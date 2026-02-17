@@ -2,20 +2,18 @@
 
 pfizer:
   name: Pfizer
-  ndc_labeler_code: "00069"
 
 teva:
   name: Teva Pharmaceuticals
-  ndc_labeler_code: "00093"
 
 sandoz:
   name: Sandoz
-  ndc_labeler_code: "00781"
 
 abbvie:
   name: AbbVie
-  ndc_labeler_code: "00074"
 
 dr_reddys:
   name: Dr. Reddy's Laboratories
-  ndc_labeler_code: "55111"
+
+infecto_pharm:
+  name: InfectoPharm

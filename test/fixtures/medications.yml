@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ritalin_ir:
+  name: Ritalin IR
+  labeler: infecto_pharm
+  form: tablet
+
+ritalin_la:
+  name: Ritalin LA
+  labeler: infecto_pharm
+  form: tablet_extended_release
