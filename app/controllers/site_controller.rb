@@ -4,7 +4,7 @@ class SiteController < ApplicationController
   layout "sessions", only: :landing
 
   def index
-    @show_assistent = params[:assistent] == "first-visit"
+    @assistent_intro = !Current.user.assistent_talks.exists?(talk: :introduction)
   end
 
   def landing

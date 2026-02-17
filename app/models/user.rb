@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
+  has_many :assistent_talks
   has_many :user_medications
   has_many :medication_versions, through: :user_medications
 
