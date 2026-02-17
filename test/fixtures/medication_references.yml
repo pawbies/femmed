@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ritalin_ir_pawbies_website:
+  medication: ritalin_ir
+  reference: pawbies_website
+
+ritalin_ir_wikipedia_article:
+  medication: ritalin_ir
+  reference: wikipedia_article
