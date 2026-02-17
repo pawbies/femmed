@@ -1,0 +1,37 @@
+<div class="w-full">
+  <img src="/icon.svg" alt="FemMed Logo" class="mx-auto aspect-square max-w-32">
+  <h1 class="mt-6 text-center font-bold text-4xl">Register</h1>
+  <h2 class="mt-3 text-center text-2xl">Welcome aboard!</h2>
+
+  <%= form_with model: @user, class: "mt-10 mx-auto max-w-md" do |form| %>
+
+    <% if @user.errors.any? %>
+      <h3 class="text-xl text-center text-red-500">Couldn't register you :(</h3>
+      <ul class="list-disc">
+        <% @user.errors.full_messages.each do |error| %>
+          <li class="text-red-500"><%= error %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <div class="my-5">
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Your email address goes here :3", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+    <div class="my-5">
+      <%= form.text_field :username, required: true, placeholder: "Whatever you wanna be called around here Nyaaa", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+    <div class="my-5">
+      <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Your new super secure password", maxlength: 72, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+    <div class="my-5">
+      <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Repeat it once just to be sure", maxlength: 72, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+    <div class="mt-8 flex justify-center">
+      <%= form.submit "Come in!", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+    </div>
+  <% end %>
+
+  <div class="mt-16 flex justify-evenly items-center max-w-md mx-auto">
+    <%= link_to "Login is this way :3", new_session_path, class: "text-xl underline hover:no-underline" %>
+  </div>
+</div>
