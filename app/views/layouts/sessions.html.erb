@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Femmed" %></title>
+    <title><%= content_for(:title) || "FemMed" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Femmed">
@@ -28,7 +28,6 @@
   </head>
 
   <body class="font-[Merriweather]">
-    <%= render "partials/header" %>
     <main class="container mx-auto mt-28 px-5 flex text-black/85">
       <%= yield %>
     </main>

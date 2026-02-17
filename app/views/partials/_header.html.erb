@@ -4,7 +4,7 @@
     <%= link_to "FemMed", root_path %>
   </h1>
 
-  <% if false %>
+  <% if authenticated? %>
     <h1>Profile</h1>
   <% else %>
     <%= link_to "Login", root_path %>
