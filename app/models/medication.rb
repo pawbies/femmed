@@ -6,6 +6,7 @@ class Medication < ApplicationRecord
   has_many :medication_versions
 
   has_and_belongs_to_many :active_ingredients
+  has_and_belongs_to_many :categories
 
   validates :name, presence: true
 end
