@@ -4,6 +4,8 @@ class SiteController < ApplicationController
   layout "sessions", only: :landing
 
   def index
+    flash.now[:alert] = "Hello World"
+    flash.now[:notice] = "Baller World"
   end
 
   def landing

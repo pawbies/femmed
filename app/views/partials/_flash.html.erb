@@ -1,0 +1,32 @@
+<% if notice %>
+  <div data-controller="flash" class="px-3 py-2 rounded-md border border-rose-600 bg-rose-300 absolute top-30 right-12">
+    <div class="border-b flex justify-between items-center">
+      <div class="flex items-center">
+        <%= image_tag "icons/info.svg", class: "aspect-square w-[1.5em]" %>
+        <h3 class="ml-1 text-lg font-semibold">For your info cutie pie!</h3>
+      </div>
+
+      <button data-action="flash#close" class="ml-6 hover:cursor-pointer">
+        <%= image_tag "icons/x.svg", class: "aspect-square w-[1.5em]" %>
+      </button>
+    </div>
+    <p class="mt-2"><%= notice %></p>
+  </div>
+<% end %>
+
+
+<% if alert %>
+  <div data-controller="flash" class="px-3 py-2 rounded-md border border-red-600 bg-red-300 absolute top-30 right-12">
+    <div class="border-b flex justify-between items-center">
+      <div class="flex items-center">
+        <%= image_tag "icons/alert.svg", class: "aspect-square w-[1.5em]" %>
+        <h3 class="ml-1 text-lg font-semibold">Something went wrong!</h3>
+      </div>
+
+      <button data-action="flash#close" class="ml-6 hover:cursor-pointer">
+        <%= image_tag "icons/x.svg", class: "aspect-square w-[1.5em]" %>
+      </button>
+    </div>
+    <p class="mt-2"><%= alert %></p>
+  </div>
+<% end %>
