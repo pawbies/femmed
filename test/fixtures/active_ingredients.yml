@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+estradiol:
+  name: Estradiol
+
+spironolactone:
+  name: Spironolactone
+
+progesterone:
+  name: Progesterone
+
+bupropion:
+  name: Bupropion
+
+finasteride:
+  name: Finasteride
+
+bicalutamide:
+  name: Bicalutamide
+
+cyproterone_acetate:
+  name: Cyproterone acetate
+
+levothyroxine:
+  name: Levothyroxine
+
+sertraline:
+  name: Sertraline
+
+escitalopram:
+  name: Escitalopram
