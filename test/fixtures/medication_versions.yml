@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ritalin_ir_5mg:
+  medication: ritalin_ir
+  added_name: 5mg
+  strength_per_dose: 5
+  ndc: 0078-0439-05
+
+ritalin_ir_10mg:
+  medication: ritalin_ir
+  added_name: 10mg
+  strength_per_dose: 10
+  ndc: 0078-0440-05
