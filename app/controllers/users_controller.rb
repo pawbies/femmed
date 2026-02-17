@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user.save
       start_new_session_for @user
-      redirect_to root_path
+      redirect_to root_path(assistent: "first-visit")
     else
       render :new, status: :unprocessable_content
     end

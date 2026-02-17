@@ -4,6 +4,7 @@ class SiteController < ApplicationController
   layout "sessions", only: :landing
 
   def index
+    @show_assistent = params[:assistent] == "first-visit"
   end
 
   def landing
