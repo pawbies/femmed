@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one_ritalin:
+  user: one
+  medication_version: ritalin_ir_5mg
+  dosage: 10
+
+two_ritalin:
+  user: one
+  medication_version: ritalin_ir_10mg
+  dosage: 10
