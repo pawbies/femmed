@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ritalin_ir_methylphenidate:
+  medication: ritalin_ir
+  active_ingredient: methylphenidate
+
+ritalin_la_methylphenidate:
+  medication: ritalin_la
+  active_ingredient: methylphenidate
