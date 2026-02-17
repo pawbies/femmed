@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ritalin_ir_antipsychotics:
+  medication: ritalin_ir
+  active_ingredient: antipsychotics
+
+ritalin_la_antipsychotics:
+  medication: ritalin_la
+  active_ingredient: antipsychotics
