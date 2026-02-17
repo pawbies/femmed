@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+pawbies_website:
+  name: Pawbies Website
+  url: https://pawbies.net
+
+wikipedia_article:
+  name: Wikipedia Article
+  url: https://de.wikipedia.org/wiki/Modafinil
