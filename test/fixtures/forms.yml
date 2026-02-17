@@ -1,0 +1,260 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# Oral Solid Forms
+tablet:
+  name: Tablet
+
+tablet_chewable:
+  name: Chewable tablet
+
+tablet_effervescent:
+  name: Effervescent tablet
+
+tablet_dispersible:
+  name: Dispersible tablet
+
+tablet_orally_disintegrating:
+  name: Orally disintegrating tablet
+
+tablet_sublingual:
+  name: Sublingual tablet
+
+tablet_buccal:
+  name: Buccal tablet
+
+tablet_extended_release:
+  name: Extended-release tablet
+
+tablet_delayed_release:
+  name: Delayed-release tablet
+
+capsule:
+  name: Capsule
+
+capsule_extended_release:
+  name: Extended-release capsule
+
+capsule_delayed_release:
+  name: Delayed-release capsule
+
+softgel:
+  name: Softgel
+
+lozenge:
+  name: Lozenge
+
+troche:
+  name: Troche
+
+gummy:
+  name: Gummy
+
+powder_oral:
+  name: Oral powder
+
+granules:
+  name: Granules
+
+# Oral Liquid Forms
+solution_oral:
+  name: Oral solution
+
+suspension:
+  name: Suspension
+
+syrup:
+  name: Syrup
+
+elixir:
+  name: Elixir
+
+emulsion:
+  name: Emulsion
+
+drops_oral:
+  name: Oral drops
+
+# Injectable Forms
+injection:
+  name: Injection
+
+injection_intravenous:
+  name: Intravenous injection
+
+injection_intramuscular:
+  name: Intramuscular injection
+
+injection_subcutaneous:
+  name: Subcutaneous injection
+
+injection_intradermal:
+  name: Intradermal injection
+
+infusion:
+  name: Infusion
+
+implant:
+  name: Implant
+
+pen_injector:
+  name: Pen injector
+
+auto_injector:
+  name: Auto-injector
+
+# Topical Forms
+cream:
+  name: Cream
+
+ointment:
+  name: Ointment
+
+gel:
+  name: Gel
+
+lotion:
+  name: Lotion
+
+paste:
+  name: Paste
+
+foam_topical:
+  name: Topical foam
+
+spray_topical:
+  name: Topical spray
+
+solution_topical:
+  name: Topical solution
+
+powder_topical:
+  name: Topical powder
+
+# Transdermal Forms
+patch:
+  name: Transdermal patch
+
+film_transdermal:
+  name: Transdermal film
+
+# Inhalation Forms
+inhaler_metered_dose:
+  name: Metered-dose inhaler
+
+inhaler_dry_powder:
+  name: Dry powder inhaler
+
+nebulizer_solution:
+  name: Nebulizer solution
+
+aerosol:
+  name: Aerosol
+
+# Nasal Forms
+spray_nasal:
+  name: Nasal spray
+
+drops_nasal:
+  name: Nasal drops
+
+gel_nasal:
+  name: Nasal gel
+
+# Ophthalmic (Eye) Forms
+drops_eye:
+  name: Eye drops
+
+ointment_eye:
+  name: Eye ointment
+
+gel_eye:
+  name: Eye gel
+
+insert_eye:
+  name: Eye insert
+
+solution_eye:
+  name: Ophthalmic solution
+
+# Otic (Ear) Forms
+drops_ear:
+  name: Ear drops
+
+solution_ear:
+  name: Ear solution
+
+# Rectal Forms
+suppository_rectal:
+  name: Rectal suppository
+
+enema:
+  name: Enema
+
+cream_rectal:
+  name: Rectal cream
+
+foam_rectal:
+  name: Rectal foam
+
+# Vaginal Forms
+suppository_vaginal:
+  name: Vaginal suppository
+
+cream_vaginal:
+  name: Vaginal cream
+
+gel_vaginal:
+  name: Vaginal gel
+
+tablet_vaginal:
+  name: Vaginal tablet
+
+ring_vaginal:
+  name: Vaginal ring
+
+insert_vaginal:
+  name: Vaginal insert
+
+# Sublingual/Buccal Forms
+film_sublingual:
+  name: Sublingual film
+
+spray_sublingual:
+  name: Sublingual spray
+
+film_buccal:
+  name: Buccal film
+
+# Other Forms
+film_oral:
+  name: Oral film
+
+strip_oral:
+  name: Oral strip
+
+chewing_gum:
+  name: Medicated chewing gum
+
+wafer:
+  name: Wafer
+
+pellet:
+  name: Pellet
+
+kit:
+  name: Kit
+
+concentrate:
+  name: Concentrate
+
+tincture:
+  name: Tincture
+
+oil:
+  name: Oil
+
+shampoo:
+  name: Medicated shampoo
+
+bar:
+  name: Medicated bar/soap
