@@ -1,3 +1,24 @@
-<div>
+<div class="w-full">
   <h1 class="font-bold text-4xl">Welcome back <%= Current.user.username %></h1>
+
+  <section class="my-12">
+    <h3 class="text-3xl">Search</h3>
+
+    <%= form_with url: root_path, class: "mt-4 flex", method: :get do |form| %>
+      <%= form.text_field :query, required: true, placeholder: "Search for anything your heart desires ^w^", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full mr-2" %>
+      <%= form.submit "Yippie", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+    <% end %>
+
+  </section>
+
+  <section class="mb-6 w-full">
+    <h3 class="text-3xl">My medications</h3>
+
+    <div class="mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-3">
+      <% 12.times do %>
+        <%= render "medication_versions/card" %>
+      <% end %>
+    </div>
+  </section>
+
 </div>
