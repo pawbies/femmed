@@ -4,9 +4,12 @@
     <%= link_to "FemMed", root_path %>
   </h1>
 
-  <% if authenticated? %>
-    <h1>Profile</h1>
-  <% else %>
-    <%= link_to "Login", root_path %>
-  <% end %>
+  <div class="relative" data-controller="profile">
+    <img data-action="click->profile#toggle" src="/icon.svg" alt="Profile picture" class="hover:cursor-pointer rounded-full border border-black aspect-square h-14">
+
+    <div data-profile-target="popup" class="hidden absolute top-16 right-0 py-2 px-4 rounded-md border border-rose-300 bg-rose-100">
+      <%= link_to "Settings", root_path, class: "text-lg font-semibold" %>
+      <%= button_to "Log out", session_path, method: :delete, class: "hover:cursor-pointer text-lg text-red-500 font-semibold" %>
+    </div>
+  </div>
 </header>
