@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_17_161125) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_17_161553) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -71,6 +71,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_17_161125) do
   create_table "categories_medications", id: false, force: :cascade do |t|
     t.integer "category_id", null: false
     t.integer "medication_id", null: false
+  end
+
+  create_table "doses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "dosage"
+    t.datetime "taken_at"
+    t.datetime "updated_at", null: false
+    t.integer "user_medication_id", null: false
+    t.index ["user_medication_id"], name: "index_doses_on_user_medication_id"
   end
 
   create_table "forms", force: :cascade do |t|
@@ -150,6 +159,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_17_161125) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "doses", "user_medications"
   add_foreign_key "medication_versions", "medications"
   add_foreign_key "medications", "forms"
   add_foreign_key "medications", "labelers"

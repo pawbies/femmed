@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 ritalin_ir_antipsychotics:
-  medication: ritalin_ir
-  category: antipsychotics
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_ir) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:antipsychotics) %>
 
 ritalin_la_antipsychotics:
-  medication: ritalin_la
-  category: antipsychotics
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_la) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:antipsychotics) %>

@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ritalin_ir_pawbies_website:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_ir) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:pawbies_website) %>
+
+ritalin_ir_wikipedia_article:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_ir) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:wikipedia_article) %>
