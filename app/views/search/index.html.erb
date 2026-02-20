@@ -2,9 +2,17 @@
   <section>
     <h3 class="text-3xl">Search</h3>
 
-    <%= form_with url: search_path, class: "mt-4 flex", method: :get do |form| %>
-      <%= form.text_field :query, required: true, value: @query, placeholder: "Search for anything your heart desires ^w^", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full mr-2" %>
-      <%= form.submit "Yippie", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+    <%= form_with url: search_path, class: "mt-4", method: :get, data: { controller: "search" } do |form| %>
+      <div class="flex">
+        <%= form.text_field :query, required: true, value: @query, placeholder: "Search for anything your heart desires ^w^", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full mr-2" %>
+        <%= form.submit "Yippie", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+      </div>
+      <div class="mt-1 flex items-center justify-end">
+        <button data-action="search#toggleHiddenOptions" type="button" class="hover:cursor-pointer">Advanced search</button>
+      </div>
+      <div data-search-target="hiddenOptions" class="hidden">
+        Hidden options
+      </div>
     <% end %>
   </section>
 
