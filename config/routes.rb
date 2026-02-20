@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   get "legal/imprint", as: :imprint
   get "legal/terms-of-service", as: :terms_of_service
   get "legal/privacy", as: :privacy
+
+  get "search" => "search#index"
 end

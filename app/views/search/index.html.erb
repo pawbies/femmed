@@ -1,0 +1,49 @@
+<div class="w-full">
+  <section>
+    <h3 class="text-3xl">Search</h3>
+
+    <%= form_with url: search_path, class: "mt-4 flex", method: :get do |form| %>
+      <%= form.text_field :query, required: true, value: @query, placeholder: "Search for anything your heart desires ^w^", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full mr-2" %>
+      <%= form.submit "Yippie", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+    <% end %>
+  </section>
+
+  <section class="mt-12">
+    <h3 class="text-3xl border-b">Results</h3>
+    <% if @categories.any? %>
+      <div class="flex flex-wrap justify-baseline">
+        <% @categories.each do |category| %>
+          <%= link_to category.name, root_path, class: "p-3 m-1 bg-rose-50 border border-rose-300 rounded-full text-nowrap border-r" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @medications.any? %>
+      <h4 class="mt-6 text-2xl">Medications</h4>
+
+      <div class="grid grid-cols-4 gap-3">
+        <% @medications.each do |medication| %>
+          <%= render "medications/card", medication: medication %>
+        <% end %>
+      </div>
+    <% end %>
+
+
+    <% if @active_ingredients.any? %>
+      <h4 class="mt-6 text-2xl">Active Ingredients</h4>
+
+      <% @active_ingredients.each do |active_ingredient| %>
+        <%= active_ingredient.name %>
+      <% end %>
+    <% end %>
+
+
+    <% if @labelers.any? %>
+      <h4 class="mt-6 text-2xl">Labelers</h4>
+
+      <% @labelers.each do |labeler| %>
+        <%= labeler.name %>
+      <% end %>
+    <% end %>
+  </section>
+</div>

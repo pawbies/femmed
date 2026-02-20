@@ -1,4 +1,6 @@
 class Medication < ApplicationRecord
+  has_one_attached :image
+
   belongs_to :labeler, optional: true
   belongs_to :form
   has_rich_text :notes
