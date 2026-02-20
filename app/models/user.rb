@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :terms_of_service
+
   has_secure_password
   has_many :sessions, dependent: :destroy
   has_many :assistent_talks
@@ -7,6 +9,7 @@ class User < ApplicationRecord
 
   validates :email_address, presence: true, uniqueness: true
   validates :username, presence: true
+  validates :terms_of_service, acceptance: true, on: :create
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 end

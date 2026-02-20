@@ -17,4 +17,8 @@ Rails.application.routes.draw do
   root "site#index"
 
   get "landing" => "site#landing"
+
+  get "legal/imprint", as: :imprint
+  get "legal/terms-of-service", as: :terms_of_service
+  get "legal/privacy", as: :privacy
 end

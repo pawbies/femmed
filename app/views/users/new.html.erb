@@ -26,6 +26,12 @@
     <div class="my-5">
       <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Repeat it once just to be sure", maxlength: 72, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
+    <div class="my-5 flex items-start gap-3">
+      <%= form.check_box :terms_of_service, required: true, class: "mt-1 accent-rose-400 w-4 h-4 shrink-0 cursor-pointer" %>
+      <%= form.label :terms_of_service, class: "text-sm text-gray-600 cursor-pointer" do %>
+        I accept the <%= link_to "Terms of Service", terms_of_service_path, class: "underline hover:no-underline text-rose-500" %>
+      <% end %>
+    </div>
     <div class="mt-8 flex justify-center">
       <%= form.submit "Come in!", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
     </div>
