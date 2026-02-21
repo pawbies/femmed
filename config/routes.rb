@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :medications
   resource :assistent_talks
   resources :users
   resource :session

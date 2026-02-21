@@ -1,0 +1,44 @@
+<div class="w-full">
+
+  <h3 class="text-3xl">
+    <%= @medication.name %>
+    <span class="text-black/50 italic">
+      - <%= @medication.active_ingredients.pluck(:name).join(", ") %>
+    </span>
+  </h3>
+  <p class="italic">Made by <%= @medication.labeler.name %></p>
+
+  <% if @medication.categories.any? %>
+    <div class="flex flex-wrap justify-baseline">
+      <% @medication.categories.each do |category| %>
+        <%= link_to category.name, root_path, class: "p-3 m-1 bg-rose-50 border border-rose-300 rounded-full text-nowrap border-r" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="my-12 text-lg">
+    <%= @medication.notes %>
+  </div>
+
+  <section>
+    <h3 class="text-2xl">Versions</h3>
+    <table class="w-full mt-3 text-sm">
+      <thead>
+        <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
+          <th class="pb-3 pr-8">Name</th>
+          <th class="pb-3 pr-8">Strength</th>
+          <th class="pb-3">NDC</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-zinc-100">
+        <% @medication.versions.each do |version| %>
+          <tr class="transition-colors hover:bg-zinc-50">
+            <td class="py-3 pr-8 font-medium text-zinc-800"><%= "#{@medication.name} #{version.added_name}" %></td>
+            <td class="py-3 pr-8 text-zinc-500"><%= version.strength_per_dose %> mg</td>
+            <td class="py-3 font-mono text-xs text-zinc-400"><%= version.ndc %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+</div>

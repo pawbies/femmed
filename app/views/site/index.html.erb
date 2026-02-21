@@ -33,7 +33,7 @@
 
     <div class="mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-3">
       <% 12.times do %>
-        <%= render "medication_versions/card" %>
+        <%= render "medication_versions/medication_version", medication_version: MedicationVersion.take %>
       <% end %>
     </div>
   </section>
