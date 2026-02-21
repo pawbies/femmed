@@ -2,6 +2,10 @@ class User < ApplicationRecord
   attr_accessor :terms_of_service
 
   has_secure_password
+
+  scope :admins, -> { where(role: "admin") }
+  scope :users, -> { where(role: "user") }
+
   has_many :sessions, dependent: :destroy
   has_many :assistent_talks
   has_many :user_medications
@@ -11,7 +15,7 @@ class User < ApplicationRecord
   validates :username, presence: true
   validates :terms_of_service, acceptance: true, on: :create
 
-  enum :role, { user: 0, admin: 1 }
+  enum :role, { user: 0, admin: 1 }, validate: true
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 end
