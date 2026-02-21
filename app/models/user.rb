@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :user_medications
   has_many :medication_versions, through: :user_medications
 
-  validates :email_address, presence: true, uniqueness: true
+  validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP } 
   validates :username, presence: true
   validates :terms_of_service, acceptance: true, on: :create
 

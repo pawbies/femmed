@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_medication: one_ritalin
+  amount: 1
+  aquired_at: 2026-02-21
+
+two:
+  user_medication: two_ritalin
+  amount: 1
+  aquired_at: 2026-02-21

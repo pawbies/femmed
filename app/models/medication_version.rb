@@ -6,4 +6,22 @@ class MedicationVersion < ApplicationRecord
   validates :added_name, presence: true
   validates :strength_per_dose, presence: true
   validates :ndc, presence: true
+
+  enum :unit, {
+    "mg": 0,
+    "g": 1,
+    "mcg": 2,
+    "mL": 3,
+    "L": 4,
+    "IU": 5,
+    "units": 6,
+    "mEq": 7,
+    "mmol": 8,
+    "tablet": 9,
+    "capsule": 10,
+    "drop": 11,
+    "puff": 12,
+    "patch": 13,
+    "%": 14
+  }, prefix: :unit
 end

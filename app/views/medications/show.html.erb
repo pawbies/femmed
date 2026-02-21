@@ -6,7 +6,9 @@
       - <%= @medication.active_ingredients.pluck(:name).join(", ") %>
     </span>
   </h3>
-  <p class="italic">Made by <%= @medication.labeler.name %></p>
+  <% if @medication.labeler.present? %>
+    <p class="italic">Made by <%= @medication.labeler.name %></p>
+  <% end %>
 
   <% if @medication.categories.any? %>
     <div class="flex flex-wrap justify-baseline">
@@ -28,14 +30,14 @@
           <th class="pb-3 pr-8">Name</th>
           <th class="pb-3 pr-8">Strength</th>
           <th class="pb-3 pr-8">NDC</th>
-          <th class="pb-3">Add</th>
+          <th class="pb-3">Add/Remove</th>
         </tr>
       </thead>
       <tbody class="divide-y divide-zinc-100">
         <% @medication.versions.each do |version| %>
           <tr class="transition-colors hover:bg-zinc-50">
             <td class="py-3 pr-8 font-medium text-zinc-800"><%= "#{@medication.name} #{version.added_name}" %></td>
-            <td class="py-3 pr-8 text-zinc-500"><%= version.strength_per_dose %> mg</td>
+            <td class="py-3 pr-8 text-zinc-500"><%= "#{version.strength_per_dose} #{version.unit}" %></td>
             <td class="py-3 pr-8 font-mono text-xs text-zinc-400"><%= version.ndc %></td>
             <td class="my-3 font-medium text-zinc-800">
               <%= button_to "＋ Add", root_path, method: :get,

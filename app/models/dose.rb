@@ -1,3 +1,3 @@
 class Dose < ApplicationRecord
-  belongs_to :user_medication
+  belongs_to :pack
 end

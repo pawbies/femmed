@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_21_181837) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_21_200835) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -82,12 +82,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_181837) do
   end
 
   create_table "doses", force: :cascade do |t|
+    t.float "amount_taken", null: false
     t.datetime "created_at", null: false
-    t.integer "dosage"
-    t.datetime "taken_at"
+    t.integer "pack_id", null: false
+    t.datetime "taken_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_medication_id", null: false
-    t.index ["user_medication_id"], name: "index_doses_on_user_medication_id"
+    t.index ["pack_id"], name: "index_doses_on_pack_id"
   end
 
   create_table "forms", force: :cascade do |t|
@@ -110,6 +110,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_181837) do
     t.integer "medication_id", null: false
     t.string "ndc", null: false
     t.integer "strength_per_dose"
+    t.integer "unit", default: 0
     t.datetime "updated_at", null: false
     t.index ["medication_id"], name: "index_medication_versions_on_medication_id"
   end
@@ -127,6 +128,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_181837) do
   create_table "medications_references", id: false, force: :cascade do |t|
     t.integer "medication_id", null: false
     t.integer "reference_id", null: false
+  end
+
+  create_table "packs", force: :cascade do |t|
+    t.integer "amount", null: false
+    t.date "aquired_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_medication_id", null: false
+    t.index ["user_medication_id"], name: "index_packs_on_user_medication_id"
   end
 
   create_table "references", force: :cascade do |t|
@@ -167,10 +177,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_181837) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assistent_talks", "users"
-  add_foreign_key "doses", "user_medications"
+  add_foreign_key "doses", "packs"
   add_foreign_key "medication_versions", "medications"
   add_foreign_key "medications", "forms"
   add_foreign_key "medications", "labelers"
+  add_foreign_key "packs", "user_medications"
   add_foreign_key "sessions", "users"
   add_foreign_key "user_medications", "medication_versions"
   add_foreign_key "user_medications", "users"
