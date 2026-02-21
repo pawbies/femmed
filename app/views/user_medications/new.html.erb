@@ -1,0 +1,30 @@
+<div class="w-full">
+  <h1 class="font-bold text-4xl">Add <%= @medication_version.full_name %> to your stack</h1>
+
+  <%= form_with model: [@medication_version, @user_medication], class: "mt-10 mx-auto max-w-md" do |form| %>
+
+    <% if @user_medication.errors.any? %>
+      <ol>
+        <% @user_medication.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end%>
+      </ol>
+    <% end %>
+
+    <%= form.hidden_field :user_id, value: Current.user.id %>
+    <div class="my-5 flex items-center">
+      <%= form.number_field :dosage,
+        required: true,
+        autofocus: true,
+        placeholder: "How much do you wanna take each time :3",
+        class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    <span class="shadow-sm rounded-r-md border bg-rose-50 border-rose-300 px-3 py-2 w-min">
+      <%= @medication_version.unit %>
+    </span>
+    </div>
+    <div class="mt-8 flex justify-center">
+      <%= form.submit "Add it",
+        class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+    </div>
+  <% end %>
+</div>

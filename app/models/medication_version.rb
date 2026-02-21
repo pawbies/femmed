@@ -24,4 +24,8 @@ class MedicationVersion < ApplicationRecord
     "patch": 13,
     "%": 14
   }, prefix: :unit
+
+  def full_name
+    "#{medication.name} #{added_name}"
+  end
 end

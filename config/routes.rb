@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :medication_versions do
+    resources :user_medications
+  end
   resources :medications
   resource :assistent_talks
   resources :users

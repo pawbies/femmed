@@ -1,0 +1,2 @@
+module UserMedicationsHelper
+end
