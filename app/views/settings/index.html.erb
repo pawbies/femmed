@@ -1,0 +1,21 @@
+<div class="w-full">
+  <h3 class="text-3xl">Settings</h3>
+
+  <section class="mt-12">
+    <h4 class="text-2xl text-center border-b">These toggles dont work yet but they are pretty</h4>
+    <div class="mt-4 space-y-3">
+      <% [
+        { label: "Show plasma concentration chart",  setting: :show_chart,        value: true  },
+        { label: "Email reminders",                  setting: :email_reminders,   value: false },
+        { label: "Public profile",                   setting: :public_profile,    value: false },
+      ].each do |s| %>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-700"><%= s[:label] %></span>
+          <%= button_to "#", class: "relative inline-flex h-6 w-11 items-center rounded-full transition-colors #{s[:value] ? 'bg-rose-400' : 'bg-gray-200'}" do %>
+            <span class="inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform <%= s[:value] ? 'translate-x-6' : 'translate-x-1' %>"></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>

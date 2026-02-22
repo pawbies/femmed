@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :settings
   resources :medication_versions do
     resources :user_medications, only: %i[ new create ]
   end
