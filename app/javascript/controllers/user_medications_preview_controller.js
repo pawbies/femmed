@@ -41,7 +41,7 @@ export default class extends Controller {
         Plot.dot(dots, {x: "time", y: "concentration", stroke: "ingredient", r: 5, fill: "white"})
       ],
       x: { label: "Hours after dose" },
-      y: { label: "Concentraction (mg)" },
+      y: { label: "Concentraction (idk must console my bf)" },
     })
 
     this.chartTarget.append(chart)
