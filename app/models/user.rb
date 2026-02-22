@@ -16,6 +16,16 @@ class User < ApplicationRecord
   validates :terms_of_service, acceptance: true, on: :create
 
   enum :role, { user: 0, admin: 1 }, validate: true
+  enum :pfp, {
+    "medicine_kisser": 0,
+    "ritalin_kisser": 1,
+    "modafinil_kisser": 2,
+    "kisser_kisser": 3
+  }, validate: true
+
+  def profile_picture
+    "pfps/#{pfp}.png"
+  end
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 end
