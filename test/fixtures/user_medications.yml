@@ -1,11 +1,56 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one_ritalin:
-  user: one
-  medication_version: ritalin_ir_5mg
-  dosage: 10
-
-two_ritalin:
-  user: one
+alice_ritalin_ir:
+  user: alice
   medication_version: ritalin_ir_10mg
   dosage: 10
+
+alice_lexapro:
+  user: alice
+  medication_version: lexapro_10mg
+  dosage: 10
+
+bob_adderall_xr:
+  user: bob
+  medication_version: adderall_xr_20mg
+  dosage: 20
+
+bob_wellbutrin:
+  user: bob
+  medication_version: wellbutrin_xl_150mg
+  dosage: 150
+
+carol_estradot:
+  user: carol
+  medication_version: estradot_100mcg
+  dosage: 100
+
+carol_progestan:
+  user: carol
+  medication_version: progestan_200mg
+  dosage: 200
+
+carol_aldactone:
+  user: carol
+  medication_version: aldactone_100mg
+  dosage: 100
+
+david_synthroid:
+  user: david
+  medication_version: synthroid_75mcg
+  dosage: 75
+
+david_prozac:
+  user: david
+  medication_version: prozac_20mg
+  dosage: 20
+
+eva_concerta:
+  user: eva
+  medication_version: concerta_36mg
+  dosage: 36
+
+eva_zoloft:
+  user: eva
+  medication_version: zoloft_50mg
+  dosage: 50

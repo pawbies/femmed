@@ -4,8 +4,72 @@ ritalin_ir:
   name: Ritalin IR
   labeler: infecto_pharm
   form: tablet
-
 ritalin_la:
   name: Ritalin LA
   labeler: infecto_pharm
   form: tablet_extended_release
+
+concerta:
+  name: Concerta
+  labeler: pfizer
+  form: tablet_extended_release
+
+adderall_ir:
+  name: Adderall IR
+  labeler: teva
+  form: tablet
+
+adderall_xr:
+  name: Adderall XR
+  labeler: abbvie
+  form: capsule_extended_release
+
+zoloft:
+  name: Zoloft
+  labeler: pfizer
+  form: tablet
+
+lexapro:
+  name: Lexapro
+  labeler: abbvie
+  form: tablet
+
+wellbutrin_xl:
+  name: Wellbutrin XL
+  labeler: pfizer
+  form: tablet_extended_release
+
+prozac:
+  name: Prozac
+  labeler: sandoz
+  form: capsule
+
+aldactone:
+  name: Aldactone
+  labeler: pfizer
+  form: tablet
+
+synthroid:
+  name: Synthroid
+  labeler: abbvie
+  form: tablet
+
+estradot:
+  name: Estradot
+  labeler: sandoz
+  form: patch
+
+progestan:
+  name: Progestan
+  labeler: abbvie
+  form: capsule
+
+propecia:
+  name: Propecia
+  labeler: pfizer
+  form: tablet
+
+casodex:
+  name: Casodex
+  labeler: sandoz
+  form: tablet

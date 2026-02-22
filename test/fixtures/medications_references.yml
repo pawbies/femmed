@@ -7,3 +7,111 @@ ritalin_ir_pawbies_website:
 ritalin_ir_wikipedia_article:
   medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_ir) %>
   reference_id: <%= ActiveRecord::FixtureSet.identify(:wikipedia_article) %>
+
+ritalin_ir_methylphenidate_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_ir) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:methylphenidate_wikipedia) %>
+ritalin_ir_adhd_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_ir) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:adhd_wikipedia) %>
+
+ritalin_la_methylphenidate_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_la) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:methylphenidate_wikipedia) %>
+ritalin_la_adhd_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_la) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:adhd_wikipedia) %>
+
+concerta_methylphenidate_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:concerta) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:methylphenidate_wikipedia) %>
+concerta_adhd_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:concerta) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:adhd_wikipedia) %>
+
+adderall_ir_amphetamine_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:adderall_ir) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:amphetamine_wikipedia) %>
+adderall_ir_adhd_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:adderall_ir) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:adhd_wikipedia) %>
+
+adderall_xr_amphetamine_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:adderall_xr) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:amphetamine_wikipedia) %>
+adderall_xr_adhd_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:adderall_xr) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:adhd_wikipedia) %>
+
+zoloft_sertraline_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:zoloft) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:sertraline_wikipedia) %>
+zoloft_depression_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:zoloft) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:depression_wikipedia) %>
+
+lexapro_escitalopram_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:lexapro) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:escitalopram_wikipedia) %>
+lexapro_depression_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:lexapro) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:depression_wikipedia) %>
+
+wellbutrin_xl_bupropion_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:wellbutrin_xl) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:bupropion_wikipedia) %>
+wellbutrin_xl_depression_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:wellbutrin_xl) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:depression_wikipedia) %>
+
+prozac_fluoxetine_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:prozac) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:fluoxetine_wikipedia) %>
+prozac_depression_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:prozac) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:depression_wikipedia) %>
+prozac_psychopharmacology_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:prozac) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:psychopharmacology_wikipedia) %>
+
+aldactone_spironolactone_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:aldactone) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:spironolactone_wikipedia) %>
+aldactone_gender_affirming_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:aldactone) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:gender_affirming_hormone_therapy_wikipedia) %>
+
+synthroid_levothyroxine_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:synthroid) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:levothyroxine_wikipedia) %>
+synthroid_hypothyroidism_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:synthroid) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:hypothyroidism_wikipedia) %>
+
+estradot_estradiol_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:estradot) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:estradiol_wikipedia) %>
+estradot_gender_affirming_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:estradot) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:gender_affirming_hormone_therapy_wikipedia) %>
+
+progestan_progesterone_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:progestan) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:progesterone_wikipedia) %>
+progestan_gender_affirming_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:progestan) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:gender_affirming_hormone_therapy_wikipedia) %>
+
+propecia_finasteride_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:propecia) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:finasteride_wikipedia) %>
+propecia_gender_affirming_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:propecia) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:gender_affirming_hormone_therapy_wikipedia) %>
+
+casodex_bicalutamide_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:casodex) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:bicalutamide_wikipedia) %>
+casodex_gender_affirming_wikipedia:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:casodex) %>
+  reference_id: <%= ActiveRecord::FixtureSet.identify(:gender_affirming_hormone_therapy_wikipedia) %>

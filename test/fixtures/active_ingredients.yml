@@ -1,34 +1,49 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-estradiol:
-  name: Estradiol
+methylphenidate:
+  name: Methylphenidate
+  half_life: 2.5
 
-spironolactone:
-  name: Spironolactone
-
-progesterone:
-  name: Progesterone
-
-bupropion:
-  name: Bupropion
-
-finasteride:
-  name: Finasteride
-
-bicalutamide:
-  name: Bicalutamide
-
-cyproterone_acetate:
-  name: Cyproterone acetate
-
-levothyroxine:
-  name: Levothyroxine
+amphetamine:
+  name: Amphetamine
+  half_life: 10.0
 
 sertraline:
   name: Sertraline
+  half_life: 26.0
 
 escitalopram:
   name: Escitalopram
+  half_life: 29.5
 
-methylphenidate:
-  name: Methylphenidate
+bupropion:
+  name: Bupropion
+  half_life: 21.0
+
+fluoxetine:
+  name: Fluoxetine
+  half_life: 48.0
+
+spironolactone:
+  name: Spironolactone
+  half_life: 1.4
+
+levothyroxine:
+  name: Levothyroxine
+  half_life: 156.0
+
+estradiol:
+  name: Estradiol
+  half_life: 1.5
+
+progesterone:
+  name: Progesterone
+  half_life: 34.0
+
+finasteride:
+  name: Finasteride
+  half_life: 5.5
+
+bicalutamide:
+  name: Bicalutamide
+  half_life: 144.0

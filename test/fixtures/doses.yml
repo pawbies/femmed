@@ -1,11 +1,111 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  pack: one
-  amount_taken: 0.85
-  taken_at: 2026-02-21 21:08:35
+alice_ritalin_ir_dose_1:
+  pack: alice_ritalin_ir_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 08:00:00
 
-two:
-  pack: one
-  amount_taken: 1.5
-  taken_at: 2026-02-21 21:08:35
+alice_ritalin_ir_dose_2:
+  pack: alice_ritalin_ir_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 13:00:00
+
+alice_ritalin_ir_dose_3:
+  pack: alice_ritalin_ir_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-21 08:00:00
+
+alice_lexapro_dose_1:
+  pack: alice_lexapro_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 09:00:00
+
+alice_lexapro_dose_2:
+  pack: alice_lexapro_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-21 09:00:00
+
+bob_adderall_xr_dose_1:
+  pack: bob_adderall_xr_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 07:30:00
+
+bob_adderall_xr_dose_2:
+  pack: bob_adderall_xr_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-21 07:30:00
+
+bob_wellbutrin_dose_1:
+  pack: bob_wellbutrin_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 08:00:00
+
+bob_wellbutrin_dose_2:
+  pack: bob_wellbutrin_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-21 08:00:00
+
+carol_estradot_dose_1:
+  pack: carol_estradot_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-14 10:00:00
+
+carol_progestan_dose_1:
+  pack: carol_progestan_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 22:00:00
+
+carol_progestan_dose_2:
+  pack: carol_progestan_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-21 22:00:00
+
+carol_aldactone_dose_1:
+  pack: carol_aldactone_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 08:00:00
+
+carol_aldactone_dose_2:
+  pack: carol_aldactone_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-21 08:00:00
+
+david_synthroid_dose_1:
+  pack: david_synthroid_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 07:00:00
+
+david_synthroid_dose_2:
+  pack: david_synthroid_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-21 07:00:00
+
+david_prozac_dose_1:
+  pack: david_prozac_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 08:00:00
+
+david_prozac_dose_2:
+  pack: david_prozac_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-21 08:00:00
+
+eva_concerta_dose_1:
+  pack: eva_concerta_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 07:00:00
+
+eva_concerta_dose_2:
+  pack: eva_concerta_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-21 07:00:00
+
+eva_zoloft_dose_1:
+  pack: eva_zoloft_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-20 09:00:00
+
+eva_zoloft_dose_2:
+  pack: eva_zoloft_pack
+  amount_taken: 1.0
+  taken_at: 2026-02-21 09:00:00

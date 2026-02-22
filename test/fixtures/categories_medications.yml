@@ -1,9 +1,70 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-ritalin_ir_antipsychotics:
+ritalin_ir_stimulants:
   medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_ir) %>
-  category_id: <%= ActiveRecord::FixtureSet.identify(:antipsychotics) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:stimulants) %>
 
-ritalin_la_antipsychotics:
+ritalin_la_stimulants:
   medication_id: <%= ActiveRecord::FixtureSet.identify(:ritalin_la) %>
-  category_id: <%= ActiveRecord::FixtureSet.identify(:antipsychotics) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:stimulants) %>
+
+concerta_stimulants:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:concerta) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:stimulants) %>
+
+adderall_ir_stimulants:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:adderall_ir) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:stimulants) %>
+
+adderall_xr_stimulants:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:adderall_xr) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:stimulants) %>
+
+zoloft_antidepressants:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:zoloft) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:antidepressants) %>
+zoloft_ssris:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:zoloft) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:ssris) %>
+
+lexapro_antidepressants:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:lexapro) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:antidepressants) %>
+lexapro_ssris:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:lexapro) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:ssris) %>
+
+prozac_antidepressants:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:prozac) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:antidepressants) %>
+prozac_ssris:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:prozac) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:ssris) %>
+
+wellbutrin_xl_antidepressants:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:wellbutrin_xl) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:antidepressants) %>
+
+aldactone_antiandrogens:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:aldactone) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:antiandrogens) %>
+
+synthroid_thyroid_medications:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:synthroid) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:thyroid_medications) %>
+
+estradot_hormones:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:estradot) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:hormones) %>
+
+progestan_hormones:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:progestan) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:hormones) %>
+
+propecia_antiandrogens:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:propecia) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:antiandrogens) %>
+
+casodex_antiandrogens:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:casodex) %>
+  category_id: <%= ActiveRecord::FixtureSet.identify(:antiandrogens) %>

@@ -7,3 +7,71 @@ pawbies_website:
 wikipedia_article:
   name: Wikipedia Article
   url: https://de.wikipedia.org/wiki/Modafinil
+
+methylphenidate_wikipedia:
+  name: Methylphenidate - Wikipedia
+  url: https://en.wikipedia.org/wiki/Methylphenidate
+
+amphetamine_wikipedia:
+  name: Amphetamine - Wikipedia
+  url: https://en.wikipedia.org/wiki/Amphetamine
+
+sertraline_wikipedia:
+  name: Sertraline - Wikipedia
+  url: https://en.wikipedia.org/wiki/Sertraline
+
+escitalopram_wikipedia:
+  name: Escitalopram - Wikipedia
+  url: https://en.wikipedia.org/wiki/Escitalopram
+
+bupropion_wikipedia:
+  name: Bupropion - Wikipedia
+  url: https://en.wikipedia.org/wiki/Bupropion
+
+fluoxetine_wikipedia:
+  name: Fluoxetine - Wikipedia
+  url: https://en.wikipedia.org/wiki/Fluoxetine
+
+spironolactone_wikipedia:
+  name: Spironolactone - Wikipedia
+  url: https://en.wikipedia.org/wiki/Spironolactone
+
+levothyroxine_wikipedia:
+  name: Levothyroxine - Wikipedia
+  url: https://en.wikipedia.org/wiki/Levothyroxine
+
+estradiol_wikipedia:
+  name: Estradiol - Wikipedia
+  url: https://en.wikipedia.org/wiki/Estradiol
+
+progesterone_wikipedia:
+  name: Progesterone - Wikipedia
+  url: https://en.wikipedia.org/wiki/Progesterone
+
+finasteride_wikipedia:
+  name: Finasteride - Wikipedia
+  url: https://en.wikipedia.org/wiki/Finasteride
+
+bicalutamide_wikipedia:
+  name: Bicalutamide - Wikipedia
+  url: https://en.wikipedia.org/wiki/Bicalutamide
+
+adhd_wikipedia:
+  name: Attention deficit hyperactivity disorder - Wikipedia
+  url: https://en.wikipedia.org/wiki/Attention_deficit_hyperactivity_disorder
+
+depression_wikipedia:
+  name: Major depressive disorder - Wikipedia
+  url: https://en.wikipedia.org/wiki/Major_depressive_disorder
+
+hypothyroidism_wikipedia:
+  name: Hypothyroidism - Wikipedia
+  url: https://en.wikipedia.org/wiki/Hypothyroidism
+
+gender_affirming_hormone_therapy_wikipedia:
+  name: Gender-affirming hormone therapy - Wikipedia
+  url: https://en.wikipedia.org/wiki/Gender-affirming_hormone_therapy
+
+psychopharmacology_wikipedia:
+  name: Psychopharmacology - Wikipedia
+  url: https://en.wikipedia.org/wiki/Psychopharmacology
