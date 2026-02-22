@@ -10,9 +10,12 @@ class User < ApplicationRecord
   has_many :assistent_talks, dependent: :destroy
   has_many :user_medications, dependent: :destroy
   has_many :medication_versions, through: :user_medications
-  has_many :settings, dependent: :destroy
 
   after_create :create_default_settings!
+
+  # Figure out encryption but ts breaks all the tests rn
+  # encrypts :email_address, deterministic: true
+  # encrypts :username
 
   validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :username, presence: true
