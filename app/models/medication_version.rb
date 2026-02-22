@@ -6,6 +6,7 @@ class MedicationVersion < ApplicationRecord
   validates :added_name, presence: true
   validates :strength_per_dose, presence: true
   validates :ndc, presence: true
+  validates :unit, presence: true
 
   enum :unit, {
     "mg": 0,
@@ -23,7 +24,7 @@ class MedicationVersion < ApplicationRecord
     "puff": 12,
     "patch": 13,
     "%": 14
-  }, prefix: :unit
+  }, prefix: :unit, validate: true
 
   def full_name
     "#{medication.name} #{added_name}"

@@ -1,5 +1,6 @@
 class LegalController < ApplicationController
   allow_unauthenticated_access
+  layout "sessions"
 
   def imprint
   end

@@ -5,237 +5,282 @@ ritalin_ir_5mg:
   added_name: 5mg
   strength_per_dose: 5
   ndc: 0078-0439-05
+  unit: mg
 ritalin_ir_10mg:
   medication: ritalin_ir
   added_name: 10mg
   strength_per_dose: 10
   ndc: 0078-0440-05
+  unit: mg
 ritalin_ir_20mg:
   medication: ritalin_ir
   added_name: 20mg
   strength_per_dose: 20
   ndc: 0078-0441-05
+  unit: mg
 
 ritalin_la_20mg:
   medication: ritalin_la
   added_name: 20mg
   strength_per_dose: 20
   ndc: 0078-0370-05
+  unit: mg
 ritalin_la_30mg:
   medication: ritalin_la
   added_name: 30mg
   strength_per_dose: 30
   ndc: 0078-0371-05
+  unit: mg
 ritalin_la_40mg:
   medication: ritalin_la
   added_name: 40mg
   strength_per_dose: 40
   ndc: 0078-0372-05
+  unit: mg
 
 concerta_18mg:
   medication: concerta
   added_name: 18mg
   strength_per_dose: 18
   ndc: 0045-0051-65
+  unit: mg
 concerta_27mg:
   medication: concerta
   added_name: 27mg
   strength_per_dose: 27
   ndc: 0045-0052-65
+  unit: mg
 concerta_36mg:
   medication: concerta
   added_name: 36mg
   strength_per_dose: 36
   ndc: 0045-0053-65
+  unit: mg
 concerta_54mg:
   medication: concerta
   added_name: 54mg
   strength_per_dose: 54
   ndc: 0045-0054-65
+  unit: mg
 
 adderall_ir_5mg:
   medication: adderall_ir
   added_name: 5mg
   strength_per_dose: 5
   ndc: 0555-0763-02
+  unit: mg
 adderall_ir_10mg:
   medication: adderall_ir
   added_name: 10mg
   strength_per_dose: 10
   ndc: 0555-0764-02
+  unit: mg
 adderall_ir_20mg:
   medication: adderall_ir
   added_name: 20mg
   strength_per_dose: 20
   ndc: 0555-0765-02
+  unit: mg
 adderall_ir_30mg:
   medication: adderall_ir
   added_name: 30mg
   strength_per_dose: 30
   ndc: 0555-0766-02
+  unit: mg
 
 adderall_xr_5mg:
   medication: adderall_xr
   added_name: 5mg
   strength_per_dose: 5
   ndc: 0074-3059-13
+  unit: mg
 adderall_xr_10mg:
   medication: adderall_xr
   added_name: 10mg
   strength_per_dose: 10
   ndc: 0074-3060-13
+  unit: mg
 adderall_xr_20mg:
   medication: adderall_xr
   added_name: 20mg
   strength_per_dose: 20
   ndc: 0074-3061-13
+  unit: mg
 adderall_xr_30mg:
   medication: adderall_xr
   added_name: 30mg
   strength_per_dose: 30
   ndc: 0074-3062-13
+  unit: mg
 
 zoloft_25mg:
   medication: zoloft
   added_name: 25mg
   strength_per_dose: 25
   ndc: 0049-4960-30
+  unit: mg
 zoloft_50mg:
   medication: zoloft
   added_name: 50mg
   strength_per_dose: 50
   ndc: 0049-4961-30
+  unit: mg
 zoloft_100mg:
   medication: zoloft
   added_name: 100mg
   strength_per_dose: 100
   ndc: 0049-4962-30
+  unit: mg
 
 lexapro_5mg:
   medication: lexapro
   added_name: 5mg
   strength_per_dose: 5
   ndc: 0456-2005-01
+  unit: mg
 lexapro_10mg:
   medication: lexapro
   added_name: 10mg
   strength_per_dose: 10
   ndc: 0456-2010-01
+  unit: mg
 lexapro_20mg:
   medication: lexapro
   added_name: 20mg
   strength_per_dose: 20
   ndc: 0456-2020-01
+  unit: mg
 
 wellbutrin_xl_150mg:
   medication: wellbutrin_xl
   added_name: 150mg
   strength_per_dose: 150
   ndc: 0173-0177-55
+  unit: mg
 wellbutrin_xl_300mg:
   medication: wellbutrin_xl
   added_name: 300mg
   strength_per_dose: 300
   ndc: 0173-0178-55
+  unit: mg
 
 prozac_10mg:
   medication: prozac
   added_name: 10mg
   strength_per_dose: 10
   ndc: 0777-3105-02
+  unit: mg
 prozac_20mg:
   medication: prozac
   added_name: 20mg
   strength_per_dose: 20
   ndc: 0777-3106-02
+  unit: mg
 prozac_40mg:
   medication: prozac
   added_name: 40mg
   strength_per_dose: 40
   ndc: 0777-3107-02
+  unit: mg
 
 aldactone_25mg:
   medication: aldactone
   added_name: 25mg
   strength_per_dose: 25
   ndc: 0025-1041-31
+  unit: mg
 aldactone_50mg:
   medication: aldactone
   added_name: 50mg
   strength_per_dose: 50
   ndc: 0025-1042-31
+  unit: mg
 aldactone_100mg:
   medication: aldactone
   added_name: 100mg
   strength_per_dose: 100
   ndc: 0025-1043-31
+  unit: mg
 
 synthroid_25mcg:
   medication: synthroid
   added_name: 25mcg
   strength_per_dose: 0.025
   ndc: 0074-4551-13
+  unit: mcg
 synthroid_50mcg:
   medication: synthroid
   added_name: 50mcg
   strength_per_dose: 0.05
   ndc: 0074-4552-13
+  unit: mcg
 synthroid_75mcg:
   medication: synthroid
   added_name: 75mcg
   strength_per_dose: 0.075
   ndc: 0074-4553-13
+  unit: mcg
 synthroid_100mcg:
   medication: synthroid
   added_name: 100mcg
   strength_per_dose: 0.1
   ndc: 0074-4554-13
+  unit: mcg
 synthroid_125mcg:
   medication: synthroid
   added_name: 125mcg
   strength_per_dose: 0.125
   ndc: 0074-4555-13
+  unit: mcg
 
 estradot_25mcg:
   medication: estradot
   added_name: 25mcg/24h
   strength_per_dose: 0.025
   ndc: 0083-2325-08
+  unit: mcg
 estradot_50mcg:
   medication: estradot
   added_name: 50mcg/24h
   strength_per_dose: 0.05
   ndc: 0083-2350-08
+  unit: mcg
 estradot_75mcg:
   medication: estradot
   added_name: 75mcg/24h
   strength_per_dose: 0.075
   ndc: 0083-2375-08
+  unit: mcg
 estradot_100mcg:
   medication: estradot
   added_name: 100mcg/24h
   strength_per_dose: 0.1
   ndc: 0083-2400-08
+  unit: mcg
 
 progestan_100mg:
   medication: progestan
   added_name: 100mg
   strength_per_dose: 100
   ndc: 0074-3847-30
+  unit: mg
 progestan_200mg:
   medication: progestan
   added_name: 200mg
   strength_per_dose: 200
   ndc: 0074-3848-30
+  unit: mg
 
 propecia_1mg:
   medication: propecia
   added_name: 1mg
   strength_per_dose: 1
   ndc: 0006-0071-31
+  unit: mg
 
 casodex_50mg:
   medication: casodex
   added_name: 50mg
   strength_per_dose: 50
   ndc: 0310-0705-30
+  unit: mg

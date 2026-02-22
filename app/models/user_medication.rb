@@ -4,5 +4,5 @@ class UserMedication < ApplicationRecord
 
   has_many :packs, dependent: :destroy
 
-  validates :dosage, presence: true
+  validates :dosage, presence: true, numericality: { only_integer: true }
 end
