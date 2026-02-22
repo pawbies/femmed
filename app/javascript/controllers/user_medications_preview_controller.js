@@ -29,8 +29,8 @@ export default class extends Controller {
     }))
 
     const chart = Plot.plot({
-      width: 500,
-      height: 300,
+      width: this.chartTarget.clientWidth,
+      height: this.chartTarget.clientWidth * 0.6,
       style: { fontSize: "10px" },
       y: { domain: [0, yMax] },
       color: { legend: true },
