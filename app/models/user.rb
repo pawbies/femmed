@@ -14,8 +14,8 @@ class User < ApplicationRecord
   after_create :create_default_settings!
 
   # Figure out encryption but ts breaks all the tests rn
-  # encrypts :email_address, deterministic: true
-  # encrypts :username
+  encrypts :email_address, deterministic: true
+  encrypts :username
 
   validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :username, presence: true
