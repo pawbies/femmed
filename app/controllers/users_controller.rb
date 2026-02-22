@@ -41,11 +41,11 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.expect(user: [:email_address, :username, :password, :password_confirmation, :terms_of_service])
+      params.expect(user: [ :email_address, :username, :password, :password_confirmation, :terms_of_service ])
     end
 
     def user_update_params
-      params.expect(user: [:email_address, :username, :pfp])
+      params.expect(user: [ :email_address, :username, :pfp ])
     end
 
     def require_own_user

@@ -61,7 +61,7 @@ def f(name) = Form.find_by!(name: name)
   { name: "Lamotrigine",                   half_life: 30.0 },
   { name: "Gabapentin",                    half_life: 6.0  },
   { name: "Budesonide",                    half_life: 2.5  },
-  { name: "Formoterol",                    half_life: 9.0  },
+  { name: "Formoterol",                    half_life: 9.0  }
 ].each { |attrs| ActiveIngredient.find_or_create_by(name: attrs[:name]).update(attrs) }
 
 # ── Labelers ──────────────────────────────────────────────────────────────────

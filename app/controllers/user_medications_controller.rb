@@ -38,6 +38,6 @@ class UserMedicationsController < ApplicationController
     end
 
     def user_medication_params
-      params.expect(user_medication: [:user_id, :dosage])
+      params.expect(user_medication: [ :user_id, :dosage ])
     end
 end
