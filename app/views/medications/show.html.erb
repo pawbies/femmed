@@ -44,7 +44,7 @@
                 <%= link_to "＋ Add", new_medication_version_user_medication_path(medication_version_id: version.id), method: :get,
                   class: "cursor-pointer px-3 py-1.5 bg-white border border-rose-300 text-rose-400 text-xs font-semibold rounded-lg hover:bg-rose-300 hover:text-white transition-colors" %>
               <% else %>
-                <%= button_to "- Remove", new_medication_version_user_medication_path(medication_version_id: version.id), method: :get,
+                <%= button_to "- Remove", Current.user.user_medications.where("medication_version_id = ?", version.id).first, method: :delete,
                   class: "cursor-pointer px-3 py-1.5 bg-white border border-rose-300 text-rose-400 text-xs font-semibold rounded-lg hover:bg-rose-300 hover:text-white transition-colors" %>
               <% end %>
             </td>

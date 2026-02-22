@@ -20,11 +20,8 @@ class UserMedicationsController < ApplicationController
 
   def destroy
     if @user_medication.user.id == Current.user.id
-      @user_medication.destroy!
-      redirect_back fallback_location: @user_medication.medication_version.medication, notice: "Removed #{@user_medication.medication_version.full_name}"
-    else
-      redirect_to root_path, notice: ">:("
-    end
+    @user_medication.destroy!
+    redirect_back fallback_location: @user_medication.medication_version.medication, notice: "Removed #{@user_medication.medication_version.full_name}"
   end
 
   private

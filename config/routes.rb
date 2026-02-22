@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :medication_versions do
-    resources :user_medications
+    resources :user_medications, only: %i[ new create ]
   end
+  resources :user_medications, except: %i[ new create ]
   resources :medications
   resource :assistent_talks
   resources :users
