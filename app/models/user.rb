@@ -20,7 +20,8 @@ class User < ApplicationRecord
     "medicine_kisser": 0,
     "ritalin_kisser": 1,
     "modafinil_kisser": 2,
-    "kisser_kisser": 3
+    "kisser_kisser": 3,
+    "home_kisser": 4
   }, validate: true
 
   def profile_picture
