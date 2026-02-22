@@ -7,9 +7,12 @@ class User < ApplicationRecord
   scope :users, -> { where(role: "user") }
 
   has_many :sessions, dependent: :destroy
-  has_many :assistent_talks
-  has_many :user_medications
+  has_many :assistent_talks, dependent: :destroy
+  has_many :user_medications, dependent: :destroy
   has_many :medication_versions, through: :user_medications
+  has_many :settings, dependent: :destroy
+
+  after_create :create_default_settings!
 
   validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :username, presence: true
@@ -29,4 +32,11 @@ class User < ApplicationRecord
   end
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
+
+  def create_default_settings!
+    Setting.create_defaults_for!(self)
+  rescue ActiveRecord::RecordInvalid => e
+    errors.add(:base, "Failed to initialize user settings! sowwy")
+    raise ActiveRecord::Rollback
+  end
 end
