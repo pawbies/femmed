@@ -40,11 +40,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
   </head>
 
-  <body class="font-[Merriweather]">
+  <body class="font-[Merriweather] min-h-screen flex flex-col">
     <%= render "partials/flash" %>
 
-    <main class="container mx-auto mt-28 mb-12 px-5 flex text-black/85">
+    <main class="container mx-auto mt-28 mb-12 px-5 flex text-black/85 flex-1">
       <%= yield %>
     </main>
+
+    <%= render "partials/footer" %>
   </body>
 </html>

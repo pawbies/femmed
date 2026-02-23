@@ -40,16 +40,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
   </head>
 
-  <body class="font-[Merriweather] min-h-screen flex flex-col">
-    <div id="veil" class="hidden fixed top-0 left-0 w-screen h-screen bg-black/50 z-50"></div> <%# Used for some js things %>
-
-    <%= render "partials/header" %>
+  <body class="font-[Merriweather]">
     <%= render "partials/flash" %>
 
-    <main class="container mx-auto mt-20 mb-12 px-5 flex text-black/85 flex-1">
+    <nav class="border-t border-zinc-200 bg-gray-50 py-4 text-xs text-gray-600">
+      <div class="mx-auto max-w-7xl px-4 flex justify-center gap-6">
+        <%= link_to "Home", root_path, class: "hover:text-gray-900 transition-colors" %>
+        <span class="text-gray-500">•</span>
+        <%= link_to "Imprint", imprint_path, class: "hover:text-gray-900 transition-colors" %>
+        <span class="text-gray-500">•</span>
+        <%= link_to "Privacy Policy", privacy_path, class: "hover:text-gray-900 transition-colors" %>
+        <span class="text-gray-500">•</span>
+        <%= link_to "Terms of Service", terms_of_service_path, class: "hover:text-gray-900 transition-colors" %>
+      </div>
+    </nav>
+
+    <main class="container mx-auto mt-20 mb-12 px-5 flex text-black/85">
       <%= yield %>
     </main>
-
-    <%= render "partials/footer" %>
   </body>
 </html>
