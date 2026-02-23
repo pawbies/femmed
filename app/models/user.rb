@@ -13,7 +13,6 @@ class User < ApplicationRecord
 
   after_create :create_default_settings!
 
-  # Figure out encryption but ts breaks all the tests rn
   encrypts :email_address, deterministic: true
   encrypts :username
 
