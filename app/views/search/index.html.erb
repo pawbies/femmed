@@ -34,24 +34,30 @@
           <%= render "medications/card", medication: medication %>
         <% end %>
       </div>
+    <% else %>
+      <h4 class="mt-6 text-2xl">No medications found</h4>
     <% end %>
 
 
     <% if @active_ingredients.any? %>
-      <h4 class="mt-6 text-2xl">Active Ingredients</h4>
+      <h4 class="mt-6 text-2xl">Active ingredients</h4>
 
       <% @active_ingredients.each do |active_ingredient| %>
         <%= active_ingredient.name %>
       <% end %>
+    <% else %>
+      <h4 class="mt-6 text-2xl">No active ingredients found</h4>
     <% end %>
 
 
     <% if @labelers.any? %>
       <h4 class="mt-6 text-2xl">Labelers</h4>
 
-      <% @labelers.each do |labeler| %>
-        <%= labeler.name %>
-      <% end %>
+      <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+        <%= render @labelers %>
+      </div>
+    <% else %>
+      <h4 class="mt-6 text-2xl">No labelers found</h4>
     <% end %>
   </section>
 </div>
