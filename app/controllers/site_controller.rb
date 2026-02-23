@@ -5,9 +5,6 @@ class SiteController < ApplicationController
 
   def index
     @assistent_intro = !Current.user.assistent_talks.exists?(talk: :introduction)
-
-    flash.now[:notice] = "Hello World"
-    flash.now[:alert] = "Bye World"
   end
 
   def landing
