@@ -11,8 +11,6 @@ class User < ApplicationRecord
   has_many :user_medications, dependent: :destroy
   has_many :medication_versions, through: :user_medications
 
-  after_create :create_default_settings!
-
   encrypts :email_address, deterministic: true
   encrypts :username
 
@@ -34,11 +32,4 @@ class User < ApplicationRecord
   end
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
-
-  def create_default_settings!
-    Setting.create_defaults_for!(self)
-  rescue ActiveRecord::RecordInvalid => e
-    errors.add(:base, "Failed to initialize user settings! sowwy")
-    raise ActiveRecord::Rollback
-  end
 end
