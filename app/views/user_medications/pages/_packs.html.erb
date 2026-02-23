@@ -2,8 +2,12 @@
   <h3 class="text-2xl">
     Packs
     <span class="text-black/50 italic">
-      - <%= (Date.today - @user_medication.packs.last.aquired_at).to_i %>
-      days since you got the last pack
+      <% unless @user_medication.packs.empty? %>
+        - <%= (Date.today - @user_medication.packs.last.aquired_at).to_i %>
+        days since you got the last pack
+      <% else %>
+        - Go ahead and get some
+      <% end %>
     </span>
   </h3>
 
