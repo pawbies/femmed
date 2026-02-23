@@ -1,6 +1,7 @@
 class UserMedicationsController < ApplicationController
-  before_action :fetch_medication_and_medication_version_from_id, except: :destroy
-  before_action :fetch_user_medication_by_id, only: :destroy
+  before_action :fetch_medication_and_medication_version_from_id, only: %i[ new create ]
+  before_action :fetch_user_medication_by_id, except: %i[ new create ]
+  before_action :require_own_user_medication, except: %i[ new create ]
 
   def new
     @user_medication = UserMedication.new
@@ -18,10 +19,14 @@ class UserMedicationsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def destroy
     if @user_medication.user.id == Current.user.id
       @user_medication.destroy!
-      redirect_back fallback_location: @user_medication.medication_version.medication, notice: "Removed #{@user_medication.medication_version.full_name}"
+      redirect_back fallback_location: @user_medication.medication_version.medication,
+                    notice: "Removed #{@user_medication.medication_version.full_name}"
     else
       redirect_to root_path, notice: ">:("
     end
@@ -39,5 +44,9 @@ class UserMedicationsController < ApplicationController
 
     def user_medication_params
       params.expect(user_medication: [ :user_id, :dosage ])
+    end
+
+    def require_own_user_medication
+      redirect_to root_path, alert: "Hey! That's not yours UwU" unless @user_medication.user.id == Current.user.id
     end
 end

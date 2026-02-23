@@ -40,6 +40,24 @@ class UserMedicationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
   end
 
+  # show
+  test "should redirect show if not authenticated" do
+    get user_medication_url(@user_medication)
+    assert_redirected_to new_session_path
+  end
+
+  test "should get show if authenticated and it's own medication" do
+    sign_in_as(@user)
+    get user_medication_url(@user_medication)
+    assert_response :success
+  end
+
+  test "should not get show for another user's medication" do
+    sign_in_as(@other_user)
+    get user_medication_url(@user_medication)
+    assert_redirected_to root_path
+  end
+
   # destroy
   test "should redirect destroy if not authenticated" do
     delete user_medication_url(@user_medication)

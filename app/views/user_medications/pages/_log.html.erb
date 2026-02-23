@@ -1,0 +1,27 @@
+<h3 class="text-2xl">
+  Log
+  <span class="text-black/50 italic">
+    - <%= "#{@user_medication.doses.count} #{'time'.pluralize(@user_medication.doses.count)}" %>
+    taken already
+  </span>
+</h3>
+<table class="w-full mt-6 text-sm">
+  <thead>
+    <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
+      <th class="pb-3 pr-8">Number</th>
+      <th class="pb-3 pr-8">Dose</th>
+      <th class="pb-3 pr-8">Time</th>
+      <th class="pb-3">Date</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-zinc-100">
+    <% @user_medication.doses.order(taken_at: :desc).each_with_index do |dose, index| %>
+      <tr class="transition-colors hover:bg-zinc-50">
+        <td class="py-3 pr-8 font-medium text-zinc-800"><%= @user_medication.doses.count - index %></td>
+        <td class="py-3 pr-8 font-medium text-zinc-800"><%= "#{dose.amount_taken} #{@user_medication.medication_version.unit}" %></td>
+        <td class="py-3 pr-8 font-medium text-zinc-800"><%= dose.taken_at.strftime("%k:%M") %></td>
+        <td class="my-3 font-medium text-zinc-800"><%= dose.taken_at.strftime("%d. %m. %Y") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

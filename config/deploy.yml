@@ -55,6 +55,8 @@ env:
     # Use femmed-db for a db accessory server on same machine via local kamal docker network.
     # DB_HOST: 192.168.0.2
 
+    OLLAMA_HOST: femmed-ollama
+
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
 
@@ -97,6 +99,10 @@ ssh:
 
 # Use accessory services (secrets come from .kamal/secrets).
 # accessories:
+#   ollama:
+#     image: "ollama/ollama:0.17.0"
+#     host: 77.42.44.2
+#     port: "127.0.0.1:11434:11434"
 #   db:
 #     image: mysql:8.0
 #     host: 192.168.0.2
