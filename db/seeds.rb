@@ -26,7 +26,8 @@ def f(name) = Form.find_by!(name: name)
   "Wakefulness-Promoting Agents",
   "Anxiolytics",
   "Antiepileptics",
-  "Antiasthmatics"
+  "Antiasthmatics",
+  "Hormone Replacement Therapy"
 ].each { Category.find_or_create_by(name: _1) }
 
 # ── Active Ingredients ────────────────────────────────────────────────────────
@@ -61,7 +62,8 @@ def f(name) = Form.find_by!(name: name)
   { name: "Lamotrigine",                   half_life: 30.0 },
   { name: "Gabapentin",                    half_life: 6.0  },
   { name: "Budesonide",                    half_life: 2.5  },
-  { name: "Formoterol",                    half_life: 9.0  }
+  { name: "Formoterol",                    half_life: 9.0  },
+  { name: "Estradiol Valerate",            half_life: 5.0  }
 ].each { |attrs| ActiveIngredient.find_or_create_by(name: attrs[:name]).update(attrs) }
 
 # ── Labelers ──────────────────────────────────────────────────────────────────
@@ -332,6 +334,19 @@ def f(name) = Form.find_by!(name: name)
     versions: [
       { added_name: "80/4.5mcg",  ndc: "0186-0372-20", strength_per_dose: 80  },
       { added_name: "160/4.5mcg", ndc: "0186-0370-20", strength_per_dose: 160 }
+    ]
+  },
+  {
+    name: "Delestrogen",
+    labeler: l("Pfizer"),
+    form: f("Injection"),
+    categories: [ c("Psychopharmaca"), c("Hormone Replacement Therapy") ],
+    active_ingredients: [ ai("Estradiol Valerate") ],
+    notes: "Estradiol valerate intramuscular injection for hormone replacement therapy and gender-affirming care. Administered as a weekly or bi-weekly intramuscular injection. Provides sustained estrogen levels with a longer duration of action than oral forms due to the valerate ester.",
+    versions: [
+      { added_name: "5mg/mL",  ndc: "0009-0413-01", strength_per_dose: 5  },
+      { added_name: "10mg/mL", ndc: "0009-0414-01", strength_per_dose: 10 },
+      { added_name: "20mg/mL", ndc: "0009-0415-01", strength_per_dose: 20 }
     ]
   }
 ].each do |m|
