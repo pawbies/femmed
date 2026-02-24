@@ -7,6 +7,8 @@ export default class extends Controller {
   static values = { ingredients: Array }
 
   connect() {
+    this.chartTarget.innerHTML = ""
+
     const ingredients = this.ingredientsValue
     const hoursElapsed = Math.floor(Math.random() * 30) // gotta calculate that sometime
 
