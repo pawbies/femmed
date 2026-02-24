@@ -1,7 +1,7 @@
 <%= link_to prescription do %>
   <div class="w-full bg-white border border-rose-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-      data-controller="user-medications-preview"
-      data-user-medications-preview-ingredients-value="<%= prescription.medication_version.medication.active_ingredients.map { |i| {name: i.name, halfLife: i.half_life, dose: Random.rand(25..300)} }.to_json %>">
+      data-controller="prescriptions-preview"
+      data-prescriptions-preview-ingredients-value="<%= prescription.medication_version.medication.active_ingredients.map { |i| {name: i.name, halfLife: i.half_life, dose: Random.rand(25..300)} }.to_json %>">
 
     <div class="px-4 pt-4 pb-2 flex items-center justify-between">
       <div>
@@ -13,7 +13,7 @@
       </span>
     </div>
 
-    <div data-user-medications-preview-target="chart" class="w-full"></div>
+    <div data-prescriptions-preview-target="chart" class="w-full"></div>
 
     <div class="px-4 py-2 border-t border-rose-100 flex gap-3">
       <span class="flex items-center gap-1 text-xs text-gray-400">

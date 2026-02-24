@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import * as Plot from "@observablehq/plot"
 
-// Connects to data-controller="user-medications-preview"
+// Connects to data-controller="prescriptions-preview"
 export default class extends Controller {
   static targets = ["chart"]
   static values = { ingredients: Array }
