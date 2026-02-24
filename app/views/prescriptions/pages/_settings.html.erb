@@ -1,4 +1,14 @@
-<h3 class="text-2xl">
-  Settings
-  <span class="text-black/50 italic">Coming soon</span>
-</h3>
+<h3 class="text-2xl">Settings</h3>
+
+<section>
+  <h4 class="mt-12 mb-6 text-2xl text-center border-b">Normal Settings</h4>
+    <p class="text-black/80 text-center">Just some normal cute settings</span>
+</section>
+
+<section>
+  <h4 class="mt-12 mb-6 text-2xl text-center border-b">Danger Zone</h4>
+  <div class="mx-auto md:max-w-2/3 flex flex-col justify-evenly items-center">
+    <%= button_to "Remove", @prescription, method: :delete, data: { turbo_confirm: "Are you sure?", turbo_frame: "_top" }, class: "hover:cursor-pointer text-red-500 text-xl underline hover:no-underline font-black" %>
+    <span class="text-black/80 text-center">be aware cutie... this also removes all the data associated with it forever o.O</span>
+  </div>
+</section>

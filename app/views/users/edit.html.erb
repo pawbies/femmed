@@ -20,17 +20,17 @@
       <%= form.text_field :username, required: true, placeholder: "Whatever you wanna be called around here Nyaaa", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
 
-<div class="my-5">
-  <p class="text-sm text-gray-500 mb-3">Choose your profile picture</p>
-  <div class="flex gap-3 justify-center">
-    <% User.pfps.keys.each do |pfp| %>
-      <label class="cursor-pointer">
-        <%= form.radio_button :pfp, pfp, class: "sr-only peer" %>
-        <%= image_tag "pfps/#{pfp}.png", alt: pfp.humanize, class: "w-16 h-16 rounded-full object-cover border-4 border-transparent peer-checked:border-rose-400 peer-checked:ring-2 peer-checked:ring-rose-300 transition-all" %>
-      </label>
-    <% end %>
-  </div>
-</div>
+    <div class="my-5">
+      <p class="text-sm text-gray-500 mb-3">Choose your profile picture</p>
+      <div class="flex gap-3 justify-center">
+        <% User.pfps.keys.each do |pfp| %>
+          <label class="cursor-pointer">
+            <%= form.radio_button :pfp, pfp, class: "sr-only peer" %>
+            <%= image_tag "pfps/#{pfp}.png", alt: pfp.humanize, class: "w-16 h-16 rounded-full object-cover border-4 border-transparent peer-checked:border-rose-400 peer-checked:ring-2 peer-checked:ring-rose-300 transition-all" %>
+          </label>
+        <% end %>
+      </div>
+    </div>
 
     <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">
       <%= form.submit "Apply my awesome changes!", class: "hover:cursor-pointer text-xl underline hover:no-underline" %>
@@ -38,8 +38,7 @@
     </div>
   <% end %>
 
-
-    <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">
-      <%= button_to "Delete account! (please don't)", @user, method: :delete, data: { turbo_confirm: "Are you sure? :( ... btw it doesnt work yet" }, class: "hover:cursor-pointer text-red-500 text-xl underline hover:no-underline" %>
-    </div>
+  <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">
+    <%= button_to "Delete account! (please don't)", @user, method: :delete, data: { turbo_confirm: "Are you sure? :(" }, class: "hover:cursor-pointer text-red-500 text-xl underline hover:no-underline" %>
+  </div>
 </div>
