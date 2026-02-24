@@ -12,7 +12,7 @@
       </span>
     </h3>
 
-    <%= link_to "Add Pack", new_prescription_pack_path(@prescription), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
+    <%= link_to "Add Pack", new_prescription_pack_path(@prescription), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white text-center font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
   </div>
 
 
@@ -21,8 +21,11 @@
 
   <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
     <div class="rounded-lg border border-zinc-300 p-4">
-      <p class="text-xs uppercase tracking-widest text-rose-300 mb-2">
-        <%= "Dose".pluralize(remaining_doses) %> Remaining
+      <p class="text-xs tracking-widest text-rose-300 mb-2">
+        <span class="uppercase">
+          <%= "Dose".pluralize(remaining_doses) %> Remaining
+        </span>
+        (<%= "#{@prescription.dosage}#{@prescription.unit}" %>)
       </p>
       <p class="text-3xl font-bold text-gray-900"><%= format("%g", remaining_doses) %></p>
       <p class="text-xs text-gray-500 mt-1">Cmon eat them up >:3</p>
