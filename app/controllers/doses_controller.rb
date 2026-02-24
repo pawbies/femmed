@@ -3,7 +3,7 @@ class DosesController < ApplicationController
   before_action :require_own_prescription
 
   def new
-    @dose = @prescription.doses.new
+    @dose = @prescription.doses.new(taken_at: Time.now)
   end
 
   def create

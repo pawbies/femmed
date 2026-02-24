@@ -3,7 +3,7 @@ class PacksController < ApplicationController
   before_action :require_own_prescription
 
   def new
-    @pack = @prescription.packs.new
+    @pack = @prescription.packs.new(aquired_at: Date.today)
   end
 
   def create
