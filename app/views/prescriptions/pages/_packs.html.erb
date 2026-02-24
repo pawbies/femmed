@@ -16,20 +16,25 @@
   </div>
 
 
+  <% remaining_doses = @prescription.remaining_doses %>
+  <% remaining_units = @prescription.remaining_units %>
+
   <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
     <div class="rounded-lg border border-zinc-300 p-4">
-      <p class="text-xs uppercase tracking-widest text-rose-300 mb-2">Doses Remaining</p>
-      <p class="text-3xl font-bold text-gray-900"><%= @prescription.remaining_doses %></p>
+      <p class="text-xs uppercase tracking-widest text-rose-300 mb-2">
+        <%= "Dose".pluralize(remaining_doses) %> Remaining
+      </p>
+      <p class="text-3xl font-bold text-gray-900"><%= format("%g", remaining_doses) %></p>
       <p class="text-xs text-gray-500 mt-1">Cmon eat them up >:3</p>
     </div>
 
     <div class="rounded-lg border border-zinc-300 p-4">
       <p class="text-xs uppercase tracking-widest text-rose-300 mb-2">
-        <%= @prescription.form.name.pluralize(@prescription.packs.sum(:amount)) %>
-        Remaining</p>
+        <%= @prescription.form.name.pluralize(remaining_units) %> Remaining
+      </p>
       <p class="text-3xl font-bold text-gray-900">
-        <%= @prescription.remaining_units %>
-        <%= @prescription.form.name.pluralize(@prescription.packs.sum(:amount)) %>
+        <%= format("%g", remaining_units) %>
+        <%= @prescription.form.name.pluralize(remaining_units) %>
       </p>
       <p class="text-xs text-gray-500 mt-1">Gotta make them disappear</p>
     </div>

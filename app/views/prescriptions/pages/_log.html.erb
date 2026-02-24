@@ -9,11 +9,12 @@
 
   <%= link_to "Log Dose", new_prescription_dose_path(@prescription), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
 </div>
-<table class="w-full mt-6 text-sm">
+<table class="w-full mt-6 text-sm border-collapse">
   <thead>
     <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
       <th class="pb-3 pr-8">Number</th>
-      <th class="pb-3 pr-8">Dose</th>
+      <th class="pb-3">Dose</th>
+      <th></th>
       <th class="pb-3 pr-8">Time</th>
       <th class="pb-3">Date</th>
     </tr>
@@ -22,7 +23,12 @@
     <% @prescription.doses.order(taken_at: :desc).each_with_index do |dose, index| %>
       <tr class="transition-colors hover:bg-zinc-50">
         <td class="py-3 pr-8 font-medium text-zinc-800"><%= @prescription.doses.count - index %></td>
-        <td class="py-3 pr-8 font-medium text-zinc-800"><%= "#{dose.amount_taken} #{@prescription.medication_version.unit}" %></td>
+        <td class="py-3 font-medium text-zinc-800">
+          <%= "#{format("%g", dose.amount_taken)} #{@prescription.form.name.pluralize(dose.amount_taken)}" %>
+        </td>
+        <td>
+          ~ <%= "#{format("%g", dose.amount_taken * @prescription.strength_per_dose)}#{@prescription.unit}" %>
+        </td>
         <td class="py-3 pr-8 font-medium text-zinc-800"><%= dose.taken_at.strftime("%k:%M") %></td>
         <td class="my-3 font-medium text-zinc-800"><%= dose.taken_at.strftime("%d. %m. %Y") %></td>
       </tr>

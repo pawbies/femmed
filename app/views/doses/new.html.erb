@@ -1,14 +1,14 @@
 <div class="w-full">
-  <h3 class="font-bold text-3xl">New pack of <%= @prescription.full_name %></h3>
+  <h3 class="font-bold text-3xl">New dose of <%= @prescription.full_name %></h3>
 
-  <%= form_with model: [@prescription, @pack], class: "mt-10 mx-auto max-w-md" do |form| %>
-    <% if @pack.errors.any? %>
+  <%= form_with model: [@prescription, @dose], class: "mt-10 mx-auto max-w-md" do |form| %>
+    <% if @dose.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">
-          <%= pluralize(@pack.errors.count, "error") %> prohibited this pack from being saved:
+          <%= pluralize(@dose.errors.count, "error") %> prohibited this dose from being saved:
         </h4>
         <ul class="list-disc list-inside text-red-800 space-y-1">
-          <% @pack.errors.full_messages.each do |error| %>
+          <% @dose.errors.full_messages.each do |error| %>
             <li><%= error %></li>
           <% end %>
         </ul>
@@ -16,11 +16,12 @@
     <% end %>
 
     <div class="my-5 flex items-center">
-      <%= form.number_field :amount,
+      <%= form.number_field :amount_taken,
         required: true,
         autofocus: true,
-        min: 1,
-        placeholder: "How many #{@prescription.form.name.pluralize.downcase} are in this pack? :3",
+        step: "any",
+        min: 0.001,
+        placeholder: "How many #{@prescription.form.name.pluralize.downcase} did you take? :3",
         class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
       <span class="shadow-sm rounded-r-md border bg-rose-50 border-rose-300 px-3 py-2 w-min whitespace-nowrap">
         <%= @prescription.form.name.pluralize %>
@@ -28,13 +29,13 @@
     </div>
 
     <div class="my-5">
-      <%= form.date_field :aquired_at,
+      <%= form.datetime_field :taken_at,
         required: true,
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
 
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Let's go and eat those meds!",
+      <%= form.submit "Yummy!",
         class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
     </div>
   <% end %>

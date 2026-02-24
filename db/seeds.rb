@@ -73,8 +73,8 @@ def f(name) = Form.find_by!(name: name)
 
 # ── Forms ─────────────────────────────────────────────────────────────────────
 
-%w[Capsules Tablets Injection Patches Drops].each { Form.find_or_create_by(name: _1) }
-[ "Film-coated Tablets", "Oral Solution", "Effervescent Tablets" ].each { Form.find_or_create_by(name: _1) }
+%w[Capsule Tablet Injection Patche Drop].each { Form.find_or_create_by(name: _1) }
+[ "Film-coated Tablet", "Oral Solution", "Effervescent Tablet" ].each { Form.find_or_create_by(name: _1) }
 
 # ── Medications & Versions ────────────────────────────────────────────────────
 
@@ -82,7 +82,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Ritalin LA",
     labeler: l("Novartis"),
-    form: f("Capsules"),
+    form: f("Capsule"),
     categories: [ c("Psychopharmaca"), c("Stimulants") ],
     active_ingredients: [ ai("Methylphenidate Hydrochloride") ],
     notes: "Extended-release formulation of methylphenidate. Uses a bimodal release system (SODAS technology) delivering 50% immediately and 50% delayed. Commonly prescribed for ADHD in children and adults. Avoid administration in the evening to prevent insomnia.",
@@ -95,7 +95,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Ritalin IR",
     labeler: l("Novartis"),
-    form: f("Tablets"),
+    form: f("Tablet"),
     categories: [ c("Psychopharmaca"), c("Stimulants") ],
     active_ingredients: [ ai("Methylphenidate Hydrochloride") ],
     notes: "Immediate-release methylphenidate with a shorter duration of action (3–5 hours). Often used as a complement to long-acting formulations or as a standalone treatment. Onset within 20–30 minutes after ingestion.",
@@ -108,7 +108,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Adderall XR",
     labeler: l("Shire"),
-    form: f("Capsules"),
+    form: f("Capsule"),
     categories: [ c("Psychopharmaca"), c("Stimulants") ],
     active_ingredients: [ ai("Amphetamine") ],
     notes: "Mixed amphetamine salts in an extended-release capsule. Duration of action up to 12 hours. The capsule can be opened and sprinkled on food for patients who have difficulty swallowing. Schedule II controlled substance.",
@@ -122,7 +122,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Vyvanse",
     labeler: l("Shire"),
-    form: f("Capsules"),
+    form: f("Capsule"),
     categories: [ c("Psychopharmaca"), c("Stimulants") ],
     active_ingredients: [ ai("Lisdexamfetamine") ],
     notes: "Lisdexamfetamine is a prodrug converted to active d-amphetamine in the body, resulting in a smoother onset and lower abuse potential compared to amphetamine. Approved for ADHD and binge eating disorder. Duration of effect approximately 14 hours.",
@@ -136,7 +136,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Strattera",
     labeler: l("Eli Lilly"),
-    form: f("Capsules"),
+    form: f("Capsule"),
     categories: [ c("Psychopharmaca") ],
     active_ingredients: [ ai("Atomoxetine") ],
     notes: "Non-stimulant ADHD medication and selective norepinephrine reuptake inhibitor (SNRI). Unlike stimulants, it is not a controlled substance and has no abuse potential. Full therapeutic effect may take 4–8 weeks. Suitable for patients with comorbid anxiety or substance use history.",
@@ -151,7 +151,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Modafinil Teva",
     labeler: l("Teva"),
-    form: f("Tablets"),
+    form: f("Tablet"),
     categories: [ c("Wakefulness-Promoting Agents"), c("Stimulants"), c("Psychopharmaca") ],
     active_ingredients: [ ai("Modafinil") ],
     notes: "Wakefulness-promoting agent with a mechanism distinct from classical stimulants, primarily acting on the dopamine transporter with additional effects on orexin/hypocretin systems. Approved for narcolepsy, shift work sleep disorder, and obstructive sleep apnea. Also widely used off-label for cognitive enhancement and ADHD. Lower abuse potential than amphetamines.",
@@ -163,7 +163,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Provigil",
     labeler: l("Cephalon"),
-    form: f("Tablets"),
+    form: f("Tablet"),
     categories: [ c("Wakefulness-Promoting Agents"), c("Stimulants") ],
     active_ingredients: [ ai("Modafinil") ],
     notes: "Brand name modafinil by Cephalon, the original developer. Indicated for narcolepsy, obstructive sleep apnea, and shift work disorder. Provigil was the first modafinil product approved by the FDA in 1998.",
@@ -175,7 +175,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Nuvigil",
     labeler: l("Cephalon"),
-    form: f("Tablets"),
+    form: f("Tablet"),
     categories: [ c("Wakefulness-Promoting Agents"), c("Stimulants") ],
     active_ingredients: [ ai("Armodafinil") ],
     notes: "Armodafinil is the R-enantiomer of modafinil with a longer half-life, allowing for once-daily dosing and more sustained wakefulness. Approved for the same indications as modafinil. Considered slightly more potent mg-for-mg.",
@@ -188,7 +188,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Armodacare",
     labeler: l("Teva"),
-    form: f("Tablets"),
+    form: f("Tablet"),
     categories: [ c("Wakefulness-Promoting Agents"), c("Stimulants") ],
     active_ingredients: [ ai("Armodafinil") ],
     notes: "Brand name armodafinil. Indicated for narcolepsy, obstructive sleep apnea, and shift work sleep disorder. Like Nuvigil, it is the R-enantiomer of modafinil with a longer half-life than racemic modafinil, allowing sustained wakefulness with once-daily dosing.",
@@ -200,7 +200,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Zoloft",
     labeler: l("Pfizer"),
-    form: f("Film-coated Tablets"),
+    form: f("Film-coated Tablet"),
     categories: [ c("Antidepressants"), c("Psychopharmaca"), c("Anxiolytics") ],
     active_ingredients: [ ai("Sertraline") ],
     notes: "Selective serotonin reuptake inhibitor (SSRI) approved for depression, OCD, panic disorder, PTSD, social anxiety disorder, and premenstrual dysphoric disorder. Generally well-tolerated with a favorable side effect profile. Full antidepressant effect typically seen after 4–6 weeks.",
@@ -213,7 +213,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Prozac",
     labeler: l("Eli Lilly"),
-    form: f("Capsules"),
+    form: f("Capsule"),
     categories: [ c("Antidepressants"), c("Psychopharmaca") ],
     active_ingredients: [ ai("Fluoxetine") ],
     notes: "One of the most widely prescribed SSRIs. Long half-life (~4–6 days) makes it forgiving of missed doses and allows for once-weekly dosing in some patients. Approved for depression, OCD, bulimia nervosa, and panic disorder. Also used in combination with olanzapine for bipolar depression.",
@@ -226,7 +226,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Effexor XR",
     labeler: l("Pfizer"),
-    form: f("Capsules"),
+    form: f("Capsule"),
     categories: [ c("Antidepressants"), c("Psychopharmaca"), c("Anxiolytics") ],
     active_ingredients: [ ai("Venlafaxine") ],
     notes: "Serotonin-norepinephrine reuptake inhibitor (SNRI) approved for major depressive disorder, generalized anxiety, social anxiety, and panic disorder. Extended-release formulation for once-daily dosing. Discontinuation syndrome can be pronounced — dose tapering is recommended.",
@@ -239,7 +239,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Wellbutrin XL",
     labeler: l("AstraZeneca"),
-    form: f("Film-coated Tablets"),
+    form: f("Film-coated Tablet"),
     categories: [ c("Antidepressants"), c("Psychopharmaca"), c("Stimulants") ],
     active_ingredients: [ ai("Bupropion") ],
     notes: "Norepinephrine-dopamine reuptake inhibitor (NDRI) with stimulant-like properties. Unlike most antidepressants, it does not cause sexual dysfunction or weight gain — it may promote weight loss. Also approved for smoking cessation. Sometimes used off-label for ADHD.",
@@ -251,7 +251,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Zyrtec",
     labeler: l("Pfizer"),
-    form: f("Film-coated Tablets"),
+    form: f("Film-coated Tablet"),
     categories: [ c("Antihistamines") ],
     active_ingredients: [ ai("Cetirizine") ],
     notes: "Second-generation antihistamine with minimal sedation compared to first-generation agents. Indicated for allergic rhinitis and chronic urticaria. Once-daily dosing due to 24-hour duration of action.",
@@ -263,7 +263,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Ibuprofen Sandoz",
     labeler: l("Sandoz"),
-    form: f("Film-coated Tablets"),
+    form: f("Film-coated Tablet"),
     categories: [ c("Analgesics") ],
     active_ingredients: [ ai("Ibuprofen") ],
     notes: "Non-steroidal anti-inflammatory drug (NSAID) for pain, fever, and inflammation. Take with food to reduce gastrointestinal irritation. Avoid in patients with peptic ulcer disease, renal impairment, or cardiovascular disease. Maximum daily dose 2400mg.",
@@ -276,7 +276,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Lamictal",
     labeler: l("Pfizer"),
-    form: f("Tablets"),
+    form: f("Tablet"),
     categories: [ c("Antiepileptics"), c("Psychopharmaca") ],
     active_ingredients: [ ai("Lamotrigine") ],
     notes: "Anticonvulsant also used as a mood stabilizer in bipolar disorder. Dose must be titrated slowly to reduce risk of serious rash (Stevens-Johnson syndrome). Interactions with valproate and enzyme-inducing medications significantly affect dosing. Requires careful monitoring during initiation.",
@@ -290,7 +290,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Co-codamol",
     labeler: l("Sandoz"),
-    form: f("Tablets"),
+    form: f("Tablet"),
     categories: [ c("Analgesics") ],
     active_ingredients: [ ai("Paracetamol"), ai("Codeine") ],
     notes: "Combination analgesic containing paracetamol and codeine phosphate. The codeine component provides additional pain relief through opioid receptor agonism. Available in varying codeine strengths. Risk of dependence with prolonged use.",
@@ -302,7 +302,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Augmentin",
     labeler: l("Pfizer"),
-    form: f("Film-coated Tablets"),
+    form: f("Film-coated Tablet"),
     categories: [ c("Antibiotics") ],
     active_ingredients: [ ai("Amoxicillin"), ai("Clavulanic Acid") ],
     notes: "Combination of amoxicillin and clavulanic acid. Clavulanic acid inhibits beta-lactamase enzymes produced by resistant bacteria, extending the spectrum of amoxicillin to cover organisms that would otherwise be resistant. Commonly used for sinusitis, ear infections, and skin infections.",
@@ -315,7 +315,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Vimovo",
     labeler: l("AstraZeneca"),
-    form: f("Film-coated Tablets"),
+    form: f("Film-coated Tablet"),
     categories: [ c("Analgesics"), c("Proton Pump Inhibitors") ],
     active_ingredients: [ ai("Naproxen"), ai("Esomeprazole") ],
     notes: "Fixed-dose combination of the NSAID naproxen and the proton pump inhibitor esomeprazole. The esomeprazole component protects the gastric mucosa from NSAID-induced damage. Indicated for patients who require NSAID therapy but are at risk of gastric ulcers.",
@@ -327,7 +327,7 @@ def f(name) = Form.find_by!(name: name)
   {
     name: "Symbicort",
     labeler: l("AstraZeneca"),
-    form: f("Drops"),
+    form: f("Drop"),
     categories: [ c("Antiasthmatics") ],
     active_ingredients: [ ai("Budesonide"), ai("Formoterol") ],
     notes: "Combination inhaled corticosteroid (budesonide) and long-acting beta-agonist (LABA, formoterol) for asthma and COPD maintenance therapy. The corticosteroid reduces airway inflammation while formoterol provides bronchodilation. Not for acute bronchospasm relief.",

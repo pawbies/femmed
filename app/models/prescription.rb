@@ -5,7 +5,10 @@ class Prescription < ApplicationRecord
   has_many :packs, dependent: :destroy
   has_many :doses, dependent: :destroy
 
+
+  delegate :strength_per_dose, to: :medication_version, allow_nil: true
   delegate :form, to: :medication_version, allow_nil: true
+  delegate :unit, to: :medication_version, allow_nil: true
   delegate :full_name, to: :medication_version, allow_nil: true
 
   validates :dosage, presence: true, numericality: { only_integer: true }

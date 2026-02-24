@@ -23,6 +23,18 @@ class DoseTest < ActiveSupport::TestCase
     assert_includes dose.errors[:amount_taken], "is not a number"
   end
 
+  test "should require amount_taken to not be zero" do
+    dose = Dose.new(prescription: prescriptions(:alice_ritalin_ir), amount_taken: 0, taken_at: Time.current)
+    assert_not dose.valid?
+    assert_includes dose.errors[:amount_taken], "must be greater than 0"
+  end
+
+  test "should require amount_taken to not be greater than zero" do
+    dose = Dose.new(prescription: prescriptions(:alice_ritalin_ir), amount_taken: -2, taken_at: Time.current)
+    assert_not dose.valid?
+    assert_includes dose.errors[:amount_taken], "must be greater than 0"
+  end
+
   test "should require taken_at" do
     dose = Dose.new(prescription: prescriptions(:alice_ritalin_ir), amount_taken: 1.0)
     assert_not dose.valid?
