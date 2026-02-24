@@ -8,8 +8,8 @@ class User < ApplicationRecord
 
   has_many :sessions, dependent: :destroy
   has_many :assistent_talks, dependent: :destroy
-  has_many :user_medications, dependent: :destroy
-  has_many :medication_versions, through: :user_medications
+  has_many :prescriptions, dependent: :destroy
+  has_many :medication_versions, through: :prescriptions
 
   encrypts :email_address, deterministic: true
   encrypts :username

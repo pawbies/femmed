@@ -1,7 +1,7 @@
 <h3 class="text-2xl">
   Log
   <span class="text-black/50 italic">
-    - <%= "#{@user_medication.doses.count} #{'time'.pluralize(@user_medication.doses.count)}" %>
+    - <%= "#{@prescription.doses.count} #{'time'.pluralize(@prescription.doses.count)}" %>
     taken already
   </span>
 </h3>
@@ -15,10 +15,10 @@
     </tr>
   </thead>
   <tbody class="divide-y divide-zinc-100">
-    <% @user_medication.doses.order(taken_at: :desc).each_with_index do |dose, index| %>
+    <% @prescription.doses.order(taken_at: :desc).each_with_index do |dose, index| %>
       <tr class="transition-colors hover:bg-zinc-50">
-        <td class="py-3 pr-8 font-medium text-zinc-800"><%= @user_medication.doses.count - index %></td>
-        <td class="py-3 pr-8 font-medium text-zinc-800"><%= "#{dose.amount_taken} #{@user_medication.medication_version.unit}" %></td>
+        <td class="py-3 pr-8 font-medium text-zinc-800"><%= @prescription.doses.count - index %></td>
+        <td class="py-3 pr-8 font-medium text-zinc-800"><%= "#{dose.amount_taken} #{@prescription.medication_version.unit}" %></td>
         <td class="py-3 pr-8 font-medium text-zinc-800"><%= dose.taken_at.strftime("%k:%M") %></td>
         <td class="my-3 font-medium text-zinc-800"><%= dose.taken_at.strftime("%d. %m. %Y") %></td>
       </tr>

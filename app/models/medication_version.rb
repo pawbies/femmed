@@ -1,7 +1,7 @@
 class MedicationVersion < ApplicationRecord
   belongs_to :medication
 
-  has_many :user_medications
+  has_many :prescriptions
 
   delegate :form, to: :medication, allow_nil: true
 

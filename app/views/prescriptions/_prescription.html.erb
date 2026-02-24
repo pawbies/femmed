@@ -1,11 +1,11 @@
-<%= link_to user_medication do %>
+<%= link_to prescription do %>
   <div class="w-full bg-white border border-rose-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
       data-controller="user-medications-preview"
-      data-user-medications-preview-ingredients-value="<%= user_medication.medication_version.medication.active_ingredients.map { |i| {name: i.name, halfLife: i.half_life, dose: Random.rand(25..300)} }.to_json %>">
+      data-user-medications-preview-ingredients-value="<%= prescription.medication_version.medication.active_ingredients.map { |i| {name: i.name, halfLife: i.half_life, dose: Random.rand(25..300)} }.to_json %>">
 
     <div class="px-4 pt-4 pb-2 flex items-center justify-between">
       <div>
-        <h5 class="font-semibold text-gray-800"><%= user_medication.medication_version.full_name %></h5>
+        <h5 class="font-semibold text-gray-800"><%= prescription.medication_version.full_name %></h5>
         <p class="text-xs text-rose-400 mt-0.5">Plasma concentration over 48h</p>
       </div>
       <span class="text-xs bg-rose-100 text-rose-500 font-medium px-2 py-1 rounded-full">

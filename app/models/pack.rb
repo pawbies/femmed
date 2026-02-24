@@ -1,7 +1,8 @@
 class Pack < ApplicationRecord
-  belongs_to :user_medication
+  belongs_to :prescription
 
   has_many :doses, dependent: :destroy
 
   validates :amount, presence: true, numericality: { only_integer: true }
+  validates :aquired_at, presence: true, comparison: { less_than_or_equal_to: -> { Time.current } }
 end

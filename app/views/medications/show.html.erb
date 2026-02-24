@@ -39,11 +39,11 @@
             <td class="py-3 pr-8 text-zinc-500"><%= "#{version.strength_per_dose} #{version.unit}" %></td>
             <td class="py-3 pr-8 font-mono text-xs text-zinc-400"><%= version.ndc %></td>
             <td class="my-3 font-medium text-zinc-800">
-              <% unless Current.user.user_medications.where("medication_version_id = ?", version.id).any? %>
-                <%= link_to "＋ Add", new_medication_version_user_medication_path(medication_version_id: version.id), method: :get,
+              <% unless Current.user.prescriptions.where("medication_version_id = ?", version.id).any? %>
+                <%= link_to "＋ Add", new_medication_version_prescription_path(medication_version_id: version.id), method: :get,
                   class: "cursor-pointer px-3 py-1.5 bg-white border border-rose-300 text-rose-400 text-xs font-semibold rounded-lg hover:bg-rose-300 hover:text-white transition-colors" %>
               <% else %>
-                <%= button_to "- Remove", Current.user.user_medications.where("medication_version_id = ?", version.id).first, method: :delete,
+                <%= button_to "- Remove", Current.user.prescriptions.where("medication_version_id = ?", version.id).first, method: :delete,
                   class: "cursor-pointer px-3 py-1.5 bg-white border border-rose-300 text-rose-400 text-xs font-semibold rounded-lg hover:bg-rose-300 hover:text-white transition-colors" %>
               <% end %>
             </td>

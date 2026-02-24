@@ -1,4 +1,4 @@
-class UserMedication < ApplicationRecord
+class Prescription < ApplicationRecord
   belongs_to :user
   belongs_to :medication_version
 
@@ -6,6 +6,7 @@ class UserMedication < ApplicationRecord
   has_many :doses, through: :packs
 
   delegate :form, to: :medication_version, allow_nil: true
+  delegate :full_name, to: :medication_version, allow_nil: true
 
   validates :dosage, presence: true, numericality: { only_integer: true }
 

@@ -1,31 +1,35 @@
 <section>
-  <h3 class="text-2xl">
-    Packs
-    <span class="text-black/50 italic">
-      <% unless @user_medication.packs.empty? %>
-        - <%= (Date.today - @user_medication.packs.last.aquired_at).to_i %>
-        days since you got the last pack
-      <% else %>
-        - Go ahead and get some
-      <% end %>
-    </span>
-  </h3>
+  <div class="flex items-center justify-between">
+    <h3 class="text-2xl">
+      Packs
+      <span class="text-black/50 italic">
+        <% unless @prescription.packs.empty? %>
+          - <%= (Date.today - @prescription.packs.order(:aquired_at).last.aquired_at).to_i %>
+          days since you got the last pack
+        <% else %>
+          - Go ahead and get some
+        <% end %>
+      </span>
+    </h3>
+
+    <%= link_to "Add Pack", new_prescription_pack_path(@prescription), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
+  </div>
 
 
-  <div class="mt-6 grid grid-cols-2 gap-6">
+  <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
     <div class="rounded-lg border border-zinc-300 p-4">
       <p class="text-xs uppercase tracking-widest text-rose-300 mb-2">Doses Remaining</p>
-      <p class="text-3xl font-bold text-gray-900"><%= @user_medication.remaining_doses %></p>
+      <p class="text-3xl font-bold text-gray-900"><%= @prescription.remaining_doses %></p>
       <p class="text-xs text-gray-500 mt-1">Cmon eat them up >:3</p>
     </div>
 
     <div class="rounded-lg border border-zinc-300 p-4">
       <p class="text-xs uppercase tracking-widest text-rose-300 mb-2">
-        <%= @user_medication.form.name.pluralize(@user_medication.packs.sum(:amount)) %>
+        <%= @prescription.form.name.pluralize(@prescription.packs.sum(:amount)) %>
         Remaining</p>
       <p class="text-3xl font-bold text-gray-900">
-        <%= @user_medication.remaining_units %>
-        <%= @user_medication.form.name.pluralize(@user_medication.packs.sum(:amount)) %>
+        <%= @prescription.remaining_units %>
+        <%= @prescription.form.name.pluralize(@prescription.packs.sum(:amount)) %>
       </p>
       <p class="text-xs text-gray-500 mt-1">Gotta make them disappear</p>
     </div>
@@ -44,9 +48,9 @@
       </tr>
     </thead>
     <tbody class="divide-y divide-zinc-100">
-      <% @user_medication.packs.order(aquired_at: :desc).each_with_index do |pack, index| %>
+      <% @prescription.packs.order(aquired_at: :desc).each_with_index do |pack, index| %>
         <tr class="transition-colors hover:bg-zinc-50">
-          <td class="py-3 pr-8 font-medium text-zinc-800"><%= @user_medication.packs.count - index %></td>
+          <td class="py-3 pr-8 font-medium text-zinc-800"><%= @prescription.packs.count - index %></td>
           <td class="py-3 pr-8 font-medium text-zinc-800"><%= pack.amount %></td>
           <td class="my-3 font-medium text-zinc-800"><%= pack.aquired_at.strftime("%d. %m. %Y") %></td>
         </tr>

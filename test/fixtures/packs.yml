@@ -1,56 +1,56 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 alice_ritalin_ir_pack:
-  user_medication: alice_ritalin_ir
+  prescription: alice_ritalin_ir
   amount: 30
   aquired_at: 2026-02-01
 
 alice_lexapro_pack:
-  user_medication: alice_lexapro
+  prescription: alice_lexapro
   amount: 30
   aquired_at: 2026-02-01
 
 bob_adderall_xr_pack:
-  user_medication: bob_adderall_xr
+  prescription: bob_adderall_xr
   amount: 30
   aquired_at: 2026-02-05
 
 bob_wellbutrin_pack:
-  user_medication: bob_wellbutrin
+  prescription: bob_wellbutrin
   amount: 30
   aquired_at: 2026-02-05
 
 carol_estradot_pack:
-  user_medication: carol_estradot
+  prescription: carol_estradot
   amount: 8
   aquired_at: 2026-02-10
 
 carol_progestan_pack:
-  user_medication: carol_progestan
+  prescription: carol_progestan
   amount: 30
   aquired_at: 2026-02-10
 
 carol_aldactone_pack:
-  user_medication: carol_aldactone
+  prescription: carol_aldactone
   amount: 30
   aquired_at: 2026-02-10
 
 david_synthroid_pack:
-  user_medication: david_synthroid
+  prescription: david_synthroid
   amount: 30
   aquired_at: 2026-02-12
 
 david_prozac_pack:
-  user_medication: david_prozac
+  prescription: david_prozac
   amount: 30
   aquired_at: 2026-02-12
 
 eva_concerta_pack:
-  user_medication: eva_concerta
+  prescription: eva_concerta
   amount: 30
   aquired_at: 2026-02-15
 
 eva_zoloft_pack:
-  user_medication: eva_zoloft
+  prescription: eva_zoloft
   amount: 30
   aquired_at: 2026-02-15

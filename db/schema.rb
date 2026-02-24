@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_22_135849) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_24_140151) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_22_135849) do
   create_table "active_ingredients_medications", id: false, force: :cascade do |t|
     t.integer "active_ingredient_id", null: false
     t.integer "medication_id", null: false
+    t.index ["medication_id", "active_ingredient_id"], name: "idx_on_medication_id_active_ingredient_id_17a7d3821b"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -80,6 +81,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_22_135849) do
   create_table "categories_medications", id: false, force: :cascade do |t|
     t.integer "category_id", null: false
     t.integer "medication_id", null: false
+    t.index ["medication_id", "category_id"], name: "index_categories_medications_on_medication_id_and_category_id"
   end
 
   create_table "doses", force: :cascade do |t|
@@ -129,15 +131,26 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_22_135849) do
   create_table "medications_references", id: false, force: :cascade do |t|
     t.integer "medication_id", null: false
     t.integer "reference_id", null: false
+    t.index ["medication_id", "reference_id"], name: "index_medications_references_on_medication_id_and_reference_id"
   end
 
   create_table "packs", force: :cascade do |t|
     t.integer "amount", null: false
     t.date "aquired_at"
     t.datetime "created_at", null: false
+    t.integer "prescription_id", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_medication_id", null: false
-    t.index ["user_medication_id"], name: "index_packs_on_user_medication_id"
+    t.index ["prescription_id"], name: "index_packs_on_prescription_id"
+  end
+
+  create_table "prescriptions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "dosage", null: false
+    t.integer "medication_version_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["medication_version_id"], name: "index_prescriptions_on_medication_version_id"
+    t.index ["user_id"], name: "index_prescriptions_on_user_id"
   end
 
   create_table "references", force: :cascade do |t|
@@ -153,16 +166,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_22_135849) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
-  end
-
-  create_table "user_medications", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.integer "dosage", null: false
-    t.integer "medication_version_id", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.index ["medication_version_id"], name: "index_user_medications_on_medication_version_id"
-    t.index ["user_id"], name: "index_user_medications_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -183,8 +186,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_22_135849) do
   add_foreign_key "medication_versions", "medications"
   add_foreign_key "medications", "forms"
   add_foreign_key "medications", "labelers"
-  add_foreign_key "packs", "user_medications"
+  add_foreign_key "packs", "prescriptions"
+  add_foreign_key "prescriptions", "medication_versions"
+  add_foreign_key "prescriptions", "users"
   add_foreign_key "sessions", "users"
-  add_foreign_key "user_medications", "medication_versions"
-  add_foreign_key "user_medications", "users"
 end

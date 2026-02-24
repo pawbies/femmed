@@ -1,11 +1,11 @@
 <div class="w-full">
   <h1 class="font-bold text-4xl">Add <%= @medication_version.full_name %> to your stack</h1>
 
-  <%= form_with model: [@medication_version, @user_medication], class: "mt-10 mx-auto max-w-md" do |form| %>
+  <%= form_with model: [@medication_version, @prescription], class: "mt-10 mx-auto max-w-md" do |form| %>
 
-    <% if @user_medication.errors.any? %>
+    <% if @prescription.errors.any? %>
       <ol>
-        <% @user_medication.errors.full_messages.each do |error| %>
+        <% @prescription.errors.full_messages.each do |error| %>
           <li><%= error %></li>
         <% end%>
       </ol>

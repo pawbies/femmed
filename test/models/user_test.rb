@@ -58,9 +58,9 @@ class UserTest < ActiveSupport::TestCase
 
   test "should destroy user medications when destroyed" do
     user = users(:alice)
-    um_count = user.user_medications.count
+    um_count = user.prescriptions.count
     assert um_count > 0
-    assert_difference("UserMedication.count", -um_count) do
+    assert_difference("Prescription.count", -um_count) do
       user.destroy
     end
   end
