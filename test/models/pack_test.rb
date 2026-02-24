@@ -23,6 +23,18 @@ class PackTest < ActiveSupport::TestCase
     assert_includes pack.errors[:amount], "must be an integer"
   end
 
+  test "should require amount to not be zero" do
+    pack = Pack.new(prescription: prescriptions(:alice_ritalin_ir), amount: 0, aquired_at: Date.today)
+    assert_not pack.valid?
+    assert_includes pack.errors[:amount], "must be greater than 0"
+  end
+
+  test "should require amount to not be negative" do
+    pack = Pack.new(prescription: prescriptions(:alice_ritalin_ir), amount: -2, aquired_at: Date.today)
+    assert_not pack.valid?
+    assert_includes pack.errors[:amount], "must be greater than 0"
+  end
+
   test "should belong to a prescription" do
     assert_equal prescriptions(:alice_ritalin_ir), packs(:alice_ritalin_ir_pack).prescription
   end
