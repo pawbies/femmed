@@ -38,17 +38,4 @@ class PackTest < ActiveSupport::TestCase
   test "should belong to a prescription" do
     assert_equal prescriptions(:alice_ritalin_ir), packs(:alice_ritalin_ir_pack).prescription
   end
-
-  test "should have many doses" do
-    assert_respond_to packs(:alice_ritalin_ir_pack), :doses
-  end
-
-  test "should destroy doses when destroyed" do
-    pack = packs(:alice_ritalin_ir_pack)
-    dose_count = pack.doses.count
-    assert dose_count > 0
-    assert_difference("Dose.count", -dose_count) do
-      pack.destroy
-    end
-  end
 end

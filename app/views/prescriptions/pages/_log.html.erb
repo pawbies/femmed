@@ -1,10 +1,14 @@
-<h3 class="text-2xl">
-  Log
-  <span class="text-black/50 italic">
-    - <%= "#{@prescription.doses.count} #{'time'.pluralize(@prescription.doses.count)}" %>
-    taken already
-  </span>
-</h3>
+<div class="flex items-center justify-between">
+  <h3 class="text-2xl">
+    Log
+    <span class="text-black/50 italic">
+      - <%= "#{@prescription.doses.count} #{'time'.pluralize(@prescription.doses.count)}" %>
+      taken already
+    </span>
+  </h3>
+
+  <%= link_to "Log Dose", new_prescription_dose_path(@prescription), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
+</div>
 <table class="w-full mt-6 text-sm">
   <thead>
     <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">

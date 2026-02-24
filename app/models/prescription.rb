@@ -3,7 +3,7 @@ class Prescription < ApplicationRecord
   belongs_to :medication_version
 
   has_many :packs, dependent: :destroy
-  has_many :doses, through: :packs
+  has_many :doses, dependent: :destroy
 
   delegate :form, to: :medication_version, allow_nil: true
   delegate :full_name, to: :medication_version, allow_nil: true

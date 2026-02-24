@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   end
   resources :prescriptions, except: %i[ new create ] do
     resources :packs
+    resources :doses
   end
   resources :medications
   resource :assistent_talks
