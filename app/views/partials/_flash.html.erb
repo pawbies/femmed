@@ -10,9 +10,12 @@
           <p class="text-sm text-emerald-700 mt-0.5"><%= notice %></p>
         </div>
       </div>
-      <button data-action="flash#close" class="ml-2 shrink-0 text-emerald-400 hover:text-emerald-600 hover:cursor-pointer transition-colors">
+      <button data-action="flash#close" class="no-js:hidden ml-2 shrink-0 text-emerald-400 hover:text-emerald-600 hover:cursor-pointer transition-colors">
         <%= image_tag "icons/x.svg", class: "w-4 h-4" %>
       </button>
+      <%= link_to request.fullpath, class: "js:hidden ml-2 shrink-0 text-emerald-400 hover:text-emerald-600 hover:cursor-pointer transition-colors" do %>
+        <%= image_tag "icons/x.svg", class: "w-4 h-4" %>
+      <% end %>
     </div>
   </div>
 <% end %>

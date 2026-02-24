@@ -3,26 +3,39 @@
       data-controller="prescriptions-preview"
       data-prescriptions-preview-ingredients-value="<%= prescription.medication_version.medication.active_ingredients.map { |i| {name: i.name, halfLife: i.half_life, dose: Random.rand(25..300)} }.to_json %>">
 
-    <div class="px-4 pt-4 pb-2 flex items-center justify-between">
+    <div class="no-js:hidden">
+      <div class="px-4 pt-4 pb-2 flex items-center justify-between">
+        <div>
+          <h5 class="font-semibold text-gray-800"><%= prescription.medication_version.full_name %></h5>
+          <p class="text-xs text-rose-400 mt-0.5">Plasma concentration over 48h</p>
+        </div>
+        <span class="text-xs bg-rose-100 text-rose-500 font-medium px-2 py-1 rounded-full">
+          Active
+        </span>
+      </div>
+
+      <div data-prescriptions-preview-target="chart" class="w-full"></div>
+
+      <div class="px-4 py-2 border-t border-rose-100 flex gap-3">
+        <span class="flex items-center gap-1 text-xs text-gray-400">
+          <span class="inline-block w-2 h-2 rounded-full bg-green-400"></span> Therapeutic
+        </span>
+        <span class="flex items-center gap-1 text-xs text-gray-400">
+          <span class="inline-block w-2 h-2 rounded-full bg-red-400"></span> Toxic
+        </span>
+      </div>
+    </div>
+
+    <div class="js:hidden px-4 py-4 flex items-center justify-between">
       <div>
         <h5 class="font-semibold text-gray-800"><%= prescription.medication_version.full_name %></h5>
-        <p class="text-xs text-rose-400 mt-0.5">Plasma concentration over 48h</p>
+        <p class="text-xs text-rose-400 mt-0.5">
+          <%= prescription.medication_version.medication.active_ingredients.map(&:name).to_sentence %>
+        </p>
       </div>
       <span class="text-xs bg-rose-100 text-rose-500 font-medium px-2 py-1 rounded-full">
         Active
       </span>
     </div>
-
-    <div data-prescriptions-preview-target="chart" class="w-full"></div>
-
-    <div class="px-4 py-2 border-t border-rose-100 flex gap-3">
-      <span class="flex items-center gap-1 text-xs text-gray-400">
-        <span class="inline-block w-2 h-2 rounded-full bg-green-400"></span> Therapeutic
-      </span>
-      <span class="flex items-center gap-1 text-xs text-gray-400">
-        <span class="inline-block w-2 h-2 rounded-full bg-red-400"></span> Toxic
-      </span>
-    </div>
-
   </div>
 <% end %>

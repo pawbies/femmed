@@ -5,6 +5,6 @@ export default class extends Controller {
   static targets = ["hiddenOptions"]
 
   toggleHiddenOptions() {
-    this.hiddenOptionsTarget.classList.toggle("hidden");
+    this.hiddenOptionsTarget.classList.toggle("js:hidden");
   }
 }

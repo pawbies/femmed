@@ -8,9 +8,9 @@
         <%= form.submit "Yippie", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
       </div>
       <div class="mt-1 flex items-center justify-end">
-        <button data-action="search#toggleHiddenOptions" type="button" class="hover:cursor-pointer">Advanced search</button>
+        <button data-action="search#toggleHiddenOptions" type="button" class="no-js:hidden hover:cursor-pointer">Advanced search</button>
       </div>
-      <div data-search-target="hiddenOptions" class="hidden">
+      <div data-search-target="hiddenOptions" class="js:hidden">
         Hidden options
       </div>
     <% end %>
