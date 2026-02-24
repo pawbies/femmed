@@ -9,16 +9,13 @@ class UserMedication < ApplicationRecord
 
   validates :dosage, presence: true, numericality: { only_integer: true }
 
-  def remaining_doses
-    total_units = packs.sum(:amount)
-    used_units = (doses.sum(:amount_taken) / medication_version.strength_per_dose)
-    remaining_units = total_units - used_units
-    ((remaining_units * medication_version.strength_per_dose) / dosage).round(2)
-  end
-
   def remaining_units
     total_units = packs.sum(:amount)
-    used_units = doses.sum(:amount_taken) / medication_version.strength_per_dose
+    used_units = doses.sum(:amount_taken)
     total_units - used_units
+  end
+
+  def remaining_doses
+    ((remaining_units() * medication_version.strength_per_dose) / dosage).round(2)
   end
 end
