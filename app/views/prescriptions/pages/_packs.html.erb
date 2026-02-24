@@ -51,7 +51,7 @@
     <thead>
       <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
         <th class="pb-3 pr-8">Number</th>
-        <th class="pb-3 pr-8">Doses in pack</th>
+        <th class="pb-3 pr-8"><%= @prescription.form.name.pluralize %>/Doses in pack</th>
         <th class="pb-3">Date</th>
       </tr>
     </thead>
@@ -59,7 +59,9 @@
       <% @prescription.packs.order(aquired_at: :desc).each_with_index do |pack, index| %>
         <tr class="transition-colors hover:bg-zinc-50">
           <td class="py-3 pr-8 font-medium text-zinc-800"><%= @prescription.packs.count - index %></td>
-          <td class="py-3 pr-8 font-medium text-zinc-800"><%= pack.amount %></td>
+          <td class="py-3 pr-8 font-medium text-zinc-800">
+            <%= "#{pack.amount}/#{pack.amount * @prescription.strength_per_dose / @prescription.dosage}" %>
+          </td>
           <td class="my-3 font-medium text-zinc-800"><%= pack.aquired_at.strftime("%d. %m. %Y") %></td>
         </tr>
       <% end %>
