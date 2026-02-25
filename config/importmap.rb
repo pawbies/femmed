@@ -45,3 +45,4 @@ pin "internmap" # @2.0.3
 pin "interval-tree-1d" # @1.0.4
 pin "isoformat" # @0.2.1
 pin "robust-predicates" # @3.0.2
+pin "local-time" # @3.0.3

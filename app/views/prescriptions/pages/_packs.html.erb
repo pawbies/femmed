@@ -62,7 +62,9 @@
           <td class="py-3 pr-8 font-medium text-zinc-800">
             <%= "#{pack.amount}/#{pack.amount * @prescription.strength_per_dose / @prescription.dosage}" %>
           </td>
-          <td class="my-3 font-medium text-zinc-800"><%= pack.aquired_at.strftime("%d. %m. %Y") %></td>
+          <td class="my-3 font-medium text-zinc-800">
+            <%= local_time(dose.taken_at, "%B %e, %Y") %>
+          </td>
         </tr>
       <% end %>
     </tbody>
