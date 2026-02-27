@@ -63,7 +63,7 @@
             <%= "#{pack.amount}/#{pack.amount * @prescription.strength_per_dose / @prescription.dosage}" %>
           </td>
           <td class="my-3 font-medium text-zinc-800">
-            <%= local_time(dose.taken_at, "%B %e, %Y") %>
+            <%= local_time(pack.aquired_at, "%B %e, %Y") %>
           </td>
         </tr>
       <% end %>
