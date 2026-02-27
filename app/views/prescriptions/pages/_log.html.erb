@@ -18,21 +18,19 @@
 <table class="w-full mt-6 text-sm border-collapse">
   <thead>
     <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
-      <th class="pb-3 pr-8">Number</th>
       <th class="pb-3">Dose</th>
-      <th class="hidden md:table-column"></th>
+      <th></th>
       <th class="pb-3 pr-8">Time</th>
       <th class="pb-3">Date</th>
     </tr>
   </thead>
   <tbody class="divide-y divide-zinc-100">
-    <% @prescription.doses.order(taken_at: :desc).each_with_index do |dose, index| %>
+    <% @prescription.doses.order(taken_at: :desc).each do |dose| %>
       <tr class="transition-colors hover:bg-zinc-50">
-        <td class="py-3 pr-8 font-medium text-zinc-800"><%= @prescription.doses.count - index %></td>
         <td class="py-3 font-medium text-zinc-800">
           <%= "#{format("%g", dose.amount_taken)} #{@prescription.form.name.pluralize(dose.amount_taken)}" %>
         </td>
-        <td class="hidden md:table-cell">
+        <td>
           ~ <%= "#{format("%g", dose.amount_taken * @prescription.strength_per_dose)}#{@prescription.unit}" %>
         </td>
         <td class="py-3 pr-8 font-medium text-zinc-800">

@@ -37,6 +37,7 @@ class SiteControllerTest < ActionDispatch::IntegrationTest
 
   test "should get about if authenticated" do
     sign_in_as(@user)
+    get about_url
     assert_response :success
   end
 end
