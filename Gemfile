@@ -69,4 +69,6 @@ group :test do
   gem "rails-controller-testing", "~> 1.0"
 end
 
+gem "dotenv-rails", groups: [:development, :test]
+
 gem "local_time", "~> 3.0"
