@@ -10,3 +10,7 @@ LocalTime.start()
 document.addEventListener("turbo:morph", () => {
   LocalTime.run()
 })
+
+document.addEventListener("turbo:load", () => {
+  document.cookie = `timezone=${Intl.DateTimeFormat().resolvedOptions().timeZone}; path=/`
+})
