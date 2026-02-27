@@ -17,6 +17,8 @@
 
   <div class="mt-16 flex justify-evenly items-center max-w-md mx-auto">
     <%= link_to "Forgot your password? x3", new_password_path, class: "text-xl underline hover:no-underline" %>
-    <%= link_to "Need an account?", new_user_path, class: "text-xl underline hover:no-underline" %>
+    <% if EnvConfig::PUBLIC %>
+      <%= link_to "Need an account?", new_user_path, class: "text-xl underline hover:no-underline" %>
+    <% end %>
   </div>
 </div>

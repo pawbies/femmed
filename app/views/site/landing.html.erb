@@ -9,7 +9,11 @@
   </h2>
 
   <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">
-    <%= link_to "Let's get started!", new_user_path, class: "text-xl underline hover:no-underline" %>
-    <%= link_to "Already signed up?", new_session_path, class: "text-xl underline hover:no-underline" %>
+    <% if EnvConfig::PUBLIC %>
+      <%= link_to "Let's get started!", new_user_path, class: "text-xl underline hover:no-underline" %>
+      <%= link_to "Already signed up?", new_session_path, class: "text-xl underline hover:no-underline" %>
+    <% else %>
+        <%= link_to "Login ^w^", new_session_path, class: "text-xl underline hover:no-underline" %>
+    <% end %>
   </div>
 </div>

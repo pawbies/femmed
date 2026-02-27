@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[ new create ]
+  before_action :require_public_application, only: %i[ new create ]
   before_action :require_own_user, only: %i[ show edit update destroy ]
   before_action :fetch_user_by_id, only: %i[ show edit update destroy ]
   layout "sessions", only: %i[ new create ]
@@ -56,5 +57,11 @@ class UsersController < ApplicationController
 
     def fetch_user_by_id
       @user = User.find(params[:id])
+    end
+
+    def require_public_application
+      unless EnvConfig::PUBLIC
+        redirect_to root_path, alert: "UwU... whatcha doin there ^^"
+      end
     end
 end
