@@ -10,6 +10,9 @@ class SiteController < ApplicationController
   def landing
   end
 
+  def about
+  end
+
   private
     def redirect_to_landing_unless_authenticated
       redirect_to :landing unless authenticated?

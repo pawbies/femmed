@@ -4,19 +4,21 @@
     <%= link_to "FemMed", root_path %>
   </h1>
 
-  <div class="relative flex items-center" data-controller="profile">
-    <%= image_tag Current.user.profile_picture, data: { action: "click->profile#toggle" }, alt: "Profile picture", class: "hover:cursor-pointer rounded-full border border-black aspect-square h-14" %>
+  <% if authenticated? %>
+    <div class="relative flex items-center" data-controller="profile">
+      <%= image_tag Current.user.profile_picture, data: { action: "click->profile#toggle" }, alt: "Profile picture", class: "hover:cursor-pointer rounded-full border border-black aspect-square h-14" %>
 
-    <div data-profile-target="popup" class="hidden absolute top-16 right-0 py-2 px-4 rounded-md border border-rose-300 bg-rose-100">
-      <%= link_to "Profile", Current.user, class: "text-lg font-semibold" %>
-      <%= link_to "Settings", settings_path, class: "text-lg font-semibold" %>
-      <%= button_to "Log out", session_path, method: :delete, class: "hover:cursor-pointer text-lg text-red-500 font-semibold" %>
-    </div>
+      <div data-profile-target="popup" class="hidden absolute top-16 right-0 py-2 px-4 rounded-md border border-rose-300 bg-rose-100">
+        <%= link_to "Profile", Current.user, class: "text-lg font-semibold" %>
+        <%= link_to "Settings", settings_path, class: "text-lg font-semibold" %>
+        <%= button_to "Log out", session_path, method: :delete, class: "hover:cursor-pointer text-lg text-red-500 font-semibold" %>
+      </div>
 
-    <div class="js:hidden border-l ml-1 pl-1 flex flex-col items-left">
-      <%= link_to "Profile", Current.user, class: "text-lg font-semibold" %>
-      <%= link_to "Settings", settings_path, class: "text-lg font-semibold" %>
-      <%= button_to "Log out", session_path, method: :delete, class: "hover:cursor-pointer text-lg text-red-500 font-semibold" %>
+      <div class="js:hidden border-l ml-1 pl-1 flex flex-col items-left">
+        <%= link_to "Profile", Current.user, class: "text-lg font-semibold" %>
+        <%= link_to "Settings", settings_path, class: "text-lg font-semibold" %>
+        <%= button_to "Log out", session_path, method: :delete, class: "hover:cursor-pointer text-lg text-red-500 font-semibold" %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </header>
