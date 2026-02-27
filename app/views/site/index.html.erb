@@ -19,17 +19,7 @@
 <div class="w-full">
   <h1 class="font-bold text-4xl">Welcome back <%= Current.user.username %></h1>
 
-  <nav class="mt-8 mb-12 flex gap-8 border-b border-gray-200">
-    <%= link_to "Home", root_path,
-        class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
-          current_page?(root_path) ? 'border-b-2 border-rose-500 text-rose-600' : ''
-        }" %>
-
-    <%= link_to "Timeline", timeline_path,
-        class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
-          current_page?(timeline_path) ? 'border-b-2 border-rose-500 text-rose-600' : ''
-        }" %>
-  </nav>
+  <%= render "partials/nav", links: [["Home", root_path], ["Timeline", timeline_path]] %>
 
   <section class="my-12">
     <h3 class="text-3xl">Search</h3>
