@@ -32,4 +32,7 @@ Rails.application.routes.draw do
   get "legal/privacy", as: :privacy
 
   get "search" => "search#index"
+
+
+  get "timeline" => "timeline#index"
 end

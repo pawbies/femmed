@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :assistent_talks, dependent: :destroy
   has_many :prescriptions, dependent: :destroy
   has_many :medication_versions, through: :prescriptions
+  has_many :doses, through: :prescriptions
 
   encrypts :email_address, deterministic: true
   encrypts :username
