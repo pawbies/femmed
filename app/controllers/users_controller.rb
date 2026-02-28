@@ -23,6 +23,10 @@ class UsersController < ApplicationController
   def show
   end
 
+  def profile
+    redirect_to Current.user
+  end
+
   def edit
   end
 

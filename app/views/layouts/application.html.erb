@@ -31,6 +31,8 @@
     <meta name="twitter:description" content="Medication tracking system">
     <meta name="twitter:image" content="/icon.svg">
 
+    <meta name="authenticated" content="<%= authenticated? ? "true" : "false" %>">
+
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
