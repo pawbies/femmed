@@ -1,6 +1,9 @@
 <div class="w-full">
   <h1 class="font-bold text-4xl">Calendar</h1>
-  <%= render "partials/nav", links: [["Home", root_path], ["Timeline", timeline_path], ["Calendar", calendar_path]] %>
+
+  <% nav_links = [["Home", root_path], ["Timeline", timeline_path], ["Calendar", calendar_path]] %>
+  <% nav_links << ["Management", users_path] if Current.user&.role == "admin" %>
+  <%= render "partials/nav", links: nav_links %>
 
   <div class="flex items-center justify-between mt-6 mb-8">
     <div class="flex items-center gap-4">
