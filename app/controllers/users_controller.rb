@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[ new create ]
   before_action :require_public_application, only: %i[ new create ]
-  before_action :require_own_user, only: %i[ show edit update destroy ]
+  before_action :require_own_user_or_admin, only: %i[ show edit update destroy ]
   before_action :fetch_user_by_id, only: %i[ show edit update destroy ]
   layout "sessions", only: %i[ new create ]
+  layout "admin", only: :index
+
+  def index
+  end
 
   def new
     @user = User.new
@@ -41,7 +45,11 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy!
 
-    redirect_to landing_path, notice: "Sorry to see you go"
+    unless Current.user.admin?
+      redirect_to landing_path, notice: "Sorry to see you go"
+    else
+      redirect_to users_path, notice: "Deleted this weird guy >:3"
+    end
   end
 
   private
@@ -53,8 +61,8 @@ class UsersController < ApplicationController
       params.expect(user: [ :email_address, :username, :pfp ])
     end
 
-    def require_own_user
-      if params[:id].to_i != Current.user.id
+    def require_own_user_or_admin
+      if params[:id].to_i != Current.user.id && Current.user.role != "admin"
         redirect_to root_path, alert: "Hey! You can't be there!"
       end
     end

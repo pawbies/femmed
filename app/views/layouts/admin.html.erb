@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>" class="no-js">
+  <head>
+    <title><%= content_for(:title) || "FemMed" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Femmed">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <meta name="author" content="Alexander Fuchs">
+    <meta name="description" content="Medication tracking system">
+
+    <meta property="og:title" content="FemMed">
+    <meta property="og:description" content="Medication tracking system">
+    <meta property="og:image" content="/icon.svg">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FemMed">
+    <meta name="twitter:description" content="Medication tracking system">
+    <meta name="twitter:image" content="/icon.svg">
+
+    <meta name="authenticated" content="<%= authenticated? ? "true" : "false" %>">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <script>
+      document.documentElement.classList.replace("no-js", "js")
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+  </head>
+
+  <body data-controller="admin-sidebar" class="font-[Merriweather] min-h-screen flex flex-col">
+    <% @admin_layout = true %>
+    <div id="veil" class="hidden fixed top-0 left-0 w-screen h-screen bg-black/50 z-50"></div> <%# Used for some js things %>
+
+    <%= render "partials/header" %>
+    <%= render "partials/flash" %>
+    <%= render "partials/sidebar" %>
+
+    <main class="container mx-auto mt-20 mb-12 px-5 flex text-black/85 flex-1">
+      <%= yield %>
+    </main>
+
+    <%= render "partials/footer" %>
+  </body>
+</html>

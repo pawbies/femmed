@@ -1,0 +1,11 @@
+<tr class="group hover:bg-rose-50/40 transition-colors">
+  <td class="py-3 pr-4">
+    <%= image_tag user.profile_picture, class: "h-14 w-14 border rounded-full object-cover" %>
+  </td>
+  <td class="py-3 pr-8 font-semibold text-gray-900 w-1/4"><%= user.username %></td>
+  <td class="py-3 text-gray-500 flex-1"><%= user.email_address %></td>
+  <td class="py-3 pr-8 text-gray-700 w-1/4"><%= user.created_at.strftime("%b %e, %Y") %></td>
+  <td class="py-3 text-right">
+    <%= link_to "+ View", user_path(user), class: "text-xs border border-rose-200 text-rose-400 hover:bg-rose-50 px-3 py-1 rounded-full transition-colors opacity-0 group-hover:opacity-100" %>
+  </td>
+</tr>
