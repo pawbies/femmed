@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[ new create ]
+
   before_action :require_public_application, only: %i[ new create ]
-  before_action :require_admin, only: :index
-  before_action :require_own_user_or_admin, only: %i[ show edit update destroy ]
-  before_action :fetch_user_by_id, only: %i[ show edit update destroy ]
+  before_action :require_admin,              only: :index
+  before_action :require_own_user_or_admin,  except: %i[ index new create ]
+  before_action :set_user,                   except: %i[ index new create ]
+
   layout "sessions", only: %i[ new create ]
-  layout "admin", only: :index
+  layout "admin",    only: :index
 
   def index
   end
@@ -74,7 +76,7 @@ class UsersController < ApplicationController
       end
     end
 
-    def fetch_user_by_id
+    def set_user
       @user = User.find(params[:id])
     end
 
