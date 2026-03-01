@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[ new create ]
   before_action :require_public_application, only: %i[ new create ]
+  before_action :require_admin, only: :index
   before_action :require_own_user_or_admin, only: %i[ show edit update destroy ]
   before_action :fetch_user_by_id, only: %i[ show edit update destroy ]
   layout "sessions", only: %i[ new create ]
@@ -59,6 +60,12 @@ class UsersController < ApplicationController
 
     def user_update_params
       params.expect(user: [ :email_address, :username, :pfp ])
+    end
+
+    def require_admin
+      unless Current.user.role == "admin"
+        redirect_to root_path, alert: "Go away!!!"
+      end
     end
 
     def require_own_user_or_admin

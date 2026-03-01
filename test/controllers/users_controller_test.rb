@@ -7,6 +7,24 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @admin = users(:admin)
   end
 
+  # index
+  test "should redirect index if not authenticated" do
+    get users_url
+    assert_redirected_to new_session_url
+  end
+
+  test "should redirect index if not admin" do
+    sign_in_as(@user)
+    get users_url
+    assert_redirected_to root_url
+  end
+
+  test "should get index if admin" do
+    sign_in_as(@admin)
+    get users_url
+    assert_response :success
+  end
+
   # show
   test "should redirect show if not authenticated" do
     get user_url(@user)
