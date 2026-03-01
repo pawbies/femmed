@@ -78,4 +78,67 @@ class MedicationsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :unprocessable_content
   end
+
+  # edit
+  test "should redirect edit if not authenticated" do
+    get edit_medication_path(@medication)
+    assert_redirected_to new_session_path
+  end
+
+  test "should redirect edit if not admin" do
+    sign_in_as(@user)
+    get edit_medication_path(@medication)
+    assert_redirected_to root_path
+  end
+
+  test "should get edit if admin" do
+    sign_in_as(@admin)
+    get edit_medication_path(@medication)
+    assert_response :success
+  end
+
+  # update
+  test "should redirect update if not authenticated" do
+    patch medication_path(@medication), params: { medication: { name: "Updated" } }
+    assert_redirected_to new_session_path
+  end
+
+  test "should redirect update if not admin" do
+    sign_in_as(@user)
+    patch medication_path(@medication), params: { medication: { name: "Updated" } }
+    assert_redirected_to root_path
+  end
+
+  test "should update medication with valid params" do
+    sign_in_as(@admin)
+    patch medication_path(@medication), params: { medication: { name: "Updated Ritalin" } }
+    assert_redirected_to medication_path(@medication)
+    assert_match /changes/, flash[:notice]
+  end
+
+  test "should not update medication with invalid params" do
+    sign_in_as(@admin)
+    patch medication_path(@medication), params: { medication: { name: "" } }
+    assert_response :unprocessable_content
+  end
+
+  # destroy
+  test "should redirect destroy if not authenticated" do
+    delete medication_path(@medication)
+    assert_redirected_to new_session_path
+  end
+
+  test "should redirect destroy if not admin" do
+    sign_in_as(@user)
+    delete medication_path(@medication)
+    assert_redirected_to root_path
+  end
+
+  test "should destroy medication if admin" do
+    sign_in_as(@admin)
+    assert_difference "Medication.count", -1 do
+      delete medication_path(@medication)
+    end
+    assert_redirected_to root_path
+  end
 end

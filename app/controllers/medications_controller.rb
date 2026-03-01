@@ -1,6 +1,6 @@
 class MedicationsController < ApplicationController
-  before_action :set_medication, only: :show
-  before_action :require_admin,  only: %i[ new create ]
+  before_action :set_medication, except: %i[ new create ]
+  before_action :require_admin,  except: :show
 
   def new
     @medication = Medication.new
@@ -17,6 +17,23 @@ class MedicationsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def destroy
+    @medication.destroy!
+
+    redirect_to root_path, notice: "#{@medication.name} is gone now"
+  end
+
+  def update
+    if @medication.update medication_params
+      redirect_to @medication, notice: "Applied your super cool changes ^^"
+    else
+      render :edit, status: :unprocessable_content
+    end
   end
 
   private

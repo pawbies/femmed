@@ -1,7 +1,7 @@
 class MedicationVersion < ApplicationRecord
   belongs_to :medication, inverse_of: :versions
 
-  has_many :prescriptions
+  has_many :prescriptions, dependent: :destroy
 
   delegate :form, to: :medication, allow_nil: true
 
