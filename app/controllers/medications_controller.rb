@@ -1,5 +1,5 @@
 class MedicationsController < ApplicationController
-  before_action :medication
+  before_action :set_medication
 
   def show
   end
