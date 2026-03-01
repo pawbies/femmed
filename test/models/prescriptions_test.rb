@@ -6,27 +6,21 @@ class PrescriptionTest < ActiveSupport::TestCase
   end
 
   test "should require a user" do
-    um = Prescription.new(medication_version: medication_versions(:ritalin_ir_10mg), dosage: 10)
+    um = Prescription.new(medication_version: medication_versions(:ritalin_ir_10mg), amount: 10)
     assert_not um.valid?
     assert_includes um.errors[:user], "must exist"
   end
 
   test "should require a medication_version" do
-    um = Prescription.new(user: users(:alice), dosage: 10)
+    um = Prescription.new(user: users(:alice), amount: 10)
     assert_not um.valid?
     assert_includes um.errors[:medication_version], "must exist"
   end
 
-  test "should require dosage" do
+  test "should require amount" do
     um = Prescription.new(user: users(:alice), medication_version: medication_versions(:ritalin_ir_10mg))
     assert_not um.valid?
-    assert_includes um.errors[:dosage], "can't be blank"
-  end
-
-  test "should require dosage to be an integer" do
-    um = Prescription.new(user: users(:alice), medication_version: medication_versions(:ritalin_ir_10mg), dosage: 1.5)
-    assert_not um.valid?
-    assert_includes um.errors[:dosage], "must be an integer"
+    assert_includes um.errors[:amount], "can't be blank"
   end
 
   test "should belong to a user" do

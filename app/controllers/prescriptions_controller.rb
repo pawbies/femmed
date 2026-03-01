@@ -38,7 +38,7 @@ class PrescriptionsController < ApplicationController
     end
 
     def prescription_params
-      params.expect(prescription: [ :user_id, :dosage ])
+      params.expect(prescription: [ :user_id, :amount ])
     end
 
     def require_own_prescription
