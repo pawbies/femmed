@@ -1,10 +1,22 @@
 <div class="w-full">
-  <h3 class="text-3xl">
-    <%= @medication.name %>
-    <span class="text-black/50 italic">
-      - <%= @medication.active_ingredients.pluck(:name).join(", ") %>
-    </span>
-  </h3>
+  <div class="flex justify-between">
+    <h3 class="text-3xl w-2/3">
+      <%= @medication.name %>
+      <span class="text-black/50 italic">
+        - <%= @medication.active_ingredients.pluck(:name).join(", ") %>
+      </span>
+    </h3>
+    <% if admin? %>
+      <div class="flex items-center gap-2">
+        <%= link_to edit_medication_path(@medication), class: "inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300 transition-colors" do %>
+          <%= image_tag "icons/edit.svg", class: "h-4 w-4" %>
+        <% end %>
+        <%= button_to @medication, method: :delete, class: "inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 bg-white hover:bg-rose-50 hover:border-rose-300 transition-colors cursor-pointer" do %>
+          <%= image_tag "icons/delete.svg", class: "h-4 w-4" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
   <% if @medication.labeler.present? %>
     <p class="italic">Made by <%= @medication.labeler.name %></p>
   <% end %>
@@ -50,43 +62,47 @@
           </tr>
         <% end %>
 
-        <tr data-medication-versions-target="new" class="transition-colors hover:bg-zinc-50 hidden">
-          <%= form_with model: [ @medication, MedicationVersion.new ] do |form| %>
-            <td class="py-3 pr-8 font-medium text-zinc-800">
-              <div class="flex items-center gap-1">
-                <span class="text-zinc-400"><%= @medication.name %></span>
-                <%= form.text_field :added_name,
-                  placeholder: "e.g. 10mg",
-                  class: "border-b border-zinc-300 bg-transparent focus:outline-none focus:border-rose-400 text-zinc-800 placeholder-zinc-300 w-24" %>
-              </div>
-            </td>
-            <td class="py-3 pr-8 text-zinc-500">
-              <div class="flex items-center gap-1">
-                <%= form.number_field :strength_per_dose,
-                  placeholder: "0",
-                  min: 0,
-                  class: "border-b border-zinc-300 bg-transparent focus:outline-none focus:border-rose-400 text-zinc-500 placeholder-zinc-300 w-12" %>
-                <%= form.select :unit, MedicationVersion.units.keys,
-                  {},
-                  class: "bg-transparent border-b border-zinc-300 focus:outline-none focus:border-rose-400 text-zinc-500 text-sm" %>
-              </div>
-            </td>
-            <td class="py-3 pr-8 font-mono text-xs text-zinc-400">
-              <%= form.text_field :ndc,
-                placeholder: "0000-0000-00",
-                class: "border-b border-zinc-300 bg-transparent focus:outline-none focus:border-rose-400 font-mono text-xs text-zinc-400 placeholder-zinc-300 w-28" %>
-            </td>
-            <td class="py-3">
-              <%= form.submit "Create",
-                class: "cursor-pointer px-3 py-1.5 bg-white border border-rose-300 text-rose-400 text-xs font-semibold rounded-lg hover:bg-rose-300 hover:text-white transition-colors" %>
-            </td>
-          <% end %>
-        </tr>
+        <% if admin? %>
+          <tr data-medication-versions-target="new" class="transition-colors hover:bg-zinc-50 hidden">
+            <%= form_with model: [ @medication, MedicationVersion.new ] do |form| %>
+              <td class="py-3 pr-8 font-medium text-zinc-800">
+                <div class="flex items-center gap-1">
+                  <span class="text-zinc-400"><%= @medication.name %></span>
+                  <%= form.text_field :added_name,
+                    placeholder: "e.g. 10mg",
+                    class: "border-b border-zinc-300 bg-transparent focus:outline-none focus:border-rose-400 text-zinc-800 placeholder-zinc-300 w-24" %>
+                </div>
+              </td>
+              <td class="py-3 pr-8 text-zinc-500">
+                <div class="flex items-center gap-1">
+                  <%= form.number_field :strength_per_dose,
+                    placeholder: "0",
+                    min: 0,
+                    class: "border-b border-zinc-300 bg-transparent focus:outline-none focus:border-rose-400 text-zinc-500 placeholder-zinc-300 w-12" %>
+                  <%= form.select :unit, MedicationVersion.units.keys,
+                    {},
+                    class: "bg-transparent border-b border-zinc-300 focus:outline-none focus:border-rose-400 text-zinc-500 text-sm" %>
+                </div>
+              </td>
+              <td class="py-3 pr-8 font-mono text-xs text-zinc-400">
+                <%= form.text_field :ndc,
+                  placeholder: "0000-0000-00",
+                  class: "border-b border-zinc-300 bg-transparent focus:outline-none focus:border-rose-400 font-mono text-xs text-zinc-400 placeholder-zinc-300 w-28" %>
+              </td>
+              <td class="py-3">
+                <%= form.submit "Create",
+                  class: "cursor-pointer px-3 py-1.5 bg-white border border-rose-300 text-rose-400 text-xs font-semibold rounded-lg hover:bg-rose-300 hover:text-white transition-colors" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
       </tbody>
     </table>
 
-    <div class="mt-6 flex items-center justify-end">
-      <button type="button" data-action="medication-versions#toggle" class="hover:cursor-pointer">Add new version</button>
-    </div>
+    <% if admin? %>
+      <div class="mt-6 flex items-center justify-end">
+        <button type="button" data-action="medication-versions#toggle" class="hover:cursor-pointer">Add new version</button>
+      </div>
+    <% end %>
   </section>
 </div>

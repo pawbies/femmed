@@ -25,6 +25,6 @@ class MedicationsController < ApplicationController
     end
 
     def medication_params
-      params.expect(medication: [ :name, :form_id, :labeler_id, :notes, active_ingredient_ids: [] ])
+      params.expect(medication: [ :name, :form_id, :labeler_id, :notes, active_ingredient_ids: [], category_ids: [] ])
     end
 end

@@ -40,7 +40,13 @@
         <% end %>
       </div>
     <% else %>
-      <h4 class="mt-6 text-2xl">No medications found</h4>
+      <div class="mt-6 mb-2 flex items-center justify-between md:justify-start">
+        <h4 class="text-2xl">No medications found</h4>
+        <% if admin? %>
+          <%= link_to "Add new", new_medication_path, class: "ml-3 text-zinc-600 italic" %>
+        <% end %>
+      </div>
+
     <% end %>
 
 
@@ -56,7 +62,13 @@
         <%= active_ingredient.name %>
       <% end %>
     <% else %>
-      <h4 class="mt-6 text-2xl">No active ingredients found</h4>
+      <div class="mt-6 mb-2 flex items-center justify-between md:justify-start">
+        <h4 class="text-2xl">No active ingredients found</h4>
+        <% if admin? %>
+          <%= link_to "Add new", new_active_ingredient_path, class: "ml-3 text-zinc-600 italic" %>
+        <% end %>
+      </div>
+
     <% end %>
 
 
@@ -72,7 +84,12 @@
         <%= render @labelers %>
       </div>
     <% else %>
-      <h4 class="mt-6 text-2xl">No labelers found</h4>
+      <div class="mt-6 mb-2 flex items-center justify-between md:justify-start">
+        <h4 class="text-2xl">No labelers found</h4>
+        <% if admin? %>
+          <%= link_to "Add new", new_labeler_path, class: "ml-3 text-zinc-600 italic" %>
+        <% end %>
+      </div>
     <% end %>
   </section>
 </div>
