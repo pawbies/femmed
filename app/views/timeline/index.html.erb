@@ -1,9 +1,10 @@
 <div class="w-full">
   <h1 class="font-bold text-4xl">Timeline</h1>
 
-  <%= render "partials/nav", links: [["Home", root_path], ["Timeline", timeline_path]] %>
+  <%= render "partials/nav", links: [["Home", root_path], ["Timeline", timeline_path], ["Calendar", calendar_path]] %>
 
   <div class="flex items-center gap-4 mb-8">
+
     <%= link_to timeline_path(date: @date - 1.day), class: "p-2 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-400 transition-colors" do %>
       &#8592;
     <% end %>

@@ -36,4 +36,5 @@ Rails.application.routes.draw do
   get "search" => "search#index"
 
   get "timeline" => "timeline#index"
+  get "calendar" => "calendar#index"
 end
