@@ -1,5 +1,5 @@
 class DosesController < ApplicationController
-  before_action :fetch_prescription_by_id
+  before_action :set_prescription
   before_action :require_own_prescription
   before_action :require_non_empty_stash, only: %i[ new create ]
 
@@ -18,7 +18,7 @@ class DosesController < ApplicationController
   end
 
   private
-    def fetch_prescription_by_id
+    def set_prescription
       @prescription = Prescription.find(params[:prescription_id])
     end
 

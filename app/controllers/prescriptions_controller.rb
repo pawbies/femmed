@@ -1,7 +1,7 @@
 class PrescriptionsController < ApplicationController
-  before_action :fetch_medication_and_medication_version_from_id, only: %i[ new create ]
-  before_action :fetch_prescription_by_id, except: %i[ new create ]
-  before_action :require_own_prescription, except: %i[ new create ]
+  before_action :set_medication_and_medication_version, only: %i[ new create ]
+  before_action :set_prescription,                      except: %i[ new create ]
+  before_action :require_own_prescription,              except: %i[ new create ]
 
   def new
     @prescription = Prescription.new
@@ -28,12 +28,12 @@ class PrescriptionsController < ApplicationController
   end
 
   private
-    def fetch_medication_and_medication_version_from_id
+    def set_medication_and_medication_version
       @medication_version = MedicationVersion.find(params[:medication_version_id])
       @medication = @medication_version.medication
     end
 
-    def fetch_prescription_by_id
+    def set_prescription
       @prescription = Prescription.find(params[:id])
     end
 

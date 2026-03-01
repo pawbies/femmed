@@ -1,11 +1,11 @@
 class MedicationsController < ApplicationController
-  before_action :fetch_medication_by_id
+  before_action :medication
 
   def show
   end
 
   private
-    def fetch_medication_by_id
+    def set_medication
       @medication = Medication.find(params[:id])
     end
 end

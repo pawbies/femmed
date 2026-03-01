@@ -1,5 +1,5 @@
 class PacksController < ApplicationController
-  before_action :fetch_prescription_by_id
+  before_action :set_prescription
   before_action :require_own_prescription
 
   def new
@@ -17,7 +17,7 @@ class PacksController < ApplicationController
   end
 
   private
-    def fetch_prescription_by_id
+    def set_prescription
       @prescription = Prescription.find(params[:prescription_id])
     end
 
