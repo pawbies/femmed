@@ -5,12 +5,6 @@
       <%= link_to "FemMed", root_path %>
     </h1>
 
-    <% if @admin_layout %>
-      <button data-action="click->admin-sidebar#open" class="p-2 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-400 transition-colors text-sm">
-        &#9776; Admin
-      </button>
-    <% end %>
-
     <% if authenticated? %>
       <div class="relative flex items-center" data-controller="profile">
         <%= image_tag Current.user.profile_picture, data: { action: "click->profile#toggle" }, alt: "Profile picture", class: "hover:cursor-pointer rounded-full border border-black aspect-square h-14" %>

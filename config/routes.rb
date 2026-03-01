@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :doses
   end
   resources :medications
+  resources :active_ingredients
+  resources :labelers
   resource :assistent_talks
   resources :users
   get "profile" => "users#profile"

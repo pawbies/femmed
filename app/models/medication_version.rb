@@ -1,5 +1,5 @@
 class MedicationVersion < ApplicationRecord
-  belongs_to :medication
+  belongs_to :medication, inverse_of: :versions
 
   has_many :prescriptions
 
