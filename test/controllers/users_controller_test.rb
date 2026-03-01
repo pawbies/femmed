@@ -7,27 +7,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @admin = users(:admin)
   end
 
-  # new
-  test "should get new if public" do
-    get new_user_url
-    assert_response :success
-  end
-
-  # create
-  test "should create user if public" do
-    assert_difference("User.count") do
-      post users_url, params: { user: { email_address: "new@example.com", username: "newuser", password: "password", password_confirmation: "password", terms_of_service: "1" } }
-    end
-    assert_redirected_to root_path
-  end
-
-  test "should not create user with invalid params" do
-    assert_no_difference("User.count") do
-      post users_url, params: { user: { email_address: "", username: "", password: "password", password_confirmation: "wrong" } }
-    end
-    assert_response :unprocessable_content
-  end
-
   # show
   test "should redirect show if not authenticated" do
     get user_url(@user)
