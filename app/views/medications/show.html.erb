@@ -64,6 +64,7 @@
               <div class="flex items-center gap-1">
                 <%= form.number_field :strength_per_dose,
                   placeholder: "0",
+                  min: 0,
                   class: "border-b border-zinc-300 bg-transparent focus:outline-none focus:border-rose-400 text-zinc-500 placeholder-zinc-300 w-12" %>
                 <%= form.select :unit, MedicationVersion.units.keys,
                   {},
