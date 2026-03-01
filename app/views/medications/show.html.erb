@@ -21,7 +21,7 @@
     <%= @medication.notes %>
   </div>
 
-  <section>
+  <section data-controller="medication-versions">
     <h3 class="text-2xl">Versions</h3>
     <table class="w-full mt-3 text-sm">
       <thead>
@@ -49,7 +49,43 @@
             </td>
           </tr>
         <% end %>
+
+        <tr data-medication-versions-target="new" class="transition-colors hover:bg-zinc-50 hidden">
+          <%= form_with model: [ @medication, MedicationVersion.new ] do |form| %>
+            <td class="py-3 pr-8 font-medium text-zinc-800">
+              <div class="flex items-center gap-1">
+                <span class="text-zinc-400"><%= @medication.name %></span>
+                <%= form.text_field :added_name,
+                  placeholder: "e.g. 10mg",
+                  class: "border-b border-zinc-300 bg-transparent focus:outline-none focus:border-rose-400 text-zinc-800 placeholder-zinc-300 w-24" %>
+              </div>
+            </td>
+            <td class="py-3 pr-8 text-zinc-500">
+              <div class="flex items-center gap-1">
+                <%= form.number_field :strength_per_dose,
+                  placeholder: "0",
+                  class: "border-b border-zinc-300 bg-transparent focus:outline-none focus:border-rose-400 text-zinc-500 placeholder-zinc-300 w-12" %>
+                <%= form.select :unit, MedicationVersion.units.keys,
+                  {},
+                  class: "bg-transparent border-b border-zinc-300 focus:outline-none focus:border-rose-400 text-zinc-500 text-sm" %>
+              </div>
+            </td>
+            <td class="py-3 pr-8 font-mono text-xs text-zinc-400">
+              <%= form.text_field :ndc,
+                placeholder: "0000-0000-00",
+                class: "border-b border-zinc-300 bg-transparent focus:outline-none focus:border-rose-400 font-mono text-xs text-zinc-400 placeholder-zinc-300 w-28" %>
+            </td>
+            <td class="py-3">
+              <%= form.submit "Create",
+                class: "cursor-pointer px-3 py-1.5 bg-white border border-rose-300 text-rose-400 text-xs font-semibold rounded-lg hover:bg-rose-300 hover:text-white transition-colors" %>
+            </td>
+          <% end %>
+        </tr>
       </tbody>
     </table>
+
+    <div class="mt-6 flex items-center justify-end">
+      <button type="button" data-action="medication-versions#toggle" class="hover:cursor-pointer">Add new version</button>
+    </div>
   </section>
 </div>

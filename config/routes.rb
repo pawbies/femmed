@@ -1,13 +1,17 @@
+
 Rails.application.routes.draw do
   resources :settings
-  resources :medication_versions do
-    resources :prescriptions, only: %i[ new create ]
+  resources :medications, shallow: true do
+    resources :medication_versions do
+      resources :prescriptions, only: %i[ new create ]
+    end
   end
+
   resources :prescriptions, except: %i[ new create ] do
     resources :packs
     resources :doses
   end
-  resources :medications
+
   resources :active_ingredients
   resources :labelers
   resource :assistent_talks
