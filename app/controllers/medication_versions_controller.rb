@@ -15,7 +15,6 @@ class MedicationVersionsController < ApplicationController
     if @medication_version.save
       redirect_to @medication, notice: "Created #{@medication_version.full_name}"
     else
-      puts @medication_version.inspect
       render :new, status: :unprocessable_entity
     end
   end
