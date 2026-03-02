@@ -77,12 +77,8 @@
       </tbody>
     </table>
 
-    <%= link_to "New version", new_medication_medication_version_path(@medication) %>
-
     <% if admin? %>
-      <div class="mt-6 flex items-center justify-end">
-        <button type="button" data-action="medication-versions#toggle" class="hover:cursor-pointer">Add new version</button>
-      </div>
+      <%= link_to "New version", new_medication_medication_version_path(@medication) %>
     <% end %>
   </section>
 </div>
