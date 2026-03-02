@@ -1,0 +1,72 @@
+<div class="w-full">
+  <h3 class="font-bold text-3xl text-center">Edit <%= @medication_version.full_name %></h3>
+
+  <%= form_with model: @medication_version, class: "mt-10 mx-auto max-w-md" do |form| %>
+    <% if @medication_version.errors.any? %>
+      <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
+        <h4 class="text-red-900 font-semibold mb-2">
+          <%= pluralize(@medication_version.errors.count, "error") %> prohibited this version from being saved:
+        </h4>
+        <ul class="list-disc list-inside text-red-800 space-y-1">
+          <% @medication_version.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% @medication_version.medication_version_ingredients.each do |medication_version_ingredient| %>
+      <% if medication_version_ingredient.errors.any? %>
+        <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
+          <h4 class="text-red-900 font-semibold mb-2">
+            <%= pluralize(medication_version_ingredient.errors.count, "error") %> prohibited this version from being saved:
+          </h4>
+          <ul class="list-disc list-inside text-red-800 space-y-1">
+            <% medication_version_ingredient.errors.full_messages.each do |error| %>
+              <li><%= error %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="my-5">
+      <%= form.text_field :added_name,
+        placeholder: "This version's name",
+        required: true,
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+
+    <div class="mt-5 mb-12">
+      <%= form.text_field :ndc,
+        placeholder: "NDC",
+        required: true,
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+
+    <%= form.fields_for :medication_version_ingredients do |ingredient_form| %>
+      <div class="mb-3">
+        <%= ingredient_form.hidden_field :active_ingredient_id, value: ingredient_form.object.active_ingredient.id %>
+        <%= ingredient_form.label :amount, ingredient_form.object.active_ingredient.name, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+        <div class="flex items-center">
+        <%= ingredient_form.number_field :amount,
+          required: true,
+          step: "any",
+          min: 0.001,
+          placeholder: "How much #{ingredient_form.object.active_ingredient.name} is in there?",
+          class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+
+          <span class="shadow-sm rounded-r-md border bg-rose-50 border-rose-300 px-3 py-2 w-min whitespace-nowrap">
+            <%= ingredient_form.select :unit, MedicationVersionIngredient.units.keys %>
+          </span>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="mt-8 flex justify-center">
+      <%= form.submit "Add this thingy!",
+        class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+    </div>
+  <% end %>
+
+</div>

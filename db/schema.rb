@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_01_211939) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_02_120346) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -107,13 +107,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_211939) do
     t.index ["name"], name: "index_labelers_on_name", unique: true
   end
 
+  create_table "medication_version_ingredients", force: :cascade do |t|
+    t.integer "active_ingredient_id", null: false
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.integer "medication_version_id", null: false
+    t.integer "unit"
+    t.datetime "updated_at", null: false
+    t.index ["active_ingredient_id"], name: "index_medication_version_ingredients_on_active_ingredient_id"
+    t.index ["medication_version_id"], name: "index_medication_version_ingredients_on_medication_version_id"
+  end
+
   create_table "medication_versions", force: :cascade do |t|
     t.string "added_name", null: false
     t.datetime "created_at", null: false
     t.integer "medication_id", null: false
     t.string "ndc", null: false
-    t.integer "strength_per_dose"
-    t.integer "unit", default: 0
     t.datetime "updated_at", null: false
     t.index ["medication_id"], name: "index_medication_versions_on_medication_id"
   end
@@ -183,6 +192,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_211939) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assistent_talks", "users"
   add_foreign_key "doses", "prescriptions"
+  add_foreign_key "medication_version_ingredients", "active_ingredients"
+  add_foreign_key "medication_version_ingredients", "medication_versions"
   add_foreign_key "medication_versions", "medications"
   add_foreign_key "medications", "forms"
   add_foreign_key "medications", "labelers"

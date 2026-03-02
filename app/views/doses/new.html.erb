@@ -2,7 +2,7 @@
   <h3 class="font-bold text-3xl">New dose of <%= @prescription.full_name %></h3>
 
   <%= form_with model: [@prescription, @dose], class: "mt-10 mx-auto max-w-md",
-    data: { controller: "dose-form", dose_form_unit_value: @prescription.unit, dose_form_strength_per_dose_value: @prescription.strength_per_dose } do |form| %>
+    data: { controller: "dose-form", dose_form_unit_value: "mg", dose_form_strength_per_dose_value: 5 } do |form| %>
     <% if @dose.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">

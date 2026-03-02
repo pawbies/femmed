@@ -6,27 +6,15 @@ class MedicationVersionTest < ActiveSupport::TestCase
   end
 
   test "should require added_name" do
-    version = MedicationVersion.new(medication: medications(:ritalin_ir), strength_per_dose: 10, ndc: "0000-0000-00", unit: :mg)
+    version = MedicationVersion.new(medication: medications(:ritalin_ir), ndc: "0000-0000-00")
     assert_not version.valid?
     assert_includes version.errors[:added_name], "can't be blank"
   end
 
-  test "should require strength_per_dose" do
-    version = MedicationVersion.new(medication: medications(:ritalin_ir), added_name: "10mg", ndc: "0000-0000-00", unit: :mg)
-    assert_not version.valid?
-    assert_includes version.errors[:strength_per_dose], "can't be blank"
-  end
-
   test "should require ndc" do
-    version = MedicationVersion.new(medication: medications(:ritalin_ir), added_name: "10mg", strength_per_dose: 10, unit: :mg)
+    version = MedicationVersion.new(medication: medications(:ritalin_ir), added_name: "10mg")
     assert_not version.valid?
     assert_includes version.errors[:ndc], "can't be blank"
-  end
-
-  test "should require unit" do
-    version = MedicationVersion.new(medication: medications(:ritalin_ir), added_name: "10mg", strength_per_dose: 10, ndc: "0000-0000-00", unit: nil)
-    assert_not version.valid?
-    assert_includes version.errors[:unit], "can't be blank"
   end
 
   test "should belong to a medication" do
