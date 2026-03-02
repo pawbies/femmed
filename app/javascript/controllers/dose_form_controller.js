@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="dose-form"
 export default class extends Controller {
+  /*
   static targets = ["input", "output"]
   static values = {
     unit: String,
@@ -17,4 +18,5 @@ export default class extends Controller {
     console.lo
     this.outputTarget.textContent = `~ ${strength}${this.unitValue}`
   }
+  */
 }
