@@ -5,6 +5,7 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
     @user         = users(:alice)
     @other_user   = users(:bob)
     @prescription = prescriptions(:alice_ritalin_ir)
+    @dose         = doses(:alice_ritalin_ir_dose_1)
   end
 
   # new
@@ -57,5 +58,68 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
       } }
     end
     assert_response :unprocessable_content
+  end
+
+  # edit
+  test "should redirect edit if not authenticated" do
+    get edit_prescription_dose_path(@prescription, @dose)
+    assert_redirected_to new_session_path
+  end
+
+  test "should redirect edit if prescription belongs to another user" do
+    sign_in_as(@other_user)
+    get edit_prescription_dose_path(@prescription, @dose)
+    assert_redirected_to root_path
+  end
+
+  test "should get edit if own prescription" do
+    sign_in_as(@user)
+    get edit_prescription_dose_path(@prescription, @dose)
+    assert_response :success
+  end
+
+  # update
+  test "should redirect update if not authenticated" do
+    patch prescription_dose_path(@prescription, @dose), params: { dose: { amount_taken: 2 } }
+    assert_redirected_to new_session_path
+  end
+
+  test "should redirect update for another user" do
+    sign_in_as(@other_user)
+    patch prescription_dose_path(@prescription, @dose), params: { dose: { amount_taken: 2 } }
+    assert_redirected_to root_path
+  end
+
+  test "should update medication with valid params" do
+    sign_in_as(@user)
+    patch prescription_dose_path(@prescription, @dose), params: { dose: { amount_taken: 2 } }
+    assert_redirected_to prescription_path(@prescription)
+  end
+
+  test "should not update medication with invalid params" do
+    sign_in_as(@user)
+    patch prescription_dose_path(@prescription, @dose), params: { dose: { amount_taken: -2 } }
+    assert_response :unprocessable_content
+  end
+
+  # destroy
+  test "should redirect destroy if not authenticated" do
+    delete prescription_dose_url(@prescription, @dose)
+    assert_redirected_to new_session_path
+  end
+
+  test "should destroy own prescription" do
+    sign_in_as(@user)
+    assert_difference("Dose.count", -1) do
+      delete prescription_dose_url(@prescription, @dose)
+    end
+  end
+
+  test "should not destroy another user's prescription" do
+    sign_in_as(@other_user)
+    assert_no_difference("Prescription.count") do
+      delete prescription_dose_url(@prescription, @dose)
+    end
+    assert_redirected_to root_path
   end
 end

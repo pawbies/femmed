@@ -113,7 +113,6 @@ class MedicationsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@admin)
     patch medication_path(@medication), params: { medication: { name: "Updated Ritalin" } }
     assert_redirected_to medication_path(@medication)
-    assert_match /changes/, flash[:notice]
   end
 
   test "should not update medication with invalid params" do

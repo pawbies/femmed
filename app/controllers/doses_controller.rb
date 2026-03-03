@@ -1,5 +1,6 @@
 class DosesController < ApplicationController
   before_action :set_prescription
+  before_action :set_dose, only: %i[ edit update destroy ]
   before_action :require_own_prescription
   before_action :require_non_empty_stash, only: %i[ new create ]
 
@@ -17,9 +18,30 @@ class DosesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @dose.update dose_params
+      redirect_to @prescription, notice: "Updated #{@prescription.full_name} dose"
+    else
+      render :edit, status: :unprocessable_content
+    end
+  end
+
+  def destroy
+    @dose.destroy!
+
+    redirect_to @prescription
+  end
+
   private
     def set_prescription
       @prescription = Prescription.find(params[:prescription_id])
+    end
+
+    def set_dose
+      @dose = @prescription.doses.find(params[:id])
     end
 
     def require_own_prescription

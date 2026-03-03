@@ -20,7 +20,8 @@
     <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
       <th class="pb-3 pr-8">Dose</th>
       <th class="pb-3 pr-8">Time</th>
-      <th class="pb-3">Date</th>
+      <th class="pb-3 pr-8">Date</th>
+      <th class="pb-3">Edit</th>
     </tr>
   </thead>
   <tbody class="divide-y divide-zinc-100">
@@ -34,6 +35,16 @@
         </td>
         <td class="my-3 font-medium text-zinc-800">
           <%= local_time(dose.taken_at, "%B %e, %Y") %>
+        </td>
+        <td>
+          <div class="flex">
+            <%= link_to edit_prescription_dose_path(@prescription, dose), target: "_top", class: "mx-1" do %>
+            <%= image_tag "icons/edit.svg", class: "aspect-squre h-[1.5em]" %>
+            <% end %>
+            <%= button_to prescription_dose_path(@prescription, dose), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "mx-1" do %>
+              <%= image_tag "icons/delete.svg", class: "aspect-square h-[1.5em]" %>
+            <% end %>
+          </div>
         </td>
       </tr>
     <% end %>
