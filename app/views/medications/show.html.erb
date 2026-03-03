@@ -39,6 +39,7 @@
       <thead>
         <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
           <th class="pb-3 pr-8">Name</th>
+          <th class="pb-3 pr-8">Ingredients</th>
           <th class="pb-3 pr-8">NDC</th>
           <% if admin? %>
             <th class="pb-3 pr-8">Add/Remove</th>
@@ -52,6 +53,19 @@
         <% @medication.versions.each do |version| %>
           <tr class="transition-colors hover:bg-zinc-50">
             <td class="py-3 pr-8 font-medium text-zinc-800"><%= version.full_name %></td>
+            <td class="py-3 pr-8 font-medium text-zinc-800">
+              <div class="text-xs flex items-center">
+                <ul>
+                  <% version.medication_version_ingredients.each do |mvi| %>
+                    <li>
+                      <%= "#{mvi.amount}#{mvi.unit} #{mvi.active_ingredient.name}" %>
+                    </li>
+                  <% end %>
+                </ul>
+                <span class="mx-1">/</span>
+                <span><%= @medication.form.name %></span>
+              </div>
+            </td>
             <td class="py-3 pr-8 font-mono text-xs text-zinc-400"><%= version.ndc %></td>
             <td class="my-3 font-medium text-zinc-800">
               <% unless Current.user.prescriptions.where("medication_version_id = ?", version.id).any? %>
@@ -65,10 +79,10 @@
             <% if admin? %>
               <td class="my-3 flex">
                 <%= link_to edit_medication_version_path(version), class: "mx-1" do %>
-                  <%= image_tag "icons/edit.svg", class: "aspect-square h-[2em]" %>
+                  <%= image_tag "icons/edit.svg", class: "aspect-square h-[1.5em]" %>
                 <% end %>
                 <%= button_to medication_version_path(version), method: :delete, data: { turbo_confirm: "Are you sure, this will remove everyones prescriptions?" }, class: "mx-1" do %>
-                  <%= image_tag "icons/delete.svg", class: "aspect-square h-[2em]" %>
+                  <%= image_tag "icons/delete.svg", class: "aspect-square h-[1.5em]" %>
                 <% end %>
               </td>
             <% end %>
