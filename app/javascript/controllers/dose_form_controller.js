@@ -8,13 +8,11 @@ export default class extends Controller {
     ingredientDosesPerUnit: Array
   }
 
-
   connect() {
     if (this.inputTarget.value) this.updateOutput()
 
     console.log(this.ingredientDosesPerUnitValue)
   }
-
 
   updateOutput() {
     const items = this.ingredientDosesPerUnitValue.map(data => {
