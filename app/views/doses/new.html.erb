@@ -2,7 +2,7 @@
   <h3 class="font-bold text-3xl">New dose of <%= @prescription.full_name %></h3>
 
   <%= form_with model: [@prescription, @dose], class: "mt-10 mx-auto max-w-md",
-    data: { controller: "dose-form", dose_form_unit_value: "mg", dose_form_strength_per_dose_value: 5 } do |form| %>
+    data: { controller: "dose-form", dose_form_ingredient_doses_per_unit_value: @prescription.medication_version.medication_version_ingredients.map { |mvi| { name: mvi.active_ingredient.name, amount: mvi.amount, unit: mvi.unit } }.to_json } do |form| %>
     <% if @dose.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">
@@ -29,7 +29,7 @@
         <%= @prescription.form.name.pluralize %>
       </span>
     </div>
-    <span class="no-js:hidden ml-1 mb-3 text-sm text-rose-400 font-medium" data-dose-form-target="output">~ Strength idk i have to redo the js</span>
+    <div class="no-js:hidden ml-1 mb-3 text-sm text-rose-400 font-medium" data-dose-form-target="output"></div>
 
     <div class="my-5">
       <%= form.datetime_field :taken_at,
