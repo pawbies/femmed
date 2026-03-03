@@ -10,7 +10,6 @@ class MedicationVersion < ApplicationRecord
   delegate :form, to: :medication, allow_nil: true
 
   validates :added_name, presence: true
-  validates :ndc, presence: true
 
   def full_name
     "#{medication.name} #{added_name}"

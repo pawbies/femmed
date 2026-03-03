@@ -38,7 +38,7 @@ class MedicationVersionsController < ApplicationController
 
   private
     def medication_version_params
-      params.require(:medication_version).permit(:added_name, :ndc, medication_version_ingredients_attributes: [ :id, :active_ingredient_id, :amount, :unit ])
+      params.require(:medication_version).permit(:added_name, medication_version_ingredients_attributes: [ :id, :active_ingredient_id, :amount, :unit ])
     end
 
     def set_medication

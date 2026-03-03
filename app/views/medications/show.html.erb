@@ -40,7 +40,6 @@
         <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
           <th class="pb-3 pr-8">Name</th>
           <th class="pb-3 pr-8">Ingredients</th>
-          <th class="pb-3 pr-8">NDC</th>
           <% if admin? %>
             <th class="pb-3 pr-8">Add/Remove</th>
             <th class="pb-3">Actions</th>
@@ -66,7 +65,6 @@
                 <span><%= @medication.form.name %></span>
               </div>
             </td>
-            <td class="py-3 pr-8 font-mono text-xs text-zinc-400"><%= version.ndc %></td>
             <td class="my-3 font-medium text-zinc-800">
               <% unless Current.user.prescriptions.where("medication_version_id = ?", version.id).any? %>
                 <%= link_to "＋ Add", new_medication_version_prescription_path(medication_version_id: version.id), method: :get,

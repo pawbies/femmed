@@ -6,15 +6,9 @@ class MedicationVersionTest < ActiveSupport::TestCase
   end
 
   test "should require added_name" do
-    version = MedicationVersion.new(medication: medications(:ritalin_ir), ndc: "0000-0000-00")
+    version = MedicationVersion.new(medication: medications(:ritalin_ir))
     assert_not version.valid?
     assert_includes version.errors[:added_name], "can't be blank"
-  end
-
-  test "should require ndc" do
-    version = MedicationVersion.new(medication: medications(:ritalin_ir), added_name: "10mg")
-    assert_not version.valid?
-    assert_includes version.errors[:ndc], "can't be blank"
   end
 
   test "should belong to a medication" do

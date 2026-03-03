@@ -37,13 +37,6 @@
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
 
-    <div class="mt-5 mb-12">
-      <%= form.text_field :ndc,
-        placeholder: "NDC",
-        required: true,
-        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
-    </div>
-
     <%= form.fields_for :medication_version_ingredients do |ingredient_form| %>
       <div class="mb-3">
         <%= ingredient_form.hidden_field :active_ingredient_id, value: ingredient_form.object.active_ingredient.id %>

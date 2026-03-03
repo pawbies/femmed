@@ -3,194 +3,149 @@
 ritalin_ir_5mg:
   medication: ritalin_ir
   added_name: 5mg
-  ndc: 0078-0439-05
 ritalin_ir_10mg:
   medication: ritalin_ir
   added_name: 10mg
-  ndc: 0078-0440-05
 ritalin_ir_20mg:
   medication: ritalin_ir
   added_name: 20mg
-  ndc: 0078-0441-05
 
 ritalin_la_20mg:
   medication: ritalin_la
   added_name: 20mg
-  ndc: 0078-0370-05
 ritalin_la_30mg:
   medication: ritalin_la
   added_name: 30mg
-  ndc: 0078-0371-05
 ritalin_la_40mg:
   medication: ritalin_la
   added_name: 40mg
-  ndc: 0078-0372-05
 
 concerta_18mg:
   medication: concerta
   added_name: 18mg
-  ndc: 0045-0051-65
 concerta_27mg:
   medication: concerta
   added_name: 27mg
-  ndc: 0045-0052-65
 concerta_36mg:
   medication: concerta
   added_name: 36mg
-  ndc: 0045-0053-65
 concerta_54mg:
   medication: concerta
   added_name: 54mg
-  ndc: 0045-0054-65
 
 adderall_ir_5mg:
   medication: adderall_ir
   added_name: 5mg
-  ndc: 0555-0763-02
 adderall_ir_10mg:
   medication: adderall_ir
   added_name: 10mg
-  ndc: 0555-0764-02
 adderall_ir_20mg:
   medication: adderall_ir
   added_name: 20mg
-  ndc: 0555-0765-02
 adderall_ir_30mg:
   medication: adderall_ir
   added_name: 30mg
-  ndc: 0555-0766-02
 
 adderall_xr_5mg:
   medication: adderall_xr
   added_name: 5mg
-  ndc: 0074-3059-13
 adderall_xr_10mg:
   medication: adderall_xr
   added_name: 10mg
-  ndc: 0074-3060-13
 adderall_xr_20mg:
   medication: adderall_xr
   added_name: 20mg
-  ndc: 0074-3061-13
 adderall_xr_30mg:
   medication: adderall_xr
   added_name: 30mg
-  ndc: 0074-3062-13
 
 zoloft_25mg:
   medication: zoloft
   added_name: 25mg
-  ndc: 0049-4960-30
 zoloft_50mg:
   medication: zoloft
   added_name: 50mg
-  ndc: 0049-4961-30
 zoloft_100mg:
   medication: zoloft
   added_name: 100mg
-  ndc: 0049-4962-30
 
 lexapro_5mg:
   medication: lexapro
   added_name: 5mg
-  ndc: 0456-2005-01
 lexapro_10mg:
   medication: lexapro
   added_name: 10mg
-  ndc: 0456-2010-01
 lexapro_20mg:
   medication: lexapro
   added_name: 20mg
-  ndc: 0456-2020-01
 
 wellbutrin_xl_150mg:
   medication: wellbutrin_xl
   added_name: 150mg
-  ndc: 0173-0177-55
 wellbutrin_xl_300mg:
   medication: wellbutrin_xl
   added_name: 300mg
-  ndc: 0173-0178-55
 
 prozac_10mg:
   medication: prozac
   added_name: 10mg
-  ndc: 0777-3105-02
 prozac_20mg:
   medication: prozac
   added_name: 20mg
-  ndc: 0777-3106-02
 prozac_40mg:
   medication: prozac
   added_name: 40mg
-  ndc: 0777-3107-02
 
 aldactone_25mg:
   medication: aldactone
   added_name: 25mg
-  ndc: 0025-1041-31
 aldactone_50mg:
   medication: aldactone
   added_name: 50mg
-  ndc: 0025-1042-31
 aldactone_100mg:
   medication: aldactone
   added_name: 100mg
-  ndc: 0025-1043-31
 
 synthroid_25mcg:
   medication: synthroid
   added_name: 25mcg
-  ndc: 0074-4551-13
 synthroid_50mcg:
   medication: synthroid
   added_name: 50mcg
-  ndc: 0074-4552-13
 synthroid_75mcg:
   medication: synthroid
   added_name: 75mcg
-  ndc: 0074-4553-13
 synthroid_100mcg:
   medication: synthroid
   added_name: 100mcg
-  ndc: 0074-4554-13
 synthroid_125mcg:
   medication: synthroid
   added_name: 125mcg
-  ndc: 0074-4555-13
 
 estradot_25mcg:
   medication: estradot
   added_name: 25mcg/24h
-  ndc: 0083-2325-08
 estradot_50mcg:
   medication: estradot
   added_name: 50mcg/24h
-  ndc: 0083-2350-08
 estradot_75mcg:
   medication: estradot
   added_name: 75mcg/24h
-  ndc: 0083-2375-08
 estradot_100mcg:
   medication: estradot
   added_name: 100mcg/24h
-  ndc: 0083-2400-08
 
 progestan_100mg:
   medication: progestan
   added_name: 100mg
-  ndc: 0074-3847-30
 progestan_200mg:
   medication: progestan
   added_name: 200mg
-  ndc: 0074-3848-30
 
 propecia_1mg:
   medication: propecia
   added_name: 1mg
-  ndc: 0006-0071-31
 
 casodex_50mg:
   medication: casodex
   added_name: 50mg
-  ndc: 0310-0705-30
