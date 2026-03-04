@@ -78,9 +78,8 @@ def f(name) = Form.find_by!(name: name)
 
 # ── Forms ─────────────────────────────────────────────────────────────────────
 
-%w[Capsule Tablet Injection Patch Drop].each { Form.find_or_create_by(name: _1) }
-[ "Film-coated Tablet", "Oral Solution", "Effervescent Tablet" ].each { Form.find_or_create_by(name: _1) }
-
+%w[Capsule Tablet Injection Patch Drop Cream Gel Ointment Spray Inhaler Suppository Powder Lozenge].each { Form.find_or_create_by(name: _1) }
+[ "Film-coated Tablet", "Oral Solution", "Effervescent Tablet", "Extended-release Capsule", "Extended-release Tablet", "Chewable Tablet", "Transdermal Patch", "Nasal Spray", "Eye Drop", "Ear Drop" ].each { Form.find_or_create_by(name: _1) }
 # ── Medications & Versions ────────────────────────────────────────────────────
 #
 # unit enum (MedicationVersionIngredient):
