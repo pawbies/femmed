@@ -19,10 +19,8 @@
   <section class="mt-12">
     <h3 class="text-3xl border-b">Results</h3>
     <% if @categories.any? %>
-      <div class="flex flex-wrap justify-baseline">
-        <% @categories.each do |category| %>
-          <%= link_to category.name, root_path, class: "p-3 m-1 bg-rose-50 border border-rose-300 rounded-full text-nowrap border-r" %>
-        <% end %>
+      <div class="mt-2 flex flex-wrap justify-baseline gap-1">
+        <%= render @categories %>
       </div>
     <% end %>
 

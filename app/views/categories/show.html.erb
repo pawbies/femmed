@@ -1,0 +1,39 @@
+<div class="w-full">
+  <div class="flex flex-col md:flex-row justify-between">
+    <h3 class="text-3xl md:w-2/3">
+      <%= @category.name %>
+      <span class="text-black/50 italic">
+        - <%= "#{@category.medications.count} #{'Medication'.pluralize(@category.medications.count)}" %>
+      </span>
+    </h3>
+    <% if admin? %>
+      <div class="my-6 md:my-0 flex items-center gap-2">
+        <%= link_to edit_category_path(@category), class: "inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300 transition-colors" do %>
+          <%= image_tag "icons/edit.svg", class: "h-4 w-4" %>
+        <% end %>
+        <%= button_to @category, method: :delete, data: { turbo_confirm: "Are you sure? No worries, this won't remove any medications, just remove this category from them :3" }, class: "inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 bg-white hover:bg-rose-50 hover:border-rose-300 transition-colors cursor-pointer" do %>
+          <%= image_tag "icons/delete.svg", class: "h-4 w-4" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-8 divide-y divide-zinc-100">
+    <% @category.medications.order(:name).each do |medication| %>
+      <%= link_to medication_path(medication), class: "flex items-center justify-between py-4 -mx-4 px-4 rounded-lg transition-all group hover:bg-zinc-50" do %>
+        <div>
+          <p class="font-medium text-gray-900 group-hover:text-rose-500 transition-colors underline-offset-2 group-hover:underline decoration-rose-300"><%= medication.name %></p>
+          <p class="text-sm text-gray-400 mt-0.5">
+            <%= medication.form.name %> &middot; <%= medication.labeler&.name %>
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs text-gray-400"><%= medication.versions.count %> <%= 'version'.pluralize(medication.versions.count) %></span>
+          <svg class="h-4 w-4 text-zinc-300 group-hover:text-rose-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
