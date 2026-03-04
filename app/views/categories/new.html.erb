@@ -1,0 +1,40 @@
+<div class="w-full">
+  <h1 class="font-bold text-center text-3xl">New category</h1>
+
+  <%= form_with model: @category, class: "mt-10 mx-auto max-w-md" do |form| %>
+    <% if @category.errors.any? %>
+      <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
+        <h4 class="text-red-900 font-semibold mb-2">
+          <%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:
+        </h4>
+        <ul class="list-disc list-inside text-red-800 space-y-1">
+          <% @category.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-5 flex items-center">
+      <%= form.text_field :name,
+        required: true,
+        autofocus: true,
+        placeholder: "A very cute name",
+        class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :medication_ids, "Medications to add directly", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.collection_select :medication_ids,
+        Medication.all.order(:name), :id, :name,
+        { include_blank: "None" },
+        { multiple: true, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full h-56 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
+      <p class="text-xs text-gray-400 mt-1">Hold Ctrl / Cmd to select multiple</p>
+    </div>
+
+    <div class="mt-8 flex justify-center">
+      <%= form.submit "UwU",
+        class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+    </div>
+  <% end %>
+</div>
