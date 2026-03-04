@@ -2,8 +2,11 @@
   <%
     mvis = prescription.medication_version.medication_version_ingredients
     unsupported = mvis.select { |m| !%w[mg g mcg].include?(m.unit) }.map do |m|
-      "#{ActiveIngredient.find(m.active_ingredient_id).name} (#{m.unit})"
+      "#{m.active_ingredient.name} (#{m.unit})"
     end
+    incomplete_pk = prescription.medication_version.medication.active_ingredients.select do |i|
+      i.half_life.blank? || i.absorption_rate.blank? || i.volume_of_distribution.blank?
+    end.map(&:name)
   %>
   <div class="no-js:hidden w-full bg-white border border-rose-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow <%= 'opacity-60 border-zinc-300' unless prescription.active? %>"
       data-controller="prescriptions-preview"
@@ -11,14 +14,13 @@
         prescription.medication_version.medication.active_ingredients.map do |ingredient|
           mvi = prescription.medication_version.medication_version_ingredients
             .find { |m| m.active_ingredient_id == ingredient.id }
-
+          next if ingredient.half_life.blank? || ingredient.absorption_rate.blank? || ingredient.volume_of_distribution.blank?
           multiplier = case mvi&.unit
-                       when "mg" then 1.0
-                       when "g" then 1000.0
+                       when "mg"  then 1.0
+                       when "g"   then 1000.0
                        when "mcg" then 0.001
                        else nil
                        end
-
           doses = if multiplier
             prescription.doses.map do |dose|
               { takenAt: dose.taken_at.to_i, amount: dose.amount_taken * mvi.amount * multiplier }
@@ -26,8 +28,8 @@
           else
             []
           end
-          { name: ingredient.name, halfLife: ingredient.half_life, doses: doses, absorptionRate: ingredient.absorption_rate || 1.0, volumeOfDistribution: ingredient.volume_of_distribution || 1.0 }
-        end.to_json
+          { name: ingredient.name, halfLife: ingredient.half_life, doses: doses, absorptionRate: ingredient.absorption_rate, volumeOfDistribution: ingredient.volume_of_distribution }
+        end.compact.to_json
       %>">
     <div class="no-js:hidden">
       <div class="px-4 pt-4 pb-2 flex items-center justify-between">
@@ -40,10 +42,15 @@
         </span>
       </div>
       <div data-prescriptions-preview-target="chart" class="w-full"></div>
-      <div class="px-4 py-2 border-t border-rose-100 flex gap-3 pb-6">
+      <div class="px-4 py-2 border-t border-rose-100 flex flex-col gap-1 pb-6">
         <% if unsupported.any? %>
           <p class="text-xs text-amber-400">
             ⚠ <%= unsupported.to_sentence %> excluded — unit not supported for PK calculation
+          </p>
+        <% end %>
+        <% if incomplete_pk.any? %>
+          <p class="text-xs text-amber-400">
+            ⚠ <%= incomplete_pk.to_sentence %> excluded — missing half-life, absorption rate, or Vd
           </p>
         <% end %>
       </div>
@@ -60,7 +67,6 @@
       </span>
     </div>
   </div>
-
   <div class="js:hidden w-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border <%= prescription.active? ? 'border-rose-200' : 'border-zinc-300 opacity-60' %>">
     <div class="px-4 py-4 flex items-center justify-between">
       <div>
