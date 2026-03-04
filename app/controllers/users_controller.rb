@@ -64,7 +64,9 @@ class UsersController < ApplicationController
     end
 
     def user_update_params
-      params.expect(user: [ :email_address, :username, :pfp ])
+      allowed = [ :email_address, :username, :pfp ]
+      allowed << :role if admin?
+      params.expect(user: allowed)
     end
 
     def require_admin
