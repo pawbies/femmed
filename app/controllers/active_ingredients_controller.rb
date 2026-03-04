@@ -38,7 +38,7 @@ class ActiveIngredientsController < ApplicationController
 
   private
     def active_ingredient_params
-      params.expect(active_ingredient: [ :name, :half_life ])
+      params.expect(active_ingredient: [ :name, :half_life, :absorption_rate, :volume_of_distribution ])
     end
 
     def set_active_ingredient

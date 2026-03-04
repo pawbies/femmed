@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_04_125555) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_04_142024) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -22,10 +22,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_04_125555) do
   end
 
   create_table "active_ingredients", force: :cascade do |t|
+    t.float "absorption_rate"
     t.datetime "created_at", null: false
     t.float "half_life"
     t.string "name", null: false
     t.datetime "updated_at", null: false
+    t.float "volume_of_distribution"
     t.index ["name"], name: "index_active_ingredients_on_name", unique: true
   end
 

@@ -30,6 +30,22 @@
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
 
+    <div class="my-5">
+      <%= form.number_field :absorption_rate,
+        placeholder: "Absorption Rate (ka, per hour) (optional)",
+        min: 0,
+        step: "any",
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.number_field :volume_of_distribution,
+        placeholder: "Volume of Distribution (L) (optional)",
+        min: 0,
+        step: "any",
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+ 
+
     <div class="mt-8 flex justify-center">
       <%= form.submit "Add this thingy!",
         class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>

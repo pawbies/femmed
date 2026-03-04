@@ -6,6 +6,8 @@ class ActiveIngredient < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :half_life, numericality: true, comparison: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :absorption_rate, numericality: true, allow_nil: true
+  validates :volume_of_distribution, numericality: true, allow_nil: true
 
   def amount_in_system(user)
     return 0.0 if half_life.nil? || half_life <= 0
