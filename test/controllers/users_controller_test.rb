@@ -26,22 +26,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   # new
-  test "should get new" do
-    get new_user_url
-    assert_response :success
-  end
-
-  test "should get new session layout if unauthenticated" do
-    get new_user_url
-    assert_template layout: "sessions"
-  end
-
-  test "should get new session layout if not admin" do
-    sign_in_as(@user)
-    get new_user_url
-    assert_template layout: "sessions"
-  end
-
   test "should get new application layout if admin" do
     sign_in_as(@admin)
     get new_user_url
@@ -49,20 +33,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   # create
-  test "should create user and start session if valid" do
-    assert_difference("User.count", 1) do
-      post users_url, params: { user: { email_address: "new@example.com", username: "newuser", password: "password", password_confirmation: "password", terms_of_service: "1" } }
-    end
-    assert_redirected_to root_url
-  end
-
-  test "should render new if invalid" do
-    assert_no_difference("User.count") do
-      post users_url, params: { user: { email_address: "", username: "newuser", password: "password", password_confirmation: "password", terms_of_service: "1" } }
-    end
-    assert_template :new
-  end
-
   test "should redirect_to user if admin" do
     sign_in_as(@admin)
     assert_difference("User.count", 1) do

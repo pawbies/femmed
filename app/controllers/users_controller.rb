@@ -84,7 +84,7 @@ class UsersController < ApplicationController
     end
 
     def require_public_application
-      unless EnvConfig::PUBLIC
+      unless EnvConfig::PUBLIC || (authenticated? && admin?)
         redirect_to root_path, alert: "UwU... whatcha doin there ^^"
       end
     end
