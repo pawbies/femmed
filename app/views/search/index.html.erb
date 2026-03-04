@@ -1,17 +1,28 @@
 <div class="w-full">
   <section>
     <h3 class="text-3xl">Search</h3>
-
     <%= form_with url: search_path, class: "mt-4", method: :get, data: { controller: "search" } do |form| %>
       <div class="flex">
         <%= form.text_field :query, value: @query, placeholder: "Search for anything your heart desires ^w^", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full mr-2" %>
         <%= form.submit "Yippie", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
       </div>
       <div class="mt-1 flex items-center justify-end">
-        <button data-action="search#toggleHiddenOptions" type="button" class="no-js:hidden hover:cursor-pointer">Advanced search</button>
+        <button data-action="search#toggleHiddenOptions" type="button" class="no-js:hidden text-sm text-gray-400 hover:text-rose-400 transition-colors flex items-center gap-1 hover:cursor-pointer">
+          <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+          </svg>
+          Advanced search
+        </button>
       </div>
-      <div data-search-target="hiddenOptions" class="js:hidden">
-        Hidden options
+      <div data-search-target="hiddenOptions" class="<%= 'js:hidden' unless @category_id.present? || @labeler_id.present? %> mt-3 p-4 rounded-xl border border-rose-100 bg-rose-50/50 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <%= form.label :category_id, "Category", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-1.5" %>
+          <%= form.select :category_id, Category.all.order(:name).map { |c| [c.name, c.id] }, { include_blank: "Any category", selected: @category_id }, { class: "w-full border border-rose-200 bg-white rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
+        </div>
+        <div>
+          <%= form.label :labeler_id, "Labeler", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-1.5" %>
+          <%= form.select :labeler_id, Labeler.all.order(:name).map { |l| [l.name, l.id] }, { include_blank: "Any labeler", selected: @labeler_id }, { class: "w-full border border-rose-200 bg-white rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
+        </div>
       </div>
     <% end %>
   </section>
