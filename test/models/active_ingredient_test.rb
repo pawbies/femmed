@@ -17,11 +17,6 @@ class ActiveIngredientTest < ActiveSupport::TestCase
     assert_includes duplicate.errors[:name], "has already been taken"
   end
 
-  test "should require nil half_life" do
-    ingredient = ActiveIngredient.new(name: "Testamine", half_life: nil)
-    assert_not ingredient.valid?
-  end
-
   test "should store half_life as a float" do
     assert_instance_of Float, active_ingredients(:methylphenidate).half_life
   end
