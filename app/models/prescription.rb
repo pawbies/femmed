@@ -6,6 +6,7 @@ class Prescription < ApplicationRecord
 
   has_many :packs, dependent: :destroy
   has_many :doses, dependent: :destroy
+  has_many :medication_version_ingredients, through: :medication_version
 
   delegate :form, to: :medication_version, allow_nil: true
   delegate :full_name, to: :medication_version, allow_nil: true

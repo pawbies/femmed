@@ -8,42 +8,56 @@ export default class extends Controller {
 
   connect() {
     this.chartTarget.innerHTML = ""
-
     const ingredients = this.ingredientsValue
-    const hoursElapsed = Math.floor(Math.random() * 30) // gotta calculate that sometime
+    const now = Math.floor(Date.now() / 1000)
 
-    const minTherapeuticDose = Math.floor(Math.random() * 60) + 25  // 25–85
-    const minToxicDose = minTherapeuticDose + Math.floor(Math.random() * 60) + 20  // always at least 20 above therapeutic
-    const yMax = Math.max(...ingredients.map(i => i.dose), minToxicDose + 20)
+    const concentrationAt = (ingredient, t) =>
+      ingredient.doses.reduce((sum, dose) => {
+        const elapsedHours = (now + t * 3600 - dose.takenAt) / 3600
+        if (elapsedHours < 0) return sum
+        return sum + dose.amount * Math.pow(0.5, elapsedHours / ingredient.halfLife)
+      }, 0)
 
-    const data = ingredients.flatMap(ingredient => Array.from(
-      {length: 48}, (_, t) => ({
-        time: t,
-        ingredient: ingredient.name,
-        concentration: ingredient.dose * Math.pow(0.5, t / ingredient.halfLife)
+    // Only go back in time if there are actual past doses to show
+    const hasPastDoses = ingredients.some(i => i.doses.some(d => d.takenAt < now))
+    const xStart = hasPastDoses ? -24 : 0
+    const xEnd = 48
+
+    const data = ingredients.flatMap(ingredient =>
+      Array.from({ length: (xEnd - xStart) + 1 }, (_, i) => {
+        const t = xStart + i
+        return { time: t, ingredient: ingredient.name, concentration: concentrationAt(ingredient, t) }
       })
-    ))
+    )
 
     const dots = ingredients.map(ingredient => ({
-      time: hoursElapsed,
+      time: 0,
       ingredient: ingredient.name,
-      concentration: ingredient.dose * Math.pow(0.5, hoursElapsed / ingredient.halfLife)
+      concentration: concentrationAt(ingredient, 0)
     }))
+
+    const minTherapeuticDose = 40
+    const minToxicDose = 120
+    const allConcentrations = data.map(d => d.concentration)
+    // Floor yMax so the axis doesn't render as "00000" when empty
+    const yMax = Math.max(...allConcentrations, 10)
 
     const chart = Plot.plot({
       width: this.chartTarget.clientWidth,
       height: this.chartTarget.clientWidth * 0.6,
       style: { fontSize: "10px" },
-      y: { domain: [0, yMax] },
+      y: { domain: [0, yMax], label: "Concentration" },
+      x: {
+        domain: [xStart, xEnd],
+        label: "Hours from now",
+        tickFormat: t => t === 0 ? "now" : `${t > 0 ? "+" : ""}${t}h`
+      },
       color: { legend: true },
       marks: [
-        Plot.rect([{}], {x1: 0, x2: 48, y1: minToxicDose, y2: yMax, fill: "red", fillOpacity: 0.15}),
-        Plot.rect([{}], {x1: 0, x2: 48, y1: minTherapeuticDose, y2: minToxicDose, fill: "green", fillOpacity: 0.15}),
+        Plot.ruleX([0], { stroke: "#aaa", strokeDasharray: "4,2" }),
         Plot.line(data, { x: "time", y: "concentration", stroke: "ingredient" }),
-        Plot.dot(dots, {x: "time", y: "concentration", stroke: "ingredient", r: 5, fill: "white"})
-      ],
-      x: { label: "Hours after dose" },
-      y: { label: "Concentraction (idk must consult my bf)" },
+        Plot.dot(dots,  { x: "time", y: "concentration", stroke: "ingredient", r: 5, fill: "white" })
+      ]
     })
 
     this.chartTarget.append(chart)

@@ -1,8 +1,19 @@
 <%= link_to prescription do %>
-  <% if false %>
+  <% if true %>
     <div class="w-full bg-white border border-rose-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow <%= 'opacity-60 border-zinc-300' unless prescription.active? %>"
-        data-controller="prescriptions-preview"
-        data-prescriptions-preview-ingredients-value="<%= prescription.medication_version.medication.active_ingredients.map { |i| {name: i.name, halfLife: i.half_life, dose: Random.rand(25..300)} }.to_json %>">
+         data-controller="prescriptions-preview"
+        data-prescriptions-preview-ingredients-value="<%=
+          prescription.medication_version.medication.active_ingredients.map do |ingredient|
+            mvi = prescription.medication_version.medication_version_ingredients
+                              .find { |m| m.active_ingredient_id == ingredient.id }
+
+            doses = prescription.doses.map do |dose|
+              { takenAt: dose.taken_at.to_i, amount: dose.amount_taken * (mvi&.amount || 1) }
+            end
+
+            { name: ingredient.name, halfLife: ingredient.half_life, doses: doses }
+          end.to_json
+        %>">
       <div class="no-js:hidden">
         <div class="px-4 pt-4 pb-2 flex items-center justify-between">
           <div>
@@ -15,12 +26,18 @@
         </div>
         <div data-prescriptions-preview-target="chart" class="w-full"></div>
         <div class="px-4 py-2 border-t border-rose-100 flex gap-3">
-          <span class="flex items-center gap-1 text-xs text-gray-400">
-            <span class="inline-block w-2 h-2 rounded-full bg-green-400"></span> Therapeutic
-          </span>
-          <span class="flex items-center gap-1 text-xs text-gray-400">
-            <span class="inline-block w-2 h-2 rounded-full bg-red-400"></span> Toxic
-          </span>
+          <% unless prescription.medication_version_ingredients.count > 1%>
+            <span class="flex items-center gap-1 text-xs text-gray-400">
+              <span class="inline-block w-2 h-2 rounded-full bg-green-400"></span> Therapeutic
+            </span>
+            <span class="flex items-center gap-1 text-xs text-gray-400">
+              <span class="inline-block w-2 h-2 rounded-full bg-red-400"></span> Toxic
+            </span>
+          <% else %>
+            <span class="flex items-center gap-1 text-xs text-gray-400">
+              No data for multi ingredient medications
+            </span>
+          <% end %>
         </div>
       </div>
       <div class="js:hidden px-4 py-4 flex items-center justify-between">
