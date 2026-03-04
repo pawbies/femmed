@@ -8,7 +8,7 @@ class PrescriptionsController < ApplicationController
   end
 
   def create
-    @prescription = Prescription.new(**prescription_params, medication_version: @medication_version)
+    @prescription = Prescription.new(**prescription_create_params, medication_version: @medication_version)
     if @prescription.user.id != Current.user.id
       flash.now[:alert] = "Heyyyyy! Dont do that!"
       render :new, status: :forbidden
@@ -20,6 +20,14 @@ class PrescriptionsController < ApplicationController
   end
 
   def show
+  end
+
+  def update
+    if @prescription.update prescription_update_params
+      redirect_to prescription_path(@prescription, page: "Settings"), notice: "Updated your prescription for ya"
+    else
+      redirect_to prescription_path(@prescription, page: "Settings"), alert: "Something went wrong :("
+    end
   end
 
   def destroy
@@ -34,11 +42,15 @@ class PrescriptionsController < ApplicationController
     end
 
     def set_prescription
-      @prescription = Prescription.find(params[:id])
+      @prescription = Current.user.prescriptions.find(params[:id])
     end
 
-    def prescription_params
+    def prescription_create_params
       params.expect(prescription: [ :user_id, :amount ])
+    end
+
+    def prescription_update_params
+      params.expect(prescription: [ :amount ])
     end
 
     def require_own_prescription

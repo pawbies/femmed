@@ -19,9 +19,9 @@
         autofocus: true,
         placeholder: "How many #{@medication_version.form.name.downcase.pluralize} do you wanna take each time :3",
         class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
-    <span class="shadow-sm rounded-r-md border bg-rose-50 border-rose-300 px-3 py-2 w-min">
-      <%= @medication_version.form.name.pluralize %>
-    </span>
+      <span class="shadow-sm rounded-r-md border bg-rose-50 border-rose-300 px-3 py-2 w-min">
+        <%= @medication_version.form.name.pluralize %>
+      </span>
     </div>
     <div class="mt-8 flex justify-center">
       <%= form.submit "Add it",

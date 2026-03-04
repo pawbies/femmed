@@ -55,7 +55,7 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
   test "should not get show for another user's medication" do
     sign_in_as(@other_user)
     get prescription_url(@prescription)
-    assert_redirected_to root_path
+    assert_response :not_found
   end
 
   # destroy
@@ -76,6 +76,24 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference("Prescription.count") do
       delete prescription_url(@prescription)
     end
-    assert_redirected_to root_path
+    assert_response :not_found
+  end
+
+  # update
+  test "should redirect update if not authenticated" do
+    patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
+    assert_redirected_to new_session_path
+  end
+
+  test "should update prescription if authenticated" do
+    sign_in_as(@user)
+    patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
+    assert_redirected_to prescription_url(@prescription, page: "Settings")
+  end
+
+  test "should not update prescription for another user" do
+    sign_in_as(@other_user)
+    patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
+    assert_response :not_found
   end
 end
