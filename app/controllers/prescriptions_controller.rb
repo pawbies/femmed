@@ -8,7 +8,7 @@ class PrescriptionsController < ApplicationController
   end
 
   def create
-    @prescription = Prescription.new(**prescription_create_params, medication_version: @medication_version)
+    @prescription = Prescription.new(**prescription_create_params, medication_version: @medication_version, active: true)
     if @prescription.user.id != Current.user.id
       flash.now[:alert] = "Heyyyyy! Dont do that!"
       render :new, status: :forbidden
@@ -50,7 +50,7 @@ class PrescriptionsController < ApplicationController
     end
 
     def prescription_update_params
-      params.expect(prescription: [ :amount ])
+      params.expect(prescription: [ :amount, :active ])
     end
 
     def require_own_prescription

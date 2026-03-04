@@ -1,6 +1,6 @@
 <%= link_to prescription do %>
   <% if false %>
-    <div class="w-full bg-white border border-rose-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+    <div class="w-full bg-white border border-rose-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow <%= 'opacity-60 border-zinc-300' unless prescription.active? %>"
         data-controller="prescriptions-preview"
         data-prescriptions-preview-ingredients-value="<%= prescription.medication_version.medication.active_ingredients.map { |i| {name: i.name, halfLife: i.half_life, dose: Random.rand(25..300)} }.to_json %>">
       <div class="no-js:hidden">
@@ -9,8 +9,8 @@
             <h5 class="font-semibold text-gray-800"><%= prescription.medication_version.full_name %></h5>
             <p class="text-xs text-rose-400 mt-0.5">Plasma concentration over 48h</p>
           </div>
-          <span class="text-xs bg-rose-100 text-rose-500 font-medium px-2 py-1 rounded-full">
-            Active
+          <span class="text-xs <%= prescription.active? ? 'bg-rose-100 text-rose-500' : 'bg-zinc-100 text-zinc-400' %> font-medium px-2 py-1 rounded-full">
+            <%= prescription.active? ? 'Active' : 'Inactive' %>
           </span>
         </div>
         <div data-prescriptions-preview-target="chart" class="w-full"></div>
@@ -30,13 +30,13 @@
             <%= prescription.medication_version.medication.active_ingredients.map(&:name).to_sentence %>
           </p>
         </div>
-        <span class="text-xs bg-rose-100 text-rose-500 font-medium px-2 py-1 rounded-full">
-          Active
+        <span class="text-xs <%= prescription.active? ? 'bg-rose-100 text-rose-500' : 'bg-zinc-100 text-zinc-400' %> font-medium px-2 py-1 rounded-full">
+          <%= prescription.active? ? 'Active' : 'Inactive' %>
         </span>
       </div>
     </div>
   <% else %>
-    <div class="w-full bg-white border border-rose-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div class="w-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border <%= prescription.active? ? 'border-rose-200' : 'border-zinc-300 opacity-60' %>">
       <div class="px-4 py-4 flex items-center justify-between">
         <div>
           <h5 class="font-semibold text-gray-800"><%= prescription.medication_version.full_name %></h5>
@@ -44,8 +44,8 @@
             <%= prescription.medication_version.medication.active_ingredients.map(&:name).to_sentence %>
           </p>
         </div>
-        <span class="text-xs bg-rose-100 text-rose-500 font-medium px-2 py-1 rounded-full">
-          Active
+        <span class="text-xs <%= prescription.active? ? 'bg-rose-100 text-rose-500' : 'bg-zinc-100 text-zinc-400' %> font-medium px-2 py-1 rounded-full">
+          <%= prescription.active? ? 'Active' : 'Inactive' %>
         </span>
       </div>
     </div>

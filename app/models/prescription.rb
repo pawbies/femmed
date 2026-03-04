@@ -11,6 +11,7 @@ class Prescription < ApplicationRecord
   delegate :full_name, to: :medication_version, allow_nil: true
 
   validates :amount, presence: true, numericality: true
+  validates :active, inclusion: { in: [ true, false ] }
 
   def remaining_units
     total_units = packs.sum(:amount)
