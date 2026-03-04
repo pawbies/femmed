@@ -5,7 +5,7 @@ class DosesController < ApplicationController
   before_action :require_non_empty_stash, only: %i[ new create ]
 
   def new
-    @dose = @prescription.doses.new(taken_at: Time.current.change(sec: 0))
+    @dose = @prescription.doses.new(amount_taken: @prescription.amount, taken_at: Time.current.change(sec: 0))
   end
 
   def create
