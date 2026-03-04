@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_action :require_own_user_or_admin,  except: %i[ index new create ]
   before_action :set_user,                   except: %i[ index new create ]
 
-  layout "sessions", only: %i[ new create ]
+  layout -> { authenticated? && admin? ? "application" : "sessions" }, only: %i[ new create ]
 
   def index
   end
@@ -19,8 +19,12 @@ class UsersController < ApplicationController
     @user = User.new(**user_params, role: "user", pfp: "medicine_kisser")
 
     if @user.save
-      start_new_session_for @user
-      redirect_to root_path
+      if authenticated? && admin?
+        redirect_to @user, notice: "Created this new user >:3"
+      else
+        start_new_session_for @user
+        redirect_to root_path
+      end
     else
       render :new, status: :unprocessable_content
     end
