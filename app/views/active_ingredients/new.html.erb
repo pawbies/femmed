@@ -24,9 +24,9 @@
 
     <div class="my-5">
       <%= form.number_field :half_life,
-        placeholder: "It's half life in hours",
+        placeholder: "It's half life in hours (optional)",
+        min: 0,
         step: "any",
-        required: true,
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
 
