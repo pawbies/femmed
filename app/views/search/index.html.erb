@@ -60,7 +60,6 @@
           <%= link_to "Add new", new_medication_path, class: "ml-3 text-zinc-600 italic" %>
         <% end %>
       </div>
-
     <% end %>
 
 
@@ -72,9 +71,9 @@
         <% end %>
       </div>
 
-      <% @active_ingredients.each do |active_ingredient| %>
-        <%= active_ingredient.name %>
-      <% end %>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <%= render @active_ingredients %>
+      </div>
     <% else %>
       <div class="mt-6 mb-2 flex items-center justify-between md:justify-start">
         <h4 class="text-2xl">No active ingredients found</h4>
@@ -82,7 +81,6 @@
           <%= link_to "Add new", new_active_ingredient_path, class: "ml-3 text-zinc-600 italic" %>
         <% end %>
       </div>
-
     <% end %>
 
 

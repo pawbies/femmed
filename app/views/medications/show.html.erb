@@ -55,7 +55,7 @@
                 <ul>
                   <% version.medication_version_ingredients.each do |mvi| %>
                     <li>
-                      <%= "#{mvi.amount}#{mvi.unit} #{mvi.active_ingredient.name}" %>
+                      <%= "#{format("%g", mvi.amount)}#{mvi.unit} #{mvi.active_ingredient.name}" %>
                     </li>
                   <% end %>
                 </ul>

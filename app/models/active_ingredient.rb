@@ -5,5 +5,5 @@ class ActiveIngredient < ApplicationRecord
   has_many :medication_versions, through: :medication_version_ingredients
 
   validates :name, presence: true, uniqueness: true
-  validates :half_life, numericality: true
+  validates :half_life, numericality: true, comparison: { greater_than_or_equal_to: 0 }
 end

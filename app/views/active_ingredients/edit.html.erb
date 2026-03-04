@@ -1,0 +1,38 @@
+<div class="w-full">
+  <h3 class="font-bold text-3xl text-center">New active ingredient</h3>
+
+  <%= form_with model: @active_ingredient, class: "mt-10 mx-auto max-w-md" do |form| %>
+    <% if @active_ingredient.errors.any? %>
+      <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
+        <h4 class="text-red-900 font-semibold mb-2">
+          <%= pluralize(@active_ingredient.errors.count, "error") %> prohibited this labeler from being saved:
+        </h4>
+        <ul class="list-disc list-inside text-red-800 space-y-1">
+          <% @active_ingredient.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-5">
+      <%= form.text_field :name,
+        placeholder: "What's it called?",
+        required: true,
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.number_field :half_life,
+        placeholder: "It's half life in hours",
+        step: "any",
+        required: true,
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+
+    <div class="mt-8 flex justify-center">
+      <%= form.submit "Add this thingy!",
+        class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+    </div>
+  <% end %>
+</div>
