@@ -13,6 +13,12 @@
             params[:page] == 'Packs' ? 'border-b-2 border-rose-500 text-rose-600' : ''
           }" %>
 
+
+      <%= link_to "About", prescription_path(@prescription, page: "About"),
+          class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
+            params[:page] == 'About' ? 'border-b-2 border-rose-500 text-rose-600' : ''
+          }" %>
+
       <%= link_to "Settings", prescription_path(@prescription, page: "Settings"),
           class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
             params[:page] == 'Settings' ? 'border-b-2 border-rose-500 text-rose-600' : ''
@@ -23,6 +29,8 @@
       <%= render "prescriptions/pages/log" %>
     <% elsif params[:page] == "Packs" %>
       <%= render "prescriptions/pages/packs" %>
+    <% elsif params[:page] == "About" %>
+        <%= render "prescriptions/pages/about" %>
     <% elsif params[:page] == "Settings" %>
       <%= render "prescriptions/pages/settings" %>
     <% else %>

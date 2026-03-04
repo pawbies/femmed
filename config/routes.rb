@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :active_ingredients
   resources :labelers
+  resources :categories
   resource :assistent_talks
   resources :users
   get "profile" => "users#profile"

@@ -1,0 +1,47 @@
+<div class="mt-8 space-y-8">
+
+  <div>
+    <h2 class="text-2xl font-semibold"><%= @prescription.medication.name %></h2>
+    <p class="text-sm text-gray-400 mt-1">
+      <%= @prescription.medication.form.name %> &middot;
+      <%= @prescription.medication.labeler.name %>
+    </p>
+  </div>
+
+  <% if @prescription.medication.notes.present? %>
+    <div class="prose prose-sm max-w-none text-gray-700">
+      <%= @prescription.medication.notes %>
+    </div>
+  <% end %>
+
+  <div>
+    <h3 class="text-xs font-semibold tracking-widest uppercase text-rose-400 mb-3">Your Version</h3>
+    <p class="text-gray-800 font-medium">
+      <%= @prescription.medication.name %> <%= @prescription.medication_version.added_name %>
+    </p>
+    <% ingredients = @prescription.medication_version.medication_version_ingredients %>
+    <% if ingredients.any? %>
+      <ul class="mt-2 space-y-1">
+        <% ingredients.each do |mvi| %>
+          <li class="text-sm text-gray-600">
+            <%= mvi.active_ingredient.name %> &mdash;
+            <span class="font-medium"><%= mvi.amount %> <%= mvi.unit %></span>
+            <% if mvi.active_ingredient.half_life.present? %>
+              <span class="text-gray-400">(t½ <%= mvi.active_ingredient.half_life %>h)</span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <% if @prescription.medication.categories.any? %>
+    <div>
+      <h3 class="text-xs font-semibold tracking-widest uppercase text-rose-400 mb-3">Categories</h3>
+      <div class="flex flex-wrap gap-2">
+        <%= render @prescription.medication.categories %>
+      </div>
+    </div>
+  <% end %>
+
+</div>

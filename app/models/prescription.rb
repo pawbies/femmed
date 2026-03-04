@@ -2,6 +2,8 @@ class Prescription < ApplicationRecord
   belongs_to :user
   belongs_to :medication_version
 
+  has_one :medication, through: :medication_version
+
   has_many :packs, dependent: :destroy
   has_many :doses, dependent: :destroy
 
