@@ -23,11 +23,11 @@ It's built with Rails 8 and SQLite, which means there's no database server to ma
 The easiest way to run femmed is with Docker. You'll need Docker installed, then:
 
 ```bash
-docker run -d -p 80:80 \
-  -e RAILS_MASTER_KEY=<your_master_key> \
-  -v femmed_storage:/rails/storage \
-  --name femmed \
-  pawbies67/femmed:latest
+git clone https://github.com/pawbies/femmed
+cd femmed
+mv .env.example .env # then edit the .env file
+docker build . -t femmed
+docker run --env-file .env -p 80:80 -v femmed_storage:/rails/storage femmed
 ```
 
 That's it. femmed will be running at `http://your-server-ip`.
@@ -36,52 +36,18 @@ That's it. femmed will be running at `http://your-server-ip`.
 
 ---
 
-## Environment variables
-
-These can be passed to Docker with `-e KEY=value` or via a `.env` file with `--env-file .env`.
-
-| Variable | Required | Description |
-|---|---|---|
-| `RAILS_MASTER_KEY` | ✅ Yes | Decrypts credentials. Found in `config/master.key` if running locally — never commit this file. |
-| `RAILS_ENV` | No | Defaults to `production` in Docker. Set to `development` locally. |
-| `SOLID_QUEUE_IN_PUMA` | No | Set to `true` (default) to run background jobs inside the web process. Set to `false` if running a dedicated worker. |
-| `PORT` | No | Port the app listens on inside the container. Defaults to `80`. |
-
----
-
 ## Updating
 
 With Docker, pull the latest image and restart:
 
 ```bash
-docker pull ghcr.io/pawbies67/femmed:latest
+git pull
 docker stop femmed && docker rm femmed
-docker run -d -p 80:80 \
-  -e RAILS_MASTER_KEY=<your_master_key> \
-  -v femmed_storage:/rails/storage \
-  --name femmed \
-  pawbies67/femmed:latest
+docker build . -t femmed
+docker run --env-file .env -p 80:80 -v femmed_storage:/rails/storage femmed
 ```
 
 Your data is safe as long as the `femmed_storage` volume is intact.
-
----
-
-## Deploying with Kamal (zero-downtime)
-
-If you want proper zero-downtime deploys to your own VPS, femmed supports [Kamal 2](https://kamal-deploy.org/):
-
-```bash
-# First-time setup — installs Docker on the server and deploys
-bin/kamal setup
-
-# Subsequent deploys
-bin/kamal deploy
-```
-
-Populate `.kamal/secrets` with your environment variables before running either command.
-
-> **Tip:** If you see a DNS resolution error in the kamal-proxy logs after a server restart, run `kamal proxy reboot` to fix it.
 
 ---
 
@@ -89,7 +55,7 @@ Populate `.kamal/secrets` with your environment variables before running either 
 
 ### Requirements
 
-- **Ruby 3.4.1** — use [rbenv](https://github.com/rbenv/rbenv) or [mise](https://mise.jdx.dev/) to install it (they'll pick up the version from `.ruby-version` automatically)
+- **Ruby 4.0.1** — use [rbenv](https://github.com/rbenv/rbenv) or [mise](https://mise.jdx.dev/) to install it (they'll pick up the version from `.ruby-version` automatically)
 - **Bundler** — `gem install bundler`
 - **SQLite3** — usually pre-installed on macOS; on Ubuntu: `apt-get install sqlite3 libsqlite3-dev`
 - **libvips** — for image processing. macOS: `brew install libvips`. Ubuntu: `apt-get install libvips`
