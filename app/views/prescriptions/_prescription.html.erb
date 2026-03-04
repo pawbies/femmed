@@ -10,7 +10,7 @@
             { takenAt: dose.taken_at.to_i, amount: dose.amount_taken * (mvi&.amount || 1) }
           end
 
-          { name: ingredient.name, halfLife: ingredient.half_life, doses: doses }
+          { name: ingredient.name, halfLife: ingredient.half_life, doses: doses, unit: mvi&.unit }
         end.to_json
       %>">
     <div class="no-js:hidden">

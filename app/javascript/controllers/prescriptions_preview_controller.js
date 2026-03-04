@@ -33,14 +33,15 @@ export default class extends Controller {
     const dots = ingredients.map(ingredient => ({
       time: 0,
       ingredient: ingredient.name,
-      concentration: concentrationAt(ingredient, 0)
+      concentration: concentrationAt(ingredient, 0),
+      unit: ingredient.unit
     }))
 
     const minTherapeuticDose = 40
     const minToxicDose = 120
     const allConcentrations = data.map(d => d.concentration)
     // Floor yMax so the axis doesn't render as "00000" when empty
-    const yMax = Math.max(...allConcentrations, 10)
+    const yMax = Math.max(...allConcentrations, 5)
 
     const chart = Plot.plot({
       width: this.chartTarget.clientWidth,
@@ -56,7 +57,8 @@ export default class extends Controller {
       marks: [
         Plot.ruleX([0], { stroke: "#aaa", strokeDasharray: "4,2" }),
         Plot.line(data, { x: "time", y: "concentration", stroke: "ingredient" }),
-        Plot.dot(dots,  { x: "time", y: "concentration", stroke: "ingredient", r: 5, fill: "white" })
+        Plot.dot(dots,  { x: "time", y: "concentration", stroke: "ingredient", r: 5, fill: "white" }),
+        Plot.text(dots, { x: "time", y: "concentration", text: d => `~${d.concentration.toFixed(3)}${d.unit}`, dx: 14, dy: -10, fontSize: 10, fill: "currentColor" })
       ]
     })
 
