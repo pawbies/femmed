@@ -61,7 +61,12 @@ export default class extends Controller {
     const minToxicDose = 120
     const allConcentrations = data.map(d => d.concentration)
     // Floor yMax so the axis doesn't render as "00000" when empty
-    const yMax = Math.max(...allConcentrations)
+    let yMax = Math.max(...allConcentrations)
+    if (yMax == 0) {
+      yMax = 1
+    } else {
+      yMax *= 1.2
+    }
 
     const chart = Plot.plot({
       width: this.chartTarget.clientWidth,
