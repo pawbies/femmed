@@ -7,12 +7,14 @@
     </span>
   </h3>
 
-  <% if @prescription.packs.empty? %>
-    <%= link_to "Add your first pack", prescription_path(@prescription, page: "Packs"), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
-  <% elsif @prescription.remaining_units.zero? %>
-    <%= link_to "Get more packs", prescription_path(@prescription, page: "Packs"), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
-  <% else %>
-    <%= link_to "Log Dose", new_prescription_dose_path(@prescription), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
+  <% if @prescription.active? %>
+    <% if @prescription.packs.empty? %>
+      <%= link_to "Add your first pack", prescription_path(@prescription, page: "Packs"), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
+    <% elsif @prescription.remaining_units.zero? %>
+      <%= link_to "Get more packs", prescription_path(@prescription, page: "Packs"), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
+    <% else %>
+      <%= link_to "Log Dose", new_prescription_dose_path(@prescription), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
+    <% end %>
   <% end %>
 </div>
 <table class="w-full mt-6 text-sm border-collapse">
@@ -20,8 +22,12 @@
     <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
       <th class="pb-3 pr-8">Dose</th>
       <th class="pb-3 pr-8">Time</th>
-      <th class="pb-3 pr-8">Date</th>
-      <th class="pb-3">Edit</th>
+      <% if @prescription.active? %>
+        <th class="pb-3 pr-8">Date</th>
+        <th class="pb-3">Edit</th>
+      <% else %>
+        <th class="pb-3">Date</th>
+      <% end %>
     </tr>
   </thead>
   <tbody class="divide-y divide-zinc-100">
@@ -36,16 +42,18 @@
         <td class="my-3 font-medium text-zinc-800">
           <%= local_time(dose.taken_at, "%B %e, %Y") %>
         </td>
-        <td>
-          <div class="flex">
-            <%= link_to edit_prescription_dose_path(@prescription, dose), target: "_top", class: "mx-1" do %>
-            <%= image_tag "icons/edit.svg", class: "aspect-squre h-[1.5em]" %>
-            <% end %>
-            <%= button_to prescription_dose_path(@prescription, dose), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "mx-1" do %>
-              <%= image_tag "icons/delete.svg", class: "aspect-square h-[1.5em]" %>
-            <% end %>
-          </div>
-        </td>
+        <% if @prescription.active? %>
+          <td>
+            <div class="flex">
+              <%= link_to edit_prescription_dose_path(@prescription, dose), target: "_top", class: "mx-1" do %>
+              <%= image_tag "icons/edit.svg", class: "aspect-squre h-[1.5em]" %>
+              <% end %>
+              <%= button_to prescription_dose_path(@prescription, dose), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "mx-1" do %>
+                <%= image_tag "icons/delete.svg", class: "aspect-square h-[1.5em]" %>
+              <% end %>
+            </div>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

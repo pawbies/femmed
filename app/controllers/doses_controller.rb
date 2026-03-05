@@ -2,6 +2,7 @@ class DosesController < ApplicationController
   before_action :set_prescription
   before_action :set_dose, only: %i[ edit update destroy ]
   before_action :require_own_prescription
+  before_action :require_active_prescription
   before_action :require_non_empty_stash, only: %i[ new create ]
 
   def new
@@ -46,6 +47,10 @@ class DosesController < ApplicationController
 
     def require_own_prescription
       redirect_to root_path, alert: "Grrrrr!" unless @prescription.user.id == Current.user.id
+    end
+
+    def require_active_prescription
+      redirect_back fallback_location: root_path, notice: "This requires an active prescription" unless @prescription.active?
     end
 
     def require_non_empty_stash

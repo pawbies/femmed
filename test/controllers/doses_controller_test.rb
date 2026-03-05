@@ -26,6 +26,13 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should redirect new if inactive prescription" do
+    sign_in_as(@user)
+    @prescription.update! active: false
+    get new_prescription_dose_path(@prescription)
+    assert_redirected_to root_path
+  end
+
   # create
   test "should redirect create if not authenticated" do
     post prescription_doses_path(@prescription), params: { dose: { amount_taken: 1, taken_at: Time.current } }
@@ -60,6 +67,18 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_content
   end
 
+  test "should redirect create if inactive prescription" do
+    sign_in_as(@user)
+    @prescription.update! active: false
+    assert_no_difference "Dose.count" do
+      post prescription_doses_path(@prescription), params: { dose: {
+        amount_taken: 1,
+        taken_at: Time.current.change(sec: 0)
+      } }
+    end
+    assert_redirected_to root_path
+  end
+
   # edit
   test "should redirect edit if not authenticated" do
     get edit_prescription_dose_path(@prescription, @dose)
@@ -76,6 +95,13 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@user)
     get edit_prescription_dose_path(@prescription, @dose)
     assert_response :success
+  end
+
+  test "should redirect edit if inactive prescription" do
+    sign_in_as(@user)
+    @prescription.update! active: false
+    get edit_prescription_dose_path(@prescription, @dose)
+    assert_redirected_to root_path
   end
 
   # update
@@ -102,6 +128,13 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_content
   end
 
+  test "should redirect update if inactive prescription" do
+    sign_in_as(@user)
+    @prescription.update! active: false
+    patch prescription_dose_path(@prescription, @dose), params: { dose: { amount_taken: 2 } }
+    assert_redirected_to root_path
+  end
+
   # destroy
   test "should redirect destroy if not authenticated" do
     delete prescription_dose_url(@prescription, @dose)
@@ -115,8 +148,17 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should not destroy another user's prescription" do
+  test "should not destroy another user's dose" do
     sign_in_as(@other_user)
+    assert_no_difference("Dose.count") do
+      delete prescription_dose_url(@prescription, @dose)
+    end
+    assert_redirected_to root_path
+  end
+
+  test "should redirect destroy if inactive prescription" do
+    sign_in_as(@user)
+    @prescription.update! active: false
     assert_no_difference("Prescription.count") do
       delete prescription_dose_url(@prescription, @dose)
     end

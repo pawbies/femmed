@@ -21,6 +21,14 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+
+  test "should redirect new if inactive prescription" do
+    sign_in_as(@user)
+    @prescription.update! active: false
+    get new_prescription_pack_url(@prescription)
+    assert_redirected_to root_url
+  end
+
   test "should not get new for another user's prescription" do
     sign_in_as(@other_user)
     get new_prescription_pack_url(@prescription)
@@ -102,5 +110,15 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@user)
     post prescription_packs_url(@prescription), params: { pack: { amount: nil, aquired_at: Date.today } }
     assert_response :unprocessable_content
+  end
+
+
+  test "should not create pack for inactive prescription" do
+    sign_in_as(@user)
+    @prescription.update! active: false
+    assert_no_difference("Pack.count") do
+      post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
+    end
+    assert_redirected_to root_path
   end
 end
