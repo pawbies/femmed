@@ -10,6 +10,13 @@
   %>
   <div class="no-js:hidden w-full bg-white border border-rose-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow <%= 'opacity-60 border-zinc-300' unless prescription.active? %>"
       data-controller="prescriptions-preview"
+      data-prescriptions-preview-release-profile-value="<%=
+      {
+        name: prescription.medication.release_profile.name,
+        delay: prescription.medication.medication_release_profile.delay,
+        release_duration: prescription.medication.medication_release_profile.release_duration
+      }.compact.to_json %>"
+
       data-prescriptions-preview-ingredients-value="<%=
         prescription.medication_version.medication.active_ingredients.map do |ingredient|
           mvi = prescription.medication_version.medication_version_ingredients

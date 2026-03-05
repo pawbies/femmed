@@ -2,41 +2,9 @@ import { Controller } from "@hotwired/stimulus"
 import * as Plot from "@observablehq/plot"
 
 const PALETTE = ["#4f8ef7", "#f5a623", "#34c98a", "#e05c6e", "#a78bfa"]
+const color = (_, idx) => PALETTE[idx % PALETTE.length]
 
 const ke = ing => Math.log(2) / ing.halfLife
-
-const concentrationAtImmediate = (ing, t) => {
-  if (t < 0) return 0
-  const [_ke, ka, vd] = [ke(ing), ing.absorptionRate, ing.volumeOfDistribution]
-  if (Math.abs(ka - _ke) < 0.0001) return 0
-  return Math.max(0, (ing.amount / vd) * (ka / (ka - _ke)) * (Math.exp(-_ke * t) - Math.exp(-ka * t)))
-}
-
-const concentrationAtBimodal = (ing, t, delay) => {
-  const pulse = (offset) => {
-    const elapsed = t - offset
-    if (elapsed < 0) return 0
-    const [_ke, ka, vd] = [ke(ing), ing.absorptionRate, ing.volumeOfDistribution]
-    if (Math.abs(ka - _ke) < 0.0001) return 0
-    return Math.max(0, ((ing.amount * 0.5) / vd) * (ka / (ka - _ke)) * (Math.exp(-_ke * elapsed) - Math.exp(-ka * elapsed)))
-  }
-  return pulse(0) + pulse(delay)
-}
-
-const concentrationAtExtended = (ing, t, duration) => {
-  if (t < 0) return 0
-  const _ke = ke(ing)
-  const R = ing.amount / duration
-  const base = R / (ing.volumeOfDistribution * _ke)
-  if (t <= duration) return base * (1 - Math.exp(-_ke * t))
-  return base * (1 - Math.exp(-_ke * duration)) * Math.exp(-_ke * (t - duration))
-}
-
-const concentration = (ing, t, releaseProfile) => {
-  if (releaseProfile.name === "Bimodal")  return concentrationAtBimodal(ing, t, releaseProfile.delay)
-  if (releaseProfile.name === "Extended") return concentrationAtExtended(ing, t, releaseProfile.release_duration)
-  return concentrationAtImmediate(ing, t)
-}
 
 const formatConc = c =>
   c < 0.001 ? c.toExponential(2) : c < 0.1 ? c.toFixed(3) : c < 1 ? c.toFixed(2) : c.toFixed(1)
@@ -53,33 +21,49 @@ export default class extends Controller {
   static values = { ingredients: Array, releaseProfile: Object }
 
   connect() {
+    this.chartTarget.innerHTML = ""
     const ingredients = this.ingredientsValue
     const releaseProfile = this.releaseProfileValue
     const empty = ingredients.length === 0
-    const color = (_, idx) => PALETTE[idx % PALETTE.length]
+    const xStart = 0
+    const xEnd = releaseProfile.name === "Extended" ? 48 : 24
 
-    const conc = (ing, t) => concentration(ing, t, releaseProfile)
+    const concentrationAt = (ing, t) => {
+      if (t < 0) return 0
+      const _ke = ke(ing), ka = ing.absorptionRate, vd = ing.volumeOfDistribution
+      if (Math.abs(ka - _ke) < 0.0001) return 0
+
+      const pulse = (offset) => {
+        const e = t - offset
+        if (e < 0) return 0
+        return Math.max(0, (ing.amount / vd) * (ka / (ka - _ke)) * (Math.exp(-_ke * e) - Math.exp(-ka * e)))
+      }
+
+      if (releaseProfile.name === "Bimodal") return pulse(0) + pulse(releaseProfile.delay)
+
+      if (releaseProfile.name === "Extended") {
+        const T = releaseProfile.release_duration
+        const base = (ing.amount / T) / (vd * _ke)
+        const c = t <= T
+          ? base * (1 - Math.exp(-_ke * t))
+          : base * (1 - Math.exp(-_ke * T)) * Math.exp(-_ke * (t - T))
+        return Math.max(0, c)
+      }
+
+      return pulse(0)
+    }
 
     const data = ingredients.flatMap((ing, idx) =>
-      Array.from({ length: 25 }, (_, t) => ({
-        time: t, ingredient: ing.name, concentration: conc(ing, t), color: color(ing, idx),
+      Array.from({ length: xEnd - xStart + 1 }, (_, i) => ({
+        time: xStart + i, ingredient: ing.name, concentration: concentrationAt(ing, xStart + i), color: color(ing, idx),
       }))
     )
 
     const localMaxima = ingredients.flatMap((ing, idx) => {
       const points = data.filter(d => d.ingredient === ing.name)
-      switch (releaseProfile.name) {
-        case "Immediate": {
-          const [_ke, ka] = [ke(ing), ing.absorptionRate]
-          if (Math.abs(ka - _ke) < 0.0001) return []
-          const tMax = Math.log(ka / _ke) / (ka - _ke)
-          return [{ time: tMax, ingredient: ing.name, concentration: conc(ing, tMax), color: color(ing, idx) }]
-        }
-        default:
-          return points
-            .filter((d, i) => i > 0 && i < points.length - 1 && d.concentration > points[i - 1].concentration && d.concentration > points[i + 1].concentration)
-            .map(d => ({ ...d, color: color(ing, idx) }))
-      }
+      return points
+        .filter((d, i) => i > 0 && i < points.length - 1 && d.concentration > points[i - 1].concentration && d.concentration > points[i + 1].concentration)
+        .map(d => ({ ...d, color: color(ing, idx) }))
     })
 
     const yMax = empty ? 1 : Math.max(...data.map(d => d.concentration)) * 1.25
@@ -99,7 +83,7 @@ export default class extends Controller {
         },
       },
       x: {
-        domain: [0, 24], label: "Hours from intake →", labelAnchor: "right", labelOffset: 36, tickSize: 0, grid: true,
+        domain: [xStart, xEnd], label: "Hours from intake →", labelAnchor: "right", labelOffset: 36, tickSize: 0, grid: true,
         tickFormat: t => t === 0 ? "Intake" : `+${t}h`,
       },
       color: {
@@ -108,7 +92,7 @@ export default class extends Controller {
         range: ingredients.map(color),
       },
       marks: empty
-        ? [Plot.text([{ x: 24, y: 0.5 }], { x: "x", y: "y", text: () => "No PK data available for this medication version", fontSize: 12, fill: "#94a3b8", textAnchor: "middle" })]
+        ? [Plot.text([{ x: xEnd / 2, y: 0.5 }], { x: "x", y: "y", text: () => "No PK data available for this medication version", fontSize: 12, fill: "#94a3b8", textAnchor: "middle" })]
         : [
             Plot.ruleY([0], { stroke: "#d1d5db", strokeWidth: 1 }),
             Plot.ruleX([0], { stroke: "#94a3b8", strokeWidth: 1.5, strokeDasharray: "5,3" }),
@@ -119,15 +103,14 @@ export default class extends Controller {
               Plot.line(data.filter(d => d.ingredient === ing.name), { x: "time", y: "concentration", stroke: color(ing, idx), strokeWidth: 2.5, curve: "catmull-rom" })
             ),
             Plot.ruleX(localMaxima, { x: "time", y1: 0, y2: "concentration", stroke: d => d.color, strokeWidth: 1, strokeDasharray: "3,3", strokeOpacity: 0.45 }),
-            Plot.ruleY(localMaxima, { y: "concentration", x1: 0, x2: d => d.time, stroke: d => d.color, strokeWidth: 1, strokeDasharray: "3,3", strokeOpacity: 0.45 }),
-            Plot.text(localMaxima, { x: "time", y: "concentration", text: peakLabel, fontSize: 10, fontWeight: "600", dx: 8, dy: -10, fill: d => d.color, textAnchor: "start" }),
+            Plot.ruleY(localMaxima, { y: "concentration", x1: xStart, x2: d => d.time, stroke: d => d.color, strokeWidth: 1, strokeDasharray: "3,3", strokeOpacity: 0.45 }),
+            Plot.text(localMaxima, { x: "time", y: "concentration", text: peakLabel, fontSize: 10, fontWeight: "600", dx: 8, dy: -10, fill: d => d.color, textAnchor: "start" })
           ],
     })
 
     chart.querySelectorAll("[aria-label='y-grid'] line, [aria-label='x-grid'] line")
       .forEach(el => { el.style.stroke = "#e2e8f0"; el.style.strokeWidth = "1" })
 
-    this.chartTarget.innerHTML = ""
     this.chartTarget.append(chart)
   }
 }
