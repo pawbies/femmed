@@ -1,13 +1,65 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  medication: one
-  release_profile: one
-  absorption_rate: 1.5
-  delay: 1.5
+ritalin_ir:
+  medication: ritalin_ir
+  release_profile: immediate
 
-two:
-  medication: two
-  release_profile: two
-  absorption_rate: 1.5
-  delay: 1.5
+ritalin_la:
+  medication: ritalin_la
+  release_profile: bimodal
+  delay: 4.0
+
+concerta:
+  medication: concerta
+  release_profile: extended
+  release_duration: 12.0
+
+adderall_ir:
+  medication: adderall_ir
+  release_profile: immediate
+
+adderall_xr:
+  medication: adderall_xr
+  release_profile: extended
+  release_duration: 12.0
+
+zoloft:
+  medication: zoloft
+  release_profile: immediate
+
+lexapro:
+  medication: lexapro
+  release_profile: immediate
+
+wellbutrin_xl:
+  medication: wellbutrin_xl
+  release_profile: extended
+  release_duration: 24.0
+
+prozac:
+  medication: prozac
+  release_profile: immediate
+
+aldactone:
+  medication: aldactone
+  release_profile: immediate
+
+synthroid:
+  medication: synthroid
+  release_profile: immediate
+
+estradot:
+  medication: estradot
+  release_profile: immediate
+
+progestan:
+  medication: progestan
+  release_profile: immediate
+
+propecia:
+  medication: propecia
+  release_profile: immediate
+
+casodex:
+  medication: casodex
+  release_profile: immediate
