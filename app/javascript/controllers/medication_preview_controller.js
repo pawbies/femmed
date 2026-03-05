@@ -26,7 +26,7 @@ export default class extends Controller {
     const releaseProfile = this.releaseProfileValue
     const empty = ingredients.length === 0
     const xStart = 0
-    const xEnd = releaseProfile.name === "Extended" ? 48 : 24
+    const xEnd = 24
 
     const concentrationAt = (ing, t) => {
       if (t < 0) return 0
