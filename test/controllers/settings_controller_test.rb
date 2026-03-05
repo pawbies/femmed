@@ -7,7 +7,7 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
 
   test "should redirect index if not authenticated" do
     get settings_url
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should get index if authenticated" do

@@ -11,7 +11,7 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
   # new
   test "should redirect new if not authenticated" do
     get new_medication_version_prescription_url(@medication_version)
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should get new if authenticated" do
@@ -23,7 +23,7 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
   # create
   test "should redirect create if not authenticated" do
     post medication_version_prescriptions_url(@medication_version), params: { prescription: { amount: 10 } }
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should create prescription if authenticated" do
@@ -31,7 +31,7 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Prescription.count") do
       post medication_version_prescriptions_url(@medication_version), params: { prescription: { user_id: @user.id, amount: 10 } }
     end
-    assert_redirected_to medication_path(@medication_version.medication)
+    assert_redirected_to medication_url(@medication_version.medication)
   end
 
   test "should not create prescription for another user" do
@@ -43,7 +43,7 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
   # show
   test "should redirect show if not authenticated" do
     get prescription_url(@prescription)
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should get show if authenticated and it's own medication" do
@@ -61,7 +61,7 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
   # destroy
   test "should redirect destroy if not authenticated" do
     delete prescription_url(@prescription)
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should destroy own prescription" do
@@ -82,7 +82,7 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
   # update
   test "should redirect update if not authenticated" do
     patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should update prescription if authenticated" do

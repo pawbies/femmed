@@ -38,6 +38,6 @@ class TimelineControllerTest < ActionDispatch::IntegrationTest
   test "should redirect to today if date is in the future" do
     sign_in_as(@user)
     get timeline_url, params: { date: Date.tomorrow.iso8601 }
-    assert_redirected_to timeline_path(date: Date.today)
+    assert_redirected_to timeline_url(date: Date.today)
   end
 end

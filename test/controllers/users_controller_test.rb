@@ -44,7 +44,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   # show
   test "should redirect show if not authenticated" do
     get user_url(@user)
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should get show for own profile" do
@@ -56,7 +56,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should not get show for another user" do
     sign_in_as(@other_user)
     get user_url(@user)
-    assert_redirected_to root_path
+    assert_redirected_to root_url
   end
 
   test "should get show for any user as admin" do
@@ -68,7 +68,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   # edit
   test "should redirect edit if not authenticated" do
     get edit_user_url(@user)
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should get edit for own profile" do
@@ -80,13 +80,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should not get edit for another user" do
     sign_in_as(@other_user)
     get edit_user_url(@user)
-    assert_redirected_to root_path
+    assert_redirected_to root_url
   end
 
   # update
   test "should redirect update if not authenticated" do
     patch user_url(@user), params: { user: { username: "newname" } }
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should update own profile" do
@@ -98,7 +98,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should not update another user's profile" do
     sign_in_as(@other_user)
     patch user_url(@user), params: { user: { username: "hacked" } }
-    assert_redirected_to root_path
+    assert_redirected_to root_url
   end
 
   test "admin should update any user" do
@@ -110,7 +110,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   # destroy
   test "should redirect destroy if not authenticated" do
     delete user_url(@user)
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should destroy own account and redirect to landing" do
@@ -118,7 +118,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference("User.count", -1) do
       delete user_url(@user)
     end
-    assert_redirected_to landing_path
+    assert_redirected_to landing_url
   end
 
   test "should not destroy another user's account" do
@@ -126,7 +126,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference("User.count") do
       delete user_url(@user)
     end
-    assert_redirected_to root_path
+    assert_redirected_to root_url
   end
 
   test "admin should destroy any user and redirect to users" do
@@ -134,6 +134,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference("User.count", -1) do
       delete user_url(@user)
     end
-    assert_redirected_to users_path
+    assert_redirected_to users_url
   end
 end

@@ -8,7 +8,7 @@ class SearchControllerTest < ActionDispatch::IntegrationTest
   # Unauthenticated
   test "should redirect search if not authenticated" do
     get search_url
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   # Authenticated

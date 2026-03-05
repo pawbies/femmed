@@ -12,7 +12,7 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
   # new
   test "should redirect new if not authenticated" do
     get new_prescription_pack_url(@prescription)
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should get new if authenticated" do
@@ -32,13 +32,13 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
   test "should not get new for another user's prescription" do
     sign_in_as(@other_user)
     get new_prescription_pack_url(@prescription)
-    assert_redirected_to root_path
+    assert_redirected_to root_url
   end
 
   # create
   test "should redirect create if not authenticated" do
     post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should create pack if authenticated" do
@@ -46,7 +46,7 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     end
-    assert_redirected_to prescription_path(@prescription, page: "Packs")
+    assert_redirected_to prescription_url(@prescription, page: "Packs")
   end
 
   test "should not create pack for another user's prescription" do
@@ -54,7 +54,7 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     end
-    assert_redirected_to root_path
+    assert_redirected_to root_url
   end
 
   test "should not create pack with missing amount" do
@@ -119,6 +119,6 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     end
-    assert_redirected_to root_path
+    assert_redirected_to root_url
   end
 end

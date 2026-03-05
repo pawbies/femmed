@@ -8,13 +8,13 @@ class AdminControllerTest < ActionDispatch::IntegrationTest
 
   test "should get redirect from index if unauthenticated" do
     get admin_url
-    assert_redirected_to new_session_path
+    assert_redirected_to new_session_url
   end
 
   test "should get redirect from index if not admin" do
     sign_in_as @user
     get admin_url
-    assert_redirected_to root_path
+    assert_redirected_to root_url
   end
 
   test "should get index if admin" do
