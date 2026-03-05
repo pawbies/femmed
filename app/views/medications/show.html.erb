@@ -103,7 +103,7 @@
                 <% end %>
                 <% if ingredient.volume_of_distribution.present? %>
                   <span class="text-zinc-400">·</span>
-                  <span>Vd <%= ingredient.absorption_rate %>L</span>
+                  <span>Vd <%= ingredient.volume_of_distribution %>L</span>
                 <% end %>
                 <% unless mvi.available_for_pk? %>
                   <span class="text-zinc-400">·</span>

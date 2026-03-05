@@ -24,7 +24,7 @@ export default class extends Controller {
     const releaseProfile = this.releaseProfileValue
     const now = Math.floor(Date.now() / 1000)
     const xStart = ingredients.some(i => i.doses.some(d => d.takenAt < now)) ? -24 : 0
-    const xEnd = releaseProfile.name === "Extended" ? 48 : 24
+    const xEnd = 48
 
     const concentrationAt = (ing, t) =>
       ing.doses.reduce((sum, dose) => {
