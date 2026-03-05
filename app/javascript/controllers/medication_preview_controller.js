@@ -5,11 +5,37 @@ const PALETTE = ["#4f8ef7", "#f5a623", "#34c98a", "#e05c6e", "#a78bfa"]
 
 const ke = ing => Math.log(2) / ing.halfLife
 
-const concentrationAt = (ing, t) => {
+const concentrationAtImmediate = (ing, t) => {
   if (t < 0) return 0
   const [_ke, ka, vd] = [ke(ing), ing.absorptionRate, ing.volumeOfDistribution]
   if (Math.abs(ka - _ke) < 0.0001) return 0
   return Math.max(0, (ing.amount / vd) * (ka / (ka - _ke)) * (Math.exp(-_ke * t) - Math.exp(-ka * t)))
+}
+
+const concentrationAtBimodal = (ing, t, delay) => {
+  const pulse = (offset) => {
+    const elapsed = t - offset
+    if (elapsed < 0) return 0
+    const [_ke, ka, vd] = [ke(ing), ing.absorptionRate, ing.volumeOfDistribution]
+    if (Math.abs(ka - _ke) < 0.0001) return 0
+    return Math.max(0, ((ing.amount * 0.5) / vd) * (ka / (ka - _ke)) * (Math.exp(-_ke * elapsed) - Math.exp(-ka * elapsed)))
+  }
+  return pulse(0) + pulse(delay)
+}
+
+const concentrationAtExtended = (ing, t, duration) => {
+  if (t < 0) return 0
+  const _ke = ke(ing)
+  const R = ing.amount / duration
+  const base = R / (ing.volumeOfDistribution * _ke)
+  if (t <= duration) return base * (1 - Math.exp(-_ke * t))
+  return base * (1 - Math.exp(-_ke * duration)) * Math.exp(-_ke * (t - duration))
+}
+
+const concentration = (ing, t, releaseProfile) => {
+  if (releaseProfile.name === "Bimodal")  return concentrationAtBimodal(ing, t, releaseProfile.delay)
+  if (releaseProfile.name === "Extended") return concentrationAtExtended(ing, t, releaseProfile.release_duration)
+  return concentrationAtImmediate(ing, t)
 }
 
 const formatConc = c =>
@@ -24,24 +50,36 @@ const peakLabel = d => {
 // Connects to data-controller="medication-preview"
 export default class extends Controller {
   static targets = ["chart"]
-  static values = { ingredients: Array }
+  static values = { ingredients: Array, releaseProfile: Object }
 
   connect() {
     const ingredients = this.ingredientsValue
+    const releaseProfile = this.releaseProfileValue
     const empty = ingredients.length === 0
     const color = (_, idx) => PALETTE[idx % PALETTE.length]
 
+    const conc = (ing, t) => concentration(ing, t, releaseProfile)
+
     const data = ingredients.flatMap((ing, idx) =>
-      Array.from({ length: 49 }, (_, t) => ({
-        time: t, ingredient: ing.name, concentration: concentrationAt(ing, t), color: color(ing, idx),
+      Array.from({ length: 25 }, (_, t) => ({
+        time: t, ingredient: ing.name, concentration: conc(ing, t), color: color(ing, idx),
       }))
     )
 
     const localMaxima = ingredients.flatMap((ing, idx) => {
-      const [_ke, ka] = [ke(ing), ing.absorptionRate]
-      if (Math.abs(ka - _ke) < 0.0001) return []
-      const tMax = Math.log(ka / _ke) / (ka - _ke)
-      return [{ time: tMax, ingredient: ing.name, concentration: concentrationAt(ing, tMax), color: color(ing, idx) }]
+      const points = data.filter(d => d.ingredient === ing.name)
+      switch (releaseProfile.name) {
+        case "Immediate": {
+          const [_ke, ka] = [ke(ing), ing.absorptionRate]
+          if (Math.abs(ka - _ke) < 0.0001) return []
+          const tMax = Math.log(ka / _ke) / (ka - _ke)
+          return [{ time: tMax, ingredient: ing.name, concentration: conc(ing, tMax), color: color(ing, idx) }]
+        }
+        default:
+          return points
+            .filter((d, i) => i > 0 && i < points.length - 1 && d.concentration > points[i - 1].concentration && d.concentration > points[i + 1].concentration)
+            .map(d => ({ ...d, color: color(ing, idx) }))
+      }
     })
 
     const yMax = empty ? 1 : Math.max(...data.map(d => d.concentration)) * 1.25
@@ -61,7 +99,7 @@ export default class extends Controller {
         },
       },
       x: {
-        domain: [0, 48], label: "Hours from intake →", labelAnchor: "right", labelOffset: 36, tickSize: 0, grid: true,
+        domain: [0, 24], label: "Hours from intake →", labelAnchor: "right", labelOffset: 36, tickSize: 0, grid: true,
         tickFormat: t => t === 0 ? "Intake" : `+${t}h`,
       },
       color: {

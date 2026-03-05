@@ -36,6 +36,12 @@
       <div class="my-12">
         <div data-controller="medication-preview"
             class="mx-auto w-full md:w-2/3 xl:w-1/2 bg-white border border-rose-100 rounded-2xl overflow-hidden shadow-sm"
+            data-medication-preview-release-profile-value="<%=
+            {
+              name: @medication.release_profile.name,
+              delay: @medication.medication_release_profile.delay,
+              release_duration: @medication.medication_release_profile.release_duration
+            }.compact.to_json %>"
             data-medication-preview-ingredients-value="<%=
               @medication_version.medication_version_ingredients.where(unit: [:mg, :g, :mcg]).joins(:active_ingredient).where.not(active_ingredients: { half_life: nil, absorption_rate: nil, volume_of_distribution: nil }).map do |mvi|
                 next if mvi.active_ingredient.half_life.blank? || mvi.active_ingredient.absorption_rate.blank? || mvi.active_ingredient.volume_of_distribution.blank?
@@ -73,7 +79,7 @@
               <% end %>
             </div>
             <span class="text-xs bg-rose-50 text-rose-400 border border-rose-100 font-medium px-2.5 py-1 rounded-full">
-              Single dose · 48h
+              Single dose · 24h
             </span>
           </div>
 
