@@ -32,7 +32,7 @@
   </thead>
   <tbody class="divide-y divide-zinc-100">
     <% @prescription.doses.order(taken_at: :desc).each do |dose| %>
-      <tr class="transition-colors hover:bg-zinc-50">
+      <tr class="transition-colors hover:bg-zinc-50" id="<%= dom_id(dose) %>">
         <td class="py-3 pr-8 font-medium text-zinc-800">
           <%= "#{format("%g", dose.amount_taken)} #{@prescription.form.name.pluralize(dose.amount_taken)}" %>
         </td>
