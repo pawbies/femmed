@@ -11,15 +11,6 @@ export default class extends Controller {
     const ingredients = this.ingredientsValue
     const now = Math.floor(Date.now() / 1000)
 
-    /*
-    const concentrationAt = (ingredient, t) =>
-      ingredient.doses.reduce((sum, dose) => {
-        const elapsedHours = (now + t * 3600 - dose.takenAt) / 3600
-        if (elapsedHours < 0) return sum
-        return sum + dose.amount * Math.pow(0.5, elapsedHours / ingredient.halfLife)
-      }, 0)
-    */
-
     const concentrationAt = (ingredient, t) =>
       ingredient.doses.reduce((sum, dose) => {
         const elapsedHours = (now + t * 3600 - dose.takenAt) / 3600

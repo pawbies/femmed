@@ -16,4 +16,8 @@ class MedicationVersionIngredient < ApplicationRecord
     "mmol": 8,
     "%": 14
   }, prefix: :unit, validate: true
+
+  def available_for_pk?
+    active_ingredient.half_life.present? && active_ingredient.absorption_rate.present? && active_ingredient.volume_of_distribution.present? && (%w[ mg mcg g ]).include?(unit)
+  end
 end
