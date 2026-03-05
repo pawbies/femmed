@@ -1,7 +1,12 @@
 <div class="mt-8 space-y-8">
 
   <div>
-    <h2 class="text-2xl font-semibold"><%= @prescription.medication.name %></h2>
+    <div class="flex items-center justify-between md:justify-start">
+      <h2 class="text-2xl font-semibold mr-3"><%= @prescription.medication.name %></h2>
+      <%= link_to @prescription.medication, target: "_top" do %>
+        <%= image_tag "icons/goto.svg", class: "aspect-square h-[2em]" %>
+      <% end %>
+    </div>
     <p class="text-sm text-gray-400 mt-1">
       <%= @prescription.medication.form.name %>
       <% if @prescription.medication.labeler.present? %>
