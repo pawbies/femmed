@@ -12,7 +12,7 @@
       data-controller="prescriptions-preview"
       data-prescriptions-preview-release-profile-value="<%=
       {
-        name: prescription.medication.release_profile.name,
+        name: prescription.medication.release_profile&.name || "Immediate",
         delay: prescription.medication.medication_release_profile.delay,
         release_duration: prescription.medication.medication_release_profile.release_duration
       }.compact.to_json %>"
