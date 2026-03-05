@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_04_142024) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_05_184115) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -109,6 +109,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_04_142024) do
     t.index ["name"], name: "index_labelers_on_name", unique: true
   end
 
+  create_table "medication_release_profiles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.float "delay"
+    t.integer "medication_id", null: false
+    t.float "release_duration"
+    t.integer "release_profile_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["medication_id"], name: "index_medication_release_profiles_on_medication_id"
+    t.index ["release_profile_id"], name: "index_medication_release_profiles_on_release_profile_id"
+  end
+
   create_table "medication_version_ingredients", force: :cascade do |t|
     t.integer "active_ingredient_id", null: false
     t.float "amount"
@@ -172,6 +183,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_04_142024) do
     t.index ["name"], name: "index_references_on_name", unique: true
   end
 
+  create_table "release_profiles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_release_profiles_on_name", unique: true
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -194,6 +212,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_04_142024) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assistent_talks", "users"
   add_foreign_key "doses", "prescriptions"
+  add_foreign_key "medication_release_profiles", "medications"
+  add_foreign_key "medication_release_profiles", "release_profiles"
   add_foreign_key "medication_version_ingredients", "active_ingredients"
   add_foreign_key "medication_version_ingredients", "medication_versions"
   add_foreign_key "medication_versions", "medications"

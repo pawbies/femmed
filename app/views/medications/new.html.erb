@@ -1,7 +1,7 @@
 <div class="w-full">
   <h1 class="font-bold text-3xl text-center">New medication</h1>
 
-  <%= form_with model: @medication, class: "mt-10 mx-auto max-w-lg" do |form| %>
+  <%= form_with model: @medication, class: "mt-10 mx-auto max-w-lg", data: { controller: "new-medication" } do |form| %>
     <% if @medication.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">
@@ -34,6 +34,27 @@
         { include_blank: false },
         { multiple: true, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full h-56 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
       <p class="text-xs text-gray-400 mt-1">Hold Ctrl / Cmd to select multiple</p>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :medication_release_profile, "Release Profile", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.fields_for :medication_release_profile do |rp_form| %>
+        <%= rp_form.select :release_profile_id, ReleaseProfile.all.order(:name).map { |rp| [rp.name, rp.id] },
+          { include_blank: "Select a release profile" },
+          { data: { action: "new-medication#update", new_medication_target: "rpSelect" }, class: "my-2 border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300 w-full" } %>
+        <div class="flex gap-3 mt-2">
+          <%= rp_form.number_field :delay,
+            data: { new_medication_target: "rpDelayField" },
+            placeholder: "Delay (hours, bimodal only)",
+            step: 0.5,
+            class: "js:hidden shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full text-sm" %>
+          <%= rp_form.number_field :release_duration,
+            data: { new_medication_target: "rpDurationField" },
+            placeholder: "Release duration (hours, extended only)",
+            step: 1,
+            class: "js:hidden shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full text-sm" %>
+        </div>
+      <% end %>
     </div>
 
     <div class="my-5">
