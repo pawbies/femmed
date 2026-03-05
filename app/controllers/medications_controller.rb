@@ -17,6 +17,7 @@ class MedicationsController < ApplicationController
   end
 
   def show
+    @medication_version = @medication.versions.find(params[:medication_version_id]) || @medication.versions.first
   end
 
   def edit

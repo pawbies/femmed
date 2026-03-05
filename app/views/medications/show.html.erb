@@ -31,73 +31,85 @@
     <%= @medication.notes %>
   </div>
 
-  <% unless @medication.versions.empty? %>
-    <% @medication_version = @medication.versions.first %>
-    <div class="my-12">
-      <div data-controller="medication-preview"
-          class="mx-auto w-full md:w-2/3 xl:w-1/2 bg-white border border-rose-100 rounded-2xl overflow-hidden shadow-sm"
-          data-medication-preview-ingredients-value="<%=
-            @medication_version.medication_version_ingredients.where(unit: [:mg, :g, :mcg]).joins(:active_ingredient).where.not(active_ingredients: { half_life: nil, absorption_rate: nil, volume_of_distribution: nil }).map do |mvi|
-              next if mvi.active_ingredient.half_life.blank? || mvi.active_ingredient.absorption_rate.blank? || mvi.active_ingredient.volume_of_distribution.blank?
-              multiplier = case mvi.unit
-                            when "mg"  then 1.0
-                            when "g"   then 1000.0
-                            when "mcg" then 0.001
-                            else nil
-                            end
-              next if multiplier.nil?
-              {
-                name: mvi.active_ingredient.name,
-                halfLife: mvi.active_ingredient.half_life,
-                amount: mvi.amount * multiplier,
-                absorptionRate: mvi.active_ingredient.absorption_rate,
-                volumeOfDistribution: mvi.active_ingredient.volume_of_distribution
-              }
-            end.compact.to_json
-          %>">
+  <turbo-frame id="graph">
+    <% unless @medication_version.nil? %>
+      <div class="my-12">
+        <div data-controller="medication-preview"
+            class="mx-auto w-full md:w-2/3 xl:w-1/2 bg-white border border-rose-100 rounded-2xl overflow-hidden shadow-sm"
+            data-medication-preview-ingredients-value="<%=
+              @medication_version.medication_version_ingredients.where(unit: [:mg, :g, :mcg]).joins(:active_ingredient).where.not(active_ingredients: { half_life: nil, absorption_rate: nil, volume_of_distribution: nil }).map do |mvi|
+                next if mvi.active_ingredient.half_life.blank? || mvi.active_ingredient.absorption_rate.blank? || mvi.active_ingredient.volume_of_distribution.blank?
+                multiplier = case mvi.unit
+                              when "mg"  then 1.0
+                              when "g"   then 1000.0
+                              when "mcg" then 0.001
+                              else nil
+                              end
+                next if multiplier.nil?
+                {
+                  name: mvi.active_ingredient.name,
+                  halfLife: mvi.active_ingredient.half_life,
+                  amount: mvi.amount * multiplier,
+                  absorptionRate: mvi.active_ingredient.absorption_rate,
+                  volumeOfDistribution: mvi.active_ingredient.volume_of_distribution
+                }
+              end.compact.to_json
+            %>">
 
-        <div class="px-5 pt-5 pb-3 flex items-start justify-between">
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-widest text-rose-300 mb-1">Pharmacokinetics</p>
-            <h3 class="text-lg font-semibold text-zinc-800"><%= @medication_version.added_name %></h3>
-          </div>
-          <span class="text-xs bg-rose-50 text-rose-400 border border-rose-100 font-medium px-2.5 py-1 rounded-full">
-            Single dose · 48h
-          </span>
-        </div>
-
-        <div data-medication-preview-target="chart" class="w-full px-1"></div>
-
-        <div class="px-5 py-3 border-t border-rose-50 flex flex-col gap-3">
-          <% @medication_version.medication_version_ingredients.each do |mvi| %>
-            <% ingredient = mvi.active_ingredient %>
-            <div class="flex items-center gap-1.5 text-xs text-zinc-500">
-              <span class="inline-block w-2 h-2 rounded-full <%= mvi.available_for_pk? ? "bg-green-400" : "bg-rose-400" %>"></span>
-              <span class="font-medium text-zinc-700"><%= ingredient.name %></span>
-              <% if ingredient.half_life.present? %>
-                <span class="text-zinc-400">·</span>
-                <span>t½ <%= ingredient.half_life %>h</span>
-                <span class="text-zinc-400">·</span>
-                <span>ke <%= (Math.log(2)/ingredient.half_life).round(2) %>h⁻¹</span>
-              <% end %>
-              <% if ingredient.absorption_rate.present? %>
-                <span class="text-zinc-400">·</span>
-                <span>ka <%= ingredient.absorption_rate %>h⁻¹</span>
-              <% end %>
-              <% if ingredient.volume_of_distribution.present? %>
-                <span class="text-zinc-400">·</span>
-                <span>Vd <%= ingredient.absorption_rate %>L</span>
-              <% end %>
-              <% unless mvi.available_for_pk? %>
-                <span class="text-zinc-400">·</span>
-                <span>Not available for pk</span>
+          <div class="px-5 pt-5 pb-3 flex items-start justify-between">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-widest text-rose-300 mb-1">Pharmacokinetics</p>
+              <%= form_with url: medication_path(@medication), method: :get, data: { turbo_frame: "graph" }, class: "mt-5" do |f| %>
+                <%= f.select :medication_version_id,
+                      @medication.versions.map { |v| [v.added_name, v.id] },
+                      { selected: @medication_version.id },
+                      {
+                        onchange: "this.form.requestSubmit()",
+                        class: "text-lg font-semibold text-zinc-800 bg-transparent border-none outline-none cursor-pointer hover:text-rose-400 transition-colors"
+                      } %>
+                <noscript>
+                  <%= f.submit "Go", class: "text-sm text-rose-400 underline ml-2" %>
+                </noscript>
               <% end %>
             </div>
-          <% end %>
+            <span class="text-xs bg-rose-50 text-rose-400 border border-rose-100 font-medium px-2.5 py-1 rounded-full">
+              Single dose · 48h
+            </span>
+          </div>
+
+          <div data-medication-preview-target="chart" class="w-full px-1"></div>
+
+          <div class="px-5 py-3 border-t border-rose-50 flex flex-col gap-3">
+            <% @medication_version.medication_version_ingredients.each do |mvi| %>
+              <% ingredient = mvi.active_ingredient %>
+              <div class="flex items-center gap-1.5 text-xs text-zinc-500">
+                <span class="inline-block w-2 h-2 rounded-full <%= mvi.available_for_pk? ? "bg-green-400" : "bg-rose-400" %>"></span>
+                <span class="font-medium text-zinc-700"><%= ingredient.name %></span>
+                <% if ingredient.half_life.present? %>
+                  <span class="text-zinc-400">·</span>
+                  <span>t½ <%= ingredient.half_life %>h</span>
+                  <span class="text-zinc-400">·</span>
+                  <span>ke <%= (Math.log(2)/ingredient.half_life).round(2) %>h⁻¹</span>
+                <% end %>
+                <% if ingredient.absorption_rate.present? %>
+                  <span class="text-zinc-400">·</span>
+                  <span>ka <%= ingredient.absorption_rate %>h⁻¹</span>
+                <% end %>
+                <% if ingredient.volume_of_distribution.present? %>
+                  <span class="text-zinc-400">·</span>
+                  <span>Vd <%= ingredient.absorption_rate %>L</span>
+                <% end %>
+                <% unless mvi.available_for_pk? %>
+                  <span class="text-zinc-400">·</span>
+                  <span>Not available for pk</span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </turbo-frame>
 
   <section class="mt-12">
     <h3 class="text-2xl">Versions</h3>
