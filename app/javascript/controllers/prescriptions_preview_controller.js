@@ -57,6 +57,15 @@ export default class extends Controller {
       concentration: concentrationAt(ingredient, 0),
     }))
 
+    const localMaxima = ingredients.flatMap(ingredient => {
+      const points = data.filter(d => d.ingredient === ingredient.name)
+      return points.filter((d, i) => {
+        if (i === 0 || i === points.length - 1) return false
+        return d.concentration > points[i - 1].concentration &&
+              d.concentration > points[i + 1].concentration
+      })
+    })
+
     const minTherapeuticDose = 40
     const minToxicDose = 120
     const allConcentrations = data.map(d => d.concentration)
@@ -83,7 +92,9 @@ export default class extends Controller {
         Plot.ruleX([0], { stroke: "#aaa", strokeDasharray: "4,2" }),
         Plot.line(data, { x: "time", y: "concentration", stroke: "ingredient" }),
         Plot.dot(dots,  { x: "time", y: "concentration", stroke: "ingredient", r: 5, fill: "white" }),
-        Plot.text(dots, { x: "time", y: "concentration", text: d => `~${d.concentration.toFixed(3)}mg/L`, dx: 14, dy: -10, fontSize: 10, fill: "currentColor" })
+        Plot.text(dots, { x: "time", y: "concentration", text: d => `~${d.concentration.toFixed(3)}mg/L`, dx: 35, dy: -10, fontSize: 10, fill: "currentColor" }),
+        Plot.ruleX(localMaxima, { x: "time", y1: 0, y2: "concentration", stroke: "red", strokeDasharray: "3,2", strokeOpacity: 0.4 }),
+        Plot.ruleY(localMaxima, { y: "concentration", x1: xStart, x2: d => d.time, stroke: "red", strokeDasharray: "3,2", strokeOpacity: 0.4 }),
       ]
     })
 
