@@ -24,12 +24,12 @@
           next if ingredient.half_life.blank? || ingredient.absorption_rate.blank? || ingredient.volume_of_distribution.blank?
           multiplier = case mvi&.unit
                        when "mg"  then 1.0
-                       when "g"   then 1000.0
-                       when "mcg" then 0.001
+                       when "g"   then 0.001
+                       when "mcg" then 1000.0
                        else nil
                        end
           doses = if multiplier
-            prescription.doses.map do |dose|
+            prescription.doses.where(taken_at: 1.week.ago..).map do |dose|
               { takenAt: dose.taken_at.to_i, amount: dose.amount_taken * mvi.amount * multiplier }
             end
           else
