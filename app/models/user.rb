@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :prescriptions, dependent: :destroy
   has_many :medication_versions, through: :prescriptions
   has_many :doses, through: :prescriptions
+  has_many :diary_entries, dependent: :destroy
 
   has_many :side_effects, dependent: :destroy
   has_many :symtoms, dependent: :destroy

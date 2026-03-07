@@ -1,6 +1,6 @@
 require "test_helper"
 
-class DiaryControllerTest < ActionDispatch::IntegrationTest
+class DiaryEntryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

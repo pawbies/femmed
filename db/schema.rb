@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_07_155214) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_07_155907) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -84,6 +84,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_07_155214) do
     t.integer "category_id", null: false
     t.integer "medication_id", null: false
     t.index ["medication_id", "category_id"], name: "index_categories_medications_on_medication_id_and_category_id"
+  end
+
+  create_table "diary_entries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "entry_for", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_diary_entries_on_user_id"
   end
 
   create_table "doses", force: :cascade do |t|
@@ -227,6 +236,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_07_155214) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assistent_talks", "users"
+  add_foreign_key "diary_entries", "users"
   add_foreign_key "doses", "prescriptions"
   add_foreign_key "medication_release_profiles", "medications"
   add_foreign_key "medication_release_profiles", "release_profiles"
