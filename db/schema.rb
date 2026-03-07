@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_05_184115) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_07_155214) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -197,6 +197,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_184115) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "side_effects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_side_effects_on_user_id"
+  end
+
+  create_table "symptoms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_symptoms_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email_address", null: false
@@ -223,4 +239,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_184115) do
   add_foreign_key "prescriptions", "medication_versions"
   add_foreign_key "prescriptions", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "side_effects", "users"
+  add_foreign_key "symptoms", "users"
 end
