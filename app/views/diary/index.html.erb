@@ -1,0 +1,121 @@
+<div class="w-full">
+  <h1 class="font-bold text-4xl">Diary</h1>
+  
+  <% nav_links = [["Home", root_path], ["Timeline", timeline_path], ["Calendar", calendar_path], ["Diary", diary_path]] %>
+  <% nav_links << [ "Admin", admin_path ] if admin? %>
+  <%= render "partials/nav", links: nav_links %>
+
+  <!-- Date Navigation -->
+  <div class="flex items-center justify-between mt-8">
+    <div class="flex items-center gap-4">
+      <%= link_to "#", class: "w-10 h-10 flex items-center justify-center border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors" do %>
+        <span class="text-gray-400">←</span>
+      <% end %>
+      <h2 class="text-xl font-medium text-rose-400">March 2026</h2>
+      <%= link_to "#", class: "w-10 h-10 flex items-center justify-center border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors" do %>
+        <span class="text-gray-400">→</span>
+      <% end %>
+    </div>
+    
+    <div class="flex gap-2">
+      <%= link_to "#", class: "px-4 py-2 bg-rose-400 text-white rounded-lg font-medium text-sm" do %>
+        List
+      <% end %>
+      <%= link_to calendar_path, class: "px-4 py-2 text-gray-500 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors" do %>
+        Calendar
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Diary Entries -->
+  <div class="mt-8 space-y-4">
+    
+    <!-- Entry Card -->
+    <div class="border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div class="bg-rose-50 px-5 py-3 border-b border-rose-100 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-rose-400 text-white rounded-lg px-3 py-2 text-center min-w-[60px]">
+            <div class="text-2xl font-bold leading-none">7</div>
+            <div class="text-xs uppercase tracking-wide mt-1">Sat</div>
+          </div>
+          <h3 class="text-sm font-semibold text-rose-500 uppercase tracking-wide">March 7, 2026</h3>
+        </div>
+        <%= link_to "#", class: "text-rose-300 hover:text-rose-400 transition-colors" do %>
+          ⋯
+        <% end %>
+      </div>
+      <div class="px-5 py-4">
+        <h4 class="font-medium text-gray-900 mb-2">Morning thoughts</h4>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          Today started with a beautiful sunrise. I spent some time reflecting on the week's events and planning for the days ahead...
+        </p>
+        <div class="mt-4 flex items-center gap-2">
+          <span class="text-xs text-gray-400">9:23 AM</span>
+          <span class="text-xs text-gray-300">•</span>
+          <span class="text-xs text-rose-400 font-medium">Personal</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Entry Card -->
+    <div class="border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div class="bg-gray-50 px-5 py-3 border-b border-gray-100 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-gray-400 text-white rounded-lg px-3 py-2 text-center min-w-[60px]">
+            <div class="text-2xl font-bold leading-none">6</div>
+            <div class="text-xs uppercase tracking-wide mt-1">Fri</div>
+          </div>
+          <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">March 6, 2026</h3>
+        </div>
+        <%= link_to "#", class: "text-gray-300 hover:text-gray-400 transition-colors" do %>
+          ⋯
+        <% end %>
+      </div>
+      <div class="px-5 py-4">
+        <h4 class="font-medium text-gray-900 mb-2">Project milestone reached</h4>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          We finally completed the first phase of the project. The team worked incredibly hard, and it really shows in the results...
+        </p>
+        <div class="mt-4 flex items-center gap-2">
+          <span class="text-xs text-gray-400">6:45 PM</span>
+          <span class="text-xs text-gray-300">•</span>
+          <span class="text-xs text-blue-400 font-medium">Work</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Entry Card -->
+    <div class="border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div class="bg-gray-50 px-5 py-3 border-b border-gray-100 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-gray-400 text-white rounded-lg px-3 py-2 text-center min-w-[60px]">
+            <div class="text-2xl font-bold leading-none">5</div>
+            <div class="text-xs uppercase tracking-wide mt-1">Thu</div>
+          </div>
+          <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">March 5, 2026</h3>
+        </div>
+        <%= link_to "#", class: "text-gray-300 hover:text-gray-400 transition-colors" do %>
+          ⋯
+        <% end %>
+      </div>
+      <div class="px-5 py-4">
+        <h4 class="font-medium text-gray-900 mb-2">Evening walk</h4>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          Took a long walk around the neighborhood. The weather was perfect, and I had time to clear my mind and think about upcoming plans...
+        </p>
+        <div class="mt-4 flex items-center gap-2">
+          <span class="text-xs text-gray-400">7:15 PM</span>
+          <span class="text-xs text-gray-300">•</span>
+          <span class="text-xs text-green-400 font-medium">Health</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- New Entry Button -->
+  <%= link_to "#", class: "fixed bottom-8 right-8 w-14 h-14 bg-rose-400 hover:bg-rose-500 text-white rounded-full shadow-lg flex items-center justify-center text-2xl transition-colors" do %>
+    +
+  <% end %>
+
+</div>

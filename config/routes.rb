@@ -43,5 +43,6 @@ Rails.application.routes.draw do
 
   get "timeline" => "timeline#index"
   get "calendar" => "calendar#index"
+  get "diary"    =>    "diary#index"
   get "admin"    =>    "admin#index"
 end
