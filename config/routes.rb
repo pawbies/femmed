@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   resources :labelers
   resources :categories
   resource :assistent_talks
-  resources :users
+  resources :users do
+    resources :diary_entries
+  end
   get "profile" => "users#profile"
   resource :session
   resources :passwords, param: :token
@@ -43,5 +45,6 @@ Rails.application.routes.draw do
 
   get "timeline" => "timeline#index"
   get "calendar" => "calendar#index"
+  get "diary"    =>    "diary#index"
   get "admin"    =>    "admin#index"
 end
