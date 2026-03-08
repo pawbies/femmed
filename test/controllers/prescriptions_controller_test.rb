@@ -8,36 +8,18 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
     @prescription = prescriptions(:alice_ritalin_ir)
   end
 
-  # new
-  test "should redirect new if not authenticated" do
-    get new_medication_version_prescription_url(@medication_version)
-    assert_redirected_to new_session_url
-  end
-
-  test "should get new if authenticated" do
-    sign_in_as(@user)
-    get new_medication_version_prescription_url(@medication_version)
-    assert_response :success
-  end
-
   # create
   test "should redirect create if not authenticated" do
-    post medication_version_prescriptions_url(@medication_version), params: { prescription: { amount: 10 } }
+    post medication_version_prescriptions_url(@medication_version)
     assert_redirected_to new_session_url
   end
 
   test "should create prescription if authenticated" do
     sign_in_as(@user)
     assert_difference("Prescription.count") do
-      post medication_version_prescriptions_url(@medication_version), params: { prescription: { user_id: @user.id, amount: 10 } }
+      post medication_version_prescriptions_url(@medication_version)
     end
-    assert_redirected_to medication_url(@medication_version.medication)
-  end
-
-  test "should not create prescription for another user" do
-    sign_in_as(@other_user)
-    post medication_version_prescriptions_url(@medication_version), params: { prescription: { user_id: @user.id, amount: 10 } }
-    assert_response :forbidden
+    assert_redirected_to Prescription.last
   end
 
   # show

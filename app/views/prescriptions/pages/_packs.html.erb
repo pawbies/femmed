@@ -1,37 +1,33 @@
 <section>
-  <div class="flex items-center justify-between">
-    <h3 class="text-2xl">
-      Packs
-      <span class="text-black/50 italic">
-        <% unless @prescription.packs.empty? %>
-          - <%= (Date.today - @prescription.packs.order(:aquired_at).last.aquired_at).to_i %>
-          days since you got the last pack
-        <% else %>
-          - Go ahead and get some
-        <% end %>
-      </span>
-    </h3>
-
-    <% if @prescription.active? %>
-      <%= link_to "Add Pack", new_prescription_pack_path(@prescription), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white text-center font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
-    <% end %>
-  </div>
+  <h3 class="text-2xl">
+    Packs
+    <span class="text-black/50 italic">
+      <% unless @prescription.packs.empty? %>
+        - <%= (Date.today - @prescription.packs.order(:aquired_at).last.aquired_at).to_i %>
+        days since you got the last pack
+      <% else %>
+        - Go ahead and get some
+      <% end %>
+    </span>
+  </h3>
 
 
   <% remaining_doses = @prescription.remaining_doses %>
   <% remaining_units = @prescription.remaining_units %>
 
   <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="rounded-lg border border-zinc-300 p-4">
-      <p class="text-xs tracking-widest text-rose-300 mb-2">
-        <span class="uppercase">
-          <%= "Dose".pluralize(remaining_doses) %> Remaining
-        </span>
-        (<%= "#{format("%g", @prescription.amount)} #{@prescription.form.name.pluralize}" %>)
-      </p>
-      <p class="text-3xl font-bold text-gray-900"><%= format("%g", remaining_doses) %></p>
-      <p class="text-xs text-gray-500 mt-1">Cmon eat them up >:3</p>
-    </div>
+    <% unless @prescription.amount == 1 %>
+      <div class="rounded-lg border border-zinc-300 p-4">
+        <p class="text-xs tracking-widest text-rose-300 mb-2">
+          <span class="uppercase">
+            <%= "Dose".pluralize(remaining_doses) %> Remaining
+          </span>
+          (<%= "#{format("%g", @prescription.amount)} #{@prescription.form.name.pluralize}" %>)
+        </p>
+        <p class="text-3xl font-bold text-gray-900"><%= format("%g", remaining_doses) %></p>
+        <p class="text-xs text-gray-500 mt-1">Cmon eat them up >:3</p>
+      </div>
+    <% end %>
 
     <div class="rounded-lg border border-zinc-300 p-4">
       <p class="text-xs uppercase tracking-widest text-rose-300 mb-2">
@@ -53,7 +49,7 @@
     <thead>
       <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
         <th class="pb-3 pr-8">Number</th>
-        <th class="pb-3 pr-8"><%= @prescription.form.name.pluralize %>/Doses in pack</th>
+        <th class="pb-3 pr-8"><%= @prescription.form.name.pluralize %></th>
         <th class="pb-3">Date</th>
       </tr>
     </thead>
@@ -62,7 +58,7 @@
         <tr class="transition-colors hover:bg-zinc-50">
           <td class="py-3 pr-8 font-medium text-zinc-800"><%= @prescription.packs.count - index %></td>
           <td class="py-3 pr-8 font-medium text-zinc-800">
-            <%= "#{pack.amount}/#{format("%g", pack.amount / @prescription.amount)}" %>
+            <%= pack.amount %>
           </td>
           <td class="my-3 font-medium text-zinc-800">
             <%= local_time(pack.aquired_at, "%B %e, %Y") %>
@@ -72,3 +68,4 @@
     </tbody>
   </table>
 </section>
+<%= render "partials/add_button", path: new_prescription_pack_path(@prescription) %>

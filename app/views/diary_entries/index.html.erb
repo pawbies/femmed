@@ -1,0 +1,83 @@
+<div class="w-full">
+  <h1 class="font-bold text-4xl">Diary</h1>
+  
+  <% nav_links = [["Home", root_path], ["Timeline", timeline_path], ["Calendar", calendar_path], ["Diary", user_diary_entries_path(Current.user)]] %>
+  <% nav_links << [ "Admin", admin_path ] if admin? %>
+  <%= render "partials/nav", links: nav_links %>
+
+  <!-- Date Navigation -->
+  <div class="flex items-center justify-between mt-8">
+    <div class="flex items-center gap-4">
+      <%= link_to "#", class: "w-10 h-10 flex items-center justify-center border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors" do %>
+        <span class="text-gray-400">←</span>
+      <% end %>
+      <h2 class="text-xl font-medium text-rose-400">March 2026</h2>
+      <%= link_to "#", class: "w-10 h-10 flex items-center justify-center border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors" do %>
+        <span class="text-gray-400">→</span>
+      <% end %>
+    </div>
+    
+    <div class="flex gap-2">
+      <%= link_to "#", class: "px-4 py-2 bg-rose-400 text-white rounded-lg font-medium text-sm" do %>
+        List
+      <% end %>
+      <%= link_to calendar_path, class: "px-4 py-2 text-gray-500 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors" do %>
+        Calendar
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Diary Entries -->
+  <div class="mt-8 space-y-4">
+    <% @diary_entries.each do |diary_entry| %>
+      <% is_today = diary_entry.entry_for.today? %>
+
+      <div class="border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+        <div class="<%= is_today ? 'bg-rose-50 border-rose-100' : 'bg-gray-50 border-gray-100' %> px-5 py-3 border-b flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="<%= is_today ? 'bg-rose-400' : 'bg-gray-400' %> text-white rounded-lg px-3 py-2 text-center min-w-[60px]">
+              <div class="text-2xl font-bold leading-none"><%= diary_entry.entry_for.day %></div>
+              <div class="text-xs uppercase tracking-wide mt-1"><%= diary_entry.entry_for.strftime("%a") %></div>
+            </div>
+            <h3 class="text-sm font-semibold <%= is_today ? 'text-rose-500' : 'text-gray-500' %> uppercase tracking-wide"><%= diary_entry.entry_for.strftime("%B %e, %Y") %></h3>
+          </div>
+          
+          <!-- Dropdown Menu -->
+          <div class="relative" data-controller="dropdown">
+            <button type="button" data-action="click->dropdown#toggle click@window->dropdown#hide" class="<%= is_today ? 'text-rose-300 hover:text-rose-400' : 'text-gray-300 hover:text-gray-400' %> transition-colors p-1">
+              ⋯
+            </button>
+            
+            <div data-dropdown-target="menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden z-10">
+              <%= link_to user_diary_entry_path(@user, diary_entry), class: "flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors" do %>
+                <span>Show</span>
+              <% end %>
+              
+              <%= link_to edit_user_diary_entry_path(@user, diary_entry), class: "flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors border-t border-gray-50" do %>
+                <span>Edit</span>
+              <% end %>
+              
+              <%= link_to user_diary_entry_path(@user, diary_entry), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this entry?" }, class: "flex items-center px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors border-t border-gray-50" do %>
+                <span>Delete</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="px-5 py-4">
+          <h4 class="font-medium text-gray-900 mb-2"><%= diary_entry.title %></h4>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            <%= truncate(diary_entry.body.to_plain_text, length: 150) %>
+          </p>
+          <div class="mt-4 flex items-center gap-2">
+            <span class="text-xs text-gray-400"><%= diary_entry.created_at.strftime("%l:%M %p") %></span>
+            <span class="text-xs text-gray-300">•</span>
+            <span class="text-xs <%= is_today ? 'text-rose-400' : 'text-gray-400' %> font-medium">Personal</span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render "partials/add_button", path: new_user_diary_entry_path(Current.user) %>
+</div>
