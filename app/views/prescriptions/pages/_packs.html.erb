@@ -1,21 +1,15 @@
 <section>
-  <div class="flex items-center justify-between">
-    <h3 class="text-2xl">
-      Packs
-      <span class="text-black/50 italic">
-        <% unless @prescription.packs.empty? %>
-          - <%= (Date.today - @prescription.packs.order(:aquired_at).last.aquired_at).to_i %>
-          days since you got the last pack
-        <% else %>
-          - Go ahead and get some
-        <% end %>
-      </span>
-    </h3>
-
-    <% if @prescription.active? %>
-      <%= link_to "Add Pack", new_prescription_pack_path(@prescription), target: "_top", class: "rounded-lg px-6 py-3 bg-rose-400 hover:bg-rose-500 text-white text-center font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200" %>
-    <% end %>
-  </div>
+  <h3 class="text-2xl">
+    Packs
+    <span class="text-black/50 italic">
+      <% unless @prescription.packs.empty? %>
+        - <%= (Date.today - @prescription.packs.order(:aquired_at).last.aquired_at).to_i %>
+        days since you got the last pack
+      <% else %>
+        - Go ahead and get some
+      <% end %>
+    </span>
+  </h3>
 
 
   <% remaining_doses = @prescription.remaining_doses %>
@@ -72,3 +66,4 @@
     </tbody>
   </table>
 </section>
+<%= render "partials/add_button", path: new_prescription_pack_path(@prescription) %>

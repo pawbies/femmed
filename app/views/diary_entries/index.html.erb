@@ -79,7 +79,5 @@
     <% end %>
   </div>
 
-  <!-- New Entry Button -->
-  <%= link_to "+", new_user_diary_entry_path(Current.user), class: "fixed bottom-8 right-8 w-14 h-14 bg-rose-400 hover:bg-rose-500 text-white rounded-full shadow-lg flex items-center justify-center text-2xl transition-colors" %>
-
+  <%= render "partials/add_button", path: new_user_diary_entry_path(Current.user) %>
 </div>
