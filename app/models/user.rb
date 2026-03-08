@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :diary_entries, dependent: :destroy
 
   has_many :side_effects, dependent: :destroy
-  has_many :symtoms, dependent: :destroy
+  has_many :symptoms, dependent: :destroy
 
   encrypts :email_address, deterministic: true
   encrypts :username
