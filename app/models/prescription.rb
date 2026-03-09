@@ -13,6 +13,8 @@ class Prescription < ApplicationRecord
 
   validates :amount, presence: true, numericality: true
   validates :active, inclusion: { in: [ true, false ] }
+  validates :preview_past, presence: true, numericality: true, comparison: { greater_than_or_equal_to: 0 }
+  validates :preview_future, presence: true, numericality: true, comparison: { greater_than_or_equal_to: 0 }
 
   def remaining_units
     total_units = packs.sum(:amount)

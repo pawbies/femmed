@@ -16,15 +16,15 @@ const peakLabel = d => {
 // Connects to data-controller="prescriptions-preview"
 export default class extends Controller {
   static targets = ["chart"]
-  static values = { ingredients: Array, releaseProfile: Object }
+  static values = { ingredients: Array, releaseProfile: Object, past: Number, future: Number }
 
   connect() {
     this.chartTarget.innerHTML = ""
     const ingredients = this.ingredientsValue
     const releaseProfile = this.releaseProfileValue
     const now = Math.floor(Date.now() / 1000)
-    const xStart = ingredients.some(i => i.doses.some(d => d.takenAt < now)) ? -24 : 0
-    const xEnd = 48
+    const xStart = this.pastValue * -1
+    const xEnd = this.futureValue
 
     const concentrationAt = (ing, t) =>
       ing.doses.reduce((sum, dose) => {
@@ -54,7 +54,7 @@ export default class extends Controller {
       }, 0)
 
     const data = ingredients.flatMap((ing, idx) =>
-      Array.from({ length: xEnd - xStart + 1 }, (_, i) => ({
+      Array.from({ length: xEnd - xStart + 2 }, (_, i) => ({
         time: xStart + i, ingredient: ing.name, concentration: concentrationAt(ing, xStart + i), color: color(ing, idx),
       }))
     )

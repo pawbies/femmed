@@ -39,7 +39,7 @@ class PrescriptionsController < ApplicationController
     end
 
     def prescription_update_params
-      params.expect(prescription: [ :amount, :active ])
+      params.expect(prescription: [ :amount, :active, :preview_past, :preview_future ])
     end
 
     def require_own_prescription

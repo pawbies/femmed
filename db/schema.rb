@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_07_155907) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_09_122928) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -178,6 +178,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_07_155907) do
     t.float "amount"
     t.datetime "created_at", null: false
     t.integer "medication_version_id", null: false
+    t.float "preview_future", default: 40.0, null: false
+    t.float "preview_past", default: 24.0, null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["medication_version_id"], name: "index_prescriptions_on_medication_version_id"

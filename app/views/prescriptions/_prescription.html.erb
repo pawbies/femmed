@@ -9,7 +9,9 @@
     end.map(&:name)
   %>
   <div class="no-js:hidden w-full bg-white border border-rose-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow <%= 'opacity-60 border-zinc-300' unless prescription.active? %>"
-      data-controller="prescriptions-preview"
+       data-controller="prescriptions-preview"
+      data-prescriptions-preview-past-value="<%= prescription.preview_past %>"
+      data-prescriptions-preview-future-value="<%= prescription.preview_future %>"
       data-prescriptions-preview-release-profile-value="<%=
       {
         name: prescription.medication.release_profile&.name || "Immediate",
