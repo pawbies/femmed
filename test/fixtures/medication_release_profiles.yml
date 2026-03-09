@@ -22,3 +22,7 @@ adderall_xr:
   medication: adderall_xr
   release_profile: extended
   release_duration: 12.0
+
+percocet:
+  medication: percocet
+  release_profile: immediate

@@ -7,12 +7,12 @@ ritalin_ir:
 ritalin_la:
   name: Ritalin LA
   labeler: infecto_pharm
-  form: tablet_extended_release
+  form: tablet
 
 concerta:
   name: Concerta
   labeler: pfizer
-  form: tablet_extended_release
+  form: tablet
 
 adderall_ir:
   name: Adderall IR
@@ -22,9 +22,8 @@ adderall_ir:
 adderall_xr:
   name: Adderall XR
   labeler: abbvie
-  form: capsule_extended_release
+  form: capsule
 
 percocet:
   name: Percocet
-  labeler: endo_pharmaceuticals
   form: tablet

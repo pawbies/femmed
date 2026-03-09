@@ -5,7 +5,7 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
     @user = users(:alice)
     @other_user = users(:bob)
     @prescription = prescriptions(:alice_ritalin_ir)
-    @other_prescription = prescriptions(:bob_wellbutrin)
+    @other_prescription = prescriptions(:bob_adderall_xr)
     @pack = packs(:alice_ritalin_ir_pack)
   end
 
