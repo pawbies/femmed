@@ -1,8 +1,9 @@
 class DosesController < ApplicationController
+  before_action :set_user
+  before_action :require_own_user
   before_action :set_prescription
-  before_action :set_dose, only: %i[ edit update destroy ]
-  before_action :require_own_prescription
   before_action :require_active_prescription
+  before_action :set_dose, only: %i[ edit update destroy ]
   before_action :require_non_empty_stash, only: %i[ new create ]
 
   def new
@@ -13,7 +14,7 @@ class DosesController < ApplicationController
     @dose = @prescription.doses.new dose_params
 
     if @dose.save
-      redirect_to @prescription, notice: "Logged it for ya ^^"
+      redirect_to user_prescription_path(@user, @prescription), notice: "Logged it for ya ^^"
     else
       render :new, status: :unprocessable_content
     end
@@ -24,7 +25,7 @@ class DosesController < ApplicationController
 
   def update
     if @dose.update dose_params
-      redirect_to @prescription, notice: "Updated #{@prescription.full_name} dose"
+      redirect_to user_prescription_path(@user, @prescription), notice: "Updated #{@prescription.full_name} dose"
     else
       render :edit, status: :unprocessable_content
     end
@@ -33,20 +34,24 @@ class DosesController < ApplicationController
   def destroy
     @dose.destroy!
 
-    redirect_to @prescription
+    redirect_to user_prescription_path(@user, @prescription)
   end
 
   private
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
     def set_prescription
-      @prescription = Prescription.find(params[:prescription_id])
+      @prescription = @user.prescriptions.find(params[:prescription_id])
     end
 
     def set_dose
       @dose = @prescription.doses.find(params[:id])
     end
 
-    def require_own_prescription
-      redirect_to root_path, alert: "Grrrrr!" unless @prescription.user.id == Current.user.id
+    def require_own_user
+      redirect_to root_path, alert: "Grrrrr!" unless @user.id == Current.user.id
     end
 
     def require_active_prescription

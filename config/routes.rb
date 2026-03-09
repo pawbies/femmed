@@ -1,14 +1,7 @@
 Rails.application.routes.draw do
   resources :settings
   resources :medications, shallow: true do
-    resources :medication_versions do
-      resources :prescriptions, only: %i[ new create ]
-    end
-  end
-
-  resources :prescriptions, except: %i[ new create ] do
-    resources :packs
-    resources :doses
+    resources :medication_versions
   end
 
   resources :active_ingredients
@@ -16,6 +9,11 @@ Rails.application.routes.draw do
   resources :categories
   resource :assistent_talks
   resources :users do
+    resources :prescriptions do
+      resources :packs
+      resources :doses
+    end
+
     resources :diary_entries
   end
   get "profile" => "users#profile"

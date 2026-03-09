@@ -3,23 +3,23 @@
 
   <turbo-frame id="prescriptions_page">
     <nav class="mt-8 mb-12 flex gap-8 border-b border-gray-200">
-      <%= link_to "Log", prescription_path(@prescription, page: "Log"),
+      <%= link_to "Log", user_prescription_path(@user, @prescription, page: "Log"),
           class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
             params[:page].nil? || params[:page] == 'Log' ? 'border-b-2 border-rose-500 text-rose-600' : ''
           }" %>
 
-      <%= link_to "Packs", prescription_path(@prescription, page: "Packs"),
+      <%= link_to "Packs", user_prescription_path(@user, @prescription, page: "Packs"),
           class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
             params[:page] == 'Packs' ? 'border-b-2 border-rose-500 text-rose-600' : ''
           }" %>
 
 
-      <%= link_to "About", prescription_path(@prescription, page: "About"),
+      <%= link_to "About", user_prescription_path(@user, @prescription, page: "About"),
           class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
             params[:page] == 'About' ? 'border-b-2 border-rose-500 text-rose-600' : ''
           }" %>
 
-      <%= link_to "Settings", prescription_path(@prescription, page: "Settings"),
+      <%= link_to "Settings", user_prescription_path(@user, @prescription, page: "Settings"),
           class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
             params[:page] == 'Settings' ? 'border-b-2 border-rose-500 text-rose-600' : ''
           }" %>

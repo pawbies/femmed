@@ -11,13 +11,13 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
 
   # new
   test "should redirect new if not authenticated" do
-    get new_prescription_pack_url(@prescription)
+    get new_user_prescription_pack_url(@user, @prescription)
     assert_redirected_to new_session_url
   end
 
   test "should get new if authenticated" do
     sign_in_as(@user)
-    get new_prescription_pack_url(@prescription)
+    get new_user_prescription_pack_url(@user, @prescription)
     assert_response :success
   end
 
@@ -25,34 +25,34 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
   test "should redirect new if inactive prescription" do
     sign_in_as(@user)
     @prescription.update! active: false
-    get new_prescription_pack_url(@prescription)
+    get new_user_prescription_pack_url(@user, @prescription)
     assert_redirected_to root_url
   end
 
   test "should not get new for another user's prescription" do
     sign_in_as(@other_user)
-    get new_prescription_pack_url(@prescription)
+    get new_user_prescription_pack_url(@user, @prescription)
     assert_redirected_to root_url
   end
 
   # create
   test "should redirect create if not authenticated" do
-    post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
+    post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     assert_redirected_to new_session_url
   end
 
   test "should create pack if authenticated" do
     sign_in_as(@user)
     assert_difference("Pack.count") do
-      post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
+      post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     end
-    assert_redirected_to prescription_url(@prescription, page: "Packs")
+    assert_redirected_to user_prescription_url(@user, @prescription, page: "Packs")
   end
 
   test "should not create pack for another user's prescription" do
     sign_in_as(@other_user)
     assert_no_difference("Pack.count") do
-      post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
+      post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     end
     assert_redirected_to root_url
   end
@@ -60,7 +60,7 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
   test "should not create pack with missing amount" do
     sign_in_as(@user)
     assert_no_difference("Pack.count") do
-      post prescription_packs_url(@prescription), params: { pack: { amount: nil, aquired_at: Date.today } }
+      post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: nil, aquired_at: Date.today } }
     end
     assert_response :unprocessable_content
   end
@@ -68,7 +68,7 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
   test "should not create pack with non-integer amount" do
     sign_in_as(@user)
     assert_no_difference("Pack.count") do
-      post prescription_packs_url(@prescription), params: { pack: { amount: "abc", aquired_at: Date.today } }
+      post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: "abc", aquired_at: Date.today } }
     end
     assert_response :unprocessable_content
   end
@@ -76,7 +76,7 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
   test "should not create pack with future date" do
     sign_in_as(@user)
     assert_no_difference("Pack.count") do
-      post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.tomorrow } }
+      post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: 30, aquired_at: Date.tomorrow } }
     end
     assert_response :unprocessable_content
   end
@@ -84,7 +84,7 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
   test "should not create pack with missing aquired_at" do
     sign_in_as(@user)
     assert_no_difference("Pack.count") do
-      post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: nil } }
+      post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: 30, aquired_at: nil } }
     end
     assert_response :unprocessable_content
   end
@@ -92,7 +92,7 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
   test "should create pack with today's date" do
     sign_in_as(@user)
     assert_difference("Pack.count") do
-      post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
+      post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     end
     assert_equal Pack.last.aquired_at, Date.today
   end
@@ -101,23 +101,22 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@user)
     past_date = 5.days.ago.to_date
     assert_difference("Pack.count") do
-      post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: past_date } }
+      post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: 30, aquired_at: past_date } }
     end
     assert_equal Pack.last.aquired_at, past_date
   end
 
   test "should render new template on validation error" do
     sign_in_as(@user)
-    post prescription_packs_url(@prescription), params: { pack: { amount: nil, aquired_at: Date.today } }
+    post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: nil, aquired_at: Date.today } }
     assert_response :unprocessable_content
   end
-
 
   test "should not create pack for inactive prescription" do
     sign_in_as(@user)
     @prescription.update! active: false
     assert_no_difference("Pack.count") do
-      post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
+      post user_prescription_packs_url(@user, @prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     end
     assert_redirected_to root_url
   end

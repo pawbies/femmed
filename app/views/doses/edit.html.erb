@@ -1,7 +1,7 @@
 <div class="w-full">
   <h1 class="font-bold text-center text-3xl">Edit <%= "#{@prescription.full_name} dose from #{@dose.taken_at.strftime("%B %e, %Y at %H:%M")}" %></h1>
 
-  <%= form_with model: [@prescription, @dose], class: "mt-10 mx-auto max-w-md",
+  <%= form_with model: [@user, @prescription, @dose], class: "mt-10 mx-auto max-w-md",
     data: { controller: "dose-form", dose_form_ingredient_doses_per_unit_value: @prescription.medication_version.medication_version_ingredients.map { |mvi| { name: mvi.active_ingredient.name, amount: mvi.amount, unit: mvi.unit } }.to_json } do |form| %>
     <% if @dose.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">

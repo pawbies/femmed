@@ -1,4 +1,4 @@
-<%= link_to prescription do %>
+<%= link_to user_prescription_path(Current.user, prescription) do %>
   <%
     mvis = prescription.medication_version.medication_version_ingredients
     unsupported = mvis.select { |m| !%w[mg g mcg].include?(m.unit) }.map do |m|

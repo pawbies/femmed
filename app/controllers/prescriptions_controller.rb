@@ -1,14 +1,14 @@
 class PrescriptionsController < ApplicationController
-  before_action :set_medication_and_medication_version,   only: :create
-  before_action :set_prescription,                      except: :create
-  before_action :require_own_prescription,              except: :create
+  before_action :set_user
+  before_action :require_own_user
+  before_action :set_prescription, except: :create
 
   def create
-    @prescription = Prescription.new(user: Current.user, amount: 1, medication_version: @medication_version, active: true)
+    @prescription = @user.prescriptions.new(**prescription_create_params, amount: 1, active: true)
     if @prescription.save
-      redirect_to @prescription, notice: "Added #{@medication.name} hehe"
+      redirect_to user_prescription_path(@user, @prescription)
     else
-      redirect_back fallback_location: @medication, alert: "Something went wrong :("
+      redirect_back fallback_location: @prescription.medication, alert: "Something went wrong :("
     end
   end
 
@@ -17,9 +17,9 @@ class PrescriptionsController < ApplicationController
 
   def update
     if @prescription.update prescription_update_params
-      redirect_to prescription_path(@prescription, page: "Settings"), notice: "Updated your prescription for ya"
+      redirect_to user_prescription_path(@user, @prescription, page: "Settings"), notice: "Updated your prescription for ya"
     else
-      redirect_to prescription_path(@prescription, page: "Settings"), alert: "Something went wrong :("
+      redirect_to user_prescription_path(@user, @prescription, page: "Settings"), alert: "Something went wrong :("
     end
   end
 
@@ -29,20 +29,23 @@ class PrescriptionsController < ApplicationController
   end
 
   private
-    def set_medication_and_medication_version
-      @medication_version = MedicationVersion.find(params[:medication_version_id])
-      @medication = @medication_version.medication
+    def set_user
+      @user = User.find(params[:user_id])
     end
 
     def set_prescription
-      @prescription = Current.user.prescriptions.find(params[:id])
+      @prescription = @user.prescriptions.find(params[:id])
+    end
+
+    def require_own_user
+      redirect_to root_path, notice: "UwU whatcha doin threre" unless @user.id == Current.user.id
+    end
+
+    def prescription_create_params
+      params.expect(prescription: [ :medication_version_id ])
     end
 
     def prescription_update_params
       params.expect(prescription: [ :amount, :active, :preview_past, :preview_future ])
-    end
-
-    def require_own_prescription
-      redirect_to root_path, alert: "Hey! That's not yours UwU" unless @prescription.user.id == Current.user.id
     end
 end
