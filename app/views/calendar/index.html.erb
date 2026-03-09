@@ -46,8 +46,14 @@
         <% (1..@date.end_of_month.day).each do |day| %>
           <% current = Date.new(@date.year, @date.month, day) %>
           <% is_today = current == Date.today %>
-          <%= link_to timeline_path(date: current), class: "aspect-square flex items-center justify-center rounded text-sm transition-colors #{is_today ? 'bg-rose-400 text-white font-semibold' : 'hover:bg-rose-50 text-gray-700 border border-rose-100'}" do %>
+          <%= link_to timeline_path(date: current), class: "relative aspect-square flex items-center justify-center rounded text-sm transition-colors #{is_today ? 'bg-rose-400 text-white font-semibold' : 'hover:bg-rose-50 text-gray-700 border border-rose-100'}" do %>
             <%= day %>
+            <% if Current.user.diary_entries.where(entry_for: current.all_day).any? %>
+              <%= image_tag "icons/book.svg", class: "aspect-square h-4 absolute right-2 bottom-2" %>
+            <% end %>
+            <% if Current.user.doses.where(taken_at: current.all_day).any? %>
+              <%= image_tag "icons/pill.svg", class: "aspect-square h-4 absolute left-2 bottom-2" %>
+            <% end %>
           <% end %>
         <% end %>
       </div>
