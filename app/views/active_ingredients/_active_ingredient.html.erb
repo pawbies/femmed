@@ -3,13 +3,14 @@
     <p class="font-medium text-gray-900 group-hover:text-rose-500 transition-colors"><%= active_ingredient.name %></p>
     <div class="flex gap-3 mt-0.5">
       <% if active_ingredient.half_life.present? %>
-        <p class="text-xs text-gray-400">t½ &nbsp;<span class="font-medium text-gray-500"><%= active_ingredient.half_life %>h</span></p>
+        <p class="text-xs text-gray-400">t½ &nbsp;<span class="font-medium text-gray-500"><%= format("%g", active_ingredient.half_life) %>h</span></p>
+        <p class="text-xs text-gray-400">ke &nbsp;<span class="font-medium text-gray-500"><%= format("%g", (Math.log(2)/active_ingredient.half_life).round(2)) %>/h</span></p>
       <% end %>
       <% if active_ingredient.absorption_rate.present? %>
-        <p class="text-xs text-gray-400">ka &nbsp;<span class="font-medium text-gray-500"><%= active_ingredient.absorption_rate %>/h</span></p>
+        <p class="text-xs text-gray-400">ka &nbsp;<span class="font-medium text-gray-500"><%= format("%g", active_ingredient.absorption_rate) %>/h</span></p>
       <% end %>
       <% if active_ingredient.volume_of_distribution.present? %>
-        <p class="text-xs text-gray-400">Vd &nbsp;<span class="font-medium text-gray-500"><%= active_ingredient.volume_of_distribution %>L</span></p>
+        <p class="text-xs text-gray-400">Vd &nbsp;<span class="font-medium text-gray-500"><%= format("%g", active_ingredient.volume_of_distribution) %>L</span></p>
       <% end %>
     </div>
   </div>
