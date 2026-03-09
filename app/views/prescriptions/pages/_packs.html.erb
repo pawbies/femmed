@@ -50,7 +50,12 @@
       <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
         <th class="pb-3 pr-8">Number</th>
         <th class="pb-3 pr-8"><%= @prescription.form.name.pluralize %></th>
-        <th class="pb-3">Date</th>
+        <% if @prescription.active? %>
+          <th class="pb-3 pr-8">Date</th>
+          <th class="pb-3">Edit</th>
+        <% else %>
+          <th class="pb-3">Date</th>
+        <% end %>
       </tr>
     </thead>
     <tbody class="divide-y divide-zinc-100">
@@ -63,6 +68,18 @@
           <td class="my-3 font-medium text-zinc-800">
             <%= local_time(pack.aquired_at, "%B %e, %Y") %>
           </td>
+          <% if @prescription.active? %>
+            <td>
+              <div class="flex">
+                <%= link_to edit_user_prescription_pack_path(@user, @prescription, pack), target: "_top", class: "mx-1" do %>
+                <%= image_tag "icons/edit.svg", class: "aspect-squre h-[1.5em]" %>
+                <% end %>
+                <%= button_to user_prescription_pack_path(@user, @prescription, pack), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "mx-1" do %>
+                  <%= image_tag "icons/delete.svg", class: "aspect-square h-[1.5em]" %>
+                <% end %>
+              </div>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

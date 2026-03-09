@@ -2,6 +2,7 @@ class PacksController < ApplicationController
   before_action :set_user
   before_action :require_own_user
   before_action :set_prescription
+  before_action :set_pack, except: %i[ new create ]
   before_action :require_active_prescription
 
   def new
@@ -18,12 +19,27 @@ class PacksController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @pack.update pack_params
+      redirect_to user_prescription_path(@user, @prescription, page: "Packs")
+    else
+      render :edit, status: :unprocessable_content
+    end
+  end
+
+  def destroy
+    @pack.destroy!
+    redirect_to user_prescription_path(@user, @prescription, page: "Packs")
+  end
+
   private
 
     def set_user
       @user = User.find(params[:user_id])
     end
-
 
     def require_own_user
       redirect_to root_path, alert: "Grrrrr!" unless @user.id == Current.user.id
@@ -31,6 +47,10 @@ class PacksController < ApplicationController
 
     def set_prescription
       @prescription = @user.prescriptions.find(params[:prescription_id])
+    end
+
+    def set_pack
+      @pack = @prescription.packs.find(params[:id])
     end
 
     def require_active_prescription
