@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+alice_morning_thoughts:
   user: alice
-  title: MyString
+  title: Morning thoughts
   entry_for: 2026-03-07 16:59:07
 
-two:
+alice_evening_thoughts:
   user: alice
-  title: MyString
+  title: Evening thoughts
   entry_for: 2026-03-07 16:59:07
