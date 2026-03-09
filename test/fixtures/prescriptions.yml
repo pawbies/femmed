@@ -3,54 +3,9 @@
 alice_ritalin_ir:
   user: alice
   medication_version: ritalin_ir_10mg
-  amount: 10
-
-alice_lexapro:
-  user: alice
-  medication_version: lexapro_10mg
-  amount: 10
+  amount: 1
 
 bob_adderall_xr:
   user: bob
   medication_version: adderall_xr_20mg
   amount: 20
-
-bob_wellbutrin:
-  user: bob
-  medication_version: wellbutrin_xl_150mg
-  amount: 150
-
-carol_estradot:
-  user: carol
-  medication_version: estradot_100mcg
-  amount: 100
-
-carol_progestan:
-  user: carol
-  medication_version: progestan_200mg
-  amount: 200
-
-carol_aldactone:
-  user: carol
-  medication_version: aldactone_100mg
-  amount: 100
-
-david_synthroid:
-  user: david
-  medication_version: synthroid_75mcg
-  amount: 75
-
-david_prozac:
-  user: david
-  medication_version: prozac_20mg
-  amount: 20
-
-eva_concerta:
-  user: eva
-  medication_version: concerta_36mg
-  amount: 36
-
-eva_zoloft:
-  user: eva
-  medication_version: zoloft_50mg
-  amount: 50

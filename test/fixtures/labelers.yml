@@ -6,14 +6,8 @@ pfizer:
 teva:
   name: Teva Pharmaceuticals
 
-sandoz:
-  name: Sandoz
-
 abbvie:
   name: AbbVie
-
-dr_reddys:
-  name: Dr. Reddy's Laboratories
 
 infecto_pharm:
   name: InfectoPharm

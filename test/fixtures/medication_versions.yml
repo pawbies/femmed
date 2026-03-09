@@ -59,93 +59,15 @@ adderall_xr_30mg:
   medication: adderall_xr
   added_name: 30mg
 
-zoloft_25mg:
-  medication: zoloft
-  added_name: 25mg
-zoloft_50mg:
-  medication: zoloft
-  added_name: 50mg
-zoloft_100mg:
-  medication: zoloft
-  added_name: 100mg
-
-lexapro_5mg:
-  medication: lexapro
-  added_name: 5mg
-lexapro_10mg:
-  medication: lexapro
-  added_name: 10mg
-lexapro_20mg:
-  medication: lexapro
-  added_name: 20mg
-
-wellbutrin_xl_150mg:
-  medication: wellbutrin_xl
-  added_name: 150mg
-wellbutrin_xl_300mg:
-  medication: wellbutrin_xl
-  added_name: 300mg
-
-prozac_10mg:
-  medication: prozac
-  added_name: 10mg
-prozac_20mg:
-  medication: prozac
-  added_name: 20mg
-prozac_40mg:
-  medication: prozac
-  added_name: 40mg
-
-aldactone_25mg:
-  medication: aldactone
-  added_name: 25mg
-aldactone_50mg:
-  medication: aldactone
-  added_name: 50mg
-aldactone_100mg:
-  medication: aldactone
-  added_name: 100mg
-
-synthroid_25mcg:
-  medication: synthroid
-  added_name: 25mcg
-synthroid_50mcg:
-  medication: synthroid
-  added_name: 50mcg
-synthroid_75mcg:
-  medication: synthroid
-  added_name: 75mcg
-synthroid_100mcg:
-  medication: synthroid
-  added_name: 100mcg
-synthroid_125mcg:
-  medication: synthroid
-  added_name: 125mcg
-
-estradot_25mcg:
-  medication: estradot
-  added_name: 25mcg/24h
-estradot_50mcg:
-  medication: estradot
-  added_name: 50mcg/24h
-estradot_75mcg:
-  medication: estradot
-  added_name: 75mcg/24h
-estradot_100mcg:
-  medication: estradot
-  added_name: 100mcg/24h
-
-progestan_100mg:
-  medication: progestan
-  added_name: 100mg
-progestan_200mg:
-  medication: progestan
-  added_name: 200mg
-
-propecia_1mg:
-  medication: propecia
-  added_name: 1mg
-
-casodex_50mg:
-  medication: casodex
-  added_name: 50mg
+percocet_2_5mg:
+  medication: percocet
+  added_name: 2.5/325mg
+percocet_5mg:
+  medication: percocet
+  added_name: 5/325mg
+percocet_7_5mg:
+  medication: percocet
+  added_name: 7.5/325mg
+percocet_10mg:
+  medication: percocet
+  added_name: 10/325mg

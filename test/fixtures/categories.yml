@@ -2,13 +2,3 @@
 
 stimulants:
   name: Stimulants
-antidepressants:
-  name: Antidepressants
-ssris:
-  name: SSRIs
-hormones:
-  name: Hormones
-antiandrogens:
-  name: Antiandrogens
-thyroid_medications:
-  name: Thyroid medications

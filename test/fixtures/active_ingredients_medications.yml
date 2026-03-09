@@ -20,42 +20,10 @@ adderall_xr_amphetamine:
   medication_id: <%= ActiveRecord::FixtureSet.identify(:adderall_xr) %>
   active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:amphetamine) %>
 
-zoloft_sertraline:
-  medication_id: <%= ActiveRecord::FixtureSet.identify(:zoloft) %>
-  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:sertraline) %>
+percocet_oxycodone:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:percocet) %>
+  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:oxycodone) %>
 
-lexapro_escitalopram:
-  medication_id: <%= ActiveRecord::FixtureSet.identify(:lexapro) %>
-  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:escitalopram) %>
-
-wellbutrin_xl_bupropion:
-  medication_id: <%= ActiveRecord::FixtureSet.identify(:wellbutrin_xl) %>
-  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:bupropion) %>
-
-prozac_fluoxetine:
-  medication_id: <%= ActiveRecord::FixtureSet.identify(:prozac) %>
-  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:fluoxetine) %>
-
-aldactone_spironolactone:
-  medication_id: <%= ActiveRecord::FixtureSet.identify(:aldactone) %>
-  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:spironolactone) %>
-
-synthroid_levothyroxine:
-  medication_id: <%= ActiveRecord::FixtureSet.identify(:synthroid) %>
-  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:levothyroxine) %>
-
-estradot_estradiol:
-  medication_id: <%= ActiveRecord::FixtureSet.identify(:estradot) %>
-  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:estradiol) %>
-
-progestan_progesterone:
-  medication_id: <%= ActiveRecord::FixtureSet.identify(:progestan) %>
-  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:progesterone) %>
-
-propecia_finasteride:
-  medication_id: <%= ActiveRecord::FixtureSet.identify(:propecia) %>
-  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:finasteride) %>
-
-casodex_bicalutamide:
-  medication_id: <%= ActiveRecord::FixtureSet.identify(:casodex) %>
-  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:bicalutamide) %>
+percocet_acetaminophen:
+  medication_id: <%= ActiveRecord::FixtureSet.identify(:percocet) %>
+  active_ingredient_id: <%= ActiveRecord::FixtureSet.identify(:acetaminophen) %>

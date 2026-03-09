@@ -15,18 +15,3 @@ bob:
   email_address: bob@example.com
   password_digest: <%= password_digest %>
   username: bob
-
-carol:
-  email_address: carol@example.com
-  password_digest: <%= password_digest %>
-  username: carol
-
-david:
-  email_address: david@example.com
-  password_digest: <%= password_digest %>
-  username: david
-
-eva:
-  email_address: eva@example.com
-  password_digest: <%= password_digest %>
-  username: eva

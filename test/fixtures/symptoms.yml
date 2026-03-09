@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+alice_inattention:
   user: alice
-  name: MyString
+  name: Inattention
 
-two:
-  user: alice
-  name: MyString
+bob_drug_abuse:
+  user: bob
+  name: drug_abuse

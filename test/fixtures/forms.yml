@@ -4,13 +4,5 @@ tablet:
   name: Tablet
 capsule:
   name: Capsule
-tablet_extended_release:
-  name: Extended-release tablet
-capsule_extended_release:
-  name: Extended-release capsule
-solution_oral:
-  name: Oral solution
 injection:
   name: Injection
-patch:
-  name: Transdermal patch

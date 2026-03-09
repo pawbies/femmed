@@ -1,13 +1,153 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+ritalin_ir_5mg_methylphenidate:
   medication_version: ritalin_ir_5mg
   active_ingredient: methylphenidate
-  amount: 1.5
-  unit: 1
+  amount: 5
+  unit: mg
 
-two:
+ritalin_ir_10mg_methylphenidate:
   medication_version: ritalin_ir_10mg
   active_ingredient: methylphenidate
-  amount: 1.5
-  unit: 1
+  amount: 10
+  unit: mg
+
+ritalin_ir_20mg_methylphenidate:
+  medication_version: ritalin_ir_20mg
+  active_ingredient: methylphenidate
+  amount: 20
+  unit: mg
+
+ritalin_la_20mg_methylphenidate:
+  medication_version: ritalin_la_20mg
+  active_ingredient: methylphenidate
+  amount: 20
+  unit: mg
+
+ritalin_la_30mg_methylphenidate:
+  medication_version: ritalin_la_30mg
+  active_ingredient: methylphenidate
+  amount: 30
+  unit: mg
+
+ritalin_la_40mg_methylphenidate:
+  medication_version: ritalin_la_40mg
+  active_ingredient: methylphenidate
+  amount: 40
+  unit: mg
+
+concerta_18mg_methylphenidate:
+  medication_version: concerta_18mg
+  active_ingredient: methylphenidate
+  amount: 18
+  unit: mg
+
+concerta_27mg_methylphenidate:
+  medication_version: concerta_27mg
+  active_ingredient: methylphenidate
+  amount: 27
+  unit: mg
+
+concerta_36mg_methylphenidate:
+  medication_version: concerta_36mg
+  active_ingredient: methylphenidate
+  amount: 36
+  unit: mg
+
+concerta_54mg_methylphenidate:
+  medication_version: concerta_54mg
+  active_ingredient: methylphenidate
+  amount: 54
+  unit: mg
+
+adderall_ir_5mg_amphetamine:
+  medication_version: adderall_ir_5mg
+  active_ingredient: amphetamine
+  amount: 5
+  unit: mg
+
+adderall_ir_10mg_amphetamine:
+  medication_version: adderall_ir_10mg
+  active_ingredient: amphetamine
+  amount: 10
+  unit: mg
+
+adderall_ir_20mg_amphetamine:
+  medication_version: adderall_ir_20mg
+  active_ingredient: amphetamine
+  amount: 20
+  unit: mg
+
+adderall_ir_30mg_amphetamine:
+  medication_version: adderall_ir_30mg
+  active_ingredient: amphetamine
+  amount: 30
+  unit: mg
+
+adderall_xr_5mg_amphetamine:
+  medication_version: adderall_xr_5mg
+  active_ingredient: amphetamine
+  amount: 5
+  unit: mg
+
+adderall_xr_10mg_amphetamine:
+  medication_version: adderall_xr_10mg
+  active_ingredient: amphetamine
+  amount: 10
+  unit: mg
+
+adderall_xr_20mg_amphetamine:
+  medication_version: adderall_xr_20mg
+  active_ingredient: amphetamine
+  amount: 20
+  unit: mg
+
+adderall_xr_30mg_amphetamine:
+  medication_version: adderall_xr_30mg
+  active_ingredient: amphetamine
+  amount: 30
+  unit: mg
+
+percocet_2_5mg_oxycodone:
+  medication_version: percocet_2_5mg
+  active_ingredient: oxycodone
+  amount: 2.5
+  unit: mg
+percocet_2_5mg_acetaminophen:
+  medication_version: percocet_2_5mg
+  active_ingredient: acetaminophen
+  amount: 325
+  unit: mg
+
+percocet_5mg_oxycodone:
+  medication_version: percocet_5mg
+  active_ingredient: oxycodone
+  amount: 5
+  unit: mg
+percocet_5mg_acetaminophen:
+  medication_version: percocet_5mg
+  active_ingredient: acetaminophen
+  amount: 325
+  unit: mg
+
+percocet_7_5mg_oxycodone:
+  medication_version: percocet_7_5mg
+  active_ingredient: oxycodone
+  amount: 7.5
+  unit: mg
+percocet_7_5mg_acetaminophen:
+  medication_version: percocet_7_5mg
+  active_ingredient: acetaminophen
+  amount: 325
+  unit: mg
+
+percocet_10mg_oxycodone:
+  medication_version: percocet_10mg
+  active_ingredient: oxycodone
+  amount: 10
+  unit: mg
+percocet_10mg_acetaminophen:
+  medication_version: percocet_10mg
+  active_ingredient: acetaminophen
+  amount: 325
+  unit: mg
