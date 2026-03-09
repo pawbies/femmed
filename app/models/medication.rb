@@ -16,4 +16,6 @@ class Medication < ApplicationRecord
   has_and_belongs_to_many :categories
 
   validates :name, presence: true
+  validates :medication_release_profile, presence: true
+  validates :form, presence: true
 end
