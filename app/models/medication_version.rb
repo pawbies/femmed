@@ -4,6 +4,7 @@ class MedicationVersion < ApplicationRecord
   has_many :prescriptions, dependent: :destroy
   has_many :medication_version_ingredients, dependent: :destroy
   has_many :active_ingredients, through: :medication_version_ingredients
+  has_many :pk_compatible_ingredients, -> { pk_compatible }, class_name: "MedicationVersionIngredient"
 
   accepts_nested_attributes_for :medication_version_ingredients
 
@@ -13,5 +14,9 @@ class MedicationVersion < ApplicationRecord
 
   def full_name
     "#{medication.name} #{added_name}"
+  end
+
+  def available_for_pk?
+    pk_compatible_ingredients.none?
   end
 end

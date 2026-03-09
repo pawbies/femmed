@@ -93,17 +93,17 @@
                 <span class="font-medium text-zinc-700"><%= ingredient.name %></span>
                 <% if ingredient.half_life.present? %>
                   <span class="text-zinc-400">·</span>
-                  <span>t½ <%= ingredient.half_life %>h</span>
+                  <span>t½ <%= format("%g", ingredient.half_life) %>h</span>
                   <span class="text-zinc-400">·</span>
                   <span>ke <%= (Math.log(2)/ingredient.half_life).round(2) %>h⁻¹</span>
                 <% end %>
                 <% if ingredient.absorption_rate.present? %>
                   <span class="text-zinc-400">·</span>
-                  <span>ka <%= ingredient.absorption_rate %>h⁻¹</span>
+                  <span>ka <%= format("%g", ingredient.absorption_rate) %>h⁻¹</span>
                 <% end %>
                 <% if ingredient.volume_of_distribution.present? %>
                   <span class="text-zinc-400">·</span>
-                  <span>Vd <%= ingredient.volume_of_distribution %>L</span>
+                  <span>Vd <%= format("%g", ingredient.volume_of_distribution) %>L</span>
                 <% end %>
                 <% unless mvi.available_for_pk? %>
                   <span class="text-zinc-400">·</span>

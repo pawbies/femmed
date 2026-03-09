@@ -16,19 +16,27 @@ const peakLabel = d => {
 // Connects to data-controller="prescriptions-preview"
 export default class extends Controller {
   static targets = ["chart"]
-  static values = { ingredients: Array, releaseProfile: Object, past: Number, future: Number }
+  static values = {
+    ingredients: Array,
+    doses: Array,
+    releaseProfile: Object,
+    past: Number,
+    future: Number
+  }
 
   connect() {
     this.chartTarget.innerHTML = ""
     const ingredients = this.ingredientsValue
+    const doses = this.dosesValue
     const releaseProfile = this.releaseProfileValue
     const now = Math.floor(Date.now() / 1000)
     const xStart = this.pastValue * -1
     const xEnd = this.futureValue
 
     const concentrationAt = (ing, t) =>
-      ing.doses.reduce((sum, dose) => {
+      doses.reduce((sum, dose) => {
         const elapsed = (now + t * 3600 - dose.takenAt) / 3600
+        const amount = ing.amount * dose.amount
         if (elapsed < 0) return sum
         const _ke = ke(ing), ka = ing.absorptionRate, vd = ing.volumeOfDistribution
         if (Math.abs(ka - _ke) < 0.0001) return sum
@@ -36,7 +44,7 @@ export default class extends Controller {
         const pulse = (offset) => {
           const e = elapsed - offset
           if (e < 0) return 0
-          return Math.max(0, (dose.amount / vd) * (ka / (ka - _ke)) * (Math.exp(-_ke * e) - Math.exp(-ka * e)))
+          return Math.max(0, (amount / vd) * (ka / (ka - _ke)) * (Math.exp(-_ke * e) - Math.exp(-ka * e)))
         }
 
         if (releaseProfile.name === "Bimodal") return sum + pulse(0) + pulse(releaseProfile.delay)
