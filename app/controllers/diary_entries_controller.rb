@@ -29,13 +29,22 @@ class DiaryEntriesController < ApplicationController
     @diary_entry = @user.diary_entries.new diary_entry_params
 
     if @diary_entry.save
-      redirect_to user_diary_entries_path
+      redirect_to edit_user_diary_entry_path(@user, @diary_entry)
     else
       render :new, status: :unprocessable_content
     end
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
   end
 
   private

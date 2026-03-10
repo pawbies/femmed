@@ -1,0 +1,43 @@
+<div class="w-full max-w-2xl mx-auto">
+  <%= link_to user_diary_entries_path(@user), class: "inline-flex items-center gap-2 text-sm text-gray-400 hover:text-gray-600 transition-colors" do %>
+    <span>←</span>
+    <span><%= @diary_entry.entry_for.strftime("%B %Y") %></span>
+  <% end %>
+
+  <% is_today = @diary_entry.entry_for.today? %>
+
+  <div class="mt-8">
+    <div class="flex items-center gap-3 mb-1">
+      <span class="text-sm font-medium <%= is_today ? 'text-rose-400' : 'text-gray-400' %> uppercase tracking-wide">
+        <%= @diary_entry.entry_for.strftime("%A, %B %e, %Y") %>
+      </span>
+    </div>
+
+    <div class="flex flex-row justify-between">
+      <h1 class="text-3xl font-bold text-gray-900"><%= @diary_entry.title %></h1>
+
+      <div class="flex items-center gap-2">
+        <%= link_to edit_user_diary_entry_path(@user, @diary_entry), class: "inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300 transition-colors" do %>
+          <%= image_tag "icons/edit.svg", class: "h-4 w-4" %>
+        <% end %>
+        <%= button_to user_diary_entry_path(@user, @diary_entry), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 bg-white hover:bg-rose-50 hover:border-rose-300 transition-colors cursor-pointer" do %>
+          <%= image_tag "icons/delete.svg", class: "h-4 w-4" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 mt-2 mb-8">
+      <span class="text-xs text-gray-400"><%= @diary_entry.created_at.strftime("%l:%M %p") %></span>
+      <span class="text-xs text-gray-300">•</span>
+      <span class="text-xs <%= is_today ? 'text-rose-400' : 'text-gray-400' %> font-medium">Personal</span>
+      <% if @diary_entry.updated_at.to_i != @diary_entry.created_at.to_i %>
+        <span class="text-xs text-gray-300">•</span>
+        <span class="text-xs text-gray-400">Edited <%= @diary_entry.updated_at.strftime("%b %e at %l:%M %p") %></span>
+      <% end %>
+    </div>
+
+    <div class="prose prose-gray prose-sm max-w-none text-gray-700 leading-relaxed">
+      <%= @diary_entry.body %>
+    </div>
+  </div>
+</div>
