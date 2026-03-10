@@ -1,5 +1,6 @@
 class DiaryEntriesController < ApplicationController
   before_action :set_user
+  before_action :require_own_user
   before_action :set_diary_entry, except: %i[ index new create ]
 
   def index
@@ -63,6 +64,10 @@ class DiaryEntriesController < ApplicationController
 
     def set_user
       @user = User.find(params[:user_id])
+    end
+
+    def require_own_user
+      redirect_to root_path, alert: "Am angwy" unless @user.id == Current.user.id
     end
 
     def set_diary_entry

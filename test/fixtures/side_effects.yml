@@ -1,9 +1,4 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-alice_headaches:
-  user: alice
-  name: Headaches
-
-bob_death:
-  user: bob
-  name: Death
+headache:
+  name: Headache

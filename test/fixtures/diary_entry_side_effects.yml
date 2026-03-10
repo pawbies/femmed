@@ -1,7 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-alice_morning_thoughts_headaches:
+alice_headache:
   diary_entry: alice_morning_thoughts
-  side_effect: alice_headaches
-  severity: Severe
-
+  side_effect: headache
+  severity: Mild

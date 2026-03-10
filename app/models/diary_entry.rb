@@ -1,10 +1,12 @@
 class DiaryEntry < ApplicationRecord
   belongs_to :user
-  has_rich_text :body
+  has_rich_text :body, encrypted: true
 
   has_many :diary_entry_side_effects, dependent: :destroy
   has_many :side_effects, through: :diary_entry_side_effects
 
   validates :title, presence: true
   validates :entry_for, presence: true
+
+  encrypts :title
 end

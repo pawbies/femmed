@@ -1,18 +1,27 @@
 <%= form_with model: [ user, diary_entry, DiaryEntrySideEffect.new ],
       class: "border border-gray-100 rounded-2xl overflow-hidden shadow-sm" do |form| %>
-
-  <div class="px-5 py-4 space-y-4">
-    <div class="grid grid-cols-2 gap-3">
+  <div class="px-5 py-4 space-y-3">
+    <div data-controller="new-option" class="space-y-3">
       <%= form.select :side_effect_id,
-        SideEffect.all.order(:name).map { |s| [s.name, s.id] },
+            SideEffect.all.order(:name).map { |s| [s.name, s.id] } + [["+ Create new...", "new"]],
             { include_blank: "Select a side effect" },
-            { required: true, class: "col-span-1 border border-rose-200 bg-rose-50 rounded-xl px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300 w-full" } %>
+            { required: true,
+              data: { action: "change->new-option#toggle", "new-option-target": "select" },
+              class: "border border-rose-200 bg-rose-50 rounded-xl px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300 w-full" } %>
 
-      <%= form.select :severity,
-            DiaryEntrySideEffect.severities.map { |name, _| [name.capitalize, name] },
-            { include_blank: "Select severity" },
-            { required: true, class: "col-span-1 border border-rose-200 bg-rose-50 rounded-xl px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300 w-full" } %>
+      <div data-new-option-target="field" class="hidden">
+        <%= form.fields_for :side_effect, SideEffect.new do |se_form| %>
+          <%= se_form.text_field :name,
+                placeholder: "Name your side effect",
+                class: "border border-rose-300 bg-rose-50 rounded-xl px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300 w-full" %>
+        <% end %>
+      </div>
     </div>
+
+    <%= form.select :severity,
+          DiaryEntrySideEffect.severities.map { |name, _| [name.capitalize, name] },
+          { include_blank: "Select severity" },
+          { required: true, class: "border border-rose-200 bg-rose-50 rounded-xl px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300 w-full" } %>
 
     <%= form.rich_textarea :notes,
           placeholder: "Anything else you wanna share?",
@@ -23,5 +32,4 @@
     <%= form.submit "Add side effect",
           class: "px-4 py-2 bg-rose-400 hover:bg-rose-500 text-white text-sm font-medium rounded-lg cursor-pointer transition-colors" %>
   </div>
-
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_10_153451) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_10_171216) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -209,8 +209,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_153451) do
     t.datetime "created_at", null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_side_effects_on_user_id"
   end
 
   create_table "symptoms", force: :cascade do |t|
@@ -250,6 +248,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_153451) do
   add_foreign_key "prescriptions", "medication_versions"
   add_foreign_key "prescriptions", "users"
   add_foreign_key "sessions", "users"
-  add_foreign_key "side_effects", "users"
   add_foreign_key "symptoms", "users"
 end
