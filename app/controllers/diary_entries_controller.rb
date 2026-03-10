@@ -29,7 +29,7 @@ class DiaryEntriesController < ApplicationController
     @diary_entry = @user.diary_entries.new diary_entry_params
 
     if @diary_entry.save
-      redirect_to edit_user_diary_entry_path(@user, @diary_entry)
+      redirect_to user_diary_entry_path(@user, @diary_entry)
     else
       render :new, status: :unprocessable_content
     end
@@ -39,12 +39,21 @@ class DiaryEntriesController < ApplicationController
   end
 
   def edit
+    @diary_entry.diary_entry_side_effects.build
   end
 
   def update
+    if @diary_entry.update diary_entry_params
+      redirect_to user_diary_entry_path(@user, @diary_entry)
+    else
+      render :edit, status: :unprocessable_content
+    end
   end
 
   def destroy
+    @diary_entry.destroy!
+
+    redirect_to user_diary_entries_path(@user)
   end
 
   private

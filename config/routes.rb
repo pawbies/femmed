@@ -14,7 +14,9 @@ Rails.application.routes.draw do
       resources :doses
     end
 
-    resources :diary_entries
+    resources :diary_entries do
+      resources :diary_entry_side_effects
+    end
   end
   get "profile" => "users#profile"
   resource :session

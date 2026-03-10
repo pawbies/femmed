@@ -1,11 +1,11 @@
 <div class="w-full">
-  <h1 class="font-bold text-3xl text-center">Do you wanna add any side effects?</h1>
+  <h1 class="font-bold text-3xl text-center">Edit <%= @diary_entry.title %></h1>
 
-  <%= form_with model: [ @user, @diary_entry ], class: "mt-10 mx-auto max-w-lg" do |form| %>
+  <%= form_with model: [ Current.user, @diary_entry ], class: "mt-10 mx-auto max-w-lg" do |form| %>
     <% if @diary_entry.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">
-          <%= pluralize(@diary_entry.errors.count, "error") %> prohibited this entry from being saved:
+          <%= pluralize(@diary_entry.errors.count, "error") %> prohibited this entry from being updated:
         </h4>
         <ul class="list-disc list-inside text-red-800 space-y-1">
           <% @diary_entry.errors.full_messages.each do |error| %>
@@ -15,12 +15,29 @@
       </div>
     <% end %>
 
-    <div class="mt-8 flex justify-center gap-3">
-      <%= form.submit "Add more?",
-        class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
-      <%= link_to "Maybe another time", user_diary_entry_path(@user, @diary_entry),
+    <div class="my-5">
+      <%= form.text_field :title,
+        placeholder: "Entry title",
+        required: true,
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.rich_textarea :body,
+        placeholder: "Tell me how you're feeling",
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full min-h-32 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.datetime_field :entry_for,
+        placeholder: "For when is this entry",
+        required: true,
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+    </div>
+
+    <div class="mt-8 flex justify-center">
+      <%= form.submit "Done?",
         class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
     </div>
   <% end %>
-
 </div>
