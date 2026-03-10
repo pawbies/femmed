@@ -2,6 +2,11 @@ class MedicationsController < ApplicationController
   before_action :set_medication, except: %i[ new create ]
   before_action :require_admin,  except: :show
 
+  content_security_policy only: :show do |policy|
+    policy.style_src :self, :https, :unsafe_inline
+  end
+  before_action :diable_css_nonce, only: :show
+
   def new
     @medication = Medication.new
     @medication.build_medication_release_profile
@@ -41,6 +46,10 @@ class MedicationsController < ApplicationController
   private
     def set_medication
       @medication = Medication.find(params[:id])
+    end
+
+    def diable_css_nonce
+     request.content_security_policy_nonce_directives = %w[script-src]
     end
 
     def medication_params

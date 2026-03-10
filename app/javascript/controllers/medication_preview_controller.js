@@ -17,7 +17,7 @@ const peakLabel = d => {
 
 // Connects to data-controller="medication-preview"
 export default class extends Controller {
-  static targets = ["chart"]
+  static targets = ["chart", "form"]
   static values = { ingredients: Array, releaseProfile: Object }
 
   connect() {
@@ -112,5 +112,9 @@ export default class extends Controller {
       .forEach(el => { el.style.stroke = "#e2e8f0"; el.style.strokeWidth = "1" })
 
     this.chartTarget.append(chart)
+  }
+
+  update() {
+    this.formTarget.requestSubmit()
   }
 }

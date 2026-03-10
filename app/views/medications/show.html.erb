@@ -65,12 +65,12 @@
           <div class="px-5 pt-5 pb-3 flex items-start justify-between">
             <div>
               <p class="text-xs font-semibold uppercase tracking-widest text-rose-300 mb-1">Pharmacokinetics</p>
-              <%= form_with url: medication_path(@medication), method: :get, data: { turbo_frame: "graph" }, class: "mt-5" do |f| %>
+              <%= form_with url: medication_path(@medication), id: "version_form", method: :get, data: { turbo_frame: "graph", medication_preview_target: "form" }, class: "mt-5" do |f| %>
                 <%= f.select :medication_version_id,
                       @medication.versions.map { |v| [v.added_name, v.id] },
                       { selected: @medication_version.id },
                       {
-                        onchange: "this.form.requestSubmit()",
+                        data: { action: "change->medication-preview#update" },
                         class: "text-lg font-semibold text-zinc-800 bg-transparent border-none outline-none cursor-pointer hover:text-rose-400 transition-colors"
                       } %>
                 <noscript>
