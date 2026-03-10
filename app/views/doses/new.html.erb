@@ -1,8 +1,10 @@
 <div class="w-full">
   <h1 class="font-bold text-center text-3xl">New dose of <%= @prescription.full_name %></h1>
-  <p class="text-center text-xl text-zinc-500">
-    <%= "#{format("%g", @prescription.remaining_units)} #{@prescription.form.name.pluralize(@prescription.remaining_units)}" %> remaining
-  </p>
+  <% if @prescription.pack_tracking_enabled? %>
+    <p class="text-center text-xl text-zinc-500">
+      <%= "#{format("%g", @prescription.remaining_units)} #{@prescription.form.name.pluralize(@prescription.remaining_units)}" %> remaining
+    </p>
+  <% end %>
 
   <%= form_with model: [@user, @prescription, @dose], class: "mt-10 mx-auto max-w-md",
     data: { controller: "dose-form", dose_form_ingredient_doses_per_unit_value: @prescription.medication_version.medication_version_ingredients.map { |mvi| { name: mvi.active_ingredient.name, amount: mvi.amount, unit: mvi.unit } }.to_json } do |form| %>

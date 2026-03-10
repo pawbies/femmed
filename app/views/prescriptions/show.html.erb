@@ -8,10 +8,12 @@
             params[:page].nil? || params[:page] == 'Log' ? 'border-b-2 border-rose-500 text-rose-600' : ''
           }" %>
 
-      <%= link_to "Packs", user_prescription_path(@user, @prescription, page: "Packs"),
-          class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
-            params[:page] == 'Packs' ? 'border-b-2 border-rose-500 text-rose-600' : ''
-          }" %>
+      <% if @prescription.pack_tracking_enabled? %>
+        <%= link_to "Packs", user_prescription_path(@user, @prescription, page: "Packs"),
+            class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
+              params[:page] == 'Packs' ? 'border-b-2 border-rose-500 text-rose-600' : ''
+            }" %>
+      <% end %>
 
 
       <%= link_to "About", user_prescription_path(@user, @prescription, page: "About"),

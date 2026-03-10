@@ -59,7 +59,7 @@ class DosesController < ApplicationController
     end
 
     def require_non_empty_stash
-      unless @prescription.remaining_units > 0
+      unless !@prescription.pack_tracking_enabled? || @prescription.remaining_units > 0
         redirect_back fallback_location: @prescription, notice: "You don't have anything to take cutie >.<"
       end
     end

@@ -46,6 +46,6 @@ class PrescriptionsController < ApplicationController
     end
 
     def prescription_update_params
-      params.expect(prescription: [ :amount, :active, :preview_past, :preview_future ])
+      params.expect(prescription: [ :amount, :active, :pack_tracking_enabled, :preview_past, :preview_future ])
     end
 end

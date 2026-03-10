@@ -4,6 +4,7 @@ class PacksController < ApplicationController
   before_action :set_prescription
   before_action :set_pack, except: %i[ new create ]
   before_action :require_active_prescription
+  before_action :require_pack_tracking_enabled
 
   def new
     @pack = @prescription.packs.new(aquired_at: Date.today)
@@ -55,6 +56,10 @@ class PacksController < ApplicationController
 
     def require_active_prescription
       redirect_back fallback_location: root_path, notice: "This requires an active prescription" unless @prescription.active?
+    end
+
+    def require_pack_tracking_enabled
+      redirect_back fallback_location: root_path, notice: "This requires the pack tracking feature" unless @prescription.pack_tracking_enabled?
     end
 
     def pack_params
