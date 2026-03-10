@@ -3,7 +3,7 @@
   <div class="px-5 py-4 space-y-3">
     <div data-controller="new-option" class="space-y-3">
       <%= form.select :side_effect_id,
-            SideEffect.all.order(:name).map { |s| [s.name, s.id] } + [["+ Create new...", "new"]],
+            @user.side_effects.map { |s| [s.name, s.id] } + [["+ Create new...", "new"]],
             { include_blank: "Select a side effect" },
             { required: true,
               data: { action: "change->new-option#toggle", "new-option-target": "select" },
