@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  diary_entry: one
+  side_effect: one
+  severity: 1
+
+two:
+  diary_entry: two
+  side_effect: two
+  severity: 1

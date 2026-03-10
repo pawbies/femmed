@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_10_101610) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_10_153451) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -93,6 +93,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_101610) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_diary_entries_on_user_id"
+  end
+
+  create_table "diary_entry_side_effects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "diary_entry_id", null: false
+    t.integer "severity", default: 0, null: false
+    t.integer "side_effect_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diary_entry_id"], name: "index_diary_entry_side_effects_on_diary_entry_id"
+    t.index ["side_effect_id"], name: "index_diary_entry_side_effects_on_side_effect_id"
   end
 
   create_table "doses", force: :cascade do |t|
@@ -226,6 +236,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_101610) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assistent_talks", "users"
   add_foreign_key "diary_entries", "users"
+  add_foreign_key "diary_entry_side_effects", "diary_entries"
+  add_foreign_key "diary_entry_side_effects", "side_effects"
   add_foreign_key "doses", "prescriptions"
   add_foreign_key "medication_release_profiles", "medications"
   add_foreign_key "medication_release_profiles", "release_profiles"
