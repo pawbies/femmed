@@ -24,27 +24,25 @@
 
   <p class="text-rose-400 mt-2 mb-8"><%= @date.strftime("%B %e, %Y") %></p>
 
-  <div class="relative md:w-2/5">
+  <div class="relative md:w-3/5">
     <div class="absolute left-16 top-0 bottom-0 w-px bg-rose-100"></div>
 
     <div class="space-y-1">
       <% (0..23).each do |hour| %>
+        <% has_anything = @doses_by_hour[hour].any? || @diary_by_hour[hour].any? %>
         <div class="flex gap-4 items-start">
-
           <div class="w-12 text-right shrink-0 pt-2">
             <span class="text-xs font-medium text-gray-400"><%= "%02d:00" % hour %></span>
           </div>
-
           <div class="shrink-0 pt-2.5 z-10">
-            <% if @doses_by_hour[hour].any? %>
+            <% if has_anything %>
               <div class="w-3 h-3 rounded-full bg-rose-400 ring-2 ring-rose-100"></div>
             <% else %>
               <div class="w-3 h-3 rounded-full bg-rose-100"></div>
             <% end %>
           </div>
-
           <div class="flex-1 pb-2">
-            <% if @doses_by_hour[hour].any? %>
+            <% if has_anything %>
               <div class="flex flex-col gap-1">
                 <% @doses_by_hour[hour].each do |dose| %>
                   <%= link_to user_prescription_path(Current.user, dose.prescription, page: "Log", anchor: dom_id(dose)), class: "bg-white border border-rose-200 rounded-xl px-4 py-2 shadow-sm flex items-center justify-between" do %>
@@ -52,6 +50,11 @@
                     <span class="ml-2 text-xs bg-rose-100 text-rose-500 font-medium px-2 py-1 rounded-full">
                       × <%= format("%g", dose.amount_taken) %>
                     </span>
+                  <% end %>
+                <% end %>
+                <% @diary_by_hour[hour].each do |entry| %>
+                  <%= link_to user_diary_entry_path(Current.user, entry), class: "bg-white border border-rose-200 rounded-xl px-4 py-2 shadow-sm" do %>
+                    <p class="text-sm font-medium">Diary: <span><%= entry.title %></span></p>
                   <% end %>
                 <% end %>
               </div>
