@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_10_171216) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_16_111610) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -63,14 +63,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_171216) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "assistent_talks", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.integer "talk", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_assistent_talks_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -232,7 +224,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_171216) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "assistent_talks", "users"
   add_foreign_key "diary_entries", "users"
   add_foreign_key "diary_entry_side_effects", "diary_entries"
   add_foreign_key "diary_entry_side_effects", "side_effects"

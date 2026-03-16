@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   resources :active_ingredients
   resources :labelers
   resources :categories
-  resource :assistent_talks
   resources :users do
     resources :prescriptions do
       resources :packs

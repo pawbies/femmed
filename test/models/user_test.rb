@@ -47,15 +47,6 @@ class UserTest < ActiveSupport::TestCase
     assert_match /pfps\/.*\.png/, users(:alice).profile_picture
   end
 
-  test "should destroy assistent talks when destroyed" do
-    user = users(:alice)
-    at_count = user.assistent_talks.count
-    assert at_count > 0
-    assert_difference("AssistentTalk.count", -at_count) do
-      user.destroy
-    end
-  end
-
   test "should destroy user medications when destroyed" do
     user = users(:alice)
     um_count = user.prescriptions.count

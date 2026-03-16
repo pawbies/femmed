@@ -9,7 +9,6 @@ class SiteController < ApplicationController
   before_action :diable_css_nonce, only: :index
 
   def index
-    @assistent_intro = !Current.user.assistent_talks.exists?(talk: :introduction)
   end
 
   def landing

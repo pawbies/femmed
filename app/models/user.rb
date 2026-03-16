@@ -7,7 +7,6 @@ class User < ApplicationRecord
   scope :users, -> { where(role: "user") }
 
   has_many :sessions, dependent: :destroy
-  has_many :assistent_talks, dependent: :destroy
   has_many :prescriptions, dependent: :destroy
   has_many :medication_versions, through: :prescriptions
   has_many :doses, through: :prescriptions
