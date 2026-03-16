@@ -8,49 +8,44 @@ class MedicationsControllerTest < ActionDispatch::IntegrationTest
     @admin      = users(:admin)
   end
 
-  # show
-  test "should redirect show if not authenticated" do
+  test "show" do
+    # Not authenticated
     get medication_url(@medication)
     assert_redirected_to new_session_url
-  end
 
-  test "should get show if authenticated" do
+    # Authenticated
     sign_in_as(@user)
     get medication_url(@medication)
     assert_response :success
   end
 
-  # new
-  test "should redirect new if not authenticated" do
+  test "new" do
+    # Not authenticated
     get new_medication_url
     assert_redirected_to new_session_url
-  end
 
-  test "should redirect new if not admin" do
+    # Not admin
     sign_in_as(@user)
     get new_medication_url
     assert_redirected_to root_url
-  end
 
-  test "should get new if admin" do
+    # Admin
     sign_in_as(@admin)
     get new_medication_url
     assert_response :success
   end
 
-  # create
-  test "should redirect create if not authenticated" do
+  test "create" do
+    # Not authenticated
     post medications_url, params: { medication: { name: "Test" } }
     assert_redirected_to new_session_url
-  end
 
-  test "should redirect create if not admin" do
+    # Not admin
     sign_in_as(@user)
     post medications_url, params: { medication: { name: "Test" } }
     assert_redirected_to root_url
-  end
 
-  test "should create medication with valid params" do
+    # Admin with valid params
     sign_in_as(@admin)
     assert_difference "Medication.count", 1 do
       post medications_url, params: { medication: {
@@ -64,10 +59,8 @@ class MedicationsControllerTest < ActionDispatch::IntegrationTest
       } }
     end
     assert_redirected_to medication_url(Medication.last)
-  end
 
-  test "should not create medication with invalid params" do
-    sign_in_as(@admin)
+    # Admin with invalid params
     assert_no_difference "Medication.count" do
       post medications_url, params: { medication: {
         name: "",
@@ -81,61 +74,53 @@ class MedicationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_content
   end
 
-  # edit
-  test "should redirect edit if not authenticated" do
+  test "edit" do
+    # Not authenticated
     get edit_medication_url(@medication)
     assert_redirected_to new_session_url
-  end
 
-  test "should redirect edit if not admin" do
+    # Not admin
     sign_in_as(@user)
     get edit_medication_url(@medication)
     assert_redirected_to root_url
-  end
 
-  test "should get edit if admin" do
+    # Admin
     sign_in_as(@admin)
     get edit_medication_url(@medication)
     assert_response :success
   end
 
-  # update
-  test "should redirect update if not authenticated" do
+  test "update" do
+    # Not authenticated
     patch medication_url(@medication), params: { medication: { name: "Updated" } }
     assert_redirected_to new_session_url
-  end
 
-  test "should redirect update if not admin" do
+    # Not admin
     sign_in_as(@user)
     patch medication_url(@medication), params: { medication: { name: "Updated" } }
     assert_redirected_to root_url
-  end
 
-  test "should update medication with valid params" do
+    # Admin with valid params
     sign_in_as(@admin)
     patch medication_url(@medication), params: { medication: { name: "Updated Ritalin" } }
     assert_redirected_to medication_url(@medication)
-  end
 
-  test "should not update medication with invalid params" do
-    sign_in_as(@admin)
+    # Admin with invalid params
     patch medication_url(@medication), params: { medication: { name: "" } }
     assert_response :unprocessable_content
   end
 
-  # destroy
-  test "should redirect destroy if not authenticated" do
+  test "destroy" do
+    # Not authenticated
     delete medication_url(@medication)
     assert_redirected_to new_session_url
-  end
 
-  test "should redirect destroy if not admin" do
+    # Not admin
     sign_in_as(@user)
     delete medication_url(@medication)
     assert_redirected_to root_url
-  end
 
-  test "should destroy medication if admin" do
+    # Admin
     sign_in_as(@admin)
     assert_difference "Medication.count", -1 do
       delete medication_url(@medication)

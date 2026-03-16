@@ -5,49 +5,37 @@ class SearchControllerTest < ActionDispatch::IntegrationTest
     @user = users(:alice)
   end
 
-  # Unauthenticated
-  test "should redirect search if not authenticated" do
+  test "search" do
+    # Not authenticated
     get search_url
     assert_redirected_to new_session_url
-  end
 
-  # Authenticated
-  test "should get search if authenticated" do
+    # Authenticated without query
     sign_in_as(@user)
     get search_url
     assert_response :success
-  end
 
-  test "should find medication by name" do
-    sign_in_as(@user)
+    # Find medication by name
     get search_url, params: { query: "ritalin" }
     assert_response :success
     assert_includes @controller.instance_variable_get(:@medications), medications(:ritalin_ir)
-  end
 
-  test "should find active ingredient by name" do
-    sign_in_as(@user)
+    # Find active ingredient by name
     get search_url, params: { query: "methylphenidate" }
     assert_response :success
     assert_includes @controller.instance_variable_get(:@active_ingredients), active_ingredients(:methylphenidate)
-  end
 
-  test "should find category by name" do
-    sign_in_as(@user)
+    # Find category by name
     get search_url, params: { query: "stimulant" }
     assert_response :success
     assert_includes @controller.instance_variable_get(:@categories), categories(:stimulants)
-  end
 
-  test "should find labeler by name" do
-    sign_in_as(@user)
+    # Find labeler by name
     get search_url, params: { query: "pfizer" }
     assert_response :success
     assert_includes @controller.instance_variable_get(:@labelers), labelers(:pfizer)
-  end
 
-  test "should return empty results for unknown query" do
-    sign_in_as(@user)
+    # Unknown query returns empty results
     get search_url, params: { query: "zzznomatch" }
     assert_response :success
     assert_empty @controller.instance_variable_get(:@medications)

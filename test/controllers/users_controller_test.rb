@@ -7,33 +7,29 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @admin = users(:admin)
   end
 
-  # index
-  test "should redirect index if not authenticated" do
+  test "index" do
+    # Not authenticated
     get users_url
     assert_redirected_to new_session_url
-  end
 
-  test "should redirect index if not admin" do
+    # Not admin
     sign_in_as(@user)
     get users_url
     assert_redirected_to root_url
-  end
 
-  test "should get index if admin" do
+    # Admin
     sign_in_as(@admin)
     get users_url
     assert_response :success
   end
 
-  # new
-  test "should get new application layout if admin" do
+  test "new" do
     sign_in_as(@admin)
     get new_user_url
     assert_template layout: "application"
   end
 
-  # create
-  test "should redirect_to user if admin" do
+  test "create" do
     sign_in_as(@admin)
     assert_difference("User.count", 1) do
       post users_url, params: { user: { email_address: "new@example.com", username: "newuser", password: "password", password_confirmation: "password", terms_of_service: "1" } }
@@ -41,98 +37,87 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to User.last
   end
 
-  # show
-  test "should redirect show if not authenticated" do
+  test "show" do
+    # Not authenticated
     get user_url(@user)
     assert_redirected_to new_session_url
-  end
 
-  test "should get show for own profile" do
+    # Own profile
     sign_in_as(@user)
     get user_url(@user)
     assert_response :success
-  end
 
-  test "should not get show for another user" do
+    # Another user's profile
     sign_in_as(@other_user)
     get user_url(@user)
     assert_redirected_to root_url
-  end
 
-  test "should get show for any user as admin" do
+    # Admin viewing any user
     sign_in_as(@admin)
     get user_url(@user)
     assert_response :success
   end
 
-  # edit
-  test "should redirect edit if not authenticated" do
+  test "edit" do
+    # Not authenticated
     get edit_user_url(@user)
     assert_redirected_to new_session_url
-  end
 
-  test "should get edit for own profile" do
+    # Own profile
     sign_in_as(@user)
     get edit_user_url(@user)
     assert_response :success
-  end
 
-  test "should not get edit for another user" do
+    # Another user's profile
     sign_in_as(@other_user)
     get edit_user_url(@user)
     assert_redirected_to root_url
   end
 
-  # update
-  test "should redirect update if not authenticated" do
+  test "update" do
+    # Not authenticated
     patch user_url(@user), params: { user: { username: "newname" } }
     assert_redirected_to new_session_url
-  end
 
-  test "should update own profile" do
+    # Own profile
     sign_in_as(@user)
     patch user_url(@user), params: { user: { username: "updatedname" } }
     assert_redirected_to @user
-  end
 
-  test "should not update another user's profile" do
+    # Another user's profile
     sign_in_as(@other_user)
     patch user_url(@user), params: { user: { username: "hacked" } }
     assert_redirected_to root_url
-  end
 
-  test "admin should update any user" do
+    # Admin updating any user
     sign_in_as(@admin)
     patch user_url(@user), params: { user: { username: "adminupdated" } }
     assert_redirected_to @user
   end
 
-  # destroy
-  test "should redirect destroy if not authenticated" do
+  test "destroy" do
+    # Not authenticated
     delete user_url(@user)
     assert_redirected_to new_session_url
-  end
 
-  test "should destroy own account and redirect to landing" do
+    # Own account
     sign_in_as(@user)
     assert_difference("User.count", -1) do
       delete user_url(@user)
     end
     assert_redirected_to landing_url
-  end
 
-  test "should not destroy another user's account" do
+    # Another user's account
     sign_in_as(@other_user)
     assert_no_difference("User.count") do
       delete user_url(@user)
     end
     assert_redirected_to root_url
-  end
 
-  test "admin should destroy any user and redirect to users" do
+    # Admin destroying any user
     sign_in_as(@admin)
     assert_difference("User.count", -1) do
-      delete user_url(@user)
+      delete user_url(@other_user)
     end
     assert_redirected_to users_url
   end

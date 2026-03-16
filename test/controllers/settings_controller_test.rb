@@ -5,12 +5,12 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
     @user = users(:alice)
   end
 
-  test "should redirect index if not authenticated" do
+  test "index" do
+    # Not authenticated
     get settings_url
     assert_redirected_to new_session_url
-  end
 
-  test "should get index if authenticated" do
+    # Authenticated
     sign_in_as(@user)
     get settings_url
     assert_response :success

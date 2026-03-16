@@ -9,13 +9,12 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
     @prescription = prescriptions(:alice_ritalin_ir)
   end
 
-  # create
-  test "should redirect create if not authenticated" do
+  test "create" do
+    # Not authenticated
     post prescriptions_url(@medication_version)
     assert_redirected_to new_session_url
-  end
 
-  test "should create prescription if authenticated" do
+    # Authenticated
     sign_in_as(@user)
     assert_difference("Prescription.count") do
       post prescriptions_url(@user), params: { prescription: { medication_version_id: @other_medication_version.id } }
@@ -23,60 +22,54 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to prescription_path(Prescription.last)
   end
 
-  # show
-  test "should redirect show if not authenticated" do
+  test "show" do
+    # Not authenticated
     get prescription_url(@prescription)
     assert_redirected_to new_session_url
-  end
 
-  test "should get show if authenticated and it's own medication" do
+    # Own prescription
     sign_in_as(@user)
     get prescription_url(@prescription)
     assert_response :success
-  end
 
-  test "should not get show for another user's medication" do
+    # Another user's prescription
     sign_in_as(@other_user)
     get prescription_url(@prescription)
     assert_response :not_found
   end
 
-  # destroy
-  test "should redirect destroy if not authenticated" do
-    delete prescription_url(@prescription)
+  test "update" do
+    # Not authenticated
+    patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
     assert_redirected_to new_session_url
+
+    # Own prescription
+    sign_in_as(@user)
+    patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
+    assert_redirected_to prescription_url(@prescription, page: "Settings")
+
+    # Another user's prescription
+    sign_in_as(@other_user)
+    patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
+    assert_response :not_found
   end
 
-  test "should destroy own prescription" do
+  test "destroy" do
+    # Not authenticated
+    delete prescription_url(@prescription)
+    assert_redirected_to new_session_url
+
+    # Own prescription
     sign_in_as(@user)
     assert_difference("Prescription.count", -1) do
       delete prescription_url(@prescription)
     end
-  end
 
-  test "should not destroy another user's prescription" do
+    # Another user's prescription
     sign_in_as(@other_user)
     assert_no_difference("Prescription.count") do
       delete prescription_url(@prescription)
     end
-    assert_response :not_found
-  end
-
-  # update
-  test "should redirect update if not authenticated" do
-    patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
-    assert_redirected_to new_session_url
-  end
-
-  test "should update prescription if authenticated" do
-    sign_in_as(@user)
-    patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
-    assert_redirected_to prescription_url(@prescription, page: "Settings")
-  end
-
-  test "should not update prescription for another user" do
-    sign_in_as(@other_user)
-    patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
     assert_response :not_found
   end
 end

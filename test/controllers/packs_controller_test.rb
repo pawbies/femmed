@@ -9,111 +9,81 @@ class PacksControllerTest < ActionDispatch::IntegrationTest
     @pack = packs(:alice_ritalin_ir_pack)
   end
 
-  # new
-  test "should redirect new if not authenticated" do
+  test "new" do
+    # Not authenticated
     get new_prescription_pack_url(@prescription)
     assert_redirected_to new_session_url
-  end
 
-  test "should get new if authenticated" do
+    # Authenticated
     sign_in_as(@user)
     get new_prescription_pack_url(@prescription)
     assert_response :success
-  end
 
-
-  test "should redirect new if inactive prescription" do
-    sign_in_as(@user)
+    # Inactive prescription
     @prescription.update! active: false
     get new_prescription_pack_url(@prescription)
     assert_redirected_to root_url
-  end
 
-  test "should not get new for another user's prescription" do
+    # Another user's prescription
+    @prescription.update! active: true
     sign_in_as(@other_user)
     get new_prescription_pack_url(@prescription)
     assert_response :not_found
   end
 
-  # create
-  test "should redirect create if not authenticated" do
+  test "create" do
+    # Not authenticated
     post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     assert_redirected_to new_session_url
-  end
 
-  test "should create pack if authenticated" do
+    # Authenticated with valid params
     sign_in_as(@user)
     assert_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     end
     assert_redirected_to prescription_url(@prescription, page: "Packs")
-  end
+    assert_equal Pack.last.aquired_at, Date.today
 
-  test "should not create pack for another user's prescription" do
+    # Another user's prescription
     sign_in_as(@other_user)
     assert_no_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
     end
     assert_response :not_found
-  end
 
-  test "should not create pack with missing amount" do
+    # Missing amount
     sign_in_as(@user)
     assert_no_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: nil, aquired_at: Date.today } }
     end
     assert_response :unprocessable_content
-  end
 
-  test "should not create pack with non-integer amount" do
-    sign_in_as(@user)
+    # Non-integer amount
     assert_no_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: "abc", aquired_at: Date.today } }
     end
     assert_response :unprocessable_content
-  end
 
-  test "should not create pack with future date" do
-    sign_in_as(@user)
+    # Future date
     assert_no_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.tomorrow } }
     end
     assert_response :unprocessable_content
-  end
 
-  test "should not create pack with missing aquired_at" do
-    sign_in_as(@user)
+    # Missing aquired_at
     assert_no_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: nil } }
     end
     assert_response :unprocessable_content
-  end
 
-  test "should create pack with today's date" do
-    sign_in_as(@user)
-    assert_difference("Pack.count") do
-      post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
-    end
-    assert_equal Pack.last.aquired_at, Date.today
-  end
-
-  test "should create pack with past date" do
-    sign_in_as(@user)
+    # Past date
     past_date = 5.days.ago.to_date
     assert_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: past_date } }
     end
     assert_equal Pack.last.aquired_at, past_date
-  end
 
-  test "should render new template on validation error" do
-    sign_in_as(@user)
-    post prescription_packs_url(@prescription), params: { pack: { amount: nil, aquired_at: Date.today } }
-    assert_response :unprocessable_content
-  end
-
-  test "should not create pack for inactive prescription" do
-    sign_in_as(@user)
+    # Inactive prescription
     @prescription.update! active: false
     assert_no_difference("Pack.count") do
       post prescription_packs_url(@prescription), params: { pack: { amount: 30, aquired_at: Date.today } }
