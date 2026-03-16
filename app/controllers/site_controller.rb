@@ -25,7 +25,7 @@ class SiteController < ApplicationController
   end
 
   def calendar
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @date = Date.parse(params[:date]) rescue Date.today
     @mode = params[:mode] == "week" ? "week" : "month"
 
     range = if @mode == "week"
