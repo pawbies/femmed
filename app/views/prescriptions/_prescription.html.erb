@@ -18,7 +18,7 @@
         volumeOfDistribution: mvi.active_ingredient.volume_of_distribution
       }.compact
     }.to_json,
-    prescriptions_preview_doses_value: prescription.doses.where(taken_at: 1.week.ago..).map { |dose|
+    prescriptions_preview_doses_value: prescription.recent_doses.map { |dose|
       {
         takenAt: dose.taken_at.to_i,
         amount: dose.amount_taken
@@ -39,10 +39,10 @@
       </div>
       <div data-prescriptions-preview-target="chart" class="w-full"></div>
       <div class="px-4 py-2 border-t border-rose-100 flex flex-col gap-1 pb-6">
-        <% unsuppored = prescription.medication_version.medication_version_ingredients.pk_incompatible %>
-        <% if prescription.medication_version.medication_version_ingredients.pk_incompatible.any? %>
+        <% incompatible = prescription.medication_version.medication_version_ingredients.pk_incompatible %>
+        <% if incompatible.any? %>
           <p class="text-xs text-amber-800">
-          ⚠ <%= prescription.medication_version.medication_version_ingredients.pk_incompatible.map { |mvi| mvi.active_ingredient.name }.to_sentence %> excluded — not supported for PK calculation
+            ⚠ <%= incompatible.map { |mvi| mvi.active_ingredient.name }.to_sentence %> excluded — not supported for PK calculation
           </p>
         <% end %>
       </div>

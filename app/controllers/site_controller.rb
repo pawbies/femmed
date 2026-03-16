@@ -10,6 +10,11 @@ class SiteController < ApplicationController
   before_action :diable_css_nonce, only: :index
 
   def index
+    @prescriptions = Current.user.prescriptions.includes(
+      { medication_version: { medication_version_ingredients: :active_ingredient } },
+      { medication: [ :release_profile, :medication_release_profile, :active_ingredients ] },
+      :recent_doses
+    ).order(active: :desc)
   end
 
   def timeline
