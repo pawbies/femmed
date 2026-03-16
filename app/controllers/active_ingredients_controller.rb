@@ -10,7 +10,7 @@ class ActiveIngredientsController < ApplicationController
     @active_ingredient = ActiveIngredient.new active_ingredient_params
 
     if @active_ingredient.save
-      redirect_to search_path(query: @active_ingredient.name), notice: "Created #{@active_ingredient.name}"
+      redirect_to search_path(query: @active_ingredient.name)
     else
       render :new, status: :unprocessable_content
     end
@@ -24,7 +24,7 @@ class ActiveIngredientsController < ApplicationController
 
   def update
     if @active_ingredient.update active_ingredient_params
-      redirect_to @active_ingredient, notice: "Oki ^^"
+      redirect_to @active_ingredient
     else
       render :edit, status: :unprocessable_content
     end

@@ -13,7 +13,7 @@ class MedicationVersionsController < ApplicationController
   def create
     @medication_version = @medication.versions.new medication_version_params
     if @medication_version.save
-      redirect_to @medication, notice: "Created #{@medication_version.full_name}"
+      redirect_to @medication
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +24,7 @@ class MedicationVersionsController < ApplicationController
 
   def update
     if @medication_version.update medication_version_params
-      redirect_to @medication_version.medication, notice: "Successfully updated"
+      redirect_to @medication_version.medication
     else
       render :edit, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class MedicationVersionsController < ApplicationController
   def destroy
     @medication_version.destroy!
 
-    redirect_to @medication_version.medication, notice: "Removed #{@medication_version.added_name}"
+    redirect_to @medication_version.medication
   end
 
   private

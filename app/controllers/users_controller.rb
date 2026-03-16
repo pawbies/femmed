@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update user_update_params
-      redirect_to @user, notice: "Updated #{@user.username} ^^"
+      redirect_to @user
     else
       render :edit, status: :unprocessable_content
     end

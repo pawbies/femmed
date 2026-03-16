@@ -14,7 +14,7 @@ class DosesController < ApplicationController
     @dose = @prescription.doses.new dose_params
 
     if @dose.save
-      redirect_to user_prescription_path(@user, @prescription), notice: "Logged it for ya ^^"
+      redirect_to user_prescription_path(@user, @prescription)
     else
       render :new, status: :unprocessable_content
     end
@@ -25,7 +25,7 @@ class DosesController < ApplicationController
 
   def update
     if @dose.update dose_params
-      redirect_to user_prescription_path(@user, @prescription), notice: "Updated #{@prescription.full_name} dose"
+      redirect_to user_prescription_path(@user, @prescription)
     else
       render :edit, status: :unprocessable_content
     end

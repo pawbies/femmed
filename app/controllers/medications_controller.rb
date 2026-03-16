@@ -16,7 +16,7 @@ class MedicationsController < ApplicationController
     @medication = Medication.new medication_params
 
     if @medication.save
-      redirect_to @medication, notice: "Created #{@medication.name}"
+      redirect_to @medication
     else
       render :new, status: :unprocessable_content
     end
@@ -29,18 +29,18 @@ class MedicationsController < ApplicationController
   def edit
   end
 
+  def update
+    if @medication.update medication_params
+      redirect_to @medication
+    else
+      render :edit, status: :unprocessable_content
+    end
+  end
+
   def destroy
     @medication.destroy!
 
     redirect_to root_path, notice: "#{@medication.name} is gone now"
-  end
-
-  def update
-    if @medication.update medication_params
-      redirect_to @medication, notice: "Applied your super cool changes ^^"
-    else
-      render :edit, status: :unprocessable_content
-    end
   end
 
   private

@@ -10,7 +10,7 @@ class LabelersController < ApplicationController
     @labeler = Labeler.new labeler_params
 
     if @labeler.save
-      redirect_to search_path(query: @labeler.name), notice: "Created #{@labeler.name}"
+      redirect_to search_path(query: @labeler.name)
     else
       render :new, status: :unprocessable_content
     end
@@ -24,7 +24,7 @@ class LabelersController < ApplicationController
 
   def update
     if @labeler.update labeler_params
-      redirect_to @labeler, notice: "Oki doki"
+      redirect_to @labeler
     else
       render :edit, status: :unprocessable_content
     end

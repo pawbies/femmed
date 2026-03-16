@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update category_params
-      redirect_to @category, notice: "All done boss ^^"
+      redirect_to @category
     else
       render :edit, status: :unprocessable_content
     end
