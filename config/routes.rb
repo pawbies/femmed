@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   get "search" => "search#index"
 
-  get "timeline" => "timeline#index"
-  get "calendar" => "calendar#index"
-  get "admin"    =>    "admin#index"
+  get "timeline" => "site#timeline"
+  get "calendar" => "site#calendar"
+  get "admin"    => "site#admin"
 end
