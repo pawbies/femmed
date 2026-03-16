@@ -9,12 +9,6 @@ class CalendarController < ApplicationController
       @date.beginning_of_month..@date.end_of_month
     end
 
-    @diary_dates = Current.user.diary_entries
-      .where(entry_for: range)
-      .pluck(:entry_for)
-      .map(&:to_date)
-      .to_set
-
     @dose_dates = Current.user.doses
       .where(taken_at: range)
       .pluck(:taken_at)

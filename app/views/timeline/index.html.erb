@@ -1,7 +1,7 @@
 <div class="w-full">
   <h1 class="font-bold text-4xl">Timeline</h1>
 
-  <% nav_links = [["Home", root_path], ["Timeline", timeline_path], ["Calendar", calendar_path], ["Diary", user_diary_entries_path(Current.user)]] %>
+  <% nav_links = [["Home", root_path], ["Timeline", timeline_path], ["Calendar", calendar_path]] %>
   <% nav_links << [ "Admin", admin_path ] if admin? %>
   <%= render "partials/nav", links: nav_links %>
 
@@ -29,7 +29,7 @@
 
     <div class="space-y-1">
       <% (0..23).each do |hour| %>
-        <% has_anything = @doses_by_hour[hour].any? || @diary_by_hour[hour].any? %>
+        <% has_anything = @doses_by_hour[hour].any? %>
         <div class="flex gap-4 items-start">
           <div class="w-12 text-right shrink-0 pt-2">
             <span class="text-xs font-medium text-gray-400"><%= "%02d:00" % hour %></span>
@@ -50,11 +50,6 @@
                     <span class="ml-2 text-xs bg-rose-100 text-rose-500 font-medium px-2 py-1 rounded-full">
                       × <%= format("%g", dose.amount_taken) %>
                     </span>
-                  <% end %>
-                <% end %>
-                <% @diary_by_hour[hour].each do |entry| %>
-                  <%= link_to user_diary_entry_path(Current.user, entry), class: "bg-white border border-rose-200 rounded-xl px-4 py-2 shadow-sm" do %>
-                    <p class="text-sm font-medium">Diary: <span><%= entry.title %></span></p>
                   <% end %>
                 <% end %>
               </div>

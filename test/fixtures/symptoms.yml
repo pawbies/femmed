@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-alice_inattention:
-  user: alice
-  name: Inattention
-
-bob_drug_abuse:
-  user: bob
-  name: drug_abuse

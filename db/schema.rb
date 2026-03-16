@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_16_111610) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_16_112433) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -76,25 +76,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_16_111610) do
     t.integer "category_id", null: false
     t.integer "medication_id", null: false
     t.index ["medication_id", "category_id"], name: "index_categories_medications_on_medication_id_and_category_id"
-  end
-
-  create_table "diary_entries", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "entry_for", null: false
-    t.string "title", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_diary_entries_on_user_id"
-  end
-
-  create_table "diary_entry_side_effects", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.integer "diary_entry_id", null: false
-    t.integer "severity", default: 0, null: false
-    t.integer "side_effect_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["diary_entry_id"], name: "index_diary_entry_side_effects_on_diary_entry_id"
-    t.index ["side_effect_id"], name: "index_diary_entry_side_effects_on_side_effect_id"
   end
 
   create_table "doses", force: :cascade do |t|
@@ -197,20 +178,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_16_111610) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "side_effects", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "name", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "symptoms", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "name", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_symptoms_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email_address", null: false
@@ -224,9 +191,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_16_111610) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "diary_entries", "users"
-  add_foreign_key "diary_entry_side_effects", "diary_entries"
-  add_foreign_key "diary_entry_side_effects", "side_effects"
   add_foreign_key "doses", "prescriptions"
   add_foreign_key "medication_release_profiles", "medications"
   add_foreign_key "medication_release_profiles", "release_profiles"
@@ -239,5 +203,4 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_16_111610) do
   add_foreign_key "prescriptions", "medication_versions"
   add_foreign_key "prescriptions", "users"
   add_foreign_key "sessions", "users"
-  add_foreign_key "symptoms", "users"
 end

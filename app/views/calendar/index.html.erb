@@ -1,7 +1,7 @@
 <div class="w-full">
   <h1 class="font-bold text-4xl">Calendar</h1>
 
-  <% nav_links = [["Home", root_path], ["Timeline", timeline_path], ["Calendar", calendar_path], ["Diary", user_diary_entries_path(Current.user)]] %>
+  <% nav_links = [["Home", root_path], ["Timeline", timeline_path], ["Calendar", calendar_path]] %>
   <% nav_links << [ "Admin", admin_path ] if admin? %>
   <%= render "partials/nav", links: nav_links %>
 
@@ -48,9 +48,6 @@
           <% is_today = current == Date.today %>
           <%= link_to timeline_path(date: current), class: "relative aspect-square flex items-center justify-center rounded text-sm transition-colors #{is_today ? 'bg-rose-400 text-white font-semibold' : 'hover:bg-rose-50 text-gray-700 border border-rose-100'}" do %>
             <%= day %>
-            <% if @diary_dates.include?(current) %>
-              <%= image_tag "icons/book.svg", class: "aspect-square h-2 md:h-4 absolute right-2 bottom-2" %>
-            <% end %>
             <% if @dose_dates.include?(current) %>
               <%= image_tag "icons/pill.svg", class: "aspect-square h-2 md:h-4 absolute left-2 bottom-2" %>
             <% end %>

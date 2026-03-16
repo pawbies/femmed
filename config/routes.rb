@@ -12,10 +12,6 @@ Rails.application.routes.draw do
       resources :packs
       resources :doses
     end
-
-    resources :diary_entries do
-      resources :diary_entry_side_effects
-    end
   end
   get "profile" => "users#profile"
   resource :session
@@ -44,6 +40,5 @@ Rails.application.routes.draw do
 
   get "timeline" => "timeline#index"
   get "calendar" => "calendar#index"
-  get "diary"    =>    "diary#index"
   get "admin"    =>    "admin#index"
 end

@@ -37,9 +37,9 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
-    <script>
+    <%= javascript_tag nonce: true do -%>
       document.documentElement.classList.replace("no-js", "js")
-    </script>
+    <% end %>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
