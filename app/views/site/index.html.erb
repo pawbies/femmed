@@ -1,9 +1,7 @@
 <div class="w-full">
   <h1 class="font-bold text-4xl">Welcome back <%= Current.user.username %></h1>
 
-  <% nav_links = [["Home", root_path], ["Timeline", timeline_path], ["Calendar", calendar_path]] %>
-  <% nav_links << [ "Admin", admin_path ] if admin? %>
-  <%= render "partials/nav", links: nav_links %>
+  <%= render "nav" %>
 
   <section class="my-12">
     <h3 class="text-3xl">Search</h3>
