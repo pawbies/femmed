@@ -17,6 +17,6 @@ class MedicationVersion < ApplicationRecord
   end
 
   def available_for_pk?
-    pk_compatible_ingredients.none?
+    pk_compatible_ingredients.any?
   end
 end

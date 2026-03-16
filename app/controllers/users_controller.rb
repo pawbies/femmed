@@ -51,10 +51,10 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy!
 
-    unless Current.user.admin?
-      redirect_to landing_path, notice: "Sorry to see you go"
-    else
+    if Current.user&.admin?
       redirect_to users_path, notice: "Deleted this weird guy >:3"
+    else
+      redirect_to landing_path, notice: "Sorry to see you go"
     end
   end
 

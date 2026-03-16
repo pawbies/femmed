@@ -12,7 +12,7 @@ class Prescription < ApplicationRecord
   delegate :form, to: :medication_version, allow_nil: true
   delegate :full_name, to: :medication_version, allow_nil: true
 
-  validates :amount, presence: true, numericality: true
+  validates :amount, presence: true, numericality: true, comparison: { greater_than: 0 }
   validates :active, inclusion: { in: [ true, false ] }
   validates :pack_tracking_enabled, inclusion: { in: [ true, false ] }
   validates :preview_past, presence: true, numericality: true, comparison: { greater_than_or_equal_to: 0 }

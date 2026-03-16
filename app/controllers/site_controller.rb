@@ -18,7 +18,11 @@ class SiteController < ApplicationController
   end
 
   def timeline
-    @date = Date.parse(params[:date]) rescue Date.today
+    @date = begin
+      Date.parse(params[:date])
+    rescue ArgumentError, TypeError
+      Date.today
+    end
     if @date.future?
       redirect_back fallback_location: timeline_path(date: Date.today), notice: "This didnt even happen yet O.O"
       return
@@ -30,7 +34,11 @@ class SiteController < ApplicationController
   end
 
   def calendar
-    @date = Date.parse(params[:date]) rescue Date.today
+    @date = begin
+      Date.parse(params[:date])
+    rescue ArgumentError, TypeError
+      Date.today
+    end
     @mode = params[:mode] == "week" ? "week" : "month"
 
     range = if @mode == "week"

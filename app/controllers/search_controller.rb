@@ -4,8 +4,14 @@ class SearchController < ApplicationController
     @category_id = params[:category_id]
     @labeler_id  = params[:labeler_id]
 
+
     @medications = Medication.all
-    @medications = @medications.where("LOWER(name) LIKE LOWER(?)", "%#{@query.strip}%") if @query.present?
+
+    if @query.present?
+      sanitized_query = ActiveRecord::Base.sanitize_sql_like(@query.strip)
+      @medications = @medications.where("LOWER(name) LIKE LOWER(?)", "%#{sanitized_query}%")
+    end
+
     @medications = @medications.joins(:categories).where(categories: { id: @category_id }) if @category_id.present?
     @medications = @medications.where(labeler_id: @labeler_id) if @labeler_id.present?
     @medications = @medications.order(:name)
