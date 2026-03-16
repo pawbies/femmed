@@ -43,7 +43,7 @@
             <% if has_anything %>
               <div class="flex flex-col gap-1">
                 <% @doses_by_hour[hour].each do |dose| %>
-                  <%= link_to user_prescription_path(Current.user, dose.prescription, page: "Log", anchor: dom_id(dose)), class: "bg-white border border-rose-200 rounded-xl px-4 py-2 shadow-sm flex items-center justify-between" do %>
+                  <%= link_to prescription_path(dose.prescription, page: "Log", anchor: dom_id(dose)), class: "bg-white border border-rose-200 rounded-xl px-4 py-2 shadow-sm flex items-center justify-between" do %>
                     <span class="text-sm font-medium text-gray-800"><%= dose.prescription.full_name %></span>
                     <span class="ml-2 text-xs bg-rose-100 text-rose-500 font-medium px-2 py-1 rounded-full">
                       × <%= format("%g", dose.amount_taken) %>

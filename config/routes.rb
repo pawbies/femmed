@@ -7,11 +7,10 @@ Rails.application.routes.draw do
   resources :active_ingredients
   resources :labelers
   resources :categories
-  resources :users do
-    resources :prescriptions do
-      resources :packs
-      resources :doses
-    end
+  resources :users
+  resources :prescriptions do
+    resources :packs
+    resources :doses
   end
   get "profile" => "users#profile"
   resource :session

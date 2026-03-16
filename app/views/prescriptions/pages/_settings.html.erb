@@ -2,7 +2,7 @@
 <section class="mt-8">
   <h2 class="text-xs font-semibold uppercase tracking-widest text-rose-400 mb-4">General</h2>
   <div class="rounded-xl border border-zinc-200 bg-white p-6">
-    <%= form_with model: [ @user, @prescription ], data: { turbo_frame: "_top" } do |form| %>
+    <%= form_with model: @prescription, data: { turbo_frame: "_top" } do |form| %>
       <%= form.label :amount, "Planned amount per dose", class: "block text-sm font-medium text-gray-700 my-2" %>
       <div class="flex">
         <%= form.number_field :amount,
@@ -91,7 +91,7 @@
       <p class="font-medium text-red-700">Remove this prescription</p>
       <p class="text-sm text-red-400 mt-0.5">This will permanently delete all doses and packs associated with it.</p>
     </div>
-    <%= button_to "Remove prescription", user_prescription_path(@user, @prescription),
+    <%= button_to "Remove prescription", @prescription,
       method: :delete,
       data: { turbo_confirm: "Are you sure?", turbo_frame: "_top" },
       class: "shrink-0 rounded-md px-4 py-2 bg-white border border-red-300 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500 font-medium text-sm transition-colors cursor-pointer" %>

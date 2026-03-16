@@ -34,10 +34,10 @@
         <% if @prescription.active? %>
           <td>
             <div class="flex">
-              <%= link_to edit_user_prescription_dose_path(@user, @prescription, dose), target: "_top", class: "mx-1" do %>
+              <%= link_to edit_prescription_dose_path(@prescription, dose), target: "_top", class: "mx-1" do %>
               <%= image_tag "icons/edit.svg", class: "aspect-squre h-[1.5em]" %>
               <% end %>
-              <%= button_to user_prescription_dose_path(@user, @prescription, dose), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "mx-1" do %>
+              <%= button_to prescription_dose_path(@prescription, dose), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "mx-1" do %>
                 <%= image_tag "icons/delete.svg", class: "hover:cursor-pointer aspect-square h-[1.5em]" %>
               <% end %>
             </div>
@@ -47,4 +47,4 @@
     <% end %>
   </tbody>
 </table>
-<%= render "partials/add_button", path: new_user_prescription_dose_path(@user, @prescription) %>
+<%= render "partials/add_button", path: new_prescription_dose_path(@prescription) %>

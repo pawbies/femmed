@@ -1,12 +1,10 @@
 class PrescriptionsController < ApplicationController
-  before_action :set_user
-  before_action :require_own_user
   before_action :set_prescription, except: :create
 
   def create
-    @prescription = @user.prescriptions.new(**prescription_create_params, amount: 1, active: true)
+    @prescription = Current.user.prescriptions.new(**prescription_create_params, amount: 1, active: true)
     if @prescription.save
-      redirect_to user_prescription_path(@user, @prescription)
+      redirect_to @prescription
     else
       redirect_back fallback_location: @prescription.medication, alert: "Something went wrong :("
     end
@@ -17,9 +15,9 @@ class PrescriptionsController < ApplicationController
 
   def update
     if @prescription.update prescription_update_params
-      redirect_to user_prescription_path(@user, @prescription, page: "Settings"), notice: "Updated your prescription for ya"
+      redirect_to prescription_path(@prescription, page: "Settings"), notice: "Updated your prescription for ya"
     else
-      redirect_to user_prescription_path(@user, @prescription, page: "Settings"), alert: "Something went wrong :("
+      redirect_to prescription_path(@prescription, page: "Settings"), alert: "Something went wrong :("
     end
   end
 
@@ -29,16 +27,8 @@ class PrescriptionsController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find(params[:user_id])
-    end
-
     def set_prescription
-      @prescription = @user.prescriptions.find(params[:id])
-    end
-
-    def require_own_user
-      redirect_to root_path, notice: "UwU whatcha doin threre" unless @user.id == Current.user.id
+      @prescription = Current.user.prescriptions.find(params[:id])
     end
 
     def prescription_create_params
