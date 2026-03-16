@@ -5,7 +5,7 @@ class MedicationsController < ApplicationController
   content_security_policy only: :show do |policy|
     policy.style_src :self, :https, :unsafe_inline
   end
-  before_action :diable_css_nonce, only: :show
+  before_action :disable_css_nonce, only: :show
 
   def new
     @medication = Medication.new
@@ -48,7 +48,7 @@ class MedicationsController < ApplicationController
       @medication = Medication.find(params[:id])
     end
 
-    def diable_css_nonce
+    def disable_css_nonce
      request.content_security_policy_nonce_directives = %w[script-src]
     end
 

@@ -69,14 +69,8 @@ class UsersController < ApplicationController
       params.expect(user: allowed)
     end
 
-    def require_admin
-      unless Current.user.role == "admin"
-        redirect_to root_path, alert: "Go away!!!"
-      end
-    end
-
     def require_own_user_or_admin
-      if params[:id].to_i != Current.user.id && Current.user.role != "admin"
+      if params[:id].to_i(10) != Current.user.id && !Current.user.admin?
         redirect_to root_path, alert: "Hey! You can't be there!"
       end
     end

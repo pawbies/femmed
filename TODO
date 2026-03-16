@@ -1,0 +1,89 @@
+# TODO - Code Review Findings
+
+## Bugs (high priority)
+
+- [x] MedicationVersion#available_for_pk? logic is inverted
+      Uses `pk_compatible_ingredients.none?` but should be `pk_incompatible_ingredients.none?`
+      File: app/models/medication_version.rb:20
+
+- [x] NoMethodError crash when a user deletes their own account
+      After @user.destroy! cascades to sessions, Current.user returns nil,
+      then `nil.admin?` raises NoMethodError.
+      Fix: use `Current.user&.admin?` or capture the role before destroying.
+      File: app/controllers/users_controller.rb:54
+
+- [x] ZeroDivisionError in Prescription#remaining_doses
+      `amount` is not validated as greater_than: 0, so dividing by it can crash.
+      The settings form also allows min: 0.
+      Fix: add `comparison: { greater_than: 0 }` to the amount validation.
+      Files: app/models/prescription.rb:28, app/views/prescriptions/pages/_settings.html.erb:9
+
+- [x] Overly broad modifier rescue in SiteController (catches all StandardError)
+      `Date.parse(params[:date]) rescue Date.today` should rescue ArgumentError only.
+      File: app/controllers/site_controller.rb:21, :33
+
+
+## Security
+
+- [x] Password reset emails broken in production
+      `config.action_mailer.default_url_options = { host: "example.com" }` is still a placeholder.
+      Password reset links will point to example.com instead of the real domain.
+      File: config/environments/production.rb:62
+
+- [x] SQL LIKE wildcards not escaped in SearchController
+      User input containing % or _ is treated as SQL wildcards.
+      Fix: sanitize with `ActiveRecord::Base.sanitize_sql_like(@query.strip)` before interpolating.
+      File: app/controllers/search_controller.rb:8-16
+
+- [x] DNS rebinding protection is disabled in production
+      `config.hosts` allowlist is commented out.
+      Fix: uncomment and set it to the actual production domain.
+      File: config/environments/production.rb:83-90
+
+
+## Best Practices
+
+- [x] Bare `rescue` without exception class in ApplicationController#set_timezone
+      Fix: rescue ArgumentError, TZInfo::InvalidTimezoneIdentifier
+      File: app/controllers/application_controller.rb:15
+
+- [x] require_admin duplicated in UsersController, shadowing the Authorization concern
+      The local version uses string comparison instead of admin? predicate.
+      Fix: remove it and rely on the concern's implementation.
+      File: app/controllers/users_controller.rb:72-76
+
+- [x] `resources :settings` should be `resource :settings` (singular)
+      Generates 7 routes but only index is used.
+      File: config/routes.rb:2
+
+- [x] Inconsistent strong params style in MedicationVersionsController
+      Uses old `params.require(...).permit(...)` instead of `params.expect(...)` like all other controllers.
+      File: app/controllers/medication_versions_controller.rb:41
+
+- [x] require_own_user_or_admin uses raw string role comparison
+      `Current.user.role != "admin"` should be `!Current.user.admin?`
+      Also `params[:id].to_i` would return 0 for non-integer IDs, potentially bypassing the check.
+      File: app/controllers/users_controller.rb:79
+
+- [x] N+1 query risk in Prescription#remaining_units / Dose#available_units
+      Both call packs.sum and doses.sum ad-hoc; fires 2 extra queries per prescription in lists.
+      Files: app/models/prescription.rb:21-24, app/models/dose.rb:10-14
+
+- [x] Two separate queries on doses in the log view
+      `.count` and `.order(...).each` each fire a separate query on the same association.
+      Fix: load once into @doses, use .size for the count, iterate the variable.
+      File: app/views/prescriptions/pages/_log.html.erb:4, :23
+
+
+## Typos
+
+- [x] `diable_css_nonce` should be `disable_css_nonce`
+      Files: app/controllers/medications_controller.rb:8,51
+             app/controllers/site_controller.rb:10,63
+
+- [x] `aquired_at` should be `acquired_at`
+      Files: app/models/pack.rb:5
+             app/controllers/packs_controller.rb:8,55
+
+- [x] `aspect-squre` should be `aspect-square`
+      File: app/views/prescriptions/pages/_log.html.erb:38

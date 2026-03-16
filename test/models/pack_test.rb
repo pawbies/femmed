@@ -6,31 +6,31 @@ class PackTest < ActiveSupport::TestCase
   end
 
   test "should require a prescription" do
-    pack = Pack.new(amount: 30, aquired_at: Date.today)
+    pack = Pack.new(amount: 30, acquired_at: Date.today)
     assert_not pack.valid?
     assert_includes pack.errors[:prescription], "must exist"
   end
 
   test "should require amount" do
-    pack = Pack.new(prescription: prescriptions(:alice_ritalin_ir), aquired_at: Date.today)
+    pack = Pack.new(prescription: prescriptions(:alice_ritalin_ir), acquired_at: Date.today)
     assert_not pack.valid?
     assert_includes pack.errors[:amount], "can't be blank"
   end
 
   test "should require amount to be an integer" do
-    pack = Pack.new(prescription: prescriptions(:alice_ritalin_ir), amount: 1.5, aquired_at: Date.today)
+    pack = Pack.new(prescription: prescriptions(:alice_ritalin_ir), amount: 1.5, acquired_at: Date.today)
     assert_not pack.valid?
     assert_includes pack.errors[:amount], "must be an integer"
   end
 
   test "should require amount to not be zero" do
-    pack = Pack.new(prescription: prescriptions(:alice_ritalin_ir), amount: 0, aquired_at: Date.today)
+    pack = Pack.new(prescription: prescriptions(:alice_ritalin_ir), amount: 0, acquired_at: Date.today)
     assert_not pack.valid?
     assert_includes pack.errors[:amount], "must be greater than 0"
   end
 
   test "should require amount to not be negative" do
-    pack = Pack.new(prescription: prescriptions(:alice_ritalin_ir), amount: -2, aquired_at: Date.today)
+    pack = Pack.new(prescription: prescriptions(:alice_ritalin_ir), amount: -2, acquired_at: Date.today)
     assert_not pack.valid?
     assert_includes pack.errors[:amount], "must be greater than 0"
   end

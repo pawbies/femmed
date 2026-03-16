@@ -17,9 +17,9 @@ class SearchController < ApplicationController
     @medications = @medications.order(:name)
 
     if @query.present?
-      @active_ingredients = ActiveIngredient.where("LOWER(name) LIKE LOWER(?)", "%#{@query.strip}%").order(:name)
-      @categories         = Category.where("LOWER(name) LIKE LOWER(?)",         "%#{@query.strip}%").order(:name)
-      @labelers           = Labeler.where("LOWER(name) LIKE LOWER(?)",          "%#{@query.strip}%").order(:name)
+      @active_ingredients = ActiveIngredient.where("LOWER(name) LIKE LOWER(?)", "%#{sanitized_query}%").order(:name)
+      @categories         = Category.where("LOWER(name) LIKE LOWER(?)",         "%#{sanitized_query}%").order(:name)
+      @labelers           = Labeler.where("LOWER(name) LIKE LOWER(?)",          "%#{sanitized_query}%").order(:name)
     else
       @active_ingredients = ActiveIngredient.all
       @categories         = Category.all

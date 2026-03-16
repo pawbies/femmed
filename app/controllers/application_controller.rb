@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     def set_timezone
       timezone = cookies[:timezone]
       Time.zone = ActiveSupport::TimeZone[timezone] if timezone.present?
-    rescue
+    rescue ArgumentError, TZInfo::InvalidTimezoneIdentifier
       Time.zone = "UTC"
     end
 end

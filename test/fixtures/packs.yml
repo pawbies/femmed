@@ -3,9 +3,9 @@
 alice_ritalin_ir_pack:
   prescription: alice_ritalin_ir
   amount: 30
-  aquired_at: 2026-02-01
+  acquired_at: 2026-02-01
 
 bob_adderall_xr_pack:
   prescription: bob_adderall_xr
   amount: 30
-  aquired_at: 2026-02-05
+  acquired_at: 2026-02-05

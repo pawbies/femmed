@@ -3,7 +3,7 @@
     Packs
     <span class="text-black/50 italic">
       <% unless @prescription.packs.empty? %>
-        - <%= (Date.today - @prescription.packs.order(:aquired_at).last.aquired_at).to_i %>
+        - <%= (Date.today - @prescription.packs.order(:acquired_at).last.acquired_at).to_i %>
         days since you got the last pack
       <% else %>
         - Go ahead and get some
@@ -59,20 +59,20 @@
       </tr>
     </thead>
     <tbody class="divide-y divide-zinc-100">
-      <% @prescription.packs.order(aquired_at: :desc).each_with_index do |pack, index| %>
+      <% @prescription.packs.order(acquired_at: :desc).each_with_index do |pack, index| %>
         <tr class="transition-colors hover:bg-zinc-50">
           <td class="py-3 pr-8 font-medium text-zinc-800"><%= @prescription.packs.count - index %></td>
           <td class="py-3 pr-8 font-medium text-zinc-800">
             <%= pack.amount %>
           </td>
           <td class="my-3 font-medium text-zinc-800">
-            <%= local_time(pack.aquired_at, "%B %e, %Y") %>
+            <%= local_time(pack.acquired_at, "%B %e, %Y") %>
           </td>
           <% if @prescription.active? %>
             <td>
               <div class="flex">
                 <%= link_to edit_prescription_pack_path(@prescription, pack), target: "_top", class: "mx-1" do %>
-                <%= image_tag "icons/edit.svg", class: "aspect-squre h-[1.5em]" %>
+                <%= image_tag "icons/edit.svg", class: "aspect-square h-[1.5em]" %>
                 <% end %>
                 <%= button_to prescription_pack_path(@prescription, pack), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "mx-1" do %>
                   <%= image_tag "icons/delete.svg", class: "aspect-square h-[1.5em]" %>

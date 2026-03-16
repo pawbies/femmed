@@ -5,7 +5,7 @@ class PacksController < ApplicationController
   before_action :require_pack_tracking_enabled
 
   def new
-    @pack = @prescription.packs.new(aquired_at: Date.today)
+    @pack = @prescription.packs.new(acquired_at: Date.today)
   end
 
   def create
@@ -52,6 +52,6 @@ class PacksController < ApplicationController
     end
 
     def pack_params
-      params.expect(pack: [ :amount, :aquired_at ])
+      params.expect(pack: [ :amount, :acquired_at ])
     end
 end
