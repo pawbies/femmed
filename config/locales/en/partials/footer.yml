@@ -1,0 +1,7 @@
+en:
+  partials:
+    footer:
+      privacy: "Privacy"
+      imprint: "Imprint"
+      about: "About FemMed"
+      made_by_html: "Made by <a href=\"https://pawbies.net\" class=\"underline hover:no-underline\">Pawbies</a>"

@@ -1,0 +1,9 @@
+ja:
+  site:
+    index:
+      welcome_back: "%{username}さん、おかえりなさい"
+      home: "ホーム"
+      search: "検索"
+      search_placeholder: "何か素敵なもの"
+      yippie: "やったー"
+      my_medications: "私の薬"

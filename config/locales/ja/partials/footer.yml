@@ -1,0 +1,7 @@
+ja:
+  partials:
+    footer:
+      privacy: "プライバシー"
+      imprint: "インプリント"
+      about: "FemMedについて"
+      made_by_html: "<a href=\"https://pawbies.net\" class=\"underline hover:no-underline\">Pawbies</a>より"

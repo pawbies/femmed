@@ -1,0 +1,7 @@
+ja:
+  partials:
+    header:
+      logo_alt: "FemMedロゴ"
+      profile_alt: "プロフィール画像"
+      profile: "プロフィール"
+      log_out: "ログアウト"
