@@ -5,9 +5,17 @@
 
   <%= form_with url: session_url, class: "mt-10 mx-auto max-w-md" do |form| %>
     <div class="my-5">
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Your email address goes here :3", value: params[:email_address], class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+      <%= form.label :email_address, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.email_field :email_address,
+        required: true,
+        autofocus: true,
+        autocomplete: "username",
+        placeholder: "kisser@boys.example :3",
+        value: params[:email_address],
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
     <div class="my-5">
+      <%= form.label :password, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "And your password goes here hehe", maxlength: 72, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
     <div class="mt-8 flex justify-center">
