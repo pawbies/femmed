@@ -1,5 +1,5 @@
 <div class="w-full">
-  <h1 class="font-bold text-center text-3xl">Edit <%= "#{@prescription.full_name} dose from #{@dose.taken_at.strftime("%B %e, %Y at %H:%M")}" %></h1>
+  <h1 class="font-bold text-center text-3xl">Edit <%= "#{@prescription.medication.name} dose from #{@dose.taken_at.strftime("%B %e, %Y at %H:%M")}" %></h1>
 
   <%= form_with model: [@prescription, @dose], class: "mt-10 mx-auto max-w-md",
     data: { controller: "dose-form", dose_form_ingredient_doses_per_unit_value: @prescription.medication_version.medication_version_ingredients.map { |mvi| { name: mvi.active_ingredient.name, amount: mvi.amount, unit: mvi.unit } }.to_json } do |form| %>
@@ -16,22 +16,26 @@
       </div>
     <% end %>
 
-    <div class="mt-5 mb-1 flex items-center">
-      <%= form.number_field :amount_taken,
-        required: true,
-        autofocus: true,
-        step: "any",
-        min: 0.001,
-        data: { dose_form_target: "input", action: "dose-form#updateOutput" },
-        placeholder: "How many #{@prescription.form.name.pluralize.downcase} did you take? :3",
-        class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
-      <span class="shadow-sm rounded-r-md border bg-rose-50 border-rose-300 px-3 py-2 w-min whitespace-nowrap">
-        <%= @prescription.form.name.pluralize %>
-      </span>
+    <div class="mt-5 mb-1">
+      <%= form.label :amount_taken, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <div class="flex">
+        <%= form.number_field :amount_taken,
+          required: true,
+          autofocus: true,
+          step: "any",
+          min: 0.001,
+          data: { dose_form_target: "input", action: "dose-form#updateOutput" },
+          placeholder: "How many did ya take :3",
+          class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+       <span class="shadow-sm rounded-r-md border bg-rose-50 border-rose-300 px-3 py-2 w-min whitespace-nowrap">
+          <%= @prescription.form.name.pluralize %>
+        </span>
+      </div>
     </div>
     <div class="no-js:hidden ml-1 mb-3 text-sm text-rose-400 font-medium" data-dose-form-target="output"></div>
 
     <div class="my-5">
+      <%= form.label :taken_at, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.datetime_field :taken_at,
         required: true,
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
