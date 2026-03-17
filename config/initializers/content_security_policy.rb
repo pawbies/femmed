@@ -11,14 +11,14 @@ Rails.application.configure do
     policy.img_src     :self, :https, :data
     policy.object_src  :none
     policy.script_src  :self, :https
-    policy.style_src   :self, :https
+    policy.style_src   :self, :https, :unsafe_inline
     # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
   end
 
   # Generate session nonces for permitted importmap, inline scripts, and inline styles.
   config.content_security_policy_nonce_generator = ->(_request) { SecureRandom.base64(16) }
-  config.content_security_policy_nonce_directives = %w[script-src style-src]
+  config.content_security_policy_nonce_directives = %w[script-src]
 
   # Automatically add `nonce` to `javascript_tag`, `javascript_include_tag`, and `stylesheet_link_tag`
   # if the corresponding directives are specified in `content_security_policy_nonce_directives`.

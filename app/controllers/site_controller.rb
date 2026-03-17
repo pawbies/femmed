@@ -4,11 +4,6 @@ class SiteController < ApplicationController
   before_action :require_admin, only: :admin
   layout "sessions", only: :landing
 
-  content_security_policy only: :index do |policy|
-    policy.style_src :self, :https, :unsafe_inline
-  end
-  before_action :disable_css_nonce, only: :index
-
   def index
     @prescriptions = Current.user.prescriptions.includes(
       { medication_version: { medication_version_ingredients: :active_ingredient } },
@@ -66,9 +61,5 @@ class SiteController < ApplicationController
   private
     def redirect_to_landing_unless_authenticated
       redirect_to :landing unless authenticated?
-    end
-
-    def disable_css_nonce
-     request.content_security_policy_nonce_directives = %w[script-src]
     end
 end
