@@ -31,8 +31,9 @@
     <% end %>
 
     <div class="my-5">
+      <%= form.label :added_name, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.text_field :added_name,
-        placeholder: "This version's name",
+        placeholder: "eg. 5mg",
         required: true,
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
@@ -40,15 +41,13 @@
     <%= form.fields_for :medication_version_ingredients do |ingredient_form| %>
       <div class="mb-3">
         <%= ingredient_form.hidden_field :active_ingredient_id, value: ingredient_form.object.active_ingredient.id %>
-        <%= ingredient_form.label :amount, ingredient_form.object.active_ingredient.name, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+        <%= ingredient_form.label :amount, "Amount of #{ingredient_form.object.active_ingredient.name}", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
         <div class="flex items-center">
-        <%= ingredient_form.number_field :amount,
-          required: true,
-          step: "any",
-          min: 0.001,
-          placeholder: "How much #{ingredient_form.object.active_ingredient.name} is in there?",
-          class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
-
+          <%= ingredient_form.number_field :amount,
+            required: true,
+            step: "any",
+            min: 0.001,
+            class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
           <span class="shadow-sm rounded-r-md border bg-rose-50 border-rose-300 px-3 py-2 w-min whitespace-nowrap">
             <%= ingredient_form.select :unit, MedicationVersionIngredient.units.keys %>
           </span>
@@ -57,7 +56,7 @@
     <% end %>
 
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Add this thingy!",
+      <%= form.submit "Update #{@medication_version.full_name}",
         class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
     </div>
   <% end %>
