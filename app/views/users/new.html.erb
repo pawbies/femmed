@@ -25,6 +25,7 @@
     <% end %>
 
     <div class="my-5">
+      <%= form.label :email_address, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.email_field :email_address,
             required: true,
             autofocus: true,
@@ -33,12 +34,14 @@
             class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
     <div class="my-5">
+      <%= form.label :username, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.text_field :username,
         required: true,
         placeholder: admin? ? "This users username" : "Whatever you wanna be called around here Nyaaa",
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
     <div class="my-5">
+      <%= form.label :password, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.password_field :password,
         required: true,
         autocomplete: "new-password",
@@ -47,6 +50,7 @@
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
     <div class="my-5">
+      <%= form.label :password_confirmation, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.password_field :password_confirmation,
         required: true,
         autocomplete: "new-password",

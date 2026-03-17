@@ -14,15 +14,25 @@
     <% end %>
 
     <div class="my-5">
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Your email address goes here :3", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+      <%= form.label :email_address, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.email_field :email_address,
+        required: true,
+        autofocus: true,
+        autocomplete: "username",
+        placeholder: "Your email address goes here :3",
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
     <div class="my-5">
-      <%= form.text_field :username, required: true, placeholder: "Whatever you wanna be called around here Nyaaa", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+      <%= form.label :username, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.text_field :username,
+        required: true,
+        placeholder: "Whatever you wanna be called around here Nyaaa",
+        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
 
     <div class="my-5">
-      <p class="text-sm text-gray-500 mb-3">Choose your profile picture</p>
-      <div class="flex gap-3 justify-center">
+      <%= form.label :pfp, "Choose your cute profile picture", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <div class="mt-2 flex gap-3 justify-center">
         <% User.pfps.keys.each do |pfp| %>
           <label class="cursor-pointer">
             <%= form.radio_button :pfp, pfp, class: "sr-only peer" %>
