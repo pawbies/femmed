@@ -49,6 +49,7 @@ env:
     SOLID_QUEUE_IN_PUMA: true
 
     FEMMED_PUBLIC: false
+    APP_HOST: femmed.pawbies.net
 
     # Set number of processes dedicated to Solid Queue (default: 1)
     # JOB_CONCURRENCY: 3
@@ -89,8 +90,8 @@ builder:
   # remote: ssh://docker@docker-builder-server
   #
   # # Pass arguments and secrets to the Docker build process
-  # args:
-  #   RUBY_VERSION: ruby-3.4.1
+  args:
+    RUBY_VERSION: ruby-3.4.1
   # secrets:
   #   - GITHUB_TOKEN
   #   - RAILS_MASTER_KEY
