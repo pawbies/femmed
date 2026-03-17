@@ -16,15 +16,22 @@
     <% end %>
 
     <div class="my-5">
+      <%= form.label :name, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.text_field :name,
-        placeholder: "What's it called?",
+        placeholder: "eg. Super Femboy Drug",
         required: true,
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
 
     <div class="flex flex-col justify-center md:flex-row md:justify-around">
-      <%= form.select :form_id, Form.all.order(:name).map { |f| [f.name, f.id] }, { include_blank: "Select a form" }, { class: "my-2 border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
-      <%= form.select :labeler_id, Labeler.all.order(:name).map { |l| [l.name, l.id] }, { include_blank: "Select a labeler (optional)" }, { class: "my-2 border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
+      <div class="w-full md:mr-1">
+        <%= form.label :form_id, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+        <%= form.select :form_id, Form.all.order(:name).map { |f| [f.name, f.id] }, {}, { class: "w-full my-2 border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
+      </div>
+      <div class="w-full md:ml-1">
+        <%= form.label :labeler_id, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+        <%= form.select :labeler_id, Labeler.all.order(:name).map { |l| [l.name, l.id] }, { include_blank: "-- None --" }, { class: "w-full my-2 border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
+      </div>
     </div>
 
     <div class="my-5">
@@ -39,8 +46,8 @@
     <div class="my-5">
       <%= form.label :medication_release_profile, "Release Profile", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.fields_for :medication_release_profile do |rp_form| %>
-        <%= rp_form.select :release_profile_id, ReleaseProfile.all.order(:name).map { |rp| [rp.name, rp.id] },
-          { include_blank: "Select a release profile" },
+        <%= rp_form.select :release_profile_id, ReleaseProfile.all.order(name: :desc).map { |rp| [rp.name, rp.id] },
+          { default: "Immediate" },
           { data: { action: "new-medication#update", new_medication_target: "rpSelect" }, class: "my-2 border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300 w-full" } %>
         <div class="flex gap-3 mt-2">
           <%= rp_form.number_field :delay,
@@ -67,13 +74,14 @@
     </div>
 
     <div class="my-5">
+      <%= form.label :notes, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.rich_textarea :notes,
-        placeholder: "Explanation for this medication",
+        placeholder: "I like boissss",
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full min-h-32 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" %>
     </div>
 
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Add this thingy!",
+      <%= form.submit "Add medication",
         class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
     </div>
   <% end %>
