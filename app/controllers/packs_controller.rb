@@ -5,7 +5,8 @@ class PacksController < ApplicationController
   before_action :require_pack_tracking_enabled
 
   def new
-    @pack = @prescription.packs.new(acquired_at: Date.today)
+    last_amount = @prescription.packs.last.amount unless @prescription.packs.empty?
+    @pack = @prescription.packs.new(acquired_at: Date.today, amount: last_amount)
   end
 
   def create
