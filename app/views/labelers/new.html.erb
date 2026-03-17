@@ -16,14 +16,15 @@
     <% end %>
 
     <div class="my-5">
+      <%= form.label :name, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.text_field :name,
-        placeholder: "Name of this institution",
+        placeholder: "eg. Femboy Bussy Institute",
         required: true,
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
     </div>
 
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Add this thingy!",
+      <%= form.submit "Add labeler!",
         class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
     </div>
   <% end %>
