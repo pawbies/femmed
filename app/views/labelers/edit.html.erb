@@ -1,5 +1,5 @@
 <div class="w-full">
-  <h1 class="font-bold text-3xl text-center">Edit labeler <%= @labeler.name %></h1>
+  <h1 class="font-semibold text-3xl text-center text-gray-800">Edit labeler <%= @labeler.name %></h1>
 
   <%= form_with model: @labeler, class: "mt-10 mx-auto max-w-md" do |form| %>
     <% if @labeler.errors.any? %>
@@ -20,12 +20,12 @@
       <%= form.text_field :name,
         placeholder: "eg. Femboy Bussy Institute",
         required: true,
-        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
 
     <div class="mt-8 flex justify-center">
       <%= form.submit "Update :3",
-        class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+        class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>
 </div>

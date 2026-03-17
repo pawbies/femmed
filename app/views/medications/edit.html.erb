@@ -1,5 +1,5 @@
 <div class="w-full">
-  <h1 class="font-bold text-3xl text-center">Edit <%= @medication.name %></h1>
+  <h1 class="font-semibold text-3xl text-center text-gray-800">Edit <%= @medication.name %></h1>
 
   <%= form_with model: @medication, class: "mt-10 mx-auto max-w-lg", data: { controller: "new-medication" } do |form| %>
     <% if @medication.errors.any? %>
@@ -20,7 +20,7 @@
       <%= form.text_field :name,
         placeholder: "eg. Super Femboy Drug",
         required: true,
-        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
 
     <div class="flex flex-col justify-center md:flex-row md:justify-around">
@@ -82,7 +82,7 @@
 
     <div class="mt-8 flex justify-center">
       <%= form.submit "Update #{@medication.name}!",
-        class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+        class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>
 </div>

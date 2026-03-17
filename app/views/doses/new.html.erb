@@ -1,5 +1,5 @@
 <div class="w-full">
-  <h1 class="font-bold text-center text-3xl">New dose of <%= @prescription.full_name %></h1>
+  <h1 class="font-semibold text-center text-3xl text-gray-800">New dose of <%= @prescription.full_name %></h1>
   <% if @prescription.pack_tracking_enabled? %>
     <p class="text-center text-xl text-zinc-500">
       <%= "#{format("%g", @prescription.remaining_units)} #{@prescription.form.name.pluralize(@prescription.remaining_units)}" %> remaining
@@ -31,8 +31,8 @@
           min: 0.001,
           data: { dose_form_target: "input", action: "dose-form#updateOutput" },
           placeholder: "How many did ya take :3",
-          class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
-       <span class="shadow-sm rounded-r-md border bg-rose-50 border-rose-300 px-3 py-2 w-min whitespace-nowrap">
+          class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+       <span class="shadow-sm rounded-r-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-min whitespace-nowrap">
           <%= @prescription.form.name.pluralize %>
         </span>
       </div>
@@ -43,12 +43,12 @@
       <%= form.label :taken_at, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.datetime_field :taken_at,
         required: true,
-        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
     </div>
 
     <div class="mt-8 flex justify-center">
       <%= form.submit "Yummy!",
-        class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+        class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>
 </div>

@@ -1,6 +1,6 @@
 <div class="w-full">
   <div class="flex flex-col md:flex-row justify-between">
-    <h3 class="text-3xl md:w-2/3"><%= @labeler.name %></h3>
+    <h3 class="text-3xl font-semibold text-gray-800 md:w-2/3"><%= @labeler.name %></h3>
     <% if admin? %>
       <div class="my-6 md:my-0 flex items-center gap-2">
         <%= link_to edit_labeler_path(@labeler), class: "inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300 transition-colors" do %>

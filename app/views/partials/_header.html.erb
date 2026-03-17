@@ -9,7 +9,7 @@
       <div class="relative flex items-center" data-controller="profile">
         <%= image_tag Current.user.profile_picture, data: { action: "click->profile#toggle" }, alt: "Profile picture", class: "hover:cursor-pointer rounded-full border border-black aspect-square h-14" %>
 
-        <div data-profile-target="popup" class="hidden absolute top-16 right-0 py-2 px-4 rounded-md border border-rose-300 bg-rose-100">
+        <div data-profile-target="popup" class="hidden absolute top-16 right-0 py-2 px-4 rounded-xl border border-rose-300 bg-rose-50 shadow-md">
           <%= link_to "Profile", Current.user, class: "text-lg font-semibold" %>
           <%= button_to "Log out", session_path, method: :delete, class: "hover:cursor-pointer text-nowrap text-lg text-red-500 font-semibold" %>
         </div>

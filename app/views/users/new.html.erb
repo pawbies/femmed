@@ -2,10 +2,10 @@
 
   <% unless authenticated? && admin? %>
     <img src="/icon.svg" alt="FemMed Logo" class="mx-auto aspect-square max-w-32">
-    <h1 class="mt-6 text-center font-bold text-4xl">Register</h1>
-    <h2 class="mt-3 text-center text-2xl">Welcome aboard!</h2>
+    <h1 class="mt-6 text-center font-semibold text-3xl text-gray-800">Register</h1>
+    <h2 class="mt-3 text-center text-xl text-gray-500">Welcome aboard!</h2>
   <% else %>
-    <h1 class="font-bold text-center text-3xl">Create new user</h1>
+    <h1 class="font-semibold text-center text-3xl text-gray-800">Create new user</h1>
   <% end %>
 
   <%= form_with model: @user, class: "mt-10 mx-auto max-w-md" do |form| %>
@@ -31,14 +31,14 @@
             autofocus: true,
             autocomplete: "username",
             placeholder: admin? ? "This users email" : "Your email address goes here :3",
-            class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+            class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
     <div class="my-5">
       <%= form.label :username, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.text_field :username,
         required: true,
         placeholder: admin? ? "This users username" : "Whatever you wanna be called around here Nyaaa",
-        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
     <div class="my-5">
       <%= form.label :password, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
@@ -47,7 +47,7 @@
         autocomplete: "new-password",
         placeholder: admin? ? "This users password" : "Your new super secure password",
         maxlength: 72,
-        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
     <div class="my-5">
       <%= form.label :password_confirmation, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
@@ -55,7 +55,7 @@
         required: true,
         autocomplete: "new-password",
         placeholder: admin? ? "This users password confirmation" : "Repeat it once just to be sure",
-        maxlength: 72, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+        maxlength: 72, class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
     <div class="my-5 flex items-start gap-3">
       <%= form.check_box :terms_of_service, required: true, class: "mt-1 accent-rose-400 w-4 h-4 shrink-0 cursor-pointer" %>
@@ -64,7 +64,7 @@
       <% end %>
     </div>
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Come in!", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+      <%= form.submit "Come in!", class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>
 

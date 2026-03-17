@@ -1,4 +1,4 @@
-<h1 class="text-2xl font-semibold">Settings</h1>
+<h1 class="text-2xl font-semibold text-gray-800 pb-3 border-b border-rose-100 mb-8">Settings</h1>
 <section class="mt-8">
   <h2 class="text-xs font-semibold uppercase tracking-widest text-rose-400 mb-4">General</h2>
   <div class="rounded-xl border border-zinc-200 bg-white p-6">
@@ -9,8 +9,8 @@
           min: 0.001,
           required: true,
           step: "any",
-          class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
-        <span class="shadow-sm rounded-r-md border border-l-0 bg-rose-50 border-rose-300 px-3 py-2 text-gray-500 text-sm whitespace-nowrap">
+          class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap">
           <%= @prescription.medication_version.form.name.pluralize %>
         </span>
       </div>
@@ -21,8 +21,8 @@
           min: 0,
           required: true,
           step: "any",
-          class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
-        <span class="shadow-sm rounded-r-md border border-l-0 bg-rose-50 border-rose-300 px-3 py-2 text-gray-500 text-sm whitespace-nowrap">
+          class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap">
           Hours
         </span>
       </div>
@@ -33,8 +33,8 @@
         <%= form.number_field :preview_future,
           required: true,
           step: "any",
-          class: "shadow-sm rounded-l-md border bg-rose-50 border-rose-300 px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
-        <span class="shadow-sm rounded-r-md border border-l-0 bg-rose-50 border-rose-300 px-3 py-2 text-gray-500 text-sm whitespace-nowrap">
+          class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap">
           Hours
         </span>
       </div>
@@ -79,7 +79,7 @@
       </div>
 
       <div class="mt-5 pt-4 border-t border-zinc-100 flex justify-end">
-        <%= form.submit "Save changes", class: "rounded-md px-5 py-2 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium transition-colors" %>
+        <%= form.submit "Save changes", class: "rounded-lg px-5 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
       </div>
     <% end %>
   </div>

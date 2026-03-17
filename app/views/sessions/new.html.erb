@@ -1,7 +1,7 @@
 <div class="w-full">
   <img src="/icon.svg" alt="FemMed Logo" class="mx-auto aspect-square max-w-32">
-  <h1 class="mt-6 text-center font-bold text-4xl">Login</h1>
-  <h2 class="mt-3 text-center text-2xl">Welcome back!</h2>
+  <h1 class="mt-6 text-center font-semibold text-3xl text-gray-800">Login</h1>
+  <h2 class="mt-3 text-center text-xl text-gray-500">Welcome back!</h2>
 
   <%= form_with url: session_url, class: "mt-10 mx-auto max-w-md" do |form| %>
     <div class="my-5">
@@ -12,14 +12,14 @@
         autocomplete: "username",
         placeholder: "kisser@boys.example :3",
         value: params[:email_address],
-        class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
     <div class="my-5">
       <%= form.label :password, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
-      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "And your password goes here hehe", maxlength: 72, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full" %>
+      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "And your password goes here hehe", maxlength: 72, class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Come in!", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+      <%= form.submit "Come in!", class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>
 

@@ -1,8 +1,8 @@
 <div class="w-full">
   <div class="flex flex-col md:flex-row justify-between">
-    <h3 class="text-3xl md:w-2/3">
+    <h3 class="text-3xl font-semibold text-gray-800 md:w-2/3">
       <%= @medication.name %>
-      <span class="text-black/50 italic">
+      <span class="text-gray-400 italic font-normal">
         - <%= @medication.active_ingredients.pluck(:name).join(", ") %>
       </span>
     </h3>
@@ -118,7 +118,7 @@
   </turbo-frame>
 
   <section class="mt-12">
-    <h3 class="text-2xl">Versions</h3>
+    <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">Versions</h3>
     <div class="overflow-x-auto -mx-4 px-4">
       <table class="w-full mt-3 text-sm">
         <thead>

@@ -1,7 +1,7 @@
 <section>
-  <h3 class="text-2xl">
+  <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
     Packs
-    <span class="text-black/50 italic">
+    <span class="text-gray-400 font-normal italic">
       <% unless @prescription.packs.empty? %>
         - <%= (Date.today - @prescription.packs.order(:acquired_at).last.acquired_at).to_i %>
         days since you got the last pack
@@ -44,7 +44,7 @@
 
 
 <section class="mt-12">
-  <h3 class="text-2xl">History</span>
+  <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">History</h3>
   <table class="w-full mt-3 text-sm">
     <thead>
       <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
