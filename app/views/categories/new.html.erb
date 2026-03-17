@@ -15,7 +15,8 @@
       </div>
     <% end %>
 
-    <div class="my-5 flex items-center">
+    <div class="my-5">
+      <%= form.label :name, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.text_field :name,
         required: true,
         autofocus: true,
