@@ -1,0 +1,7 @@
+de:
+  partials:
+    header:
+      logo_alt: "FemMed Logo"
+      profile_alt: "Profilbild"
+      profile: "Profile"
+      log_out: "Abmelden"

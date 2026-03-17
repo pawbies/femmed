@@ -1,31 +1,80 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      user: "User"
+      prescription: "Prescription"
+      dose: "Dose"
+      pack: "Pack"
+      medication: "Medication"
+      medication_version: "Medication version"
+      active_ingredient: "Active ingredient"
+      medication_version_ingredient: "Medication version ingredient"
+      medication_release_profile: "Medication release profile"
+      category: "Category"
+      form: "Form"
+      labeler: "Labeler"
+      release_profile: "Release profile"
+      session: "Session"
+    attributes:
+      user:
+        email_address: "Email address"
+        username: "Username"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        role: "Role"
+        pfp: "Profile picture"
+        language: "Language"
+        terms_of_service: "Terms of service"
+      prescription:
+        active: "Active"
+        amount: "Amount"
+        pack_tracking_enabled: "Pack tracking enabled"
+        preview_future: "Preview future (hours)"
+        preview_past: "Preview past (hours)"
+      dose:
+        amount_taken: "Amount taken"
+        taken_at: "Taken at"
+      pack:
+        acquired_at: "Acquired at"
+        amount: "Amount"
+      medication:
+        name: "Name"
+      medication_version:
+        added_name: "Added name"
+      active_ingredient:
+        name: "Name"
+        absorption_rate: "Absorption rate"
+        half_life: "Half-life"
+        volume_of_distribution: "Volume of distribution"
+      medication_version_ingredient:
+        amount: "Amount"
+        unit: "Unit"
+      medication_release_profile:
+        delay: "Delay"
+        release_duration: "Release duration"
+    errors:
+      messages:
+        accepted: "must be accepted"
+        blank: "can't be blank"
+        confirmation: "doesn't match %{attribute}"
+        empty: "can't be empty"
+        equal_to: "must be equal to %{count}"
+        even: "must be even"
+        exclusion: "is reserved"
+        greater_than: "must be greater than %{count}"
+        greater_than_or_equal_to: "must be greater than or equal to %{count}"
+        inclusion: "is not included in the list"
+        invalid: "is invalid"
+        less_than: "must be less than %{count}"
+        less_than_or_equal_to: "must be less than or equal to %{count}"
+        model_invalid: "Validation failed: %{errors}"
+        not_a_number: "is not a number"
+        not_an_integer: "must be an integer"
+        odd: "must be odd"
+        other_than: "must be other than %{count}"
+        present: "must be blank"
+        required: "must exist"
+        taken: "has already been taken"
+        too_long: "is too long (maximum is %{count} characters)"
+        too_short: "is too short (minimum is %{count} characters)"
+        wrong_length: "is the wrong length (should be %{count} characters)"

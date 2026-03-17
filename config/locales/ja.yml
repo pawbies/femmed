@@ -1,0 +1,80 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+      prescription: "処方箋"
+      dose: "投与"
+      pack: "パック"
+      medication: "薬"
+      medication_version: "薬のバージョン"
+      active_ingredient: "有効成分"
+      medication_version_ingredient: "薬バージョン成分"
+      medication_release_profile: "薬の放出プロファイル"
+      category: "カテゴリ"
+      form: "剤形"
+      labeler: "製造元"
+      release_profile: "放出プロファイル"
+      session: "セッション"
+    attributes:
+      user:
+        email_address: "メールアドレス"
+        username: "ユーザー名"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+        role: "役割"
+        pfp: "プロフィール画像"
+        language: "言語"
+        terms_of_service: "利用規約"
+      prescription:
+        active: "有効"
+        amount: "量"
+        pack_tracking_enabled: "パック管理有効"
+        preview_future: "将来プレビュー（時間）"
+        preview_past: "過去プレビュー（時間）"
+      dose:
+        amount_taken: "投与量"
+        taken_at: "投与日時"
+      pack:
+        acquired_at: "取得日"
+        amount: "量"
+      medication:
+        name: "名前"
+      medication_version:
+        added_name: "追加名"
+      active_ingredient:
+        name: "名前"
+        absorption_rate: "吸収率"
+        half_life: "半減期"
+        volume_of_distribution: "分布容積"
+      medication_version_ingredient:
+        amount: "量"
+        unit: "単位"
+      medication_release_profile:
+        delay: "遅延"
+        release_duration: "放出持続時間"
+    errors:
+      messages:
+        accepted: "を受諾してください"
+        blank: "を入力してください"
+        confirmation: "と%{attribute}の入力が一致しません"
+        empty: "を入力してください"
+        equal_to: "は%{count}にしてください"
+        even: "は偶数にしてください"
+        exclusion: "は使用できません"
+        greater_than: "は%{count}より大きい値にしてください"
+        greater_than_or_equal_to: "は%{count}以上の値にしてください"
+        inclusion: "は一覧にありません"
+        invalid: "は不正な値です"
+        less_than: "は%{count}より小さい値にしてください"
+        less_than_or_equal_to: "は%{count}以下の値にしてください"
+        model_invalid: "バリデーションに失敗しました: %{errors}"
+        not_a_number: "は数値で入力してください"
+        not_an_integer: "は整数で入力してください"
+        odd: "は奇数にしてください"
+        other_than: "は%{count}以外の値にしてください"
+        present: "は入力しないでください"
+        required: "を入力してください"
+        taken: "はすでに使用されています"
+        too_long: "は%{count}文字以内で入力してください"
+        too_short: "は%{count}文字以上で入力してください"
+        wrong_length: "は%{count}文字で入力してください"

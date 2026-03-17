@@ -1,30 +1,38 @@
 <div class="w-full">
   <div class="mb-6">
-    <h1 class="font-semibold hidden md:inline text-3xl text-gray-800">Welcome back <%= Current.user.username %></h1>
-    <h1 class="font-semibold md:hidden text-3xl text-gray-800">Home</h1>
+    <h1 class="font-semibold hidden md:inline text-3xl text-gray-800">
+      <%= t(".welcome_back", username: Current.user.username) %>
+    </h1>
+    <h1 class="font-semibold md:hidden text-3xl text-gray-800">
+      <%= t(".home") %>
+    </h1>
   </div>
 
   <%= render "nav" %>
 
   <section class="my-12" data-controller="live-search">
     <div class="mb-4">
-      <h3 class="text-3xl font-semibold text-gray-800">Search</h3>
+      <h3 class="text-3xl font-semibold text-gray-800">
+        <%= t(".search") %>
+      </h3>
     </div>
 
     <div class="relative">
       <%= form_with url: search_path, class: "mt-4 flex gap-2", method: :get do |form| %>
         <%= form.text_field :query,
-          placeholder: "Search for anything your heart desires ^w^",
+          placeholder: t(".search_placeholder"),
           data: { action: "input->live-search#search", live_search_target: "input" },
           class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
-        <%= form.submit "Yippie", class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+        <%= form.submit t(".yippie"), class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
       <% end %>
       <div id="search_results" class="absolute max-h-96 overflow-y-auto top-full left-0 right-0 z-50 mt-1 rounded-lg shadow-md bg-white"></div>
     </div>
   </section>
 
   <section class="mb-6 w-full">
-    <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">My medications</h3>
+    <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
+      <%= t(".my_medications") %>
+    </h3>
 
     <div class="mx-2 mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
       <%= render @prescriptions %>

@@ -1,0 +1,9 @@
+de:
+  site:
+    index:
+      welcome_back: "Willkommen zurück %{username}"
+      home: "Start"
+      search: "Suche"
+      search_placeholder: "Irgendwas tolles"
+      yippie: "Yippie"
+      my_medications: "Meine Medikamente"
