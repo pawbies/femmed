@@ -25,12 +25,35 @@ The easiest way to run femmed is with Docker. You'll need Docker installed, then
 ```bash
 git clone https://github.com/pawbies/femmed
 cd femmed
-mv .env.example .env # then edit the .env file
+cp .env.example .env
+```
+
+Open `.env` and fill in the required values. To generate the secret keys, run these commands inside the repo:
+
+```bash
+# Generate SECRET_KEY_BASE
+docker run --rm -it ruby:4.0.1-slim bin/rails secret
+
+# Generate the Active Record encryption keys
+docker run --rm -v "$PWD":/rails -w /rails ruby:3.4.1-slim bundle exec rails db:encryption:init
+```
+
+Or if you have Ruby installed locally:
+
+```bash
+bundle install
+bin/rails secret                  # → SECRET_KEY_BASE
+bin/rails db:encryption:init      # → the three ACTIVE_RECORD_ENCRYPTION_* keys
+```
+
+Once your `.env` is filled in, build and run:
+
+```bash
 docker build . -t femmed
 docker run --env-file .env -p 80:80 -v femmed_storage:/rails/storage femmed
 ```
 
-That's it. femmed will be running at `http://your-server-ip`.
+femmed will be running at `http://your-server-ip`.
 
 > **Don't lose your data:** The `-v femmed_storage:/rails/storage` volume mount is what keeps your database and uploads alive across updates. Don't skip it.
 
@@ -38,7 +61,7 @@ That's it. femmed will be running at `http://your-server-ip`.
 
 ## Updating
 
-With Docker, pull the latest image and restart:
+Pull the latest code and rebuild:
 
 ```bash
 git pull
