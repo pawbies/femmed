@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :settings
   resources :medications, shallow: true do
     resources :medication_versions
   end
