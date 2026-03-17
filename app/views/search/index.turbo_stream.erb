@@ -1,0 +1,57 @@
+<%= turbo_stream.update "search_results" do %>
+  <% if @query.present? %>
+    <div class="rounded-md border border-rose-200 divide-y divide-rose-100">
+
+      <% if @prescriptions.any? %>
+        <div class="px-4 py-2 text-xs font-medium text-rose-400 uppercase tracking-wide">Your prescriptions</div>
+        <% @prescriptions.each do |prescriptions| %>
+          <%= link_to prescriptions, class: "block px-4 py-3 hover:bg-rose-50 transition-colors" do %>
+            <span class="font-medium text-gray-900"><%= prescriptions.full_name %></span>
+          <% end %>
+        <% end %>
+      <% end %>
+
+
+      <% if @medications.any? %>
+        <div class="px-4 py-2 text-xs font-medium text-rose-400 uppercase tracking-wide">Medications</div>
+        <% @medications.each do |medication| %>
+          <%= link_to medication, class: "block px-4 py-3 hover:bg-rose-50 transition-colors" do %>
+            <span class="font-medium text-gray-900"><%= medication.name %></span>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if @active_ingredients.any? %>
+        <div class="px-4 py-2 text-xs font-medium text-rose-400 uppercase tracking-wide">Active Ingredients</div>
+        <% @active_ingredients.each do |active_ingredient| %>
+          <%= link_to active_ingredient, class: "block px-4 py-3 hover:bg-rose-50 transition-colors" do %>
+            <span class="font-medium text-gray-900"><%= active_ingredient.name %></span>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if @categories.any? %>
+        <div class="px-4 py-2 text-xs font-medium text-rose-400 uppercase tracking-wide">Categories</div>
+        <% @categories.each do |category| %>
+          <%= link_to category, class: "block px-4 py-3 hover:bg-rose-50 transition-colors" do %>
+            <span class="font-medium text-gray-900"><%= category.name %></span>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if @labelers.any? %>
+        <div class="px-4 py-2 text-xs font-medium text-rose-400 uppercase tracking-wide">Labelers</div>
+        <% @labelers.each do |labeler| %>
+          <%= link_to labeler, class: "block px-4 py-3 hover:bg-rose-50 transition-colors" do %>
+            <span class="font-medium text-gray-900"><%= labeler.name %></span>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if @medications.none? && @active_ingredients.none? && @categories.none? && @labelers.none? %>
+        <p class="px-4 py-3 text-sm text-gray-400">No results found for "<%= @query %>"</p>
+      <% end %>
+
+    </div>
+  <% end %>
+<% end %>

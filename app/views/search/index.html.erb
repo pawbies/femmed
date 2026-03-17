@@ -30,6 +30,16 @@
   <section class="mt-12">
     <h3 class="text-3xl border-b">Results</h3>
 
+     <% if @prescriptions.any? %>
+      <div class="mt-2 mb-2 flex items-center justify-between md:justify-start">
+        <h4 class="text-2xl">Your prescriptions</h4>
+      </div>
+      <div class="mt-4 grid grid-cols-2 xl:grid-cols-4 gap-3">
+        <%= render partial: "prescriptions/prescription", collection: @prescriptions, locals: { minimal: true } %>
+      </div>
+    <% end %>
+
+
     <% if @categories.any? %>
       <div class="mt-2 mb-2 flex items-center justify-between md:justify-start">
         <h4 class="text-2xl">Categories</h4>

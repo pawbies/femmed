@@ -4,19 +4,25 @@
 
   <%= render "nav" %>
 
-  <section class="my-12">
+  <section class="my-12" data-controller="live-search">
     <h3 class="text-3xl">Search</h3>
 
-    <%= form_with url: search_path, class: "mt-4 flex", method: :get do |form| %>
-      <%= form.text_field :query, placeholder: "Search for anything your heart desires ^w^", class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full mr-2" %>
-      <%= form.submit "Yippie", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
-    <% end %>
+    <div class="relative">
+      <%= form_with url: search_path, class: "mt-4 flex", method: :get do |form| %>
+        <%= form.text_field :query,
+          placeholder: "Search for anything your heart desires ^w^",
+          data: { action: "input->live-search#search", live_search_target: "input" },
+          class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full mr-2" %>
+        <%= form.submit "Yippie", class: "rounded-md px-6 py-3 bg-rose-400 hover:bg-rose-300 cursor-pointer font-medium" %>
+      <% end %>
+      <div id="search_results" class="absolute max-h-96 overflow-y-auto top-full left-0 right-0 z-50 mt-1 rounded-md shadow-md bg-white"></div>
+    </div>
   </section>
 
   <section class="mb-6 w-full">
     <h3 class="text-3xl">My medications</h3>
 
-    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+    <div class="mx-2 mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
       <%= render @prescriptions %>
     </div>
   </section>
