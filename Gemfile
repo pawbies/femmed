@@ -72,3 +72,5 @@ end
 gem "dotenv-rails", groups: [ :development, :test ]
 
 gem "local_time", "~> 3.0"
+
+gem "csv", "~> 3.3"

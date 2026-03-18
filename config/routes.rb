@@ -38,4 +38,8 @@ Rails.application.routes.draw do
   get "timeline" => "site#timeline"
   get "calendar" => "site#calendar"
   get "admin"    => "site#admin"
+
+  scope "/transfer", module: :transfer do
+    resource :export
+  end
 end

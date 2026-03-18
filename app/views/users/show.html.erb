@@ -2,8 +2,9 @@
   <%= image_tag @user.profile_picture, alt: "Profile picture", class: "mx-auto aspect-square max-w-32 rounded-full border" %>
   <h1 class="mt-6 text-center font-semibold text-3xl text-gray-800"><%= @user.username %></h1>
 
-  <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">
-    <%= link_to "Wanna change something?", edit_user_path(@user), class: "text-xl underline hover:no-underline" %>
+  <div class="mt-16 mx-auto md:max-w-2/3 flex flex-col md:flex-row justify-around items-center">
+    <%= link_to "Wanna change something?", edit_user_path(@user), class: "my-2 text-xl underline hover:no-underline" %>
+    <%= link_to "Export your data?", new_export_path, class: "my-2 text-xl underline hover:no-underline" %>
   </div>
 
   <% if hotwire_native_app? %>
