@@ -1,0 +1,7 @@
+de:
+  medications:
+    preview_graph:
+      pharmacokinetics: "Pharmakokinetik"
+      go: "Los"
+      single_dose_badge: "Einzeldosis · 24h"
+      not_available_for_pk: "Nicht für PK verfügbar"

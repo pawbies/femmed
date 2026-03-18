@@ -1,0 +1,15 @@
+en:
+  site:
+    calendar:
+      title: "Calendar"
+      month: "Month"
+      week: "Week"
+      view_day: "View day"
+      day_abbr:
+        - "Mon"
+        - "Tue"
+        - "Wed"
+        - "Thu"
+        - "Fri"
+        - "Sat"
+        - "Sun"

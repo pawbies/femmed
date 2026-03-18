@@ -7,3 +7,7 @@ en:
       search_placeholder: "Something cool"
       yippie: "Yippie"
       my_medications: "My medications"
+      current_concentrations: "Current concentrations"
+      ingredient: "Ingredient"
+      concentration: "Concentration"
+      trend: "Trend"

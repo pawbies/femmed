@@ -1,6 +1,6 @@
 <div class="w-full">
   <div class="mb-6">
-    <h1 class="font-semibold text-3xl text-gray-800">Calendar</h1>
+    <h1 class="font-semibold text-3xl text-gray-800"><%= t(".title") %></h1>
   </div>
 
   <%= render "nav" %>
@@ -23,15 +23,15 @@
     </div>
 
     <div class="mt-3 md:mt-0 flex rounded-lg border border-rose-200 overflow-hidden text-sm">
-      <%= link_to "Month", calendar_path(date: @date, mode: "month"), class: "px-4 py-1.5 transition-colors #{@mode == 'month' ? 'bg-rose-400 text-white font-medium' : 'text-rose-400 hover:bg-rose-50'}" %>
-      <%= link_to "Week", calendar_path(date: @date, mode: "week"), class: "px-4 py-1.5 transition-colors #{@mode == 'week' ? 'bg-rose-400 text-white font-medium' : 'text-rose-400 hover:bg-rose-50'}" %>
+      <%= link_to t(".month"), calendar_path(date: @date, mode: "month"), class: "px-4 py-1.5 transition-colors #{@mode == 'month' ? 'bg-rose-400 text-white font-medium' : 'text-rose-400 hover:bg-rose-50'}" %>
+      <%= link_to t(".week"), calendar_path(date: @date, mode: "week"), class: "px-4 py-1.5 transition-colors #{@mode == 'week' ? 'bg-rose-400 text-white font-medium' : 'text-rose-400 hover:bg-rose-50'}" %>
     </div>
   </div>
 
   <% if @mode == "month" %>
     <div class="w-full mx-auto lg:w-2/3 xl:w-1/2">
       <div class="grid grid-cols-7 mb-2">
-        <% %w[Mon Tue Wed Thu Fri Sat Sun].each do |day| %>
+        <% t(".day_abbr").each do |day| %>
           <div class="text-center text-xs font-medium text-gray-400 py-2"><%= day %></div>
         <% end %>
       </div>
@@ -69,7 +69,7 @@
               </span>
             </div>
             <%= link_to timeline_path(date: day), class: "text-xs text-rose-400 hover:underline" do %>
-              View day &#8594;
+              <%= t(".view_day") %> &#8594;
             <% end %>
           </div>
         <% end %>

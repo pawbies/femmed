@@ -1,0 +1,8 @@
+de:
+  prescriptions:
+    show:
+      log: "Protokoll"
+      packs: "Packungen"
+      routine: "Routine"
+      about: "Info"
+      settings: "Einstellungen"

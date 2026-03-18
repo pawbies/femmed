@@ -1,5 +1,5 @@
 <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
-  About
+  <%= t(".title") %>
 </h3>
 
 <div>
@@ -20,7 +20,7 @@
 <% end %>
 
 <div class="mt-12">
-  <h3 class="text-xs font-semibold tracking-widest uppercase text-rose-400 mb-3">Your Version</h3>
+  <h3 class="text-xs font-semibold tracking-widest uppercase text-rose-400 mb-3"><%= t(".your_version") %></h3>
   <p class="text-gray-800 font-medium">
     <%= @prescription.medication.name %> <%= @prescription.medication_version.added_name %>
   </p>
@@ -43,7 +43,7 @@
 
 <% if @prescription.medication.categories.any? %>
   <div class="mt-12">
-    <h3 class="text-xs font-semibold tracking-widest uppercase text-rose-400 mb-3">Categories</h3>
+    <h3 class="text-xs font-semibold tracking-widest uppercase text-rose-400 mb-3"><%= t(".categories") %></h3>
     <div class="flex flex-wrap gap-2">
       <%= render @prescription.medication.categories %>
     </div>

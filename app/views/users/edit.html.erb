@@ -5,7 +5,7 @@
   <%= form_with model: @user, class: "mt-10" do |form| %>
     <div class="mx-auto max-w-md">
     <% if @user.errors.any? %>
-      <h3 class="text-xl text-center text-red-500">Couldn't register you :(</h3>
+      <h3 class="text-xl text-center text-red-500"><%= t(".error_heading") %></h3>
       <ul class="list-disc">
         <% @user.errors.full_messages.each do |error| %>
           <li class="text-red-500"><%= error %></li>
@@ -19,19 +19,19 @@
         required: true,
         autofocus: true,
         autocomplete: "username",
-        placeholder: "Your email address goes here :3",
+        placeholder: t(".email_placeholder"),
         class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
     <div class="my-5">
       <%= form.label :username, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.text_field :username,
         required: true,
-        placeholder: "Whatever you wanna be called around here Nyaaa",
+        placeholder: t(".username_placeholder"),
         class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
 
     <div class="my-5">
-      <%= form.label :pfp, "Choose your cute profile picture", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.label :pfp, t(".pfp_label"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <div class="mt-2 flex gap-3 justify-center">
         <% User.pfps.keys.each do |pfp| %>
           <label class="cursor-pointer">
@@ -53,8 +53,8 @@
     <% if admin? && @user.id != Current.user.id %>
       <div class="my-5 flex items-center justify-between p-4 bg-rose-50 border border-rose-200 rounded-lg">
         <div>
-          <p class="font-medium text-rose-700">Admin access</p>
-          <p class="text-sm text-gray-500">Grants full administrative privileges</p>
+          <p class="font-medium text-rose-700"><%= t(".admin_access") %></p>
+          <p class="text-sm text-gray-500"><%= t(".admin_access_desc") %></p>
         </div>
         <label class="relative inline-flex items-center cursor-pointer">
           <%= form.check_box :role, { class: "sr-only peer", checked: @user.admin? }, "admin", "user" %>
@@ -64,12 +64,12 @@
     <% end %>
 
     <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">
-      <%= form.submit "Apply my awesome changes!", class: "hover:cursor-pointer text-xl underline hover:no-underline" %>
-      <%= link_to "Revert everything!", @user, class: "text-xl underline hover:no-underline" %>
+      <%= form.submit t(".submit"), class: "hover:cursor-pointer text-xl underline hover:no-underline" %>
+      <%= link_to t(".revert"), @user, class: "text-xl underline hover:no-underline" %>
     </div>
   <% end %>
 
   <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">
-    <%= button_to "Delete account! (please don't)", @user, method: :delete, data: { turbo_confirm: "Are you sure? :(" }, class: "hover:cursor-pointer text-red-500 text-xl underline hover:no-underline" %>
+    <%= button_to t(".delete"), @user, method: :delete, data: { turbo_confirm: t(".confirm_delete") }, class: "hover:cursor-pointer text-red-500 text-xl underline hover:no-underline" %>
   </div>
 </div>

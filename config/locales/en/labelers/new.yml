@@ -1,0 +1,16 @@
+en:
+  labelers:
+    new:
+      title: "New labeler"
+      error_count:
+        one: "1 error prohibited this labeler from being saved:"
+        other: "%{count} errors prohibited this labeler from being saved:"
+      name_placeholder: "eg. Femboy Bussy Institute"
+      submit: "Add labeler!"
+    edit:
+      title: "Edit labeler %{name}"
+      error_count:
+        one: "1 error prohibited this labeler from being saved:"
+        other: "%{count} errors prohibited this labeler from being saved:"
+      name_placeholder: "eg. Femboy Bussy Institute"
+      submit: "Update :3"

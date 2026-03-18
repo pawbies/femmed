@@ -1,0 +1,11 @@
+en:
+  transfer:
+    exports:
+      new:
+        title: "Export your data"
+        subtitle: "Choose what to include in your export."
+        prescriptions_label: "Prescriptions"
+        prescriptions_desc: "Your active and inactive prescriptions"
+        profile_label: "Profile"
+        profile_desc: "Your account and preferences"
+        submit: "Export"

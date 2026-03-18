@@ -1,0 +1,15 @@
+en:
+  prescriptions:
+    pages:
+      routine:
+        title: "Routine"
+        set_routine: "Set routine"
+        schedule: "Schedule"
+        starting: "Starting"
+        edit_routine: "Edit routine"
+        remove_routine: "Remove routine"
+        upcoming: "Upcoming"
+        day: "Day"
+        date: "Date"
+        time: "Time"
+        no_routine: "No routine set yet"

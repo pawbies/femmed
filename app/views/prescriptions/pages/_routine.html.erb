@@ -1,26 +1,26 @@
 <div class="flex justify-between items-center pb-3 border-b border-rose-100 mb-8">
   <h3 class="text-2xl font-semibold text-gray-700">
-    Routine
+    <%= t(".title") %>
   </h3>
 
   <% unless @prescription.routine.present? %>
-    <%= link_to "Set routine", new_prescription_routine_path(@prescription), target: "_top", class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+    <%= link_to t(".set_routine"), new_prescription_routine_path(@prescription), target: "_top", class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
   <% end %>
 </div>
 
 <% if @prescription.routine.present? %>
     <div class="rounded-lg border border-zinc-300 p-4">
-      <p class="text-xs uppercase tracking-widest text-rose-300 mb-2">Schedule</p>
+      <p class="text-xs uppercase tracking-widest text-rose-300 mb-2"><%= t(".schedule") %></p>
       <p class="text-xl font-bold text-gray-900"><%= @prescription.routine.to_s.capitalize %></p>
-      <p class="text-xs text-gray-500 mt-1">Starting <%= @prescription.routine.start_time.strftime("%-d %B %Y") %></p>
+      <p class="text-xs text-gray-500 mt-1"><%= t(".starting") %> <%= @prescription.routine.start_time.strftime("%-d %B %Y") %></p>
     </div>
 
     <div class="flex gap-3 mt-6">
-      <%= link_to "Edit routine",
+      <%= link_to t(".edit_routine"),
         edit_prescription_routine_path(@prescription),
         target: "_top",
         class: "rounded-md px-4 py-2 text-sm font-medium border border-zinc-200 text-gray-600 hover:bg-zinc-50 transition-colors" %>
-      <%= button_to "Remove routine",
+      <%= button_to t(".remove_routine"),
         prescription_routine_path(@prescription),
         method: :delete,
         target: "_top",
@@ -31,14 +31,14 @@
   <% upcoming = @prescription.routine.next_occurrences(7) rescue [] %>
   <% if upcoming.any? %>
     <section class="mt-12">
-      <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">Upcoming</h3>
+      <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8"><%= t(".upcoming") %></h3>
 
       <table class="w-full mt-3 text-sm">
         <thead>
           <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
-            <th class="pb-3 pr-8">Day</th>
-            <th class="pb-3 pr-8">Date</th>
-            <th class="pb-3">Time</th>
+            <th class="pb-3 pr-8"><%= t(".day") %></th>
+            <th class="pb-3 pr-8"><%= t(".date") %></th>
+            <th class="pb-3"><%= t(".time") %></th>
           </tr>
         </thead>
         <tbody class="divide-y divide-zinc-100">
@@ -54,5 +54,5 @@
     </section>
   <% end %>
 <% else %>
-  <p class="text-xl text-center">No routine set yet</p>
+  <p class="text-xl text-center"><%= t(".no_routine") %></p>
 <% end %>

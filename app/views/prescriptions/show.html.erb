@@ -3,29 +3,29 @@
 
   <turbo-frame id="prescriptions_page">
     <nav class="mt-8 mb-12 flex gap-8 border-b border-gray-200 overflow-x-scroll">
-      <%= link_to "Log", prescription_path(@prescription, page: "Log"),
+      <%= link_to t(".log"), prescription_path(@prescription, page: "Log"),
           class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
             params[:page].nil? || params[:page] == 'Log' ? 'border-b-2 border-rose-500 text-rose-600' : ''
           }" %>
 
       <% if @prescription.pack_tracking_enabled? %>
-        <%= link_to "Packs", prescription_path(@prescription, page: "Packs"),
+        <%= link_to t(".packs"), prescription_path(@prescription, page: "Packs"),
             class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
               params[:page] == 'Packs' ? 'border-b-2 border-rose-500 text-rose-600' : ''
             }" %>
       <% end %>
 
-      <%= link_to "Routine", prescription_path(@prescription, page: "Routine"),
+      <%= link_to t(".routine"), prescription_path(@prescription, page: "Routine"),
           class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
             params[:page] == 'Routine' ? 'border-b-2 border-rose-500 text-rose-600' : ''
           }" %>
 
-      <%= link_to "About", prescription_path(@prescription, page: "About"),
+      <%= link_to t(".about"), prescription_path(@prescription, page: "About"),
           class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
             params[:page] == 'About' ? 'border-b-2 border-rose-500 text-rose-600' : ''
           }" %>
 
-      <%= link_to "Settings", prescription_path(@prescription, page: "Settings"),
+      <%= link_to t(".settings"), prescription_path(@prescription, page: "Settings"),
           class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
             params[:page] == 'Settings' ? 'border-b-2 border-rose-500 text-rose-600' : ''
           }" %>

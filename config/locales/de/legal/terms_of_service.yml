@@ -1,0 +1,125 @@
+de:
+  legal:
+    terms_of_service:
+      title: "Nutzungsbedingungen"
+      last_updated: "Zuletzt aktualisiert: 16. März 2026"
+      s1_heading: "1. Annahme der Nutzungsbedingungen"
+      s1_body: >-
+        Durch die Erstellung eines Kontos oder die Nutzung von FemMed erklären Sie sich mit diesen
+        Nutzungsbedingungen einverstanden. Wenn Sie diesen Bedingungen nicht zustimmen, nutzen Sie
+        den Dienst bitte nicht. Wir behalten uns das Recht vor, diese Bedingungen jederzeit zu
+        aktualisieren — die weitere Nutzung von FemMed nach der Veröffentlichung von Änderungen
+        gilt als Zustimmung zu den überarbeiteten Bedingungen.
+      s2_heading: "2. Über FemMed"
+      s2_body1: >-
+        FemMed ist ein kostenloser, privat betriebener Medikamentenverwaltungsdienst. Er soll
+        Nutzern helfen, ihre persönlichen Medikamentenpläne zu organisieren und zu verfolgen.
+      s2_body2_html: >-
+        FemMed ist <span class="font-medium">kein medizinischer Dienst</span>. Er erteilt keinerlei
+        medizinische Ratschläge, Diagnosen oder Behandlungsempfehlungen. Nichts innerhalb der
+        Anwendung sollte als Ersatz für professionellen medizinischen Rat verstanden werden.
+        Konsultieren Sie immer eine qualifizierte medizinische Fachkraft, bevor Sie Entscheidungen
+        über Ihre Medikamente oder Gesundheit treffen.
+      s3_heading: "3. Nutzungsvoraussetzungen"
+      s3_body: >-
+        Sie müssen mindestens 16 Jahre alt sein, um FemMed nutzen zu dürfen, in Übereinstimmung
+        mit österreichischem Recht. Durch die Erstellung eines Kontos bestätigen Sie, dass Sie
+        diese Voraussetzung erfüllen. Wir behalten uns das Recht vor, Konten zu sperren oder zu
+        löschen, wenn wir Grund zur Annahme haben, dass diese Bedingung nicht erfüllt ist.
+      s4_heading: "4. Ihr Konto"
+      s4_body1: >-
+        Sie sind verantwortlich für die Vertraulichkeit Ihrer Anmeldedaten und für alle Aktivitäten,
+        die unter Ihrem Konto stattfinden. Verwenden Sie bitte ein starkes, einzigartiges Passwort
+        und teilen Sie Ihr Konto nicht mit anderen.
+      s4_contact_html: >-
+        Wenn Sie einen unbefugten Zugriff auf Ihr Konto vermuten, kontaktieren Sie uns bitte
+        umgehend unter <a href="mailto:contact@pawbies.net" class="underline">contact@pawbies.net</a>.
+      s4_deletion_before: >-
+        Sie können Ihr Konto jederzeit innerhalb der Anwendung löschen. Nach der Löschung werden
+        alle mit Ihrem Konto verbundenen personenbezogenen Daten innerhalb von 30 Tagen dauerhaft
+        aus unseren Systemen entfernt, gemäß unserer
+      s4_deletion_link: "Datenschutzerklärung"
+      s5_heading: "5. Nutzereingaben"
+      s5_intro: "FemMed ermöglicht es Ihnen, benutzerdefinierte Medikamente einzureichen, die nicht in unserer Datenbank vorhanden sind. Durch das Einreichen von Inhalten bestätigen Sie, dass:"
+      s5_item1: "Die von Ihnen bereitgestellten Informationen nach bestem Wissen korrekt sind"
+      s5_item2: "Sie keine falschen, irreführenden oder schädlichen Inhalte einreichen"
+      s5_item3: "Sie keine Rechte des geistigen Eigentums Dritter verletzen"
+      s5_footer: >-
+        Wir überprüfen die Richtigkeit von nutzereingereichten Medikamenteneinträgen nicht und
+        übernehmen keine Haftung für Fehler oder Auslassungen in von Ihnen bereitgestellten
+        Inhalten. Sie bleiben allein verantwortlich für die Informationen, die Sie in die Anwendung
+        eingeben.
+      s6_heading: "6. Zulässige Nutzung"
+      s6_intro: "Sie erklären sich damit einverstanden, FemMed nur für seinen vorgesehenen Zweck und in Übereinstimmung mit allen geltenden Gesetzen zu nutzen. Sie dürfen nicht:"
+      s6_item1: "Versuchen, unbefugten Zugriff auf Teile des Dienstes oder seine Infrastruktur zu erlangen"
+      s6_item2: "Den Dienst zur Speicherung oder Übertragung rechtswidriger, schädlicher oder betrügerischer Inhalte nutzen"
+      s6_item3: "Die Anwendung zurückentwickeln, dekompilieren oder anderweitig versuchen, den Quellcode zu extrahieren"
+      s6_item4: "Automatisierte Skripte, Bots oder Scraper zur Interaktion mit dem Dienst verwenden"
+      s6_item5: "Versuchen, die Leistung des Dienstes für andere Nutzer zu stören oder zu beeinträchtigen"
+      s6_footer: >-
+        Wir behalten uns das Recht vor, Konten, die gegen diese Bedingungen verstoßen, ohne
+        vorherige Ankündigung zu sperren oder dauerhaft zu kündigen.
+      s7_heading: "7. Verfügbarkeit des Dienstes"
+      s7_body: >-
+        FemMed wird kostenlos und auf einer „wie besehen"- und „wie verfügbar"-Basis bereitgestellt.
+        Wir geben keine Garantien hinsichtlich Betriebszeit, Verfügbarkeit oder unterbrechungsfreiem
+        Zugang zum Dienst. Wir können den Dienst jederzeit mit oder ohne Vorankündigung aussetzen,
+        ändern oder einstellen und übernehmen keine Haftung für etwaige daraus resultierende
+        Verluste oder Unannehmlichkeiten.
+      s8_heading: "8. Gewährleistungsausschluss"
+      s8_intro: >-
+        Im größtmöglichen gesetzlich zulässigen Umfang nach österreichischem und anwendbarem
+        EU-Recht wird FemMed ohne Gewährleistungen jeglicher Art, weder ausdrücklich noch
+        stillschweigend, bereitgestellt. Wir garantieren nicht, dass:
+      s8_item1: "Der Dienst Ihren spezifischen Anforderungen entspricht"
+      s8_item2: "Der Dienst fehlerfrei, sicher oder kontinuierlich verfügbar ist"
+      s8_item3: "Medikamentendaten innerhalb der Anwendung vollständig, aktuell oder korrekt sind"
+      s8_footer: "Die Nutzung des Dienstes erfolgt vollständig auf Ihr eigenes Risiko."
+      s9_heading: "9. Haftungsbeschränkung"
+      s9_body: >-
+        Im größtmöglichen gesetzlich zulässigen Umfang haftet Max Mustermann (Betreiber von FemMed)
+        nicht für direkte, indirekte, zufällige, Folge- oder besondere Schäden, die aus Ihrer
+        Nutzung des Dienstes oder der Unmöglichkeit der Nutzung entstehen — einschließlich, aber
+        nicht beschränkt auf gesundheitsbezogene Entscheidungen auf Grundlage von Informationen
+        innerhalb der Anwendung, Datenverlust oder Dienstunterbrechungen.
+      s9_footer: >-
+        Nichts in diesen Bedingungen schränkt die Haftung für grobe Fahrlässigkeit, vorsätzliches
+        Fehlverhalten oder Haftung ein, die nach österreichischem Verbraucherschutzrecht nicht
+        ausgeschlossen werden kann.
+      s10_heading: "10. Geistiges Eigentum"
+      s10_body1: >-
+        Alle originalen Inhalte, das Design und der Code von FemMed sind geistiges Eigentum von
+        Max Mustermann und durch österreichisches Urheberrecht geschützt. Sie dürfen keinen Teil
+        des Dienstes ohne vorherige schriftliche Genehmigung vervielfältigen, verbreiten oder
+        abgeleitete Werke daraus erstellen.
+      s10_body2: >-
+        Medikamentennamen, Herstellerinformationen und andere Referenzdaten können aus öffentlichen
+        Datenbanken oder Drittanbieterquellen stammen und unterliegen weiterhin den jeweiligen
+        Lizenzen und Eigentumsrechten.
+      s11_heading: "11. Datenschutz"
+      s11_before_link: "Ihre Nutzung von FemMed unterliegt auch unserer"
+      s11_privacy_link: "Datenschutzerklärung"
+      s11_after_link: ", die durch Verweis in diese Nutzungsbedingungen einbezogen wird. Durch die Nutzung von FemMed stimmen Sie der Erhebung und Verwendung Ihrer Daten wie darin beschrieben zu."
+      s12_heading: "12. Anwendbares Recht & Gerichtsstand"
+      s12_body1: >-
+        Diese Nutzungsbedingungen unterliegen dem Recht der Republik Österreich, ohne Rücksicht
+        auf Kollisionsnormen. Alle Streitigkeiten, die sich aus diesen Bedingungen oder Ihrer
+        Nutzung von FemMed ergeben, unterliegen der ausschließlichen Zuständigkeit der zuständigen
+        österreichischen Gerichte.
+      s12_body2: >-
+        Wenn Sie Verbraucher mit Wohnsitz in einem anderen EU-Mitgliedstaat sind, behalten Sie
+        das Recht, die zwingenden Verbraucherschutzbestimmungen Ihres Wohnsitzlandes in Anspruch
+        zu nehmen.
+      s13_heading: "13. Änderungen dieser Bedingungen"
+      s13_body: >-
+        Wir können diese Nutzungsbedingungen von Zeit zu Zeit aktualisieren. Bei wesentlichen
+        Änderungen werden wir Sie per E-Mail und/oder durch einen auffälligen Hinweis in der
+        Anwendung informieren. Das Datum am Anfang dieser Seite zeigt an, wann die Bedingungen
+        zuletzt aktualisiert wurden. Die weitere Nutzung von FemMed nach dem Inkrafttreten von
+        Änderungen gilt als Ihre Zustimmung zu den überarbeiteten Bedingungen.
+      s14_heading: "14. Kontakt"
+      s14_body: "Bei Fragen zu diesen Nutzungsbedingungen wenden Sie sich bitte an:"
+      s14_note: >-
+        Diese Nutzungsbedingungen wurden in Übereinstimmung mit österreichischem Recht erstellt,
+        einschließlich des E-Commerce-Gesetzes (ECG), des Konsumentenschutzgesetzes (KSchG) und
+        der anwendbaren EU-Verbraucherschutzrichtlinien.

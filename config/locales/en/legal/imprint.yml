@@ -1,0 +1,48 @@
+en:
+  legal:
+    imprint:
+      title: "Imprint"
+      subtitle: "Information obligations pursuant to § 5 ECG (E-Commerce-Gesetz) and § 25 MedienG (Mediengesetz)"
+      last_updated: "Last updated: 16. March 2026"
+      s1_heading: "1. Operator & Contact"
+      s1_name_label: "Name:"
+      s1_email_label: "Email:"
+      s2_heading: "2. Nature of the Service"
+      s2_body: >-
+        FemMed is a privately operated medication tracking service. It is not a medical device,
+        does not provide medical advice, and does not replace consultation with a qualified
+        healthcare professional. The service is provided for personal organisational purposes only.
+      s3_heading: "3. Regulatory Authority & Applicable Law"
+      s3_body: >-
+        FemMed is operated by a private individual and is not subject to a specific regulatory
+        authority or professional licensing requirement. The service is subject to Austrian law.
+        In matters of data protection, the competent supervisory authority is:
+      s3_authority_name: "Datenschutzbehörde (DSB)"
+      s3_authority_address: "Barichgasse 40–42, 1030 Vienna, Austria"
+      s4_heading: "4. Liability for Content"
+      s4_body: >-
+        The contents of this website have been created with the utmost care. However, we cannot
+        guarantee the accuracy, completeness, or timeliness of the information provided. As a
+        private service provider, we are responsible for our own content on these pages in
+        accordance with general law (§ 7 ECG). We are not obligated to monitor transmitted or
+        stored third-party information or to investigate circumstances that indicate illegal activity.
+      s5_heading: "5. Liability for Links"
+      s5_body: >-
+        This website may contain links to external third-party websites. We have no influence over
+        the content of those sites and therefore cannot accept any liability for them. The respective
+        provider or operator of each linked page is always responsible for its content. Linked pages
+        were checked for possible legal violations at the time of linking and no illegal content was
+        identified. Permanent monitoring of linked pages is not reasonable without concrete evidence
+        of a violation. If we become aware of any legal infringements, we will remove such links immediately.
+      s6_heading: "6. Copyright"
+      s6_body: >-
+        The content and works created by the site operator on this website are subject to Austrian
+        copyright law. Reproduction, processing, distribution, or any form of commercialisation
+        beyond the scope of copyright law requires the prior written consent of the author. Downloads
+        and copies of this site are permitted for private, non-commercial use only.
+      s7_heading: "7. Online Dispute Resolution"
+      s7_body_html: >-
+        The European Commission provides a platform for online dispute resolution (ODR), which can be
+        found at <a href="https://ec.europa.eu/consumers/odr" class="underline">ec.europa.eu/consumers/odr</a>.
+        We are not obligated to participate in dispute resolution proceedings before a consumer
+        arbitration board and do not voluntarily do so.

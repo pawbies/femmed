@@ -1,0 +1,22 @@
+en:
+  categories:
+    new:
+      title: "New category"
+      error_count:
+        one: "1 error prohibited this category from being saved:"
+        other: "%{count} errors prohibited this category from being saved:"
+      name_placeholder: "A very cute name"
+      medications_label: "Medications to add directly"
+      none: "None"
+      multi_hint: "Hold Ctrl / Cmd to select multiple"
+      submit: "UwU"
+    edit:
+      title: "Edit category %{name}"
+      error_count:
+        one: "1 error prohibited this category from being saved:"
+        other: "%{count} errors prohibited this category from being saved:"
+      name_placeholder: "A very cute name"
+      medications_label: "Medications to add directly"
+      none: "None"
+      multi_hint: "Hold Ctrl / Cmd to select multiple"
+      submit: "UwU"

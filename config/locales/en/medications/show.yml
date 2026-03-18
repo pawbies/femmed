@@ -1,0 +1,14 @@
+en:
+  medications:
+    show:
+      made_by: "Made by %{labeler}"
+      confirm_delete: "Are you sure? This will delete everyone's prescriptions as well o.O"
+      versions: "Versions"
+      name: "Name"
+      ingredients: "Ingredients"
+      add_remove: "Add/Remove"
+      actions: "Actions"
+      add: "+ Add"
+      remove: "- Remove"
+      confirm_remove_version: "Are you sure? This will remove everyone's prescriptions."
+      new_version: "New version"

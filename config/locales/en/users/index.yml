@@ -1,0 +1,9 @@
+en:
+  users:
+    index:
+      title: "All users on %{domain}"
+      registered: "registered"
+      username: "Username"
+      joined: "Joined"
+    row:
+      view: "+ View"

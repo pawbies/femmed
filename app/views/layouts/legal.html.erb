@@ -51,13 +51,13 @@
 
     <nav class="border-t border-zinc-200 bg-gray-50 py-4 text-xs text-gray-600">
       <div class="mx-auto max-w-7xl px-4 flex justify-center gap-6">
-        <%= link_to "Home", root_path, class: "hover:text-gray-900 transition-colors" %>
+        <%= link_to t("layouts.legal.home"), root_path, class: "hover:text-gray-900 transition-colors" %>
         <span class="text-gray-500">•</span>
-        <%= link_to "Imprint", imprint_path, class: "hover:text-gray-900 transition-colors" %>
+        <%= link_to t("layouts.legal.imprint"), imprint_path, class: "hover:text-gray-900 transition-colors" %>
         <span class="text-gray-500">•</span>
-        <%= link_to "Privacy Policy", privacy_path, class: "hover:text-gray-900 transition-colors" %>
+        <%= link_to t("layouts.legal.privacy"), privacy_path, class: "hover:text-gray-900 transition-colors" %>
         <span class="text-gray-500">•</span>
-        <%= link_to "Terms of Service", terms_of_service_path, class: "hover:text-gray-900 transition-colors" %>
+        <%= link_to t("layouts.legal.terms"), terms_of_service_path, class: "hover:text-gray-900 transition-colors" %>
       </div>
     </nav>
 

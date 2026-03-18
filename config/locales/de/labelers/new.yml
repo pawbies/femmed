@@ -1,0 +1,16 @@
+de:
+  labelers:
+    new:
+      title: "Neuer Hersteller"
+      error_count:
+        one: "1 Fehler hat verhindert, dass dieser Hersteller gespeichert wurde:"
+        other: "%{count} Fehler haben verhindert, dass dieser Hersteller gespeichert wurde:"
+      name_placeholder: "z.B. Femboy Bussy Institut"
+      submit: "Hersteller hinzufügen!"
+    edit:
+      title: "Hersteller %{name} bearbeiten"
+      error_count:
+        one: "1 Fehler hat verhindert, dass dieser Hersteller gespeichert wurde:"
+        other: "%{count} Fehler haben verhindert, dass dieser Hersteller gespeichert wurde:"
+      name_placeholder: "z.B. Femboy Bussy Institut"
+      submit: "Aktualisieren :3"

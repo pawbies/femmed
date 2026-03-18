@@ -1,12 +1,12 @@
 <div class="w-full">
-  <h3 class="text-3xl font-semibold text-gray-800">Export your data</h3>
-  <p class="mt-2 text-sm text-zinc-500">Choose what to include in your export.</p>
+  <h3 class="text-3xl font-semibold text-gray-800"><%= t(".title") %></h3>
+  <p class="mt-2 text-sm text-zinc-500"><%= t(".subtitle") %></p>
 
   <%= form_with url: export_path, data: { turbo: false }, class: "mt-8" do |form| %>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <% [
-        { key: :prescriptions, label: "Prescriptions", desc: "Your active and inactive prescriptions" },
-        { key: :profile,       label: "Profile",       desc: "Your account and preferences" },
+        { key: :prescriptions, label: t(".prescriptions_label"), desc: t(".prescriptions_desc") },
+        { key: :profile,       label: t(".profile_label"),       desc: t(".profile_desc") },
       ].each do |opt| %>
         <label class="relative flex items-start gap-3 p-4 rounded-xl border border-rose-200 bg-white cursor-pointer transition-all has-checked:border-rose-400 has-checked:bg-rose-50/50 has-checked:shadow-sm hover:border-rose-300">
           <%= form.check_box "data[#{opt[:key]}]",
@@ -21,7 +21,7 @@
     </div>
 
     <div class="mt-8">
-      <%= form.submit "Export", class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+      <%= form.submit t(".submit"), class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>
 </div>

@@ -1,0 +1,7 @@
+en:
+  labelers:
+    show:
+      confirm_delete: "Are you sure? No worries, this won't remove any medications, just remove this labeler from them :3"
+      version_count:
+        one: "version"
+        other: "versions"

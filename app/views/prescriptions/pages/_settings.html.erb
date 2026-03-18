@@ -1,9 +1,9 @@
-<h1 class="text-2xl font-semibold text-gray-800 pb-3 border-b border-rose-100 mb-8">Settings</h1>
+<h1 class="text-2xl font-semibold text-gray-800 pb-3 border-b border-rose-100 mb-8"><%= t(".title") %></h1>
 <section class="mt-8">
-  <h2 class="text-xs font-semibold uppercase tracking-widest text-rose-400 mb-4">General</h2>
+  <h2 class="text-xs font-semibold uppercase tracking-widest text-rose-400 mb-4"><%= t(".general") %></h2>
   <div class="rounded-xl border border-zinc-200 bg-white p-6">
     <%= form_with model: @prescription, data: { turbo_frame: "_top" } do |form| %>
-      <%= form.label :amount, "Planned amount per dose", class: "block text-sm font-medium text-gray-700 my-2" %>
+      <%= form.label :amount, t(".planned_amount"), class: "block text-sm font-medium text-gray-700 my-2" %>
       <div class="flex">
         <%= form.number_field :amount,
           min: 0.001,
@@ -15,7 +15,7 @@
         </span>
       </div>
 
-      <%= form.label :preview_past, "Preview into the past", class: "block text-sm font-medium text-gray-700 my-2" %>
+      <%= form.label :preview_past, t(".preview_past"), class: "block text-sm font-medium text-gray-700 my-2" %>
       <div class="flex">
         <%= form.number_field :preview_past,
           min: 0,
@@ -23,26 +23,26 @@
           step: "any",
           class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
         <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap">
-          Hours
+          <%= t(".hours") %>
         </span>
       </div>
 
 
-      <%= form.label :preview_future, "Preview into the future", class: "block text-sm font-medium text-gray-700 my-2" %>
+      <%= form.label :preview_future, t(".preview_future"), class: "block text-sm font-medium text-gray-700 my-2" %>
       <div class="flex">
         <%= form.number_field :preview_future,
           required: true,
           step: "any",
           class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
         <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap">
-          Hours
+          <%= t(".hours") %>
         </span>
       </div>
 
       <div class="flex items-center justify-between mt-5 pt-4 border-t border-zinc-100">
         <div>
-          <%= form.label :pack_tracking_enabled, "Enable pack tracking", class: "block text-sm font-medium text-gray-700" %>
-          <p class="text-xs text-gray-400 mt-0.5">Enables pack amount and date tracking</p>
+          <%= form.label :pack_tracking_enabled, t(".enable_pack_tracking"), class: "block text-sm font-medium text-gray-700" %>
+          <p class="text-xs text-gray-400 mt-0.5"><%= t(".pack_tracking_desc") %></p>
         </div>
         <label class="relative inline-flex items-center cursor-pointer">
           <%= form.check_box :pack_tracking_enabled, class: "sr-only peer" %>
@@ -61,8 +61,8 @@
 
       <div class="flex items-center justify-between mt-5 pt-4 border-t border-zinc-100">
         <div>
-          <%= form.label :active, "Active prescription", class: "block text-sm font-medium text-gray-700" %>
-          <p class="text-xs text-gray-400 mt-0.5">Enables dose tracking and reminders</p>
+          <%= form.label :active, t(".active_prescription"), class: "block text-sm font-medium text-gray-700" %>
+          <p class="text-xs text-gray-400 mt-0.5"><%= t(".active_prescription_desc") %></p>
         </div>
         <label class="relative inline-flex items-center cursor-pointer">
           <%= form.check_box :active, class: "sr-only peer" %>
@@ -79,21 +79,21 @@
       </div>
 
       <div class="mt-5 pt-4 border-t border-zinc-100 flex justify-end">
-        <%= form.submit "Save changes", class: "rounded-lg px-5 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+        <%= form.submit t(".save"), class: "rounded-lg px-5 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
       </div>
     <% end %>
   </div>
 </section>
 <section class="mt-8">
-  <h2 class="text-xs font-semibold uppercase tracking-widest text-red-400 mb-4">Danger Zone</h2>
+  <h2 class="text-xs font-semibold uppercase tracking-widest text-red-400 mb-4"><%= t(".danger_zone") %></h2>
   <div class="rounded-xl border border-red-200 bg-red-50 p-6 flex items-center justify-between gap-6">
     <div>
-      <p class="font-medium text-red-700">Remove this prescription</p>
-      <p class="text-sm text-red-400 mt-0.5">This will permanently delete all doses and packs associated with it.</p>
+      <p class="font-medium text-red-700"><%= t(".remove_label") %></p>
+      <p class="text-sm text-red-400 mt-0.5"><%= t(".remove_desc") %></p>
     </div>
-    <%= button_to "Remove prescription", @prescription,
+    <%= button_to t(".remove_button"), @prescription,
       method: :delete,
-      data: { turbo_confirm: "Are you sure?", turbo_frame: "_top" },
+      data: { turbo_confirm: t(".confirm_remove"), turbo_frame: "_top" },
       class: "shrink-0 rounded-md px-4 py-2 bg-white border border-red-300 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500 font-medium text-sm transition-colors cursor-pointer" %>
   </div>
 </section>

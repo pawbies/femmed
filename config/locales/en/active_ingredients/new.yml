@@ -1,0 +1,18 @@
+en:
+  active_ingredients:
+    new:
+      title: "New active ingredient"
+      error_count:
+        one: "1 error prohibited this from being saved:"
+        other: "%{count} errors prohibited this from being saved:"
+      pk_heading: "PK calculation values - optional"
+      hours_unit: "Hours"
+      submit: "Create"
+    edit:
+      title: "Edit active ingredient"
+      error_count:
+        one: "1 error prohibited this from being saved:"
+        other: "%{count} errors prohibited this from being saved:"
+      pk_heading: "PK calculation values - optional"
+      hours_unit: "Hours"
+      submit: "Update ^^"

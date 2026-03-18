@@ -1,0 +1,13 @@
+de:
+  prescriptions:
+    pages:
+      log:
+        title: "Protokoll"
+        times_taken:
+          one: "1 Mal eingenommen"
+          other: "%{count} Mal eingenommen"
+        dose: "Dosis"
+        time: "Uhrzeit"
+        date: "Datum"
+        edit: "Bearbeiten"
+        confirm_delete: "Bist du sicher?"

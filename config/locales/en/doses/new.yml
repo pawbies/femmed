@@ -1,0 +1,17 @@
+en:
+  doses:
+    new:
+      title: "New dose of %{prescription}"
+      remaining: "remaining"
+      error_count:
+        one: "1 error prevented this dose from being saved:"
+        other: "%{count} errors prevented this dose from being saved:"
+      amount_placeholder: "How many did ya take :3"
+      submit: "Yummy!"
+    edit:
+      title: "Edit %{medication} dose from %{date}"
+      error_count:
+        one: "1 error prevented this dose from being saved:"
+        other: "%{count} errors prevented this dose from being saved:"
+      amount_placeholder: "How many did ya take :3"
+      submit: "Yummy!"

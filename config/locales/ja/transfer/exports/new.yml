@@ -1,0 +1,11 @@
+ja:
+  transfer:
+    exports:
+      new:
+        title: "データをエクスポート"
+        subtitle: "エクスポートする内容を選んでください。"
+        prescriptions_label: "処方"
+        prescriptions_desc: "有効・無効な処方"
+        profile_label: "プロフィール"
+        profile_desc: "アカウントと設定"
+        submit: "エクスポート"

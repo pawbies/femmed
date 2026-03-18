@@ -3,13 +3,13 @@
   <h1 class="mt-6 text-center font-semibold text-3xl text-gray-800"><%= @user.username %></h1>
 
   <div class="mt-16 mx-auto md:max-w-2/3 flex flex-col md:flex-row justify-around items-center">
-    <%= link_to "Wanna change something?", edit_user_path(@user), class: "my-2 text-xl underline hover:no-underline" %>
-    <%= link_to "Export your data?", new_export_path, class: "my-2 text-xl underline hover:no-underline" %>
+    <%= link_to t(".edit"), edit_user_path(@user), class: "my-2 text-xl underline hover:no-underline" %>
+    <%= link_to t(".export"), new_export_path, class: "my-2 text-xl underline hover:no-underline" %>
   </div>
 
   <% if hotwire_native_app? %>
     <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">
-      <%= button_to "Log out", session_path, method: :delete, class: "hover:cursor-pointer text-lg text-red-500 font-semibold" %>
+      <%= button_to t(".log_out"), session_path, method: :delete, class: "hover:cursor-pointer text-lg text-red-500 font-semibold" %>
     </div>
   <% end %>
 </div>

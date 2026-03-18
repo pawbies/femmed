@@ -1,11 +1,11 @@
 <div class="w-full">
-  <h1 class="font-semibold text-3xl text-center text-gray-800">New version for <%= @medication.name %></h1>
+  <h1 class="font-semibold text-3xl text-center text-gray-800"><%= t(".title", medication: @medication.name) %></h1>
 
   <%= form_with model: [ @medication, @medication_version ], class: "mt-10 mx-auto max-w-md" do |form| %>
     <% if @medication_version.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">
-          <%= pluralize(@medication_version.errors.count, "error") %> prohibited this version from being saved:
+          <%= t(".error_count", count: @medication_version.errors.count) %>
         </h4>
         <ul class="list-disc list-inside text-red-800 space-y-1">
           <% @medication_version.errors.full_messages.each do |error| %>
@@ -19,7 +19,7 @@
       <% if medication_version_ingredient.errors.any? %>
         <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
           <h4 class="text-red-900 font-semibold mb-2">
-            <%= pluralize(medication_version_ingredient.errors.count, "error") %> prohibited this version from being saved:
+            <%= t(".error_count", count: medication_version_ingredient.errors.count) %>
           </h4>
           <ul class="list-disc list-inside text-red-800 space-y-1">
             <% medication_version_ingredient.errors.full_messages.each do |error| %>
@@ -33,7 +33,7 @@
     <div class="my-5">
       <%= form.label :added_name, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.text_field :added_name,
-        placeholder: "eg. 5mg",
+        placeholder: t(".name_placeholder"),
         required: true,
         class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
@@ -41,7 +41,7 @@
     <%= form.fields_for :medication_version_ingredients do |ingredient_form| %>
       <div class="mb-3">
         <%= ingredient_form.hidden_field :active_ingredient_id, value: ingredient_form.object.active_ingredient.id %>
-        <%= ingredient_form.label :amount, "Amount of #{ingredient_form.object.active_ingredient.name}", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+        <%= ingredient_form.label :amount, t(".amount_label", name: ingredient_form.object.active_ingredient.name), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
         <div class="flex items-center">
           <%= ingredient_form.number_field :amount,
             required: true,
@@ -56,7 +56,7 @@
     <% end %>
 
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Create #{@medication.name} version",
+      <%= form.submit t(".submit", medication: @medication.name),
         class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>

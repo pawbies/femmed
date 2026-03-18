@@ -1,0 +1,18 @@
+ja:
+  active_ingredients:
+    new:
+      title: "新しい有効成分"
+      error_count:
+        one: "1件のエラーにより保存できませんでした："
+        other: "%{count}件のエラーにより保存できませんでした："
+      pk_heading: "PK計算値 - 任意"
+      hours_unit: "時間"
+      submit: "作成"
+    edit:
+      title: "有効成分を編集"
+      error_count:
+        one: "1件のエラーにより保存できませんでした："
+        other: "%{count}件のエラーにより保存できませんでした："
+      pk_heading: "PK計算値 - 任意"
+      hours_unit: "時間"
+      submit: "更新 ^^"

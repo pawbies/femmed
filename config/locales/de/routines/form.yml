@@ -1,0 +1,29 @@
+de:
+  routines:
+    form:
+      frequency: "Häufigkeit"
+      every_day: "Täglich"
+      every_x_days: "Alle X Tage"
+      specific_days: "Bestimmte Tage"
+      every_x_hours: "Alle X Stunden"
+      repeat_every: "Wiederholen alle"
+      days_unit: "Tage"
+      hours_unit: "Stunden"
+      days_label: "Tage"
+      times_of_day: "Tageszeiten"
+      add_time: "+ Weitere Zeit hinzufügen"
+      starting_from: "Beginnend ab"
+      week_days:
+        - "Montag"
+        - "Dienstag"
+        - "Mittwoch"
+        - "Donnerstag"
+        - "Freitag"
+        - "Samstag"
+        - "Sonntag"
+    new:
+      title: "Routine für %{prescription}"
+      submit: "Routine speichern"
+    edit:
+      title: "Routine für %{prescription} bearbeiten"
+      submit: "Routine aktualisieren"

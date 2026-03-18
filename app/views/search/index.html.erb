@@ -1,43 +1,43 @@
 <div class="w-full">
   <section>
     <div class="mb-6">
-      <h3 class="text-3xl font-semibold text-gray-800">Search</h3>
-      <p class="mt-1 text-sm text-gray-500">Find medications, categories, ingredients, and labelers</p>
+      <h3 class="text-3xl font-semibold text-gray-800"><%= t(".title") %></h3>
+      <p class="mt-1 text-sm text-gray-500"><%= t(".subtitle") %></p>
     </div>
     <%= form_with url: search_path, class: "space-y-3", method: :get, data: { controller: "search" } do |form| %>
       <div class="flex gap-2">
-        <%= form.text_field :query, value: @query, placeholder: "Search for anything your heart desires ^w^", class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
-        <%= form.submit "Search", class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+        <%= form.text_field :query, value: @query, placeholder: t(".placeholder"), class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
+        <%= form.submit t(".submit"), class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
       </div>
       <div class="flex items-center justify-end">
         <button data-action="search#toggleHiddenOptions" type="button" class="no-js:hidden text-sm text-gray-400 hover:text-rose-500 transition-colors flex items-center gap-1.5 hover:cursor-pointer">
           <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
           </svg>
-          Advanced search
+          <%= t(".advanced") %>
         </button>
       </div>
       <div data-search-target="hiddenOptions" class="<%= 'js:hidden' unless @category_id.present? || @labeler_id.present? %> p-4 rounded-xl border border-rose-100 bg-rose-50/50 grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <%= form.label :category_id, "Category", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-1.5" %>
-          <%= form.select :category_id, Category.all.order(:name).map { |c| [c.name, c.id] }, { include_blank: "Any category", selected: @category_id }, { class: "w-full border border-rose-200 bg-white rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
+          <%= form.label :category_id, t(".category_label"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-1.5" %>
+          <%= form.select :category_id, Category.all.order(:name).map { |c| [c.name, c.id] }, { include_blank: t(".any_category"), selected: @category_id }, { class: "w-full border border-rose-200 bg-white rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
         </div>
         <div>
-          <%= form.label :labeler_id, "Labeler", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-1.5" %>
-          <%= form.select :labeler_id, Labeler.all.order(:name).map { |l| [l.name, l.id] }, { include_blank: "Any labeler", selected: @labeler_id }, { class: "w-full border border-rose-200 bg-white rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
+          <%= form.label :labeler_id, t(".labeler_label"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-1.5" %>
+          <%= form.select :labeler_id, Labeler.all.order(:name).map { |l| [l.name, l.id] }, { include_blank: t(".any_labeler"), selected: @labeler_id }, { class: "w-full border border-rose-200 bg-white rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
         </div>
       </div>
     <% end %>
   </section>
 
   <section class="mt-14">
-    <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">Results</h3>
+    <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8"><%= t(".results") %></h3>
 
     <% if @prescriptions.any? %>
       <div class="mb-8">
         <h4 class="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
           <span class="w-1.5 h-5 rounded-full bg-rose-400 inline-block"></span>
-          Your prescriptions
+          <%= t(".your_prescriptions") %>
           <span class="ml-1 text-xs font-normal text-rose-400 bg-rose-50 border border-rose-200 rounded-full px-2 py-0.5"><%= @prescriptions.size %></span>
         </h4>
         <div class="grid grid-cols-2 xl:grid-cols-4 gap-3">
@@ -51,11 +51,11 @@
         <div class="flex items-center gap-2 mb-4">
           <h4 class="text-lg font-semibold text-gray-700 flex items-center gap-2">
             <span class="w-1.5 h-5 rounded-full bg-rose-400 inline-block"></span>
-            Categories
+            <%= t(".categories") %>
             <span class="ml-1 text-xs font-normal text-rose-400 bg-rose-50 border border-rose-200 rounded-full px-2 py-0.5"><%= @categories.size %></span>
           </h4>
           <% if admin? %>
-            <%= link_to "Add new", new_category_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
+            <%= link_to t(".add_new"), new_category_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
           <% end %>
         </div>
         <div class="flex flex-wrap gap-2">
@@ -64,9 +64,9 @@
       </div>
     <% else %>
       <div class="mb-8 flex items-center justify-between">
-        <p class="text-sm text-gray-400 italic">No categories found</p>
+        <p class="text-sm text-gray-400 italic"><%= t(".no_categories") %></p>
         <% if admin? %>
-          <%= link_to "Add new", new_category_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
+          <%= link_to t(".add_new"), new_category_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
         <% end %>
       </div>
     <% end %>
@@ -76,11 +76,11 @@
         <div class="flex items-center gap-2 mb-4">
           <h4 class="text-lg font-semibold text-gray-700 flex items-center gap-2">
             <span class="w-1.5 h-5 rounded-full bg-rose-400 inline-block"></span>
-            Medications
+            <%= t(".medications") %>
             <span class="ml-1 text-xs font-normal text-rose-400 bg-rose-50 border border-rose-200 rounded-full px-2 py-0.5"><%= @medications.size %></span>
           </h4>
           <% if admin? %>
-            <%= link_to "Add new", new_medication_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
+            <%= link_to t(".add_new"), new_medication_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
           <% end %>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-3">
@@ -91,9 +91,9 @@
       </div>
     <% else %>
       <div class="mb-8 flex items-center justify-between">
-        <p class="text-sm text-gray-400 italic">No medications found</p>
+        <p class="text-sm text-gray-400 italic"><%= t(".no_medications") %></p>
         <% if admin? %>
-          <%= link_to "Add new", new_medication_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
+          <%= link_to t(".add_new"), new_medication_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
         <% end %>
       </div>
     <% end %>
@@ -103,11 +103,11 @@
         <div class="flex items-center gap-2 mb-4">
           <h4 class="text-lg font-semibold text-gray-700 flex items-center gap-2">
             <span class="w-1.5 h-5 rounded-full bg-rose-400 inline-block"></span>
-            Active ingredients
+            <%= t(".active_ingredients") %>
             <span class="ml-1 text-xs font-normal text-rose-400 bg-rose-50 border border-rose-200 rounded-full px-2 py-0.5"><%= @active_ingredients.size %></span>
           </h4>
           <% if admin? %>
-            <%= link_to "Add new", new_active_ingredient_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
+            <%= link_to t(".add_new"), new_active_ingredient_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
           <% end %>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -116,9 +116,9 @@
       </div>
     <% else %>
       <div class="mb-8 flex items-center justify-between">
-        <p class="text-sm text-gray-400 italic">No active ingredients found</p>
+        <p class="text-sm text-gray-400 italic"><%= t(".no_active_ingredients") %></p>
         <% if admin? %>
-          <%= link_to "Add new", new_active_ingredient_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
+          <%= link_to t(".add_new"), new_active_ingredient_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
         <% end %>
       </div>
     <% end %>
@@ -128,11 +128,11 @@
         <div class="flex items-center gap-2 mb-4">
           <h4 class="text-lg font-semibold text-gray-700 flex items-center gap-2">
             <span class="w-1.5 h-5 rounded-full bg-rose-400 inline-block"></span>
-            Labelers
+            <%= t(".labelers") %>
             <span class="ml-1 text-xs font-normal text-rose-400 bg-rose-50 border border-rose-200 rounded-full px-2 py-0.5"><%= @labelers.size %></span>
           </h4>
           <% if admin? %>
-            <%= link_to "Add new", new_labeler_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
+            <%= link_to t(".add_new"), new_labeler_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
           <% end %>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
@@ -141,9 +141,9 @@
       </div>
     <% else %>
       <div class="mb-8 flex items-center justify-between">
-        <p class="text-sm text-gray-400 italic">No labelers found</p>
+        <p class="text-sm text-gray-400 italic"><%= t(".no_labelers") %></p>
         <% if admin? %>
-          <%= link_to "Add new", new_labeler_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
+          <%= link_to t(".add_new"), new_labeler_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
         <% end %>
       </div>
     <% end %>

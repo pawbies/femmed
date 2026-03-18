@@ -1,0 +1,22 @@
+ja:
+  categories:
+    new:
+      title: "新しいカテゴリ"
+      error_count:
+        one: "1件のエラーにより保存できませんでした："
+        other: "%{count}件のエラーにより保存できませんでした："
+      name_placeholder: "かわいい名前"
+      medications_label: "直接追加する薬"
+      none: "なし"
+      multi_hint: "複数選択はCtrl / Cmdを押したまま"
+      submit: "UwU"
+    edit:
+      title: "カテゴリ %{name} を編集"
+      error_count:
+        one: "1件のエラーにより保存できませんでした："
+        other: "%{count}件のエラーにより保存できませんでした："
+      name_placeholder: "かわいい名前"
+      medications_label: "直接追加する薬"
+      none: "なし"
+      multi_hint: "複数選択はCtrl / Cmdを押したまま"
+      submit: "UwU"

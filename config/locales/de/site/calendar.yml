@@ -1,0 +1,15 @@
+de:
+  site:
+    calendar:
+      title: "Kalender"
+      month: "Monat"
+      week: "Woche"
+      view_day: "Tag ansehen"
+      day_abbr:
+        - "Mo"
+        - "Di"
+        - "Mi"
+        - "Do"
+        - "Fr"
+        - "Sa"
+        - "So"

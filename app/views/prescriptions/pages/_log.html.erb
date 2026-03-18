@@ -1,22 +1,21 @@
 <% doses = @prescription.doses.order(taken_at: :desc).to_a %>
 <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
-  Log
+  <%= t(".title") %>
   <span class="text-gray-400 font-normal italic">
-    - <%= "#{doses.size} #{'time'.pluralize(doses.size)}" %>
-    taken already
+    - <%= t(".times_taken", count: doses.size) %>
   </span>
 </h3>
 
 <table class="w-full mt-6 text-sm border-collapse">
   <thead>
     <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
-      <th class="pb-3 pr-8">Dose</th>
-      <th class="pb-3 pr-8">Time</th>
+      <th class="pb-3 pr-8"><%= t(".dose") %></th>
+      <th class="pb-3 pr-8"><%= t(".time") %></th>
       <% if @prescription.active? %>
-        <th class="pb-3 pr-8">Date</th>
-        <th class="pb-3">Edit</th>
+        <th class="pb-3 pr-8"><%= t(".date") %></th>
+        <th class="pb-3"><%= t(".edit") %></th>
       <% else %>
-        <th class="pb-3">Date</th>
+        <th class="pb-3"><%= t(".date") %></th>
       <% end %>
     </tr>
   </thead>
@@ -38,7 +37,7 @@
               <%= link_to edit_prescription_dose_path(@prescription, dose), target: "_top", class: "mx-1" do %>
               <%= image_tag "icons/edit.svg", class: "aspect-square h-[1.5em]" %>
               <% end %>
-              <%= button_to prescription_dose_path(@prescription, dose), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "mx-1" do %>
+              <%= button_to prescription_dose_path(@prescription, dose), method: :delete, data: { turbo_confirm: t(".confirm_delete") }, class: "mx-1" do %>
                 <%= image_tag "icons/delete.svg", class: "hover:cursor-pointer aspect-square h-[1.5em]" %>
               <% end %>
             </div>

@@ -1,0 +1,5 @@
+en:
+  medications:
+    card:
+      cover_alt: "Medication cover"
+      view: "View medication"

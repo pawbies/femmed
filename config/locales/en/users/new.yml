@@ -1,0 +1,22 @@
+en:
+  users:
+    new:
+      logo_alt: "FemMed Logo"
+      title: "Register"
+      subtitle: "Welcome aboard!"
+      admin_title: "Create new user"
+      error_heading: "Couldn't register you :("
+      admin_error_heading: "Evil errors"
+      email_placeholder: "Your email address goes here :3"
+      admin_email_placeholder: "This user's email"
+      username_placeholder: "Whatever you wanna be called around here Nyaaa"
+      admin_username_placeholder: "This user's username"
+      password_placeholder: "Your new super secure password"
+      admin_password_placeholder: "This user's password"
+      password_confirmation_placeholder: "Repeat it once just to be sure"
+      admin_password_confirmation_placeholder: "This user's password confirmation"
+      accept: "I accept the"
+      admin_accept: "He accepts the"
+      terms_of_service: "Terms of Service"
+      submit: "Come in!"
+      login_link: "Login is this way :3"

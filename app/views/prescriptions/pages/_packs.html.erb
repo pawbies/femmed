@@ -1,12 +1,11 @@
 <section>
   <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
-    Packs
+    <%= t(".title") %>
     <span class="text-gray-400 font-normal italic">
       <% unless @prescription.packs.empty? %>
-        - <%= (Date.today - @prescription.packs.order(:acquired_at).last.acquired_at).to_i %>
-        days since you got the last pack
+        - <%= t(".days_since_last", days: (Date.today - @prescription.packs.order(:acquired_at).last.acquired_at).to_i) %>
       <% else %>
-        - Go ahead and get some
+        - <%= t(".get_some") %>
       <% end %>
     </span>
   </h3>
@@ -20,41 +19,41 @@
       <div class="rounded-lg border border-zinc-300 p-4">
         <p class="text-xs tracking-widest text-rose-300 mb-2">
           <span class="uppercase">
-            <%= "Dose".pluralize(remaining_doses) %> Remaining
+            <%= t(".doses_remaining", count: remaining_doses) %>
+            (<%= "#{format("%g", @prescription.amount)} #{@prescription.form.name.pluralize}" %>)
           </span>
-          (<%= "#{format("%g", @prescription.amount)} #{@prescription.form.name.pluralize}" %>)
         </p>
         <p class="text-3xl font-bold text-gray-900"><%= format("%g", remaining_doses) %></p>
-        <p class="text-xs text-gray-500 mt-1">Cmon eat them up >:3</p>
+        <p class="text-xs text-gray-500 mt-1"><%= t(".eat_them_up") %></p>
       </div>
     <% end %>
 
     <div class="rounded-lg border border-zinc-300 p-4">
       <p class="text-xs uppercase tracking-widest text-rose-300 mb-2">
-        <%= @prescription.form.name.pluralize(remaining_units) %> Remaining
+        <%= @prescription.form.name.pluralize(remaining_units) %> <%= t(".remaining") %>
       </p>
       <p class="text-3xl font-bold text-gray-900">
         <%= format("%g", remaining_units) %>
         <%= @prescription.form.name.pluralize(remaining_units) %>
       </p>
-      <p class="text-xs text-gray-500 mt-1">Gotta make them disappear</p>
+      <p class="text-xs text-gray-500 mt-1"><%= t(".gotta_disappear") %></p>
     </div>
   </div>
 </section>
 
 
 <section class="mt-12">
-  <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">History</h3>
+  <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8"><%= t(".history") %></h3>
   <table class="w-full mt-3 text-sm">
     <thead>
       <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
-        <th class="pb-3 pr-8">Number</th>
+        <th class="pb-3 pr-8"><%= t(".number") %></th>
         <th class="pb-3 pr-8"><%= @prescription.form.name.pluralize %></th>
         <% if @prescription.active? %>
-          <th class="pb-3 pr-8">Date</th>
-          <th class="pb-3">Edit</th>
+          <th class="pb-3 pr-8"><%= t(".date") %></th>
+          <th class="pb-3"><%= t(".edit") %></th>
         <% else %>
-          <th class="pb-3">Date</th>
+          <th class="pb-3"><%= t(".date") %></th>
         <% end %>
       </tr>
     </thead>
@@ -74,7 +73,7 @@
                 <%= link_to edit_prescription_pack_path(@prescription, pack), target: "_top", class: "mx-1" do %>
                 <%= image_tag "icons/edit.svg", class: "aspect-square h-[1.5em]" %>
                 <% end %>
-                <%= button_to prescription_pack_path(@prescription, pack), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "mx-1" do %>
+                <%= button_to prescription_pack_path(@prescription, pack), method: :delete, data: { turbo_confirm: t(".confirm_delete") }, class: "mx-1" do %>
                   <%= image_tag "icons/delete.svg", class: "aspect-square h-[1.5em]" %>
                 <% end %>
               </div>

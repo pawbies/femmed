@@ -1,0 +1,9 @@
+ja:
+  site:
+    landing:
+      logo_alt: "FemMedロゴ"
+      title: "FemMedへようこそ"
+      subtitle: "フェムボーイによるフェムボーイのための服薬管理システム"
+      get_started: "さっそく始めよう！"
+      already_signed_up: "すでに登録済み？"
+      login: "ログイン ^w^"

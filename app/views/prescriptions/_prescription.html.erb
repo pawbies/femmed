@@ -14,11 +14,11 @@
           <div>
             <h5 class="font-semibold text-gray-800"><%= prescription.medication_version.full_name %></h5>
             <p class="text-xs text-rose-400 mt-0.5">
-              Plasma concentration over <%= format("%g", prescription.preview_future + prescription.preview_past) %>h
+              <%= t(".plasma_concentration", hours: format("%g", prescription.preview_future + prescription.preview_past)) %>
             </p>
           </div>
           <span class="text-xs <%= prescription.active? ? 'bg-rose-100 text-rose-500' : 'bg-zinc-100 text-zinc-400' %> font-medium px-2 py-1 rounded-full">
-            <%= prescription.active? ? 'Active' : 'Inactive' %>
+            <%= prescription.active? ? t(".active") : t(".inactive") %>
           </span>
         </div>
         <div data-prescriptions-preview-target="chart" class="w-full"></div>
@@ -26,7 +26,7 @@
           <% incompatible = prescription.medication_version.medication_version_ingredients.pk_incompatible %>
           <% if incompatible.any? %>
             <p class="text-xs text-amber-800">
-              ⚠ <%= incompatible.map { |mvi| mvi.active_ingredient.name }.to_sentence %> excluded — not supported for PK calculation
+              ⚠ <%= t(".pk_excluded", ingredients: incompatible.map { |mvi| mvi.active_ingredient.name }.to_sentence) %>
             </p>
           <% end %>
         </div>
@@ -41,7 +41,7 @@
           </p>
         </div>
         <span class="text-xs <%= prescription.active? ? 'bg-rose-100 text-rose-500' : 'bg-zinc-100 text-zinc-400' %> font-medium px-2 py-1 rounded-full">
-          <%= prescription.active? ? 'Active' : 'Inactive' %>
+          <%= prescription.active? ? t(".active") : t(".inactive") %>
         </span>
       </div>
     <% end %>
@@ -54,7 +54,7 @@
       </p>
     </div>
     <span class="text-xs <%= prescription.active? ? 'bg-rose-100 text-rose-500' : 'bg-zinc-100 text-zinc-400' %> font-medium px-2 py-1 rounded-full">
-      <%= prescription.active? ? 'Active' : 'Inactive' %>
+      <%= prescription.active? ? t(".active") : t(".inactive") %>
     </span>
   <% end %>
 <% end %>

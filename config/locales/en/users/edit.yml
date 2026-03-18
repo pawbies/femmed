@@ -1,0 +1,13 @@
+en:
+  users:
+    edit:
+      error_heading: "Couldn't save your changes :("
+      email_placeholder: "Your email address goes here :3"
+      username_placeholder: "Whatever you wanna be called around here Nyaaa"
+      pfp_label: "Choose your cute profile picture"
+      admin_access: "Admin access"
+      admin_access_desc: "Grants full administrative privileges"
+      submit: "Apply my awesome changes!"
+      revert: "Revert everything!"
+      delete: "Delete account! (please don't)"
+      confirm_delete: "Are you sure? :("

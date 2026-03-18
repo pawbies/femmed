@@ -1,11 +1,11 @@
 <div class="w-full">
-  <h1 class="font-semibold text-center text-3xl text-gray-800">Edit pack of <%= @prescription.full_name %></h1>
+  <h1 class="font-semibold text-center text-3xl text-gray-800"><%= t(".title", prescription: @prescription.full_name) %></h1>
 
   <%= form_with model: [ @prescription, @pack ], class: "mt-10 mx-auto max-w-md" do |form| %>
     <% if @pack.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">
-          <%= pluralize(@pack.errors.count, "error") %> prohibited this pack from being saved:
+          <%= t(".error_count", count: @pack.errors.count) %>
         </h4>
         <ul class="list-disc list-inside text-red-800 space-y-1">
           <% @pack.errors.full_messages.each do |error| %>
@@ -17,7 +17,7 @@
 
 
     <div class="my-5">
-      <%= form.label :amount, "Amount of #{@prescription.form.name.pluralize}", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.label :amount, t(".amount_label", form: @prescription.form.name.pluralize), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <div class="flex items-center">
         <%= form.number_field :amount,
           required: true,
@@ -39,7 +39,7 @@
     </div>
 
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Let's go and eat those meds!",
+      <%= form.submit t(".submit"),
         class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>

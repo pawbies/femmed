@@ -1,11 +1,11 @@
 <div class="w-full">
-  <h1 class="font-semibold text-center text-3xl text-gray-800">Edit category <%= @category.name %></h1>
+  <h1 class="font-semibold text-center text-3xl text-gray-800"><%= t(".title", name: @category.name) %></h1>
 
   <%= form_with model: @category, class: "mt-10 mx-auto max-w-md" do |form| %>
     <% if @category.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">
-          <%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:
+          <%= t(".error_count", count: @category.errors.count) %>
         </h4>
         <ul class="list-disc list-inside text-red-800 space-y-1">
           <% @category.errors.full_messages.each do |error| %>
@@ -20,21 +20,21 @@
       <%= form.text_field :name,
         required: true,
         autofocus: true,
-        placeholder: "A very cute name",
+        placeholder: t(".name_placeholder"),
         class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
 
     <div class="my-5">
-      <%= form.label :medication_ids, "Medications to add directly", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.label :medication_ids, t(".medications_label"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.collection_select :medication_ids,
         Medication.all.order(:name), :id, :name,
-        { include_blank: "None" },
+        { include_blank: t(".none") },
         { multiple: true, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full h-56 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
-      <p class="text-xs text-gray-400 mt-1">Hold Ctrl / Cmd to select multiple</p>
+      <p class="text-xs text-gray-400 mt-1"><%= t(".multi_hint") %></p>
     </div>
 
     <div class="mt-8 flex justify-center">
-      <%= form.submit "UwU",
+      <%= form.submit t(".submit"),
         class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>

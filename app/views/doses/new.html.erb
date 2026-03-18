@@ -1,8 +1,8 @@
 <div class="w-full">
-  <h1 class="font-semibold text-center text-3xl text-gray-800">New dose of <%= @prescription.full_name %></h1>
+  <h1 class="font-semibold text-center text-3xl text-gray-800"><%= t(".title", prescription: @prescription.full_name) %></h1>
   <% if @prescription.pack_tracking_enabled? %>
     <p class="text-center text-xl text-zinc-500">
-      <%= "#{format("%g", @prescription.remaining_units)} #{@prescription.form.name.pluralize(@prescription.remaining_units)}" %> remaining
+      <%= "#{format("%g", @prescription.remaining_units)} #{@prescription.form.name.pluralize(@prescription.remaining_units)}" %> <%= t(".remaining") %>
     </p>
   <% end %>
 
@@ -11,7 +11,7 @@
     <% if @dose.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">
-          <%= pluralize(@dose.errors.count, "error") %> prohibited this dose from being saved:
+          <%= t(".error_count", count: @dose.errors.count) %>
         </h4>
         <ul class="list-disc list-inside text-red-800 space-y-1">
           <% @dose.errors.full_messages.each do |error| %>
@@ -30,7 +30,7 @@
           step: "any",
           min: 0.001,
           data: { dose_form_target: "input", action: "dose-form#updateOutput" },
-          placeholder: "How many did ya take :3",
+          placeholder: t(".amount_placeholder"),
           class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
        <span class="shadow-sm rounded-r-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-min whitespace-nowrap">
           <%= @prescription.form.name.pluralize %>
@@ -47,7 +47,7 @@
     </div>
 
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Yummy!",
+      <%= form.submit t(".submit"),
         class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>

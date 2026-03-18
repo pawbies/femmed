@@ -1,0 +1,13 @@
+en:
+  prescriptions:
+    pages:
+      log:
+        title: "Log"
+        times_taken:
+          one: "1 time taken already"
+          other: "%{count} times taken already"
+        dose: "Dose"
+        time: "Time"
+        date: "Date"
+        edit: "Edit"
+        confirm_delete: "Are you sure?"

@@ -1,0 +1,32 @@
+ja:
+  medications:
+    new:
+      title: "新しい薬"
+      error_count:
+        one: "1件のエラーが保存を妨げました："
+        other: "%{count}件のエラーが保存を妨げました："
+      name_placeholder: "例：スーパーフェムボーイ薬"
+      none_option: "-- なし --"
+      active_ingredients_label: "有効成分"
+      ctrl_hint: "Ctrl / Cmd を押しながら複数選択"
+      release_profile_label: "放出プロファイル"
+      delay_placeholder: "遅延（時間、二峰性のみ）"
+      duration_placeholder: "放出時間（時間、徐放性のみ）"
+      categories_label: "カテゴリ"
+      notes_placeholder: "私はボーイズが好き"
+      submit: "薬を追加"
+    edit:
+      title: "%{name}を編集"
+      error_count:
+        one: "1件のエラーが保存を妨げました："
+        other: "%{count}件のエラーが保存を妨げました："
+      name_placeholder: "例：スーパーフェムボーイ薬"
+      none_option: "-- なし --"
+      active_ingredients_label: "有効成分"
+      ctrl_hint: "Ctrl / Cmd を押しながら複数選択"
+      release_profile_label: "放出プロファイル"
+      delay_placeholder: "遅延（時間、二峰性のみ）"
+      duration_placeholder: "放出時間（時間、徐放性のみ）"
+      categories_label: "カテゴリ"
+      notes_placeholder: "私はボーイズが好き"
+      submit: "%{name}を更新！"

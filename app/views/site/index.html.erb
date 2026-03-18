@@ -42,16 +42,16 @@
   <% if @concentrations.any? %>
     <section class="mb-6 w-full">
       <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
-        Current concentrations
+        <%= t(".current_concentrations") %>
       </h3>
 
       <div class="bg-white border border-rose-200 rounded-xl overflow-x-auto shadow-sm">
         <table class="w-full text-sm">
           <thead>
             <tr class="bg-rose-50 text-left text-xs uppercase tracking-widest text-rose-400">
-              <th class="px-5 py-3 font-semibold">Ingredient</th>
-              <th class="px-5 py-3 font-semibold">Concentration</th>
-              <th class="px-5 py-3 font-semibold">Trend</th>
+              <th class="px-5 py-3 font-semibold"><%= t(".ingredient") %></th>
+              <th class="px-5 py-3 font-semibold"><%= t(".concentration") %></th>
+              <th class="px-5 py-3 font-semibold"><%= t(".trend") %></th>
             </tr>
           </thead>
           <tbody class="divide-y divide-zinc-100">

@@ -1,0 +1,7 @@
+ja:
+  prescriptions:
+    prescription:
+      plasma_concentration: "%{hours}時間の血漿濃度"
+      active: "有効"
+      inactive: "無効"
+      pk_excluded: "%{ingredients}は除外されています（PK計算非対応）"

@@ -1,0 +1,9 @@
+ja:
+  users:
+    index:
+      title: "%{domain}のすべてのユーザー"
+      registered: "人登録済み"
+      username: "ユーザー名"
+      joined: "参加日"
+    row:
+      view: "+ 表示"

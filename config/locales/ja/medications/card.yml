@@ -1,0 +1,5 @@
+ja:
+  medications:
+    card:
+      cover_alt: "薬の画像"
+      view: "薬を見る"

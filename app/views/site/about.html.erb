@@ -1,39 +1,32 @@
 <div>
   <div class="mb-8">
-    <h1 class="font-semibold text-3xl text-gray-800">About FemMed</h1>
-    <p class="text-rose-400 mt-1">Medication tracking, made by femboys for femboys</p>
+    <h1 class="font-semibold text-3xl text-gray-800"><%= t(".title") %></h1>
+    <p class="text-rose-400 mt-1"><%= t(".subtitle") %></p>
   </div>
 
   <div>
-    <h2 class="font-semibold text-xl text-gray-800 mb-3">🔒 Your data, your server</h2>
+    <h2 class="font-semibold text-xl text-gray-800 mb-3"><%= t(".data_heading") %></h2>
     <p class="text-gray-600 leading-relaxed">
-      We don't want your data. Seriously. FemMed is self-hosted, which means everything
-      you log — your doses, your medications, your history — lives on your machine, not ours.
-      No accounts with strangers, no privacy policies written by lawyers, no third parties
-      quietly profiting off your health information.
+      <%= t(".data_body") %>
     </p>
   </div>
 
   <div>
-    <h2 class="font-semibold text-xl text-gray-800 mb-3">💊 What it does</h2>
+    <h2 class="font-semibold text-xl text-gray-800 mb-3"><%= t(".does_heading") %></h2>
     <p class="text-gray-600 leading-relaxed">
-      FemMed lets you track your prescriptions and log doses as you take them. There's a timeline view for reviewing
-      your day, and everything is designed to be quick to use — logging a dose should take
-      seconds, not minutes.
+      <%= t(".does_body") %>
     </p>
   </div>
 
   <div>
-    <h2 class="font-semibold text-xl text-gray-800 mb-3">🛠 Built with</h2>
+    <h2 class="font-semibold text-xl text-gray-800 mb-3"><%= t(".built_heading") %></h2>
     <p class="text-gray-600 leading-relaxed">
-      FemMed is a Rails 8 application using SQLite, Tailwind CSS, Hotwire, and Stimulus.
-      It's designed to run in a single Docker container with no external dependencies —
-      no Redis, no Postgres, no fuss. If you can run Docker, you can run FemMed.
+      <%= t(".built_body") %>
     </p>
   </div>
 
   <div>
-    <h2 class="font-semibold text-xl text-gray-800 mb-4">💗 Thanks to</h2>
+    <h2 class="font-semibold text-xl text-gray-800 mb-4"><%= t(".thanks_heading") %></h2>
     <div class="flex flex-col gap-3 xl:max-w-1/2 xl:mx-auto">
       <a href="https://github.com/dooklin" target="_blank"
         class="flex items-center gap-4 bg-white border border-rose-200 rounded-xl px-4 py-3 shadow-sm hover:shadow-md hover:border-rose-300 transition-all group">

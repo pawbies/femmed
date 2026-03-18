@@ -1,0 +1,8 @@
+ja:
+  prescriptions:
+    show:
+      log: "ログ"
+      packs: "パック"
+      routine: "ルーティン"
+      about: "詳細"
+      settings: "設定"

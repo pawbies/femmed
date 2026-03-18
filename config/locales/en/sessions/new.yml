@@ -1,0 +1,10 @@
+en:
+  sessions:
+    new:
+      logo_alt: "FemMed Logo"
+      title: "Login"
+      subtitle: "Welcome back!"
+      email_placeholder: "kisser@boys.example :3"
+      password_placeholder: "And your password goes here hehe"
+      submit: "Come in!"
+      need_account: "Need an account?"

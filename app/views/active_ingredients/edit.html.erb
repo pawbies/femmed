@@ -1,11 +1,11 @@
 <div class="w-full">
-  <h1 class="font-semibold text-3xl text-center text-gray-800">Edit active ingredient</h1>
+  <h1 class="font-semibold text-3xl text-center text-gray-800"><%= t(".title") %></h1>
 
   <%= form_with model: @active_ingredient, class: "mt-10 mx-auto max-w-md" do |form| %>
     <% if @active_ingredient.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">
-          <%= pluralize(@active_ingredient.errors.count, "error") %> prohibited this labeler from being saved:
+          <%= t(".error_count", count: @active_ingredient.errors.count) %>
         </h4>
         <ul class="list-disc list-inside text-red-800 space-y-1">
           <% @active_ingredient.errors.full_messages.each do |error| %>
@@ -22,7 +22,7 @@
         class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
 
-    <h2 class="mt-16 font-semibold text-xl text-center">PK calculation values - optional</h2>
+    <h2 class="mt-16 font-semibold text-xl text-center"><%= t(".pk_heading") %></h2>
 
     <div class="my-5">
       <%= form.label :half_life, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
@@ -32,7 +32,7 @@
           step: "any",
           class: "shadow-sm w-2/3 rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
         <span class="shadow-sm w-1/3 text-center rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap">
-          Hours
+          <%= t(".hours_unit") %>
         </span>
       </div>
     </div>
@@ -64,7 +64,7 @@
     </div>
 
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Update ^^",
+      <%= form.submit t(".submit"),
         class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>

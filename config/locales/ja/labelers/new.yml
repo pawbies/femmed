@@ -1,0 +1,16 @@
+ja:
+  labelers:
+    new:
+      title: "新しいラベラー"
+      error_count:
+        one: "1件のエラーにより保存できませんでした："
+        other: "%{count}件のエラーにより保存できませんでした："
+      name_placeholder: "例: フェムボーイ研究所"
+      submit: "追加！"
+    edit:
+      title: "ラベラー %{name} を編集"
+      error_count:
+        one: "1件のエラーにより保存できませんでした："
+        other: "%{count}件のエラーにより保存できませんでした："
+      name_placeholder: "例: フェムボーイ研究所"
+      submit: "更新 :3"

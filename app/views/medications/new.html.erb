@@ -1,11 +1,11 @@
 <div class="w-full">
-  <h1 class="font-semibold text-3xl text-center text-gray-800">New medication</h1>
+  <h1 class="font-semibold text-3xl text-center text-gray-800"><%= t(".title") %></h1>
 
   <%= form_with model: @medication, class: "mt-10 mx-auto max-w-lg", data: { controller: "new-medication" } do |form| %>
     <% if @medication.errors.any? %>
       <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
         <h4 class="text-red-900 font-semibold mb-2">
-          <%= pluralize(@medication.errors.count, "error") %> prohibited this medication from being saved:
+          <%= t(".error_count", count: @medication.errors.count) %>
         </h4>
         <ul class="list-disc list-inside text-red-800 space-y-1">
           <% @medication.errors.full_messages.each do |error| %>
@@ -18,7 +18,7 @@
     <div class="my-5">
       <%= form.label :name, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.text_field :name,
-        placeholder: "eg. Super Femboy Drug",
+        placeholder: t(".name_placeholder"),
         required: true,
         class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
     </div>
@@ -30,21 +30,21 @@
       </div>
       <div class="w-full md:ml-1">
         <%= form.label :labeler_id, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
-        <%= form.select :labeler_id, Labeler.all.order(:name).map { |l| [l.name, l.id] }, { include_blank: "-- None --" }, { class: "w-full my-2 border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
+        <%= form.select :labeler_id, Labeler.all.order(:name).map { |l| [l.name, l.id] }, { include_blank: t(".none_option") }, { class: "w-full my-2 border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
       </div>
     </div>
 
     <div class="my-5">
-      <%= form.label :active_ingredient_ids, "Active Ingredients", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.label :active_ingredient_ids, t(".active_ingredients_label"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.collection_select :active_ingredient_ids,
         ActiveIngredient.all.order(:name), :id, :name,
         { include_blank: false },
         { multiple: true, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full h-56 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
-      <p class="text-xs text-gray-400 mt-1">Hold Ctrl / Cmd to select multiple</p>
+      <p class="text-xs text-gray-400 mt-1"><%= t(".ctrl_hint") %></p>
     </div>
 
     <div class="my-5">
-      <%= form.label :medication_release_profile, "Release Profile", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.label :medication_release_profile, t(".release_profile_label"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.fields_for :medication_release_profile do |rp_form| %>
         <%= rp_form.select :release_profile_id, ReleaseProfile.all.order(name: :desc).map { |rp| [rp.name, rp.id] },
           { default: "Immediate" },
@@ -52,12 +52,12 @@
         <div class="flex gap-3 mt-2">
           <%= rp_form.number_field :delay,
             data: { new_medication_target: "rpDelayField" },
-            placeholder: "Delay (hours, bimodal only)",
+            placeholder: t(".delay_placeholder"),
             step: 0.5,
             class: "js:hidden shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full text-sm" %>
           <%= rp_form.number_field :release_duration,
             data: { new_medication_target: "rpDurationField" },
-            placeholder: "Release duration (hours, extended only)",
+            placeholder: t(".duration_placeholder"),
             step: 1,
             class: "js:hidden shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full text-sm" %>
         </div>
@@ -65,23 +65,23 @@
     </div>
 
     <div class="my-5">
-      <%= form.label :category_ids, "Categories", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.label :category_ids, t(".categories_label"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.collection_select :category_ids,
         Category.all.order(:name), :id, :name,
         { include_blank: false },
         { multiple: true, class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full h-56 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" } %>
-      <p class="text-xs text-gray-400 mt-1">Hold Ctrl / Cmd to select multiple</p>
+      <p class="text-xs text-gray-400 mt-1"><%= t(".ctrl_hint") %></p>
     </div>
 
     <div class="my-5">
       <%= form.label :notes, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.rich_textarea :notes,
-        placeholder: "I like boissss",
+        placeholder: t(".notes_placeholder"),
         class: "shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full min-h-32 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" %>
     </div>
 
     <div class="mt-8 flex justify-center">
-      <%= form.submit "Add medication",
+      <%= form.submit t(".submit"),
         class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
     </div>
   <% end %>

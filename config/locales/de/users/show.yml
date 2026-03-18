@@ -1,0 +1,6 @@
+de:
+  users:
+    show:
+      edit: "Was ändern?"
+      export: "Daten exportieren?"
+      log_out: "Abmelden"

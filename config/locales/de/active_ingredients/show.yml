@@ -1,0 +1,7 @@
+de:
+  active_ingredients:
+    show:
+      confirm_delete: "Bist du sicher? Keine Sorge, Medikamente werden nicht gelöscht, nur dieser Wirkstoff wird entfernt :3"
+      version_count:
+        one: "Version"
+        other: "Versionen"

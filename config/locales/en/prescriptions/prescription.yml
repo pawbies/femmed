@@ -1,0 +1,7 @@
+en:
+  prescriptions:
+    prescription:
+      plasma_concentration: "Plasma concentration over %{hours}h"
+      active: "Active"
+      inactive: "Inactive"
+      pk_excluded: "%{ingredients} excluded — not supported for PK calculation"

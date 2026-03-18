@@ -1,0 +1,18 @@
+en:
+  medication_versions:
+    new:
+      title: "New version for %{medication}"
+      error_count:
+        one: "1 error prohibited this version from being saved:"
+        other: "%{count} errors prohibited this version from being saved:"
+      name_placeholder: "eg. 5mg"
+      amount_label: "Amount of %{name}"
+      submit: "Create %{medication} version"
+    edit:
+      title: "Edit %{version}"
+      error_count:
+        one: "1 error prohibited this version from being saved:"
+        other: "%{count} errors prohibited this version from being saved:"
+      name_placeholder: "eg. 5mg"
+      amount_label: "Amount of %{name}"
+      submit: "Update %{version}"

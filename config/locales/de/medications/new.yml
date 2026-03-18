@@ -1,0 +1,32 @@
+de:
+  medications:
+    new:
+      title: "Neues Medikament"
+      error_count:
+        one: "1 Fehler hat die Speicherung verhindert:"
+        other: "%{count} Fehler haben die Speicherung verhindert:"
+      name_placeholder: "z.B. Super Femboy Medikament"
+      none_option: "-- Keine --"
+      active_ingredients_label: "Wirkstoffe"
+      ctrl_hint: "Strg / Cmd gedrückt halten für Mehrfachauswahl"
+      release_profile_label: "Freigabeprofil"
+      delay_placeholder: "Verzögerung (Stunden, nur bimodal)"
+      duration_placeholder: "Freisetzungsdauer (Stunden, nur verlängert)"
+      categories_label: "Kategorien"
+      notes_placeholder: "Ich mag Boissss"
+      submit: "Medikament hinzufügen"
+    edit:
+      title: "%{name} bearbeiten"
+      error_count:
+        one: "1 Fehler hat die Speicherung verhindert:"
+        other: "%{count} Fehler haben die Speicherung verhindert:"
+      name_placeholder: "z.B. Super Femboy Medikament"
+      none_option: "-- Keine --"
+      active_ingredients_label: "Wirkstoffe"
+      ctrl_hint: "Strg / Cmd gedrückt halten für Mehrfachauswahl"
+      release_profile_label: "Freigabeprofil"
+      delay_placeholder: "Verzögerung (Stunden, nur bimodal)"
+      duration_placeholder: "Freisetzungsdauer (Stunden, nur verlängert)"
+      categories_label: "Kategorien"
+      notes_placeholder: "Ich mag Boissss"
+      submit: "%{name} aktualisieren!"

@@ -1,0 +1,10 @@
+ja:
+  categories:
+    show:
+      medication_count:
+        one: "1つの薬"
+        other: "%{count}つの薬"
+      confirm_delete: "本当に？薬は削除されません。カテゴリから外されるだけです :3"
+      version_count:
+        one: "バージョン"
+        other: "バージョン"

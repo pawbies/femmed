@@ -1,0 +1,6 @@
+en:
+  users:
+    show:
+      edit: "Wanna change something?"
+      export: "Export your data?"
+      log_out: "Log out"

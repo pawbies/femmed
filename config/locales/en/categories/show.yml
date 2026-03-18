@@ -1,0 +1,10 @@
+en:
+  categories:
+    show:
+      medication_count:
+        one: "1 Medication"
+        other: "%{count} Medications"
+      confirm_delete: "Are you sure? No worries, this won't remove any medications, just remove this category from them :3"
+      version_count:
+        one: "version"
+        other: "versions"

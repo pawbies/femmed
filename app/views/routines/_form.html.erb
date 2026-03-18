@@ -5,13 +5,13 @@
 
     <%# ── Frequency ── %>
     <div class="mb-5">
-      <span class="block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2">Frequency</span>
+      <span class="block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2"><%= t(".frequency") %></span>
       <div class="grid grid-cols-2 gap-2">
         <% [
-          ["daily",    "Every day"],
-          ["interval", "Every X days"],
-          ["weekly",   "Specific days"],
-          ["hourly",   "Every X hours"],
+          ["daily",    t(".every_day")],
+          ["interval", t(".every_x_days")],
+          ["weekly",   t(".specific_days")],
+          ["hourly",   t(".every_x_hours")],
         ].each do |value, label| %>
           <label class="flex items-center justify-center py-2.5 px-4 rounded-lg border border-zinc-200 bg-white cursor-pointer
                         text-sm font-medium text-gray-600 transition-all
@@ -29,37 +29,38 @@
 
     <%# ── Every X days ── %>
     <div data-routine-target="interval" class="<%= d[:routine_type] == 'interval' ? '' : 'hidden' %> mb-5">
-      <%= form.label :routine_interval, "Repeat every", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.label :routine_interval, t(".repeat_every"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <div class="flex">
         <%= form.number_field :routine_interval,
               min: 2, value: d[:routine_interval] || 2,
               class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
-        <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap">Days</span>
+        <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap"><%= t(".days_unit") %></span>
       </div>
     </div>
 
     <%# ── Every X hours ── %>
     <div data-routine-target="hourly" class="<%= d[:routine_type] == 'hourly' ? '' : 'hidden' %> mb-5">
-      <%= form.label :routine_hourly_interval, "Repeat every", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.label :routine_hourly_interval, t(".repeat_every"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <div class="flex">
         <%= form.number_field :routine_hourly_interval,
               min: 1, value: d[:routine_hourly_interval] || 8,
               class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
-        <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap">Hours</span>
+        <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap"><%= t(".hours_unit") %></span>
       </div>
     </div>
 
     <%# ── Specific days ── %>
     <div data-routine-target="weekly" class="<%= d[:routine_type] == 'weekly' ? '' : 'hidden' %> mb-5">
-      <span class="block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2">Days</span>
+      <span class="block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2"><%= t(".days_label") %></span>
       <div class="flex flex-wrap gap-2">
-        <% %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].each do |day| %>
+        <% english_days = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday] %>
+        <% t(".week_days").each_with_index do |day_name, i| %>
           <label class="flex items-center justify-center w-11 h-11 rounded-full border border-rose-200
                         bg-white cursor-pointer transition-all text-sm font-semibold text-zinc-500
                         has-[:checked]:bg-rose-400 has-[:checked]:text-white has-[:checked]:border-rose-400
                         hover:border-rose-300">
-            <%= check_box_tag "routine_days[]", day.downcase, (d[:routine_days] || []).include?(day.downcase), class: "sr-only" %>
-            <%= day[0..1] %>
+            <%= check_box_tag "routine_days[]", english_days[i].downcase, (d[:routine_days] || []).include?(english_days[i].downcase), class: "sr-only" %>
+            <%= day_name[0..1] %>
           </label>
         <% end %>
       </div>
@@ -68,7 +69,7 @@
     <%# ── Times of day ── %>
     <% show_times = %w[daily interval weekly].include?(d[:routine_type]) %>
     <div data-routine-target="times" class="<%= show_times ? '' : 'hidden' %> mb-5">
-      <span class="block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2">Times of day</span>
+      <span class="block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2"><%= t(".times_of_day") %></span>
       <div data-routine-target="timesList" class="flex flex-col gap-2 mb-2">
         <% times = d[:routine_times].presence || ["08:00"] %>
         <% times.each_with_index do |time, i| %>
@@ -84,13 +85,13 @@
       </div>
       <button type="button" data-action="click->routine#addTime"
               class="text-sm text-rose-400 hover:text-rose-500 font-medium cursor-pointer transition-colors">
-        + Add another time
+        <%= t(".add_time") %>
       </button>
     </div>
 
     <%# ── Start date ── %>
     <div data-routine-target="startDate" class="<%= d[:routine_type].present? ? '' : 'hidden' %> mb-5">
-      <%= form.label :routine_start, "Starting from", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.label :routine_start, t(".starting_from"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
       <%= form.date_field :routine_start,
             value: d[:routine_start] || Date.today,
             class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>

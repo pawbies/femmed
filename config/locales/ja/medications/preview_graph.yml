@@ -1,0 +1,7 @@
+ja:
+  medications:
+    preview_graph:
+      pharmacokinetics: "薬物動態"
+      go: "実行"
+      single_dose_badge: "単回投与 · 24時間"
+      not_available_for_pk: "PK対応なし"

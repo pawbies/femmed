@@ -1,0 +1,16 @@
+ja:
+  packs:
+    new:
+      title: "%{prescription}の新しいパック"
+      error_count:
+        one: "1件のエラーが保存を妨げました："
+        other: "%{count}件のエラーが保存を妨げました："
+      amount_label: "%{form}の数"
+      submit: "さあ飲もう！"
+    edit:
+      title: "%{prescription}のパックを編集"
+      error_count:
+        one: "1件のエラーが保存を妨げました："
+        other: "%{count}件のエラーが保存を妨げました："
+      amount_label: "%{form}の数"
+      submit: "さあ飲もう！"

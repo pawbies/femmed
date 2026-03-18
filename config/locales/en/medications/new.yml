@@ -1,0 +1,32 @@
+en:
+  medications:
+    new:
+      title: "New medication"
+      error_count:
+        one: "1 error prevented this medication from being saved:"
+        other: "%{count} errors prevented this medication from being saved:"
+      name_placeholder: "eg. Super Femboy Drug"
+      none_option: "-- None --"
+      active_ingredients_label: "Active Ingredients"
+      ctrl_hint: "Hold Ctrl / Cmd to select multiple"
+      release_profile_label: "Release Profile"
+      delay_placeholder: "Delay (hours, bimodal only)"
+      duration_placeholder: "Release duration (hours, extended only)"
+      categories_label: "Categories"
+      notes_placeholder: "I like boissss"
+      submit: "Add medication"
+    edit:
+      title: "Edit %{name}"
+      error_count:
+        one: "1 error prevented this medication from being saved:"
+        other: "%{count} errors prevented this medication from being saved:"
+      name_placeholder: "eg. Super Femboy Drug"
+      none_option: "-- None --"
+      active_ingredients_label: "Active Ingredients"
+      ctrl_hint: "Hold Ctrl / Cmd to select multiple"
+      release_profile_label: "Release Profile"
+      delay_placeholder: "Delay (hours, bimodal only)"
+      duration_placeholder: "Release duration (hours, extended only)"
+      categories_label: "Categories"
+      notes_placeholder: "I like boissss"
+      submit: "Update %{name}!"
