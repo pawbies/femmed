@@ -9,3 +9,8 @@ bob_adderall_xr:
   user: bob
   medication_version: adderall_xr_20mg
   amount: 20
+
+alice_percocet:
+  user: alice
+  medication_version: percocet_5mg
+  amount: 1

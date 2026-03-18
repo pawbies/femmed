@@ -21,3 +21,12 @@ bob_adderall_xr_dose_2:
   prescription: bob_adderall_xr
   amount_taken: 1.0
   taken_at: 2026-02-21 07:30:00
+
+alice_percocet_dose_1:
+  prescription: alice_percocet
+  amount_taken: 1.0
+  taken_at: <%= 3.hours.ago.to_fs(:db) %>
+alice_percocet_dose_2:
+  prescription: alice_percocet
+  amount_taken: 1.0
+  taken_at: <%= 8.hours.ago.to_fs(:db) %>
