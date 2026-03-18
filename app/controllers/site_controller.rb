@@ -10,6 +10,8 @@ class SiteController < ApplicationController
       { medication: [ :release_profile, :medication_release_profile, :active_ingredients ] },
       :recent_doses
     ).order(active: :desc)
+
+    @concentrations = PkCalculator.current_concentrations(@prescriptions)
   end
 
   def timeline

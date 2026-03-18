@@ -1,6 +1,36 @@
 class PkCalculator
   PALETTE = %w[#4f8ef7 #f5a623 #34c98a #e05c6e #a78bfa].freeze
 
+  # Returns an array of { name:, concentration:, rate: } for each active
+  # ingredient the user currently has in their system.
+  # rate is the instantaneous change in mg/L per hour (positive = rising, negative = falling).
+  def self.current_concentrations(prescriptions, now: Time.current)
+    now_ts = now.to_i
+    dt = 0.01 # ~36 seconds, small enough for accurate derivative
+
+    ingredient_map = {}
+
+    prescriptions.each do |prescription|
+      next unless prescription.active?
+
+      release = pk_release_profile(prescription.medication)
+      doses = prescription.recent_doses.map { |d| { taken_at: d.taken_at.to_i, amount: d.amount_taken } }
+      next if doses.empty?
+
+      pk_ingredients(prescription.medication_version).each do |ing|
+        entry = ingredient_map[ing[:name]] ||= { id: ing[:id], name: ing[:name], concentration: 0.0, rate: 0.0 }
+
+        c_now = concentration_from_doses(ing, release, doses, now_ts, 0)
+        c_dt  = concentration_from_doses(ing, release, doses, now_ts, dt)
+
+        entry[:concentration] += c_now
+        entry[:rate] += (c_dt - c_now) / dt
+      end
+    end
+
+    ingredient_map.values.reject { |i| i[:concentration] == 0.0 && i[:rate] == 0.0 }
+  end
+
   # Single hypothetical dose at t=0, plotted over 0–24h.
   # Used on the medication show page.
   def self.for_medication(medication_version)
@@ -143,6 +173,7 @@ class PkCalculator
     medication_version.pk_compatible_ingredients.map do |mvi|
       ai = mvi.active_ingredient
       {
+        id:                     ai.id,
         name:                   ai.name,
         amount:                 mvi.amount * mvi.pk_multiplier,
         half_life:              ai.half_life,
