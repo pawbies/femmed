@@ -17,7 +17,7 @@
           class: "border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300" %>
     <% end %>
 
-    <%= link_to timeline_path(date: @date + 1.day), class: "p-2 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-400 transition-colors #{'opacity-30 pointer-events-none' if @date >= Date.today}" do %>
+    <%= link_to timeline_path(date: @date + 1.day), class: "p-2 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-400 transition-colors" do %>
       &#8594;
     <% end %>
   </div>
@@ -29,27 +29,38 @@
 
     <div class="space-y-1">
       <% (0..23).each do |hour| %>
-        <% has_anything = @doses_by_hour[hour].any? %>
+        <% doses   = @doses_by_hour[hour] %>
+        <% planned = @planned_by_hour[hour] %>
+        <% has_doses   = doses.any? %>
+        <% has_planned = planned.any? %>
         <div class="flex gap-4 items-start">
           <div class="w-12 text-right shrink-0 pt-2">
             <span class="text-xs font-medium text-gray-400"><%= "%02d:00" % hour %></span>
           </div>
           <div class="shrink-0 pt-2.5 z-10">
-            <% if has_anything %>
+            <% if has_doses %>
               <div class="w-3 h-3 rounded-full bg-rose-400 ring-2 ring-rose-100"></div>
+            <% elsif has_planned %>
+              <div class="w-3 h-3 rounded-full border-2 border-rose-300 bg-white"></div>
             <% else %>
               <div class="w-3 h-3 rounded-full bg-rose-100"></div>
             <% end %>
           </div>
           <div class="flex-1 pb-2">
-            <% if has_anything %>
+            <% if has_doses || has_planned %>
               <div class="flex flex-col gap-1">
-                <% @doses_by_hour[hour].each do |dose| %>
+                <% doses.each do |dose| %>
                   <%= link_to prescription_path(dose.prescription, page: "Log", anchor: dom_id(dose)), class: "bg-white border border-rose-200 rounded-xl px-4 py-2 shadow-sm flex items-center justify-between" do %>
                     <span class="text-sm font-medium text-gray-800"><%= dose.prescription.full_name %></span>
                     <span class="ml-2 text-xs bg-rose-100 text-rose-500 font-medium px-2 py-1 rounded-full">
-                      × <%= format("%g", dose.amount_taken) %>
+                      &times; <%= format("%g", dose.amount_taken) %>
                     </span>
+                  <% end %>
+                <% end %>
+                <% planned.each do |entry| %>
+                  <%= link_to prescription_path(entry[:prescription], page: "Routine"), class: "border border-dashed border-rose-200 rounded-xl px-4 py-2 flex items-center justify-between" do %>
+                    <span class="text-sm text-gray-500"><%= entry[:prescription].full_name %></span>
+                    <span class="ml-2 text-xs text-rose-300 font-medium"><%= entry[:time].strftime("%H:%M") %></span>
                   <% end %>
                 <% end %>
               </div>

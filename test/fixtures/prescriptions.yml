@@ -14,3 +14,4 @@ alice_percocet:
   user: alice
   medication_version: percocet_5mg
   amount: 1
+  pack_tracking_enabled: false
