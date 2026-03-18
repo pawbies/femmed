@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :prescriptions do
     resources :packs
     resources :doses
+    resource :routine
   end
   get "profile" => "users#profile"
   resource :session

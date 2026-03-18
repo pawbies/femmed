@@ -1,0 +1,106 @@
+<% d = local_assigns[:routine_data] || {} %>
+
+<div data-controller="routine" data-routine-initial-type-value="<%= d[:routine_type] %>">
+  <%= form_with url: url, method: method, data: { turbo_frame: "_top" } do |form| %>
+
+    <%# ── Frequency ── %>
+    <div class="mb-5">
+      <span class="block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2">Frequency</span>
+      <div class="grid grid-cols-2 gap-2">
+        <% [
+          ["daily",    "Every day"],
+          ["interval", "Every X days"],
+          ["weekly",   "Specific days"],
+          ["hourly",   "Every X hours"],
+        ].each do |value, label| %>
+          <label class="flex items-center justify-center py-2.5 px-4 rounded-lg border border-zinc-200 bg-white cursor-pointer
+                        text-sm font-medium text-gray-600 transition-all
+                        has-[:checked]:border-rose-400 has-[:checked]:bg-rose-50 has-[:checked]:text-rose-600
+                        hover:border-zinc-300">
+            <input type="radio" name="routine_type" value="<%= value %>"
+                   <%= "checked" if d[:routine_type] == value %>
+                   data-action="change->routine#toggle"
+                   class="sr-only">
+            <%= label %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <%# ── Every X days ── %>
+    <div data-routine-target="interval" class="<%= d[:routine_type] == 'interval' ? '' : 'hidden' %> mb-5">
+      <%= form.label :routine_interval, "Repeat every", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <div class="flex">
+        <%= form.number_field :routine_interval,
+              min: 2, value: d[:routine_interval] || 2,
+              class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap">Days</span>
+      </div>
+    </div>
+
+    <%# ── Every X hours ── %>
+    <div data-routine-target="hourly" class="<%= d[:routine_type] == 'hourly' ? '' : 'hidden' %> mb-5">
+      <%= form.label :routine_hourly_interval, "Repeat every", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <div class="flex">
+        <%= form.number_field :routine_hourly_interval,
+              min: 1, value: d[:routine_hourly_interval] || 8,
+              class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-gray-500 text-sm whitespace-nowrap">Hours</span>
+      </div>
+    </div>
+
+    <%# ── Specific days ── %>
+    <div data-routine-target="weekly" class="<%= d[:routine_type] == 'weekly' ? '' : 'hidden' %> mb-5">
+      <span class="block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2">Days</span>
+      <div class="flex flex-wrap gap-2">
+        <% %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].each do |day| %>
+          <label class="flex items-center justify-center w-11 h-11 rounded-full border border-rose-200
+                        bg-white cursor-pointer transition-all text-sm font-semibold text-zinc-500
+                        has-[:checked]:bg-rose-400 has-[:checked]:text-white has-[:checked]:border-rose-400
+                        hover:border-rose-300">
+            <%= check_box_tag "routine_days[]", day.downcase, (d[:routine_days] || []).include?(day.downcase), class: "sr-only" %>
+            <%= day[0..1] %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <%# ── Times of day ── %>
+    <% show_times = %w[daily interval weekly].include?(d[:routine_type]) %>
+    <div data-routine-target="times" class="<%= show_times ? '' : 'hidden' %> mb-5">
+      <span class="block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2">Times of day</span>
+      <div data-routine-target="timesList" class="flex flex-col gap-2 mb-2">
+        <% times = d[:routine_times].presence || ["08:00"] %>
+        <% times.each_with_index do |time, i| %>
+          <div class="flex gap-2 items-center">
+            <input type="time" name="routine_times[]" value="<%= time %>"
+                   class="shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-rose-300">
+            <% if i > 0 %>
+              <button type="button" data-action="click->routine#removeTime"
+                      class="text-zinc-400 hover:text-red-400 text-xl leading-none cursor-pointer">&times;</button>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <button type="button" data-action="click->routine#addTime"
+              class="text-sm text-rose-400 hover:text-rose-500 font-medium cursor-pointer transition-colors">
+        + Add another time
+      </button>
+    </div>
+
+    <%# ── Start date ── %>
+    <div data-routine-target="startDate" class="<%= d[:routine_type].present? ? '' : 'hidden' %> mb-5">
+      <%= form.label :routine_start, "Starting from", class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.date_field :routine_start,
+            value: d[:routine_start] || Date.today,
+            class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+    </div>
+
+    <%# ── Submit ── %>
+    <div data-routine-target="submit" class="<%= d[:routine_type].present? ? '' : 'hidden' %> mt-8 flex justify-center">
+      <%= form.submit submit_label,
+            class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+    </div>
+
+  <% end %>
+</div>

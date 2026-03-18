@@ -18,6 +18,8 @@ class Prescription < ApplicationRecord
   validates :preview_past, presence: true, numericality: true, comparison: { greater_than_or_equal_to: 0 }
   validates :preview_future, presence: true, numericality: true, comparison: { greater_than_or_equal_to: 0 }
 
+  serialize :routine, coder: IceCube::Schedule
+
   def remaining_units
     total_units = packs.sum(:amount)
     used_units = doses.sum(:amount_taken)

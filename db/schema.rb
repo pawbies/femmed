@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_18_142410) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_18_150743) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -158,6 +158,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_18_142410) do
     t.boolean "pack_tracking_enabled", default: true, null: false
     t.float "preview_future", default: 40.0, null: false
     t.float "preview_past", default: 24.0, null: false
+    t.text "routine"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["medication_version_id"], name: "index_prescriptions_on_medication_version_id"

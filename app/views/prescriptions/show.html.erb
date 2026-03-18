@@ -15,6 +15,10 @@
             }" %>
       <% end %>
 
+      <%= link_to "Routine", prescription_path(@prescription, page: "Routine"),
+          class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
+            params[:page] == 'Routine' ? 'border-b-2 border-rose-500 text-rose-600' : ''
+          }" %>
 
       <%= link_to "About", prescription_path(@prescription, page: "About"),
           class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
@@ -31,6 +35,8 @@
       <%= render "prescriptions/pages/log" %>
     <% elsif params[:page] == "Packs" %>
       <%= render "prescriptions/pages/packs" %>
+    <% elsif params[:page] == "Routine" %>
+      <%= render "prescriptions/pages/routine" %>
     <% elsif params[:page] == "About" %>
         <%= render "prescriptions/pages/about" %>
     <% elsif params[:page] == "Settings" %>
