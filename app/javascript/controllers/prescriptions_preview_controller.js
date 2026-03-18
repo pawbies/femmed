@@ -1,87 +1,29 @@
 import { Controller } from "@hotwired/stimulus"
 import * as Plot from "@observablehq/plot"
 
-const PALETTE = ["#4f8ef7", "#f5a623", "#34c98a", "#e05c6e", "#a78bfa"]
-const color = (_, idx) => PALETTE[idx % PALETTE.length]
-
-const ke = ing => Math.log(2) / ing.halfLife
-
 const formatConc = (c, prefix = "") =>
   c < 0.001 ? `${prefix}${c.toExponential(2)}` : `${prefix}${c.toFixed(3)} mg/L`
-
-const peakLabel = d => {
-  return formatConc(d.concentration)
-}
 
 // Connects to data-controller="prescriptions-preview"
 export default class extends Controller {
   static targets = ["chart"]
   static values = {
-    ingredients: Array,
-    doses: Array,
-    releaseProfile: Object,
+    plot: Object,
     past: Number,
     future: Number
   }
 
   connect() {
     this.chartTarget.innerHTML = ""
-    const ingredients = this.ingredientsValue
-    const doses = this.dosesValue
-    const releaseProfile = this.releaseProfileValue
-    const now = Math.floor(Date.now() / 1000)
+    const { series, dots, local_maxima: localMaxima, y_max: yMax } = this.plotValue
     const xStart = this.pastValue * -1
     const xEnd = this.futureValue
 
-    const concentrationAt = (ing, t) =>
-      doses.reduce((sum, dose) => {
-        const elapsed = (now + t * 3600 - dose.takenAt) / 3600
-        const amount = ing.amount * dose.amount
-        if (elapsed < 0) return sum
-        const _ke = ke(ing), ka = ing.absorptionRate, vd = ing.volumeOfDistribution
-        if (Math.abs(ka - _ke) < 0.0001) return sum
+    const ingredients = [...new Set(series.map(d => d.ingredient))]
+    const colorMap = Object.fromEntries(series.map(d => [d.ingredient, d.color]))
 
-        const pulse = (offset) => {
-          const e = elapsed - offset
-          if (e < 0) return 0
-          return Math.max(0, (amount / vd) * (ka / (ka - _ke)) * (Math.exp(-_ke * e) - Math.exp(-ka * e)))
-        }
-
-        if (releaseProfile.name === "Bimodal") return sum + pulse(0) + pulse(releaseProfile.delay)
-
-        if (releaseProfile.name === "Extended") {
-          const T = releaseProfile.release_duration
-          const base = (dose.amount / T) / (vd * _ke)
-          const c = elapsed <= T
-            ? base * (1 - Math.exp(-_ke * elapsed))
-            : base * (1 - Math.exp(-_ke * T)) * Math.exp(-_ke * (elapsed - T))
-          return sum + Math.max(0, c)
-        }
-
-        return sum + pulse(0)
-      }, 0)
-
-    const data = ingredients.flatMap((ing, idx) =>
-      Array.from({ length: xEnd - xStart + 2 }, (_, i) => ({
-        time: xStart + i, ingredient: ing.name, concentration: concentrationAt(ing, xStart + i), color: color(ing, idx),
-      }))
-    )
-
-    const dots = ingredients.map((ing, idx) => ({
-      time: 0, ingredient: ing.name, concentration: concentrationAt(ing, 0), color: color(ing, idx),
-    }))
-
-    const localMaxima = ingredients.flatMap((ing, idx) => {
-      const points = data.filter(d => d.ingredient === ing.name)
-      return points
-        .filter((d, i) => i > 0 && i < points.length - 1 && d.concentration > points[i - 1].concentration && d.concentration > points[i + 1].concentration)
-        .map(d => ({ ...d, color: color(ing, idx) }))
-    })
-
-    const yMax = Math.max(...data.map(d => d.concentration)) || 1
     const W = this.chartTarget.clientWidth
     const H = Math.round(W * 0.58)
-    const colorMap = Object.fromEntries(ingredients.map((ing, idx) => [ing.name, color(ing, idx)]))
 
     const chart = Plot.plot({
       width: W, height: H,
@@ -99,15 +41,15 @@ export default class extends Controller {
         domain: [xStart, xEnd], label: "Hours from now →", labelAnchor: "right", labelOffset: 36, tickSize: 0, grid: true,
         tickFormat: t => t === 0 ? "now" : `${t > 0 ? "+" : ""}${t}h`,
       },
-      color: { legend: true, domain: ingredients.map(i => i.name), range: ingredients.map(color) },
+      color: { legend: true, domain: ingredients, range: ingredients.map(n => colorMap[n]) },
       marks: [
         Plot.ruleY([0], { stroke: "#d1d5db", strokeWidth: 1 }),
         Plot.ruleX([0], { stroke: "#94a3b8", strokeWidth: 1.5, strokeDasharray: "5,3" }),
-        ...ingredients.map((ing, idx) =>
-          Plot.areaY(data.filter(d => d.ingredient === ing.name), { x: "time", y: "concentration", fill: color(ing, idx), fillOpacity: 0.08, curve: "catmull-rom" })
+        ...ingredients.map(name =>
+          Plot.areaY(series.filter(d => d.ingredient === name), { x: "time", y: "concentration", fill: colorMap[name], fillOpacity: 0.08, curve: "catmull-rom" })
         ),
-        ...ingredients.map((ing, idx) =>
-          Plot.line(data.filter(d => d.ingredient === ing.name), { x: "time", y: "concentration", stroke: color(ing, idx), strokeWidth: 2.5, curve: "catmull-rom" })
+        ...ingredients.map(name =>
+          Plot.line(series.filter(d => d.ingredient === name), { x: "time", y: "concentration", stroke: colorMap[name], strokeWidth: 2.5, curve: "catmull-rom" })
         ),
         Plot.ruleX(localMaxima, { x: "time", y1: 0, y2: "concentration", stroke: d => d.color, strokeWidth: 1, strokeDasharray: "3,3", strokeOpacity: 0.5 }),
         Plot.ruleY(localMaxima, { y: "concentration", x1: xStart, x2: d => d.time, stroke: d => d.color, strokeWidth: 1, strokeDasharray: "3,3", strokeOpacity: 0.5 }),

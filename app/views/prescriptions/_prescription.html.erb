@@ -7,26 +7,7 @@
       controller: "prescriptions-preview",
       prescriptions_preview_past_value: prescription.preview_past,
       prescriptions_preview_future_value: prescription.preview_future,
-      prescriptions_preview_release_profile_value: {
-        name: prescription.medication.release_profile&.name || "Immediate",
-        delay: prescription.medication.medication_release_profile.delay,
-        release_duration: prescription.medication.medication_release_profile.release_duration
-      }.compact.to_json,
-      prescriptions_preview_ingredients_value: prescription.medication_version.pk_compatible_ingredients.map { |mvi|
-        {
-          name: mvi.active_ingredient.name,
-          amount: mvi.amount * mvi.pk_multiplier,
-          halfLife: mvi.active_ingredient.half_life,
-          absorptionRate: mvi.active_ingredient.absorption_rate,
-          volumeOfDistribution: mvi.active_ingredient.volume_of_distribution
-        }.compact
-      }.to_json,
-      prescriptions_preview_doses_value: prescription.recent_doses.map { |dose|
-        {
-          takenAt: dose.taken_at.to_i,
-          amount: dose.amount_taken
-        }.compact
-      }.to_json
+      prescriptions_preview_plot_value: PkCalculator.for_prescription(prescription).to_json
     } do %>
       <div class="<%= "hidden" unless prescription.active? %> no-js:hidden">
         <div class="px-4 pt-4 pb-2 flex items-center justify-between">
