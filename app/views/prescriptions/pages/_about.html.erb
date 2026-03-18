@@ -1,55 +1,52 @@
-<div class="mt-8 space-y-8">
+  <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
+    About
+    <span class="text-gray-400 font-normal italic">
+      - <%= @prescription.full_name %>
+    </span>
+  </h3>
 
-  <div>
-    <div class="flex items-center justify-between md:justify-start">
-      <h2 class="text-2xl font-semibold mr-3"><%= @prescription.medication.name %></h2>
-      <%= link_to @prescription.medication, target: "_top" do %>
-        <%= image_tag "icons/goto.svg", class: "aspect-square h-[2em]" %>
-      <% end %>
-    </div>
-    <p class="text-sm text-gray-400 mt-1">
-      <%= @prescription.medication.form.name %>
-      <% if @prescription.medication.labeler.present? %>
-        &middot;
-        <%= @prescription.medication.labeler.name %>
-      <% end %>
-    </p>
-  </div>
-
-  <% if @prescription.medication.notes.present? %>
-    <div class="prose prose-sm max-w-none text-gray-700">
-      <%= @prescription.medication.notes %>
-    </div>
+<p class="text-md text-gray-700 mb-3">
+  <%= @prescription.medication.form.name %>
+  <% if @prescription.medication.labeler.present? %>
+    &middot;
+    <%= @prescription.medication.labeler.name %>
   <% end %>
+</p>
 
-  <div>
-    <h3 class="text-xs font-semibold tracking-widest uppercase text-rose-400 mb-3">Your Version</h3>
-    <p class="text-gray-800 font-medium">
-      <%= @prescription.medication.name %> <%= @prescription.medication_version.added_name %>
-    </p>
-    <% ingredients = @prescription.medication_version.medication_version_ingredients %>
-    <% if ingredients.any? %>
-      <ul class="mt-2 space-y-1">
-        <% ingredients.each do |mvi| %>
-          <li class="text-sm text-gray-600">
-            <%= mvi.active_ingredient.name %> &mdash;
-            <span class="font-medium"><%= mvi.amount %> <%= mvi.unit %></span>
-            <% if mvi.active_ingredient.half_life.present? %>
-              <span class="text-gray-400">(t½ <%= mvi.active_ingredient.half_life %>h)</span>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
+<% if @prescription.medication.notes.present? %>
+  <div class="prose prose-sm max-w-none text-gray-700">
+    <%= @prescription.medication.notes %>
   </div>
+<% end %>
 
-  <% if @prescription.medication.categories.any? %>
-    <div>
-      <h3 class="text-xs font-semibold tracking-widest uppercase text-rose-400 mb-3">Categories</h3>
-      <div class="flex flex-wrap gap-2">
-        <%= render @prescription.medication.categories %>
-      </div>
-    </div>
+<div class="mt-12">
+  <h3 class="text-xs font-semibold tracking-widest uppercase text-rose-400 mb-3">Your Version</h3>
+  <p class="text-gray-800 font-medium">
+    <%= @prescription.medication.name %> <%= @prescription.medication_version.added_name %>
+  </p>
+  <% ingredients = @prescription.medication_version.medication_version_ingredients %>
+  <% if ingredients.any? %>
+    <ul class="mt-2 space-y-1">
+      <% ingredients.each do |mvi| %>
+        <li class="text-sm text-gray-600">
+          <%= mvi.active_ingredient.name %> &mdash;
+          <span class="font-medium"><%= format("%g", mvi.amount) %><%= mvi.unit %></span>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
-
 </div>
+
+<div class="mt-6">
+  <%= render "medications/preview_graph", medication_version: @prescription.medication_version %>
+</div>
+
+<% if @prescription.medication.categories.any? %>
+  <div class="mt-12">
+    <h3 class="text-xs font-semibold tracking-widest uppercase text-rose-400 mb-3">Categories</h3>
+    <div class="flex flex-wrap gap-2">
+      <%= render @prescription.medication.categories %>
+    </div>
+  </div>
+<% end %>
+
