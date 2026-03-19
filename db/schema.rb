@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_18_150743) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_19_103009) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -165,6 +165,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_18_150743) do
     t.index ["user_id"], name: "index_prescriptions_on_user_id"
   end
 
+  create_table "push_subscriptions", force: :cascade do |t|
+    t.string "auth"
+    t.datetime "created_at", null: false
+    t.string "endpoint"
+    t.string "p256dh"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
+  end
+
   create_table "release_profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -204,5 +214,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_18_150743) do
   add_foreign_key "packs", "prescriptions"
   add_foreign_key "prescriptions", "medication_versions"
   add_foreign_key "prescriptions", "users"
+  add_foreign_key "push_subscriptions", "users"
   add_foreign_key "sessions", "users"
 end

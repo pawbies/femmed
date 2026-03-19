@@ -43,4 +43,6 @@ Rails.application.routes.draw do
   scope "/transfer", module: :transfer do
     resource :export
   end
+
+  resources :push_subscriptions
 end

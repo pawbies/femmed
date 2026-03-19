@@ -76,3 +76,5 @@ gem "local_time", "~> 3.0"
 gem "csv", "~> 3.3"
 
 gem "ice_cube", "~> 0.17.0"
+
+gem "web-push", "~> 3.1"

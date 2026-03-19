@@ -9,6 +9,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <% if ENV["VAPID_PUBLIC_KEY"] %>
+      <meta name="vapid-public-key" content="<%= ENV["VAPID_PUBLIC_KEY"] %>">
+    <% end %>
+
     <%= yield :head %>
 
     <%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>

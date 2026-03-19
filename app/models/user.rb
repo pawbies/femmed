@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :medication_versions, through: :prescriptions
   has_many :doses, through: :prescriptions
 
+  has_many :push_subscriptions, dependent: :destroy
+
   encrypts :email_address, deterministic: true
   encrypts :username
 
