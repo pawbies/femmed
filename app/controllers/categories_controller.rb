@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
     @category = Category.new category_params
 
     if @category.save
-      redirect_to @category, notice: "Created the super duper cute #{@category.name} category"
+      redirect_to @category
     else
       render :new, status: :unprocessable_content
     end

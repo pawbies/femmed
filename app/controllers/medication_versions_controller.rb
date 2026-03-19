@@ -15,7 +15,7 @@ class MedicationVersionsController < ApplicationController
     if @medication_version.save
       redirect_to @medication
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -26,7 +26,7 @@ class MedicationVersionsController < ApplicationController
     if @medication_version.update medication_version_params
       redirect_to @medication_version.medication
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

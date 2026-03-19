@@ -10,7 +10,7 @@ class LabelersController < ApplicationController
     @labeler = Labeler.new labeler_params
 
     if @labeler.save
-      redirect_to search_path(query: @labeler.name)
+      redirect_to @labeler
     else
       render :new, status: :unprocessable_content
     end

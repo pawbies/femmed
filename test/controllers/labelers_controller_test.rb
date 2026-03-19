@@ -51,7 +51,7 @@ class LabelersControllerTest < ActionDispatch::IntegrationTest
     assert_difference "Labeler.count" do
       post labelers_url, params: { labeler: { name: "Pfizer 2" } }
     end
-    assert_redirected_to search_url(query: "Pfizer 2")
+    assert_redirected_to labeler_url(Labeler.last)
 
     # Admin with invalid params
     assert_no_difference "Labeler.count" do

@@ -10,7 +10,7 @@ class ActiveIngredientsController < ApplicationController
     @active_ingredient = ActiveIngredient.new active_ingredient_params
 
     if @active_ingredient.save
-      redirect_to search_path(query: @active_ingredient.name)
+      redirect_to @active_ingredient
     else
       render :new, status: :unprocessable_content
     end

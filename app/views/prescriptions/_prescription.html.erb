@@ -1,6 +1,6 @@
 <% minimal = local_assigns.fetch(:minimal, false) %>
 
-<% unless minimal %>
+<% unless minimal || prescription.medication_version_ingredients.pk_compatible.none? %>
   <%= link_to prescription,
     class: "w-full bg-white border border-rose-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow #{'opacity-60 border-zinc-300' unless prescription.active?}",
     data: {

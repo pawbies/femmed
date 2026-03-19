@@ -51,7 +51,7 @@ class ActiveIngredientsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "ActiveIngredient.count" do
       post active_ingredients_url, params: { active_ingredient: { name: "Methylphenidate :3", half_life: 3.5 } }
     end
-    assert_redirected_to search_url(query: "Methylphenidate :3")
+    assert_redirected_to active_ingredient_url(ActiveIngredient.last)
 
     # Admin with invalid params
     assert_no_difference "ActiveIngredient.count" do
