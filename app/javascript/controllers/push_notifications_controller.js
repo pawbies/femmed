@@ -17,8 +17,13 @@ export default class extends Controller {
       return
     }
 
-    this.registration = await navigator.serviceWorker.ready
-    await this.updateState()
+    try {
+      this.registration = await navigator.serviceWorker.ready
+      await this.updateState()
+    } catch (error) {
+      console.error("Service worker not available:", error)
+      this.element.hidden = true
+    }
   }
 
   async updateState() {
@@ -41,6 +46,7 @@ export default class extends Controller {
   }
 
   async subscribe() {
+    if (!this.registration) return
     this.buttonTarget.disabled = true
     this.buttonTarget.textContent = "Subscribing…"
 
@@ -67,6 +73,7 @@ export default class extends Controller {
   }
 
   async unsubscribe() {
+    if (!this.registration) return
     this.buttonTarget.disabled = true
     this.buttonTarget.textContent = "Unsubscribing…"
 
