@@ -16,6 +16,7 @@ class DoseReminderJob < ApplicationJob
         puts "Passwd check"
 
         prescription.routine.occurrences_between(now, window_end).each do |occurrence|
+          puts "found occurance"
           next if already_taken?(prescription, occurrence)
           puts "passed second check"
 
