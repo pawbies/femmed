@@ -10,10 +10,14 @@ class DoseReminderJob < ApplicationJob
 
     User.joins(:push_subscriptions).distinct.each do |user|
       user.prescriptions.where(active: true).each do |prescription|
+        puts "Going for #{prescription.full_name}"
         next unless prescription.routine.present?
+
+        puts "Passwd check"
 
         prescription.routine.occurrences_between(now, window_end).each do |occurrence|
           next if already_taken?(prescription, occurrence)
+          puts "passed second check"
 
           send_reminder(user, prescription, occurrence)
         end
