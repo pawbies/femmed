@@ -93,9 +93,9 @@ class RoutinesController < ApplicationController
       return nil if routine_params[:routine_type].blank?
 
       start = if routine_params[:routine_start].present?
-        Date.parse(routine_params[:routine_start]).to_time
+        Time.zone.parse(routine_params[:routine_start])
       else
-        Time.current.beginning_of_day
+        Time.zone.now.beginning_of_day
       end
 
       schedule = IceCube::Schedule.new(start)
