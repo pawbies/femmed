@@ -1,4 +1,4 @@
-<div class="w-full">
+<div class="w-full" data-controller="forgot-password">
   <img src="/icon.svg" alt="<%= t(".logo_alt") %>" class="mx-auto aspect-square max-w-32">
   <h1 class="mt-6 text-center font-semibold text-3xl text-gray-800"><%= t(".title") %></h1>
   <h2 class="mt-3 text-center text-xl text-gray-500"><%= t(".subtitle") %></h2>
@@ -23,9 +23,17 @@
     </div>
   <% end %>
 
-  <% if EnvConfig::PUBLIC %>
-    <div class="mt-16 flex justify-evenly items-center max-w-md mx-auto">
+  <div class="mt-16 flex justify-evenly items-center max-w-md mx-auto">
+    <% if EnvConfig::PUBLIC %>
       <%= link_to t(".need_account"), new_user_path, class: "text-xl underline hover:no-underline" %>
-    </div>
-  <% end %>
+    <% end %>
+    <button data-action="forgot-password#toggle" type="button" class="text-xl underline hover:no-underline hover:cursor-pointer">Forgot password?</button>
+  </div>
+
+  <div class="hidden" data-forgot-password-target="area">
+    <h2 class="mt-12 text-center text-xl text-gray-500">Forgot Password</h2>
+    <p class="mt-text-center text-center text-lg">
+      If you've forgotten please consult your application administrator.
+    </p>
+  </div>
 </div>
