@@ -7,11 +7,16 @@
     <%= link_to t(".export"), new_export_path, class: "my-2 text-xl underline hover:no-underline" %>
   </div>
 
-
-  <button data-controller="push-notifications" data-action="push-notifications#subscribe" class="hover:cursor-pointer text-lg text-red-500 font-semibold">
-    Subscribe to push
-  </button>
-
+  <div data-controller="push-notifications" class="mt-8 text-center">
+    <button
+      data-push-notifications-target="button"
+      data-action="push-notifications#subscribe"
+      class="hover:cursor-pointer text-lg text-red-500 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      Enable push notifications
+    </button>
+    <p data-push-notifications-target="status" class="mt-2 text-sm text-gray-500"></p>
+  </div>
 
   <% if hotwire_native_app? %>
     <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">

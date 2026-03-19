@@ -44,5 +44,6 @@ Rails.application.routes.draw do
     resource :export
   end
 
-  resources :push_subscriptions
+  post "push_notifications" => "push_subscriptions#create"
+  delete "push_subscriptions" => "push_subscriptions#destroy"
 end
