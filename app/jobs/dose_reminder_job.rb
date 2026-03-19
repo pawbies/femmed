@@ -10,15 +10,10 @@ class DoseReminderJob < ApplicationJob
 
     User.joins(:push_subscriptions).distinct.each do |user|
       user.prescriptions.where(active: true).each do |prescription|
-        puts "Going for #{prescription.full_name}"
         next unless prescription.routine.present?
 
-        puts "Passwd check"
-
         prescription.routine.occurrences_between(now, window_end).each do |occurrence|
-          puts "found occurance"
           next if already_taken?(prescription, occurrence)
-          puts "passed second check"
 
           send_reminder(user, prescription, occurrence)
         end
@@ -30,12 +25,12 @@ class DoseReminderJob < ApplicationJob
 
   def already_taken?(prescription, occurrence)
     prescription.doses.where(
-      taken_at: (occurrence.utc - TAKEN_WINDOW)..(occurrence.utc + REMINDER_WINDOW)
+      taken_at: (occurrence - TAKEN_WINDOW)..(occurrence + TAKEN_WINDOW)
     ).exists?
   end
 
   def send_reminder(user, prescription, occurrence)
-    name = prescription.full_name.presence || "your medication"
+    name = prescription.full_name
     time = occurrence.strftime("%H:%M")
 
     PushNotificationService.new(
