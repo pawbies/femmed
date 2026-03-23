@@ -1,0 +1,19 @@
+ja:
+  prescriptions:
+    edit:
+      title: "設定"
+      general: "一般"
+      planned_amount: "1回の服用量"
+      preview_past: "過去のプレビュー"
+      preview_future: "未来のプレビュー"
+      hours: "時間"
+      enable_pack_tracking: "パック管理を有効にする"
+      pack_tracking_desc: "パックの数量と日付の追跡を有効にします"
+      active_prescription: "有効な処方"
+      active_prescription_desc: "服薬記録とリマインダーを有効にします"
+      save: "変更を保存"
+      danger_zone: "危険なゾーン"
+      remove_label: "この処方を削除"
+      remove_desc: "関連するすべての服用記録とパックが完全に削除されます。"
+      remove_button: "処方を削除"
+      confirm_remove: "本当に？"

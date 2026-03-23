@@ -19,22 +19,22 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Prescription.count") do
       post prescriptions_url(@user), params: { prescription: { medication_version_id: @other_medication_version.id } }
     end
-    assert_redirected_to prescription_path(Prescription.last)
+    assert_redirected_to prescription_doses_path(Prescription.last)
   end
 
-  test "show" do
+  test "edit" do
     # Not authenticated
-    get prescription_url(@prescription)
+    get edit_prescription_url(@prescription)
     assert_redirected_to new_session_url
 
     # Own prescription
     sign_in_as(@user)
-    get prescription_url(@prescription)
+    get edit_prescription_url(@prescription)
     assert_response :success
 
     # Another user's prescription
     sign_in_as(@other_user)
-    get prescription_url(@prescription)
+    get edit_prescription_url(@prescription)
     assert_response :not_found
   end
 
@@ -46,7 +46,7 @@ class PrescriptionsControllerTest < ActionDispatch::IntegrationTest
     # Own prescription
     sign_in_as(@user)
     patch prescription_url(@prescription), params: { prescription: { amount: 10 } }
-    assert_redirected_to prescription_url(@prescription, page: "Settings")
+    assert_redirected_to edit_prescription_path(@prescription)
 
     # Another user's prescription
     sign_in_as(@other_user)

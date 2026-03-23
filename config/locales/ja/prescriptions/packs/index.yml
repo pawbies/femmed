@@ -1,0 +1,18 @@
+ja:
+  prescriptions:
+    packs:
+      index:
+        title: "パック"
+        days_since_last: "最後のパックから%{days}日経過"
+        get_some: "パックを入手しよう"
+        doses_remaining:
+          one: "残り1回分"
+          other: "残り%{count}回分"
+        eat_them_up: "さあ飲んで >:3"
+        remaining: "残り"
+        gotta_disappear: "全部なくなるまで頑張れ"
+        history: "履歴"
+        number: "番号"
+        date: "日付"
+        edit: "編集"
+        confirm_delete: "本当に？"

@@ -9,11 +9,12 @@ Rails.application.routes.draw do
   resources :users
 
   resources :prescriptions do
-    scope module: :prescription do
+    scope module: :prescriptions do
       resources :packs
       resources :doses
+      resource :routine
+      get "about" => "about#show"
     end
-    resource :routine
   end
 
   get "profile" => "users#profile"

@@ -1,0 +1,8 @@
+en:
+  prescriptions:
+    nav:
+      log: "Log"
+      packs: "Packs"
+      routine: "Routine"
+      about: "About"
+      settings: "Settings"

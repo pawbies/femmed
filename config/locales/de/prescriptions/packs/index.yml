@@ -1,0 +1,18 @@
+de:
+  prescriptions:
+    packs:
+      index:
+        title: "Packungen"
+        days_since_last: "%{days} Tage seit der letzten Packung"
+        get_some: "Lass dir welche geben"
+        doses_remaining:
+          one: "1 Dosis verbleibend"
+          other: "%{count} Dosen verbleibend"
+        eat_them_up: "Los, nimm sie! >:3"
+        remaining: "Verbleibend"
+        gotta_disappear: "Die müssen weg"
+        history: "Verlauf"
+        number: "Nummer"
+        date: "Datum"
+        edit: "Bearbeiten"
+        confirm_delete: "Bist du sicher?"

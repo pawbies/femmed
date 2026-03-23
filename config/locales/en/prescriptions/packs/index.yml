@@ -1,0 +1,18 @@
+en:
+  prescriptions:
+    packs:
+      index:
+        title: "Packs"
+        days_since_last: "%{days} days since you got the last pack"
+        get_some: "Go ahead and get some"
+        doses_remaining:
+          one: "1 Dose Remaining"
+          other: "%{count} Doses Remaining"
+        eat_them_up: "Cmon eat them up >:3"
+        remaining: "Remaining"
+        gotta_disappear: "Gotta make them disappear"
+        history: "History"
+        number: "Number"
+        date: "Date"
+        edit: "Edit"
+        confirm_delete: "Are you sure?"

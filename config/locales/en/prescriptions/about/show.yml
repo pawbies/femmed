@@ -1,0 +1,7 @@
+en:
+  prescriptions:
+    about:
+      show:
+        title: "About"
+        your_version: "Your Version"
+        categories: "Categories"

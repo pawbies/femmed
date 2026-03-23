@@ -4,20 +4,20 @@ class PrescriptionsController < ApplicationController
   def create
     @prescription = Current.user.prescriptions.new(**prescription_create_params, amount: 1, active: true)
     if @prescription.save
-      redirect_to @prescription
+      redirect_to prescription_doses_path(@prescription)
     else
       redirect_back fallback_location: @prescription.medication, alert: "Something went wrong :("
     end
   end
 
-  def show
+  def edit
   end
 
   def update
     if @prescription.update prescription_update_params
-      redirect_to prescription_path(@prescription, page: "Settings"), notice: "Updated your prescription for ya"
+      redirect_to edit_prescription_path(@prescription), notice: "Updated your prescription for ya"
     else
-      redirect_to prescription_path(@prescription, page: "Settings"), alert: "Something went wrong :("
+      redirect_to edit_prescription_path(@prescription), alert: "Something went wrong :("
     end
   end
 

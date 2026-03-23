@@ -1,0 +1,19 @@
+en:
+  prescriptions:
+    edit:
+      title: "Settings"
+      general: "General"
+      planned_amount: "Planned amount per dose"
+      preview_past: "Preview into the past"
+      preview_future: "Preview into the future"
+      hours: "Hours"
+      enable_pack_tracking: "Enable pack tracking"
+      pack_tracking_desc: "Enables pack amount and date tracking"
+      active_prescription: "Active prescription"
+      active_prescription_desc: "Enables dose tracking and reminders"
+      save: "Save changes"
+      danger_zone: "Danger Zone"
+      remove_label: "Remove this prescription"
+      remove_desc: "This will permanently delete all doses and packs associated with it."
+      remove_button: "Remove prescription"
+      confirm_remove: "Are you sure?"

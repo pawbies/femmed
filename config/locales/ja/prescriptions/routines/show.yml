@@ -1,0 +1,15 @@
+ja:
+  prescriptions:
+    routines:
+      show:
+        title: "ルーティン"
+        set_routine: "ルーティンを設定"
+        schedule: "スケジュール"
+        starting: "開始日："
+        edit_routine: "ルーティンを編集"
+        remove_routine: "ルーティンを削除"
+        upcoming: "次回"
+        day: "曜日"
+        date: "日付"
+        time: "時間"
+        no_routine: "まだルーティンが設定されていません"
