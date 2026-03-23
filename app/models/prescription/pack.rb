@@ -1,4 +1,4 @@
-class Pack < ApplicationRecord
+class Prescription::Pack < ApplicationRecord
   belongs_to :prescription
 
   validates :amount, presence: true, numericality: { only_integer: true }, comparison: { greater_than: 0 }

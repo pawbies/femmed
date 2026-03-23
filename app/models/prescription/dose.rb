@@ -1,4 +1,4 @@
-class Dose < ApplicationRecord
+class Prescription::Dose < ApplicationRecord
   belongs_to :prescription
 
   validates :amount_taken, presence: true, numericality: true, comparison: { greater_than: 0 }

@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :prescriptions, dependent: :destroy
   has_many :medication_versions, through: :prescriptions
-  has_many :doses, through: :prescriptions
+  has_many :doses, through: :prescriptions, class_name: "Prescription::Dose"
 
   has_many :push_subscriptions, dependent: :destroy
 

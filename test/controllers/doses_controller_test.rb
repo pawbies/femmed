@@ -5,7 +5,7 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
     @user         = users(:alice)
     @other_user   = users(:bob)
     @prescription = prescriptions(:alice_ritalin_ir)
-    @dose         = doses(:alice_ritalin_ir_dose_1)
+    @dose         = prescription_doses(:alice_ritalin_ir_dose_1)
   end
 
   test "new" do
@@ -41,7 +41,7 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
 
     # Valid params
     sign_in_as(@user)
-    assert_difference "Dose.count", 1 do
+    assert_difference "Prescription::Dose.count", 1 do
       post prescription_doses_url(@prescription), params: { dose: {
         amount_taken: 1,
         taken_at: Time.current.change(sec: 0)
@@ -50,7 +50,7 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to prescription_path(@prescription)
 
     # Invalid params
-    assert_no_difference "Dose.count" do
+    assert_no_difference "Prescription::Dose.count" do
       post prescription_doses_url(@prescription), params: { dose: {
         amount_taken: nil,
         taken_at: nil
@@ -60,7 +60,7 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
 
     # Inactive prescription
     @prescription.update! active: false
-    assert_no_difference "Dose.count" do
+    assert_no_difference "Prescription::Dose.count" do
       post prescription_doses_url(@prescription), params: { dose: {
         amount_taken: 1,
         taken_at: Time.current.change(sec: 0)
@@ -122,13 +122,13 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
 
     # Own prescription
     sign_in_as(@user)
-    assert_difference("Dose.count", -1) do
+    assert_difference("Prescription::Dose.count", -1) do
       delete prescription_dose_url(@prescription, @dose)
     end
 
     # Another user's dose
     sign_in_as(@other_user)
-    assert_no_difference("Dose.count") do
+    assert_no_difference("Prescription::Dose.count") do
       delete prescription_dose_url(@prescription, @dose)
     end
     assert_response :not_found

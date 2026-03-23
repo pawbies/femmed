@@ -35,7 +35,7 @@ class PrescriptionTest < ActiveSupport::TestCase
     um = prescriptions(:alice_ritalin_ir)
     pack_count = um.packs.count
     assert pack_count > 0
-    assert_difference("Pack.count", -pack_count) do
+    assert_difference("Prescription::Pack.count", -pack_count) do
       um.destroy
     end
   end

@@ -4,9 +4,10 @@ class Prescription < ApplicationRecord
 
   has_one :medication, through: :medication_version
 
-  has_many :packs, dependent: :destroy
-  has_many :doses, dependent: :destroy
-  has_many :recent_doses, -> { where(taken_at: 1.week.ago..) }, class_name: "Dose"
+  has_many :packs, dependent: :destroy, class_name: "Prescription::Pack"
+  has_many :doses, dependent: :destroy, class_name: "Prescription::Dose"
+
+  has_many :recent_doses, -> { where(taken_at: 1.week.ago..) }, class_name: "Prescription::Dose"
   has_many :medication_version_ingredients, through: :medication_version
 
   delegate :form, to: :medication_version, allow_nil: true

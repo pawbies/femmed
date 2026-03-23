@@ -27,8 +27,8 @@ class Transfer::ExportsController < ApplicationController
         @prescriptions.each do |prescription|
           records = (prescription.doses + prescription.packs).sort_by do |record|
             case record
-            when Dose then record.taken_at
-            when Pack then record.acquired_at
+            when Prescription::Dose then record.taken_at
+            when Prescription::Pack then record.acquired_at
             end
           end
 
@@ -46,9 +46,9 @@ class Transfer::ExportsController < ApplicationController
               "",
               "",
               case record
-              when Dose then
+              when Prescription::Dose then
                 "#{format("%g", record.amount_taken)} #{prescription.form.name.pluralize(record.amount_taken)} Dose at #{record.taken_at.strftime("%B %e, %Y %H:%M")}"
-              when Pack then
+              when Prescription::Pack then
                 "#{record.amount} #{prescription.form.name.pluralize(record.amount)} Pack at #{record.acquired_at.strftime("%B %e, %Y")}"
               end
             ]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_19_103009) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_23_113002) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -78,15 +78,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_103009) do
     t.index ["medication_id", "category_id"], name: "index_categories_medications_on_medication_id_and_category_id"
   end
 
-  create_table "doses", force: :cascade do |t|
-    t.float "amount_taken", null: false
-    t.datetime "created_at", null: false
-    t.integer "prescription_id", null: false
-    t.datetime "taken_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["prescription_id"], name: "index_doses_on_prescription_id"
-  end
-
   create_table "forms", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -141,13 +132,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_103009) do
     t.index ["labeler_id"], name: "index_medications_on_labeler_id"
   end
 
-  create_table "packs", force: :cascade do |t|
+  create_table "prescription_doses", force: :cascade do |t|
+    t.float "amount_taken", null: false
+    t.datetime "created_at", null: false
+    t.integer "prescription_id", null: false
+    t.datetime "taken_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prescription_id"], name: "index_prescription_doses_on_prescription_id"
+  end
+
+  create_table "prescription_packs", force: :cascade do |t|
     t.date "acquired_at", null: false
     t.integer "amount", null: false
     t.datetime "created_at", null: false
     t.integer "prescription_id", null: false
     t.datetime "updated_at", null: false
-    t.index ["prescription_id"], name: "index_packs_on_prescription_id"
+    t.index ["prescription_id"], name: "index_prescription_packs_on_prescription_id"
   end
 
   create_table "prescriptions", force: :cascade do |t|
@@ -203,7 +203,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_103009) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "doses", "prescriptions"
   add_foreign_key "medication_release_profiles", "medications"
   add_foreign_key "medication_release_profiles", "release_profiles"
   add_foreign_key "medication_version_ingredients", "active_ingredients"
@@ -211,7 +210,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_103009) do
   add_foreign_key "medication_versions", "medications"
   add_foreign_key "medications", "forms"
   add_foreign_key "medications", "labelers"
-  add_foreign_key "packs", "prescriptions"
+  add_foreign_key "prescription_doses", "prescriptions"
+  add_foreign_key "prescription_packs", "prescriptions"
   add_foreign_key "prescriptions", "medication_versions"
   add_foreign_key "prescriptions", "users"
   add_foreign_key "push_subscriptions", "users"
