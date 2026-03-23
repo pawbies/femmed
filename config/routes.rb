@@ -7,11 +7,15 @@ Rails.application.routes.draw do
   resources :labelers
   resources :categories
   resources :users
+
   resources :prescriptions do
-    resources :packs
-    resources :doses
+    scope module: :prescription do
+      resources :packs
+      resources :doses
+    end
     resource :routine
   end
+
   get "profile" => "users#profile"
   resource :session
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

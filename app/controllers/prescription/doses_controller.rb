@@ -1,6 +1,4 @@
-class DosesController < ApplicationController
-  before_action :set_prescription
-  before_action :require_active_prescription
+class Prescription::DosesController < Prescription::BaseController
   before_action :set_dose, only: %i[ edit update destroy ]
   before_action :require_non_empty_stash, only: %i[ new create ]
 
@@ -36,16 +34,8 @@ class DosesController < ApplicationController
   end
 
   private
-    def set_prescription
-      @prescription = Current.user.prescriptions.find(params[:prescription_id])
-    end
-
     def set_dose
       @dose = @prescription.doses.find(params[:id])
-    end
-
-    def require_active_prescription
-      redirect_back fallback_location: root_path, notice: "This requires an active prescription" unless @prescription.active?
     end
 
     def require_non_empty_stash
@@ -55,6 +45,6 @@ class DosesController < ApplicationController
     end
 
     def dose_params
-      params.expect(dose: [ :amount_taken, :taken_at ])
+      params.expect(prescription_dose: [ :amount_taken, :taken_at ])
     end
 end

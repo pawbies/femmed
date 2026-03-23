@@ -1,7 +1,5 @@
-class PacksController < ApplicationController
-  before_action :set_prescription
+class Prescription::PacksController < Prescription::BaseController
   before_action :set_pack, except: %i[ new create ]
-  before_action :require_active_prescription
   before_action :require_pack_tracking_enabled
 
   def new
@@ -36,16 +34,8 @@ class PacksController < ApplicationController
   end
 
   private
-    def set_prescription
-      @prescription = Current.user.prescriptions.find(params[:prescription_id])
-    end
-
     def set_pack
       @pack = @prescription.packs.find(params[:id])
-    end
-
-    def require_active_prescription
-      redirect_back fallback_location: root_path, notice: "This requires an active prescription" unless @prescription.active?
     end
 
     def require_pack_tracking_enabled
@@ -53,6 +43,6 @@ class PacksController < ApplicationController
     end
 
     def pack_params
-      params.expect(pack: [ :amount, :acquired_at ])
+      params.expect(prescription_pack: [ :amount, :acquired_at ])
     end
 end

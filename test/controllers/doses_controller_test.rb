@@ -31,18 +31,18 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
 
   test "create" do
     # Not authenticated
-    post prescription_doses_url(@prescription), params: { dose: { amount_taken: 1, taken_at: Time.current } }
+    post prescription_doses_url(@prescription), params: { prescription_dose: { amount_taken: 1, taken_at: Time.current } }
     assert_redirected_to new_session_url
 
     # Another user's prescription
     sign_in_as(@other_user)
-    post prescription_doses_url(@prescription), params: { dose: { amount_taken: 1, taken_at: Time.current } }
+    post prescription_doses_url(@prescription), params: { prescription_dose: { amount_taken: 1, taken_at: Time.current } }
     assert_response :not_found
 
     # Valid params
     sign_in_as(@user)
     assert_difference "Prescription::Dose.count", 1 do
-      post prescription_doses_url(@prescription), params: { dose: {
+      post prescription_doses_url(@prescription), params: { prescription_dose: {
         amount_taken: 1,
         taken_at: Time.current.change(sec: 0)
       } }
@@ -51,7 +51,7 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
 
     # Invalid params
     assert_no_difference "Prescription::Dose.count" do
-      post prescription_doses_url(@prescription), params: { dose: {
+      post prescription_doses_url(@prescription), params: { prescription_dose: {
         amount_taken: nil,
         taken_at: nil
       } }
@@ -61,7 +61,7 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
     # Inactive prescription
     @prescription.update! active: false
     assert_no_difference "Prescription::Dose.count" do
-      post prescription_doses_url(@prescription), params: { dose: {
+      post prescription_doses_url(@prescription), params: { prescription_dose: {
         amount_taken: 1,
         taken_at: Time.current.change(sec: 0)
       } }
@@ -92,26 +92,26 @@ class DosesControllerTest < ActionDispatch::IntegrationTest
 
   test "update" do
     # Not authenticated
-    patch prescription_dose_url(@prescription, @dose), params: { dose: { amount_taken: 2 } }
+    patch prescription_dose_url(@prescription, @dose), params: { prescription_dose: { amount_taken: 2 } }
     assert_redirected_to new_session_url
 
     # Another user's prescription
     sign_in_as(@other_user)
-    patch prescription_dose_url(@prescription, @dose), params: { dose: { amount_taken: 2 } }
+    patch prescription_dose_url(@prescription, @dose), params: { prescription_dose: { amount_taken: 2 } }
     assert_response :not_found
 
     # Valid params
     sign_in_as(@user)
-    patch prescription_dose_url(@prescription, @dose), params: { dose: { amount_taken: 2 } }
+    patch prescription_dose_url(@prescription, @dose), params: { prescription_dose: { amount_taken: 2 } }
     assert_redirected_to prescription_url(@prescription)
 
     # Invalid params
-    patch prescription_dose_url(@prescription, @dose), params: { dose: { amount_taken: -2 } }
+    patch prescription_dose_url(@prescription, @dose), params: { prescription_dose: { amount_taken: -2 } }
     assert_response :unprocessable_content
 
     # Inactive prescription
     @prescription.update! active: false
-    patch prescription_dose_url(@prescription, @dose), params: { dose: { amount_taken: 2 } }
+    patch prescription_dose_url(@prescription, @dose), params: { prescription_dose: { amount_taken: 2 } }
     assert_redirected_to root_url
   end
 
