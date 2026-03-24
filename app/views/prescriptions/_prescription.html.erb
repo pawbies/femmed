@@ -49,7 +49,7 @@
       </div>
     <% end %>
 <% else %>
-  <%= link_to prescription, class: "px-4 py-4 flex items-center justify-between border rounded-md border-rose-200 shadow-sm" do %>
+  <%= link_to prescription_doses_path(prescription), class: "px-4 py-4 flex items-center justify-between border rounded-md border-rose-200 shadow-sm" do %>
     <div>
       <h5 class="font-semibold text-gray-800"><%= prescription.medication_version.full_name %></h5>
       <p class="text-xs text-rose-400 mt-0.5">
