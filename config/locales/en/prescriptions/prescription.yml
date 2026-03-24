@@ -5,3 +5,6 @@ en:
       active: "Active"
       inactive: "Inactive"
       pk_excluded: "%{ingredients} excluded — not supported for PK calculation"
+      x_label: "Hours from now"
+      y_label: "Concentration (mg/L)"
+      now_label: "now"

@@ -10,7 +10,10 @@ export default class extends Controller {
   static values = {
     plot: Object,
     past: Number,
-    future: Number
+    future: Number,
+    xlabel: String,
+    ylabel: String,
+    nowlabel: String
   }
 
   connect() {
@@ -18,6 +21,12 @@ export default class extends Controller {
     const { series, dots, local_maxima: localMaxima, y_max: yMax } = this.plotValue
     const xStart = this.pastValue * -1
     const xEnd = this.futureValue
+
+    const xLabel = this.xlabelValue
+    const yLabel = this.ylabelValue
+    const nowLabel = this.nowlabelValue
+
+    console.log(xLabel)
 
     const ingredients = [...new Set(series.map(d => d.ingredient))]
     const colorMap = Object.fromEntries(series.map(d => [d.ingredient, d.color]))
@@ -30,7 +39,7 @@ export default class extends Controller {
       marginLeft: 64, marginRight: 24, marginTop: 28, marginBottom: 44,
       style: { fontFamily: "'Inter', 'DM Sans', system-ui, sans-serif", fontSize: "11px", background: "transparent", overflow: "visible" },
       y: {
-        domain: [0, yMax * 1.25], label: "Concentration (mg/L)", labelArrow: "up", labelOffset: 56, tickSize: 0, grid: true,
+        domain: [0, yMax * 1.25], label: yLabel, labelArrow: "up", labelOffset: 56, tickSize: 0, grid: true,
         tickFormat: v => {
           if (v === 0) return "0"
           const decimals = Math.max(0, 1 - Math.floor(Math.log10(Math.abs(v))))
@@ -38,8 +47,8 @@ export default class extends Controller {
         },
       },
       x: {
-        domain: [xStart, xEnd], label: "Hours from now →", labelAnchor: "right", labelOffset: 36, tickSize: 0, grid: true,
-        tickFormat: t => t === 0 ? "now" : `${t > 0 ? "+" : ""}${t}h`,
+        domain: [xStart, xEnd], label: xLabel, labelAnchor: "right", labelOffset: 36, tickSize: 0, grid: true,
+        tickFormat: t => t === 0 ? nowLabel : `${t > 0 ? "+" : ""}${t}h`,
       },
       color: { legend: true, domain: ingredients, range: ingredients.map(n => colorMap[n]) },
       marks: [

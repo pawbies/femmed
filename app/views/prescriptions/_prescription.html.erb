@@ -7,7 +7,10 @@
       controller: "prescriptions-preview",
       prescriptions_preview_past_value: prescription.preview_past,
       prescriptions_preview_future_value: prescription.preview_future,
-      prescriptions_preview_plot_value: PkCalculator.for_prescription(prescription).to_json
+      prescriptions_preview_plot_value: PkCalculator.for_prescription(prescription).to_json,
+      prescriptions_preview_xlabel_value: t(".x_label"),
+      prescriptions_preview_ylabel_value: t(".y_label"),
+      prescriptions_preview_nowlabel_value: t(".now_label")
     } do %>
       <div class="<%= "hidden" unless prescription.active? %> no-js:hidden">
         <div class="px-4 pt-4 pb-2 flex items-center justify-between">
