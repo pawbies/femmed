@@ -1,5 +1,5 @@
 <div class="w-full">
-  <h1 class="text-3xl font-semibold text-gray-800"><%= @prescription.medication_version.full_name %></h1>
+  <h1 class="text-3xl font-semibold text-gray-800"><%= @prescription.medication.name %></h1>
 
   <turbo-frame id="prescriptions_page">
     <%= render "prescriptions/nav" %>
