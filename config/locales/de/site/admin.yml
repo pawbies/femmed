@@ -1,7 +1,0 @@
-de:
-  site:
-    admin:
-      title: "Admin"
-      user_management: "Benutzerverwaltung"
-      see_all_users: "Alle Benutzer anzeigen"
-      create_new_user: "Neuen Benutzer erstellen"

@@ -1,7 +1,0 @@
-ja:
-  labelers:
-    show:
-      confirm_delete: "本当に？薬は削除されません。ラベラーから外されるだけです :3"
-      version_count:
-        one: "バージョン"
-        other: "バージョン"

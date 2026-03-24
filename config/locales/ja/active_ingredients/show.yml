@@ -1,7 +1,0 @@
-ja:
-  active_ingredients:
-    show:
-      confirm_delete: "本当に？薬は削除されません。有効成分から外されるだけです :3"
-      version_count:
-        one: "バージョン"
-        other: "バージョン"

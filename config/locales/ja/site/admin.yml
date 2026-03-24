@@ -1,7 +1,0 @@
-ja:
-  site:
-    admin:
-      title: "管理"
-      user_management: "ユーザー管理"
-      see_all_users: "すべてのユーザーを見る"
-      create_new_user: "新しいユーザーを作成"

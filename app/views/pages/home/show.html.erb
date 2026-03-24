@@ -1,0 +1,77 @@
+<div class="w-full">
+  <div class="mb-6">
+    <h1 class="font-semibold hidden md:inline text-3xl text-gray-800">
+      <%= t(".welcome_back", username: Current.user.username) %>
+    </h1>
+    <h1 class="font-semibold md:hidden text-3xl text-gray-800">
+      <%= t(".home") %>
+    </h1>
+  </div>
+
+  <%= render "pages/nav" %>
+
+  <section class="my-12" data-controller="live-search">
+    <div class="mb-4">
+      <h3 class="text-3xl font-semibold text-gray-800">
+        <%= t(".search") %>
+      </h3>
+    </div>
+
+    <div class="relative">
+      <%= form_with url: search_path, class: "mt-4 flex gap-2", method: :get do |form| %>
+        <%= form.text_field :query,
+          placeholder: t(".search_placeholder"),
+          data: { action: "input->live-search#search", live_search_target: "input" },
+          class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
+        <%= form.submit t(".yippie"), class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+      <% end %>
+      <div id="search_results" class="absolute max-h-96 overflow-y-auto top-full left-0 right-0 z-50 mt-1 rounded-lg shadow-md bg-white"></div>
+    </div>
+  </section>
+
+  <section class="mb-6 w-full">
+    <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
+      <%= t(".my_medications") %>
+    </h3>
+
+    <div class="mx-2 mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+      <%= render partial: "prescriptions/prescription", collection: @prescriptions %>
+    </div>
+  </section>
+
+  <% if @concentrations.any? %>
+    <section class="mb-6 w-full">
+      <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
+        <%= t(".current_concentrations") %>
+      </h3>
+
+      <div class="bg-white border border-rose-200 rounded-xl overflow-x-auto shadow-sm">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-rose-50 text-left text-xs uppercase tracking-widest text-rose-400">
+              <th class="px-5 py-3 font-semibold"><%= t(".ingredient") %></th>
+              <th class="px-5 py-3 font-semibold"><%= t(".concentration") %></th>
+              <th class="px-5 py-3 font-semibold"><%= t(".trend") %></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-100">
+            <% @concentrations.each do |entry| %>
+              <tr class="transition-colors hover:bg-rose-50/30">
+                <td class="px-5 py-3.5 text-nowrap font-medium text-zinc-800">
+                  <%= link_to entry[:name], active_ingredient_path(id: entry[:id]) %>
+                </td>
+                <td class="px-5 py-3.5 text-nowrap font-mono text-zinc-700">
+                  <%= number_with_precision(entry[:concentration], precision: 4) %> mg/L
+                </td>
+                <td class="px-5 py-3.5 text-nowrap font-mono <%= entry[:rate] >= 0 ? 'text-emerald-600' : 'text-rose-500' %>">
+                  <%= entry[:rate] >= 0 ? "▲" : "▼" %>
+                  <%= number_with_precision(entry[:rate].abs, precision: 4) %> mg/L/h
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  <% end %>
+</div>

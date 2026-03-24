@@ -1,0 +1,13 @@
+en:
+  pages:
+    about:
+      show:
+        title: "About FemMed"
+        subtitle: "Medication tracking, made by femboys for femboys"
+        data_heading: "🔒 Your data, your server"
+        data_body: "We don't want your data. Seriously. FemMed is self-hosted, which means everything you log — your doses, your medications, your history — lives on your machine, not ours. No accounts with strangers, no privacy policies written by lawyers, no third parties quietly profiting off your health information."
+        does_heading: "💊 What it does"
+        does_body: "FemMed lets you track your prescriptions and log doses as you take them. There's a timeline view for reviewing your day, and everything is designed to be quick to use — logging a dose should take seconds, not minutes."
+        built_heading: "🛠 Built with"
+        built_body: "FemMed is a Rails 8 application using SQLite, Tailwind CSS, Hotwire, and Stimulus. It's designed to run in a single Docker container with no external dependencies — no Redis, no Postgres, no fuss. If you can run Docker, you can run FemMed."
+        thanks_heading: "💗 Thanks to"

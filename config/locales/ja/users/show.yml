@@ -1,6 +1,0 @@
-ja:
-  users:
-    show:
-      edit: "何か変えたい？"
-      export: "データをエクスポート？"
-      log_out: "ログアウト"

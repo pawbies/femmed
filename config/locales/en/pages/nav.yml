@@ -1,0 +1,7 @@
+en:
+  pages:
+    nav:
+      home: "Home"
+      timeline: "Timeline"
+      calendar: "Calendar"
+      admin: "Admin"

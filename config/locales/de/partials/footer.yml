@@ -1,8 +1,0 @@
-de:
-  partials:
-    footer:
-      privacy: "Datenschutz"
-      imprint: "Impressum"
-      about: "Über FemMed"
-      made_by_html: "Gemacht von <a href=\"https://pawbies.net\" class=\"underline hover:no-underline\">Pawbies</a>"
-
