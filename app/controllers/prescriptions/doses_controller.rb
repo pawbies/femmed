@@ -14,7 +14,7 @@ class Prescriptions::DosesController < Prescriptions::BaseController
     @dose = @prescription.doses.new dose_params
 
     if @dose.save
-      redirect_to @prescription
+      redirect_to prescription_doses_path(@prescription)
     else
       render :new, status: :unprocessable_content
     end
@@ -25,7 +25,7 @@ class Prescriptions::DosesController < Prescriptions::BaseController
 
   def update
     if @dose.update dose_params
-      redirect_to @prescription
+      redirect_to prescription_doses_path(@prescription)
     else
       render :edit, status: :unprocessable_content
     end
@@ -34,7 +34,7 @@ class Prescriptions::DosesController < Prescriptions::BaseController
   def destroy
     @dose.destroy!
 
-    redirect_to @prescription
+    redirect_to prescription_doses_path(@prescription)
   end
 
   private

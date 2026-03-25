@@ -1,5 +1,5 @@
 en:
-  prescription:
+  prescriptions:
     doses:
       new:
         title: "New dose of %{prescription}"

@@ -1,5 +1,5 @@
 en:
-  prescription:
+  prescriptions:
     packs:
       new:
         title: "New pack of %{prescription}"

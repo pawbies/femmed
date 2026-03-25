@@ -14,7 +14,7 @@ class Prescriptions::PacksController < Prescriptions::BaseController
     @pack = @prescription.packs.new pack_params
 
     if @pack.save
-      redirect_to prescription_path(@prescription, page: "Packs")
+      redirect_to prescription_packs_path(@prescription)
     else
       render :new, status: :unprocessable_content
     end
@@ -25,7 +25,7 @@ class Prescriptions::PacksController < Prescriptions::BaseController
 
   def update
     if @pack.update pack_params
-      redirect_to prescription_path(@prescription, page: "Packs")
+      redirect_to prescription_packs_path(@prescription)
     else
       render :edit, status: :unprocessable_content
     end
@@ -33,7 +33,7 @@ class Prescriptions::PacksController < Prescriptions::BaseController
 
   def destroy
     @pack.destroy!
-    redirect_to prescription_path(@prescription, page: "Packs")
+    redirect_to prescription_packs_path(@prescription)
   end
 
   private
