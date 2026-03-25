@@ -41,7 +41,7 @@ class Prescriptions::PacksControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Prescription::Pack.count") do
       post prescription_packs_url(@prescription), params: { prescription_pack: { amount: 30, acquired_at: Date.today } }
     end
-    assert_redirected_to prescription_url(@prescription, page: "Packs")
+    assert_redirected_to prescription_packs_url(@prescription)
     assert_equal Prescription::Pack.last.acquired_at, Date.today
 
     # Another user's prescription

@@ -47,7 +47,7 @@ class Prescriptions::DosesControllerTest < ActionDispatch::IntegrationTest
         taken_at: Time.current.change(sec: 0)
       } }
     end
-    assert_redirected_to prescription_path(@prescription)
+    assert_redirected_to prescription_doses_path(@prescription)
 
     # Invalid params
     assert_no_difference "Prescription::Dose.count" do
@@ -103,7 +103,7 @@ class Prescriptions::DosesControllerTest < ActionDispatch::IntegrationTest
     # Valid params
     sign_in_as(@user)
     patch prescription_dose_url(@prescription, @dose), params: { prescription_dose: { amount_taken: 2 } }
-    assert_redirected_to prescription_url(@prescription)
+    assert_redirected_to prescription_doses_url(@prescription)
 
     # Invalid params
     patch prescription_dose_url(@prescription, @dose), params: { prescription_dose: { amount_taken: -2 } }
