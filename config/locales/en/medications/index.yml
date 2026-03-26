@@ -1,0 +1,10 @@
+en:
+  medications:
+    index:
+      title: "All medications"
+      medication_count:
+        one: "medication"
+        other: "medications"
+      version_count:
+        one: "version"
+        other: "versions"

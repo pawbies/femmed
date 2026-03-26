@@ -6,3 +6,7 @@ en:
         user_management: "User Management"
         see_all_users: "See all users"
         create_new_user: "Create new user"
+
+        medication_management: "Medication Management"
+        see_all_medications: "See all medications"
+        create_new_medication: "Create new medication"

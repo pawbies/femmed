@@ -1,6 +1,10 @@
 class MedicationsController < ApplicationController
-  before_action :set_medication, except: %i[ new create ]
+  before_action :set_medication, except: %i[ index new create ]
   before_action :require_admin,  except: :show
+
+  def index
+    @medications = Medication.order(:name)
+  end
 
   def new
     @medication = Medication.new

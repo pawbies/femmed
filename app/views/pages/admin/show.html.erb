@@ -22,5 +22,39 @@
         <% end %>
       </div>
     </div>
+
+    <div class="border border-rose-100 rounded-2xl overflow-hidden shadow-sm">
+      <div class="bg-rose-50 px-5 py-3 border-b border-rose-100 flex items-center justify-between">
+        <h2 class="text-sm font-semibold text-rose-500 uppercase tracking-wide"><%= t(".medication_management") %></h2>
+      </div>
+      <div class="divide-y divide-rose-50">
+        <%= link_to medications_path, class: "flex items-center justify-between px-5 py-3 hover:bg-rose-50 transition-colors group" do %>
+          <span class="text-sm font-medium text-gray-700 group-hover:text-rose-500 transition-colors"><%= t(".see_all_medications") %></span>
+          <span class="text-rose-300 group-hover:text-rose-400 transition-colors">&#8594;</span>
+        <% end %>
+        <%= link_to new_medication_path, class: "flex items-center justify-between px-5 py-3 hover:bg-rose-50 transition-colors group" do %>
+          <span class="text-sm font-medium text-gray-700 group-hover:text-rose-500 transition-colors"><%= t(".create_new_medication") %></span>
+          <span class="text-rose-300 group-hover:text-rose-400 transition-colors">&#8594;</span>
+        <% end %>
+      </div>
+    </div>
+
+
+    <div class="border border-rose-100 rounded-2xl overflow-hidden shadow-sm">
+      <div class="bg-rose-50 px-5 py-3 border-b border-rose-100 flex items-center justify-between">
+        <h2 class="text-sm font-semibold text-rose-500 uppercase tracking-wide"><%= t(".user_management") %></h2>
+      </div>
+      <div class="divide-y divide-rose-50">
+        <%= link_to users_path, class: "flex items-center justify-between px-5 py-3 hover:bg-rose-50 transition-colors group" do %>
+          <span class="text-sm font-medium text-gray-700 group-hover:text-rose-500 transition-colors"><%= t(".see_all_users") %></span>
+          <span class="text-rose-300 group-hover:text-rose-400 transition-colors">&#8594;</span>
+        <% end %>
+        <%= link_to new_user_path, class: "flex items-center justify-between px-5 py-3 hover:bg-rose-50 transition-colors group" do %>
+          <span class="text-sm font-medium text-gray-700 group-hover:text-rose-500 transition-colors"><%= t(".create_new_user") %></span>
+          <span class="text-rose-300 group-hover:text-rose-400 transition-colors">&#8594;</span>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </div>

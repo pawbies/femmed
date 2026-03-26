@@ -8,6 +8,22 @@ class MedicationsControllerTest < ActionDispatch::IntegrationTest
     @admin      = users(:admin)
   end
 
+  test "index" do
+    # Not authenticated
+    get medications_url
+    assert_redirected_to new_session_url
+
+    # Authenticated
+    sign_in_as(@user)
+    get medications_url
+    assert_redirected_to root_url
+
+    # Admin
+    sign_in_as(@admin)
+    get medications_url
+    assert_response :success
+  end
+
   test "show" do
     # Not authenticated
     get medication_url(@medication)
