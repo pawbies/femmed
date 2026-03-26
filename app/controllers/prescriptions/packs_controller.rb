@@ -3,6 +3,7 @@ class Prescriptions::PacksController < Prescriptions::BaseController
   before_action :require_pack_tracking_enabled
 
   def index
+    @pagy, @packs = pagy(:offset, @prescription.packs.order(acquired_at: :desc), limit: 10)
   end
 
   def new

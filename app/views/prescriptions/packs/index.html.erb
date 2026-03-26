@@ -64,7 +64,7 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-zinc-100">
-          <% @prescription.packs.order(acquired_at: :desc).each_with_index do |pack, index| %>
+          <% @packs.each_with_index do |pack, index| %>
             <tr class="transition-colors hover:bg-zinc-50">
               <td class="py-3 pr-8 font-medium text-zinc-800"><%= @prescription.packs.count - index %></td>
               <td class="py-3 pr-8 font-medium text-zinc-800">
@@ -89,6 +89,7 @@
           <% end %>
         </tbody>
       </table>
+      <%== @pagy.series_nav %>
     </section>
     <%= render "partials/add_button", path: new_prescription_pack_path(@prescription) %>
   </turbo-frame>

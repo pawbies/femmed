@@ -3,7 +3,7 @@ class Prescriptions::DosesController < Prescriptions::BaseController
   before_action :require_non_empty_stash, only: %i[ new create ]
 
   def index
-    @doses = @prescription.doses.order(taken_at: :desc)
+    @pagy, @doses = pagy(:offset, @prescription.doses.order(taken_at: :desc), limit: 10)
   end
 
   def new
