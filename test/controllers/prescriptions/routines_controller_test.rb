@@ -60,7 +60,7 @@ class Prescriptions::RoutinesControllerTest < ActionDispatch::IntegrationTest
       routine_start: Date.today.to_s,
       "routine_times[]": [ "08:00" ]
     }
-    assert_redirected_to prescription_path(@prescription, page: "Routine")
+    assert_redirected_to prescription_routine_path(@prescription)
     @prescription.reload
     assert_not_nil @prescription.routine
     rule = @prescription.routine.recurrence_rules.first
@@ -74,7 +74,7 @@ class Prescriptions::RoutinesControllerTest < ActionDispatch::IntegrationTest
       routine_start: Date.today.to_s,
       "routine_times[]": [ "08:00", "20:00" ]
     }
-    assert_redirected_to prescription_path(@prescription, page: "Routine")
+    assert_redirected_to prescription_routine_path(@prescription)
     @prescription.reload
     h = @prescription.routine.recurrence_rules.first.to_hash
     assert_equal [ 8, 20 ], h.dig(:validations, :hour_of_day)
@@ -89,7 +89,7 @@ class Prescriptions::RoutinesControllerTest < ActionDispatch::IntegrationTest
       routine_start: Date.today.to_s,
       "routine_times[]": [ "09:00" ]
     }
-    assert_redirected_to prescription_path(@prescription, page: "Routine")
+    assert_redirected_to prescription_routine_path(@prescription)
     @prescription.reload
     rule = @prescription.routine.recurrence_rules.first
     assert_instance_of IceCube::DailyRule, rule
@@ -104,7 +104,7 @@ class Prescriptions::RoutinesControllerTest < ActionDispatch::IntegrationTest
       "routine_days[]": [ "monday", "thursday" ],
       "routine_times[]": [ "07:30" ]
     }
-    assert_redirected_to prescription_path(@prescription, page: "Routine")
+    assert_redirected_to prescription_routine_path(@prescription)
     @prescription.reload
     rule = @prescription.routine.recurrence_rules.first
     assert_instance_of IceCube::WeeklyRule, rule
@@ -120,7 +120,7 @@ class Prescriptions::RoutinesControllerTest < ActionDispatch::IntegrationTest
       routine_hourly_interval: 6,
       routine_start: Date.today.to_s
     }
-    assert_redirected_to prescription_path(@prescription, page: "Routine")
+    assert_redirected_to prescription_routine_path(@prescription)
     @prescription.reload
     rule = @prescription.routine.recurrence_rules.first
     assert_instance_of IceCube::HourlyRule, rule
@@ -154,7 +154,7 @@ class Prescriptions::RoutinesControllerTest < ActionDispatch::IntegrationTest
       routine_hourly_interval: 4,
       routine_start: Date.today.to_s
     }
-    assert_redirected_to prescription_path(@prescription, page: "Routine")
+    assert_redirected_to prescription_routine_path(@prescription)
     @prescription.reload
     assert_instance_of IceCube::HourlyRule, @prescription.routine.recurrence_rules.first
   end
@@ -257,7 +257,7 @@ class Prescriptions::RoutinesControllerTest < ActionDispatch::IntegrationTest
       routine_hourly_interval: 12,
       routine_start: Date.today.to_s
     }
-    assert_redirected_to prescription_path(@prescription, page: "Routine")
+    assert_redirected_to prescription_routine_path(@prescription)
     @prescription.reload
     assert_instance_of IceCube::HourlyRule, @prescription.routine.recurrence_rules.first
     assert_equal 12, @prescription.routine.recurrence_rules.first.to_hash[:interval]
@@ -271,7 +271,7 @@ class Prescriptions::RoutinesControllerTest < ActionDispatch::IntegrationTest
       routine_start: Date.today.to_s,
       "routine_times[]": [ "12:00", "18:00" ]
     }
-    assert_redirected_to prescription_path(@prescription, page: "Routine")
+    assert_redirected_to prescription_routine_path(@prescription)
     @prescription.reload
     h = @prescription.routine.recurrence_rules.first.to_hash
     assert_equal [ 12, 18 ], h.dig(:validations, :hour_of_day)
@@ -313,7 +313,7 @@ class Prescriptions::RoutinesControllerTest < ActionDispatch::IntegrationTest
     set_routine!
     sign_in_as(@user)
     delete prescription_routine_url(@prescription)
-    assert_redirected_to prescription_path(@prescription, page: "Routine")
+    assert_redirected_to prescription_routine_path(@prescription)
     @prescription.reload
     assert_nil @prescription.routine
   end
@@ -321,7 +321,7 @@ class Prescriptions::RoutinesControllerTest < ActionDispatch::IntegrationTest
   test "destroy: works when no routine is set" do
     sign_in_as(@user)
     delete prescription_routine_url(@prescription)
-    assert_redirected_to prescription_path(@prescription, page: "Routine")
+    assert_redirected_to prescription_routine_path(@prescription)
     @prescription.reload
     assert_nil @prescription.routine
   end

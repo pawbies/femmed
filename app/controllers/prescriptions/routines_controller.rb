@@ -12,7 +12,7 @@ class Prescriptions::RoutinesController < Prescriptions::BaseController
       flash.now[:notice] = "Sorry >.< something went wrong"
       render :new, status: :unprocessable_content
     elsif @prescription.update routine: schedule
-      redirect_to prescription_path(@prescription, page: "Routine")
+      redirect_to prescription_routine_path(@prescription)
     else
       render :new, status: :unprocessable_content
     end
@@ -25,7 +25,7 @@ class Prescriptions::RoutinesController < Prescriptions::BaseController
       flash.now[:notice] = "Sorry >.< something went wrong"
       render :edit, status: :unprocessable_content
     elsif @prescription.update routine: schedule
-      redirect_to prescription_path(@prescription, page: "Routine")
+      redirect_to prescription_routine_path(@prescription)
     else
       @routine_data = schedule_to_form_data(@prescription.routine)
       render :edit, status: :unprocessable_content
@@ -35,7 +35,7 @@ class Prescriptions::RoutinesController < Prescriptions::BaseController
   def destroy
     @prescription.update! routine: nil
 
-    redirect_to prescription_path(@prescription, page: "Routine")
+    redirect_to prescription_routine_path(@prescription)
   end
 
   private
