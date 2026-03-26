@@ -2,7 +2,7 @@
   <h3 class="text-3xl font-semibold text-gray-800 md:w-2/3">
     <%= t(".title") %>
     <span class="text-gray-400 font-normal italic">
-      - <%= @medications.count %> <%= t(".medication_count", count: @medications.count) %>
+      - <%= @pagy.count %> <%= t(".medication_count", count: @pagy.count) %>
     </span>
   </h3>
 
@@ -29,4 +29,6 @@
       <% end %>
     <% end %>
   </div>
+
+  <%== @pagy.series_nav %>
 </div>

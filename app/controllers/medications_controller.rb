@@ -3,7 +3,7 @@ class MedicationsController < ApplicationController
   before_action :require_admin,  except: :show
 
   def index
-    @medications = Medication.order(:name)
+    @pagy, @medications = pagy(:offset, Medication.order(:name))
   end
 
   def new

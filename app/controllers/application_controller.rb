@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include Authentication, Authorization
+  include Authentication, Authorization, Pagy::Method
   before_action :set_locale
   before_action :set_timezone
 
