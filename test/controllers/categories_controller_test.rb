@@ -7,6 +7,23 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     @admin    = users(:admin)
   end
 
+  test "index" do
+    # Not authenticated
+    get categories_url
+    assert_redirected_to new_session_url
+
+    # Not admin
+    sign_in_as(@user)
+    get categories_url
+    assert_redirected_to root_url
+
+    # Admin
+    sign_in_as(@admin)
+    get categories_url
+    assert_response :success
+  end
+
+
   test "show" do
     # Not authenticated
     get category_url(@category)

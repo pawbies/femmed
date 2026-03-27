@@ -1,0 +1,10 @@
+en:
+  categories:
+    index:
+      title: "All categories"
+      category_count:
+        one: "category"
+        other: "categories"
+      medication_count:
+        one: "medication"
+        other: "medications"

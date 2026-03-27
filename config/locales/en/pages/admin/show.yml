@@ -14,3 +14,7 @@ en:
         active_ingredient_management: "Active Ingredient Management"
         see_all_active_ingredients: "See all active ingredients"
         create_new_active_ingredient: "Create new active ingredient"
+
+        category_management: "Category Management"
+        see_all_categories: "See all categories"
+        create_new_category: "Create new category"

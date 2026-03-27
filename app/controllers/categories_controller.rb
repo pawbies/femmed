@@ -1,6 +1,10 @@
 class CategoriesController < ApplicationController
-  before_action :set_category,  except: %i[new create]
   before_action :require_admin, except: :show
+  before_action :set_category,  except: %i[ index new create ]
+
+  def index
+    @pagy, @categories = pagy(:offset, Category.order(:name))
+  end
 
   def new
     @category = Category.new
