@@ -1,0 +1,16 @@
+en:
+  forms:
+    new:
+      title: "New form"
+      error_count:
+        one: "1 error prohibited this form from being saved:"
+        other: "%{count} errors prohibited this form from being saved:"
+      name_placeholder: "eg. Super Duper Capsule"
+      submit: "Add form!"
+    edit:
+      title: "Edit form %{name}"
+      error_count:
+        one: "1 error prohibited this form from being saved:"
+        other: "%{count} errors prohibited this form from being saved:"
+      name_placeholder: "eg. Super Duper Capsule"
+      submit: "Update :3"

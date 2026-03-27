@@ -1,0 +1,8 @@
+en:
+  forms:
+    show:
+      confirm_delete: "Are you sure?"
+      no_medications_yet: "No medications yet"
+      version_count:
+        one: "version"
+        other: "versions"

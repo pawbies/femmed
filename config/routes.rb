@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :active_ingredients
   resources :labelers
   resources :categories
+  resources :forms
   resources :users
 
   resources :prescriptions do

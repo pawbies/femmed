@@ -22,3 +22,7 @@ en:
         labeler_management: "Labeler Management"
         see_all_labelers: "See all labelers"
         create_new_labeler: "Create new labeler"
+
+        form_management: "Form Management"
+        see_all_forms: "See all forms"
+        create_new_form: "Create new form"

@@ -1,0 +1,10 @@
+en:
+  forms:
+    index:
+      title: "All forms"
+      form_count:
+        one: "form"
+        other: "forms"
+      medication_count:
+        one: "medication"
+        other: "medications"
