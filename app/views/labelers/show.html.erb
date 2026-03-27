@@ -13,22 +13,30 @@
     <% end %>
   </div>
 
-  <div class="mt-8 divide-y divide-zinc-100">
-    <% @labeler.medications.order(:name).each do |medication| %>
-      <%= link_to medication_path(medication), class: "flex items-center justify-between py-4 -mx-4 px-4 rounded-lg transition-all group hover:bg-zinc-50" do %>
-        <div>
-          <p class="font-medium text-gray-900 group-hover:text-rose-500 transition-colors underline-offset-2 group-hover:underline decoration-rose-300"><%= medication.name %></p>
-          <p class="text-sm text-gray-400 mt-0.5">
-            <%= medication.form.name %> &middot; <%= medication.labeler&.name %>
-          </p>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="text-xs text-gray-400"><%= medication.versions.count %> <%= t(".version_count", count: medication.versions.count) %></span>
-          <svg class="h-4 w-4 text-zinc-300 group-hover:text-rose-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </div>
+  <% unless @labeler.medications.empty? %>
+    <div class="mt-8 divide-y divide-zinc-100">
+      <% @labeler.medications.order(:name).each do |medication| %>
+        <%= link_to medication_path(medication), class: "flex items-center justify-between py-4 -mx-4 px-4 rounded-lg transition-all group hover:bg-zinc-50" do %>
+          <div>
+            <p class="font-medium text-gray-900 group-hover:text-rose-500 transition-colors underline-offset-2 group-hover:underline decoration-rose-300"><%= medication.name %></p>
+            <p class="text-sm text-gray-400 mt-0.5">
+              <%= medication.form.name %> &middot; <%= medication.labeler&.name %>
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-gray-400"><%= medication.versions.count %> <%= t(".version_count", count: medication.versions.count) %></span>
+            <svg class="h-4 w-4 text-zinc-300 group-hover:text-rose-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+    <div class="mt-8">
+      <p class="text-center text-xl">
+        <%= t(".no_medications_yet") %>
+      </p>
+    </div>
+  <% end %>
 </div>

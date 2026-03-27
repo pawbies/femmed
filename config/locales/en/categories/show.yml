@@ -5,6 +5,7 @@ en:
         one: "1 Medication"
         other: "%{count} Medications"
       confirm_delete: "Are you sure? No worries, this won't remove any medications, just remove this category from them :3"
+      no_medications_yet: "No medications yet"
       version_count:
         one: "version"
         other: "versions"

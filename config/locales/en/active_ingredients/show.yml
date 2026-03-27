@@ -2,6 +2,7 @@ en:
   active_ingredients:
     show:
       confirm_delete: "Are you sure? No worries, this won't remove any medications, just remove this ingredient from them :3"
+      no_medications_yet: "No medications yet"
       version_count:
         one: "version"
         other: "versions"
