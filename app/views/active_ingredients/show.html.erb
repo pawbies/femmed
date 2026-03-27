@@ -36,7 +36,10 @@
           </p>
         </div>
         <div class="flex items-center gap-3">
-          <span class="text-xs text-gray-400"><%= t(".version_count", count: medication.versions.count) %></span>
+          <span class="text-xs text-gray-400">
+            <%= medication.versions.count %>
+            <%= t(".version_count", count: medication.versions.count) %>
+          </span>
           <svg class="h-4 w-4 text-zinc-300 group-hover:text-rose-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           </svg>
