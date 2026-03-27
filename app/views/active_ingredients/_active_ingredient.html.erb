@@ -10,7 +10,7 @@
         <p class="text-xs text-gray-400">ka &nbsp;<span class="font-medium text-gray-500"><%= format("%g", active_ingredient.absorption_rate) %>/h</span></p>
       <% end %>
       <% if active_ingredient.volume_of_distribution.present? %>
-        <p class="text-xs text-gray-400">Vd &nbsp;<span class="font-medium text-gray-500"><%= format("%g", active_ingredient.volume_of_distribution) %>L</span></p>
+        <p class="text-xs text-gray-400">Vd &nbsp;<span class="font-medium text-gray-500"><%= format("%g", active_ingredient.volume_of_distribution) %>L/kg</span></p>
       <% end %>
     </div>
   </div>

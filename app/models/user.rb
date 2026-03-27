@@ -20,6 +20,7 @@ class User < ApplicationRecord
   validates :username, presence: true
   validates :terms_of_service, acceptance: true, on: :create
   validates :language, inclusion: { in: ->(_) { I18n.available_locales.map(&:to_s) } }
+  validates :body_weight, presence: true, numericality: true, comparison: { greater_than: 0 }
 
   enum :role, { user: 0, admin: 1 }, validate: true
   enum :pfp, {

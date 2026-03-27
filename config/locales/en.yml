@@ -24,6 +24,7 @@ en:
         role: "Role"
         pfp: "Profile picture"
         language: "Language"
+        body_weight: "Body weight"
         terms_of_service: "Terms of service"
       prescription:
         active: "Active"

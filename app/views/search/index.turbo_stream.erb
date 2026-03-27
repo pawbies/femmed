@@ -4,9 +4,9 @@
 
       <% if @prescriptions.any? %>
         <div class="px-4 py-2 text-xs font-medium text-rose-400 uppercase tracking-wide"><%= t(".your_prescriptions") %></div>
-        <% @prescriptions.each do |prescriptions| %>
+        <% @prescriptions.each do |prescription| %>
           <%= link_to prescription_doses_path(prescription), class: "block px-4 py-3 hover:bg-rose-50 transition-colors" do %>
-            <span class="font-medium text-gray-900"><%= prescriptions.full_name %></span>
+            <span class="font-medium text-gray-900"><%= prescription.full_name %></span>
           <% end %>
         <% end %>
       <% end %>

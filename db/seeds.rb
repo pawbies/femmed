@@ -35,47 +35,45 @@ def f(name) = Form.find_by!(name: name)
 #
 # half_life:                hours
 # absorption_rate:          ka (1/hour) — rate of absorption into systemic circulation
-# volume_of_distribution:   Vd (litres) — apparent volume drug distributes into
+# volume_of_distribution:   Vd (litres/kilogram) — apparent volume drug distributes into
 #
 # Sources: standard pharmacokinetic literature / FDA prescribing information.
-# All values are approximate population means for a 70kg adult.
 # Inhaled drugs (Budesonide, Formoterol) reflect pulmonary absorption rate.
 # Estradiol Valerate reflects IM depot absorption, not oral.
 
 [
-  { name: "Methylphenidate Hydrochloride", half_life:  3.5, absorption_rate: 2.0,  volume_of_distribution:  185.0 },
-  { name: "Amphetamine",                   half_life: 11.0, absorption_rate: 1.0,  volume_of_distribution:  245.0 },
-  { name: "Lisdexamfetamine",              half_life: 11.0, absorption_rate: 0.5,  volume_of_distribution:  450.0 },
-  { name: "Atomoxetine",                   half_life:  5.0, absorption_rate: 1.0,  volume_of_distribution:   60.0 },
-  { name: "Modafinil",                     half_life: 13.0, absorption_rate: 0.9,  volume_of_distribution:   63.0 },
-  { name: "Armodafinil",                   half_life: 15.0, absorption_rate: 1.0,  volume_of_distribution:   42.0 },
-  { name: "Ibuprofen",                     half_life:  2.0, absorption_rate: 2.5,  volume_of_distribution:   10.5 },
-  { name: "Paracetamol",                   half_life:  2.5, absorption_rate: 2.0,  volume_of_distribution:   63.0 },
-  { name: "Codeine",                       half_life:  3.0, absorption_rate: 1.5,  volume_of_distribution:  245.0 },
-  { name: "Sertraline",                    half_life: 26.0, absorption_rate: 0.5,  volume_of_distribution:  300.0 },
-  { name: "Fluoxetine",                    half_life: 48.0, absorption_rate: 0.5,  volume_of_distribution: 2800.0 },
-  { name: "Venlafaxine",                   half_life:  5.0, absorption_rate: 1.0,  volume_of_distribution:  525.0 },
-  { name: "Bupropion",                     half_life: 21.0, absorption_rate: 0.8,  volume_of_distribution: 2000.0 },
-  { name: "Cetirizine",                    half_life:  8.0, absorption_rate: 1.5,  volume_of_distribution:   39.0 },
-  { name: "Loratadine",                    half_life: 10.0, absorption_rate: 1.5,  volume_of_distribution:  119.0 },
-  { name: "Omeprazole",                    half_life:  1.0, absorption_rate: 2.0,  volume_of_distribution:   21.0 },
-  { name: "Pantoprazole",                  half_life:  1.0, absorption_rate: 1.5,  volume_of_distribution:   11.0 },
-  { name: "Esomeprazole",                  half_life:  1.3, absorption_rate: 1.5,  volume_of_distribution:   16.0 },
-  { name: "Metformin",                     half_life:  6.5, absorption_rate: 0.5,  volume_of_distribution:  654.0 },
-  { name: "Atorvastatin",                  half_life: 14.0, absorption_rate: 1.0,  volume_of_distribution:  565.0 },
-  { name: "Amoxicillin",                   half_life:  1.3, absorption_rate: 1.5,  volume_of_distribution:   18.0 },
-  { name: "Clavulanic Acid",               half_life:  1.0, absorption_rate: 1.5,  volume_of_distribution:   14.0 },
-  { name: "Naproxen",                      half_life: 14.0, absorption_rate: 1.5,  volume_of_distribution:   11.0 },
-  { name: "Warfarin",                      half_life: 40.0, absorption_rate: 1.0,  volume_of_distribution:   10.0 },
-  { name: "Lorazepam",                     half_life: 15.0, absorption_rate: 1.5,  volume_of_distribution:   91.0 },
-  { name: "Diazepam",                      half_life: 60.0, absorption_rate: 1.5,  volume_of_distribution:   77.0 },
-  { name: "Lamotrigine",                   half_life: 30.0, absorption_rate: 0.7,  volume_of_distribution:   77.0 },
-  { name: "Gabapentin",                    half_life:  6.0, absorption_rate: 0.8,  volume_of_distribution:   58.0 },
-  { name: "Budesonide",                    half_life:  2.5, absorption_rate: 1.5,  volume_of_distribution:  183.0 },
-  { name: "Formoterol",                    half_life:  9.0, absorption_rate: 2.0,  volume_of_distribution:  912.0 },
-  { name: "Estradiol Valerate",            half_life:  5.0, absorption_rate: 0.2,  volume_of_distribution: 1000.0 }
+  { name: "Methylphenidate Hydrochloride", half_life:  3.5, absorption_rate: 2.0,  volume_of_distribution:   2.64 },
+  { name: "Amphetamine",                   half_life: 11.0, absorption_rate: 1.0,  volume_of_distribution:   3.50 },
+  { name: "Lisdexamfetamine",              half_life: 11.0, absorption_rate: 0.5,  volume_of_distribution:   6.43 },
+  { name: "Atomoxetine",                   half_life:  5.0, absorption_rate: 1.0,  volume_of_distribution:   0.86 },
+  { name: "Modafinil",                     half_life: 13.0, absorption_rate: 0.9,  volume_of_distribution:   0.90 },
+  { name: "Armodafinil",                   half_life: 15.0, absorption_rate: 1.0,  volume_of_distribution:   0.60 },
+  { name: "Ibuprofen",                     half_life:  2.0, absorption_rate: 2.5,  volume_of_distribution:   0.15 },
+  { name: "Paracetamol",                   half_life:  2.5, absorption_rate: 2.0,  volume_of_distribution:   0.90 },
+  { name: "Codeine",                       half_life:  3.0, absorption_rate: 1.5,  volume_of_distribution:   3.50 },
+  { name: "Sertraline",                    half_life: 26.0, absorption_rate: 0.5,  volume_of_distribution:   4.29 },
+  { name: "Fluoxetine",                    half_life: 48.0, absorption_rate: 0.5,  volume_of_distribution:  40.00 },
+  { name: "Venlafaxine",                   half_life:  5.0, absorption_rate: 1.0,  volume_of_distribution:   7.50 },
+  { name: "Bupropion",                     half_life: 21.0, absorption_rate: 0.8,  volume_of_distribution:  28.57 },
+  { name: "Cetirizine",                    half_life:  8.0, absorption_rate: 1.5,  volume_of_distribution:   0.56 },
+  { name: "Loratadine",                    half_life: 10.0, absorption_rate: 1.5,  volume_of_distribution:   1.70 },
+  { name: "Omeprazole",                    half_life:  1.0, absorption_rate: 2.0,  volume_of_distribution:   0.30 },
+  { name: "Pantoprazole",                  half_life:  1.0, absorption_rate: 1.5,  volume_of_distribution:   0.16 },
+  { name: "Esomeprazole",                  half_life:  1.3, absorption_rate: 1.5,  volume_of_distribution:   0.23 },
+  { name: "Metformin",                     half_life:  6.5, absorption_rate: 0.5,  volume_of_distribution:   9.34 },
+  { name: "Atorvastatin",                  half_life: 14.0, absorption_rate: 1.0,  volume_of_distribution:   8.07 },
+  { name: "Amoxicillin",                   half_life:  1.3, absorption_rate: 1.5,  volume_of_distribution:   0.26 },
+  { name: "Clavulanic Acid",               half_life:  1.0, absorption_rate: 1.5,  volume_of_distribution:   0.20 },
+  { name: "Naproxen",                      half_life: 14.0, absorption_rate: 1.5,  volume_of_distribution:   0.16 },
+  { name: "Warfarin",                      half_life: 40.0, absorption_rate: 1.0,  volume_of_distribution:   0.14 },
+  { name: "Lorazepam",                     half_life: 15.0, absorption_rate: 1.5,  volume_of_distribution:   1.30 },
+  { name: "Diazepam",                      half_life: 60.0, absorption_rate: 1.5,  volume_of_distribution:   1.10 },
+  { name: "Lamotrigine",                   half_life: 30.0, absorption_rate: 0.7,  volume_of_distribution:   1.10 },
+  { name: "Gabapentin",                    half_life:  6.0, absorption_rate: 0.8,  volume_of_distribution:   0.83 },
+  { name: "Budesonide",                    half_life:  2.5, absorption_rate: 1.5,  volume_of_distribution:   2.61 },
+  { name: "Formoterol",                    half_life:  9.0, absorption_rate: 2.0,  volume_of_distribution:  13.03 },
+  { name: "Estradiol Valerate",            half_life:  5.0, absorption_rate: 0.2,  volume_of_distribution:  14.29 }
 ].each { |attrs| ActiveIngredient.find_or_create_by(name: attrs[:name]).update(attrs) }
-
 # ── Labelers ──────────────────────────────────────────────────────────────────
 
 %w[Novartis Pfizer Bayer Sandoz Shire Sanofi Hexal Mepha AstraZeneca Cephalon Teva Ratiopharm].each { Labeler.find_or_create_by(name: _1) }

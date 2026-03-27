@@ -5,7 +5,7 @@
   <turbo-frame id="graph">
     <div data-controller="medication-preview"
           class="mx-auto w-full md:w-2/3 xl:w-1/2 bg-white border border-rose-100 rounded-2xl overflow-hidden shadow-sm"
-          data-medication-preview-plot-value="<%= PkCalculator.for_medication(medication_version).to_json %>">
+          data-medication-preview-plot-value="<%= PkCalculator.for_medication(medication_version, Current.user.body_weight).to_json %>">
       <div class="px-5 pt-5 pb-3 flex items-start justify-between">
         <div>
           <p class="text-xs font-semibold uppercase tracking-widest text-rose-300 mb-1"><%= t(".pharmacokinetics") %></p>
@@ -49,7 +49,7 @@
             <% end %>
             <% if ingredient.volume_of_distribution.present? %>
               <span class="text-zinc-400">·</span>
-              <span>Vd <%= format("%g", ingredient.volume_of_distribution) %>L</span>
+              <span>Vd <%= format("%g", ingredient.volume_of_distribution) %>L/kg</span>
             <% end %>
             <% unless mvi.available_for_pk? %>
               <span class="text-zinc-400">·</span>

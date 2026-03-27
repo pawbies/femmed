@@ -108,7 +108,7 @@ class PkCalculatorTest < ActiveSupport::TestCase
     ing = { half_life: Math.log(2) / ke, absorption_rate: ka, volume_of_distribution: vd, amount: amount, name: "test" }
     release = { name: "Immediate" }
 
-    result = PkCalculator.send(:concentration_for_single_dose, ing, release, 5.0)
+    result = PkCalculator.send(:concentration_for_single_dose, ing, release, 5.0, 70)
     assert_equal 0.0, result
   end
 
@@ -117,7 +117,7 @@ class PkCalculatorTest < ActiveSupport::TestCase
   test "for_medication returns expected structure" do
     version = medication_versions(:percocet_5mg)
 
-    result = PkCalculator.for_medication(version)
+    result = PkCalculator.for_medication(version, 70)
 
     assert result.key?(:series)
     assert result.key?(:local_maxima)
@@ -133,7 +133,7 @@ class PkCalculatorTest < ActiveSupport::TestCase
   test "for_medication series covers 0 to 24 hours" do
     version = medication_versions(:percocet_5mg)
 
-    result = PkCalculator.for_medication(version)
+    result = PkCalculator.for_medication(version, 70)
     times = result[:series].map { |d| d[:time] }.uniq.sort
 
     assert_equal 0, times.first
@@ -143,7 +143,7 @@ class PkCalculatorTest < ActiveSupport::TestCase
   test "for_medication includes both pk-compatible ingredients for percocet" do
     version = medication_versions(:percocet_5mg)
 
-    result = PkCalculator.for_medication(version)
+    result = PkCalculator.for_medication(version, 70)
     ingredient_names = result[:ingredients].map { |i| i[:name] }
 
     assert_includes ingredient_names, "Oxycodone"
@@ -153,7 +153,7 @@ class PkCalculatorTest < ActiveSupport::TestCase
   test "for_medication assigns different colors per ingredient" do
     version = medication_versions(:percocet_5mg)
 
-    result = PkCalculator.for_medication(version)
+    result = PkCalculator.for_medication(version, 70)
     colors = result[:ingredients].map { |i| i[:color] }
 
     assert_equal colors.uniq.length, colors.length, "each ingredient should have a unique color"
@@ -162,7 +162,7 @@ class PkCalculatorTest < ActiveSupport::TestCase
   test "for_medication concentrations start at zero and return to near zero" do
     version = medication_versions(:percocet_5mg)
 
-    result = PkCalculator.for_medication(version)
+    result = PkCalculator.for_medication(version, 70)
 
     result[:ingredients].each do |ing_meta|
       points = result[:series].select { |d| d[:ingredient] == ing_meta[:name] }
@@ -175,7 +175,7 @@ class PkCalculatorTest < ActiveSupport::TestCase
   test "for_medication finds local maxima" do
     version = medication_versions(:percocet_5mg)
 
-    result = PkCalculator.for_medication(version)
+    result = PkCalculator.for_medication(version, 70)
 
     assert result[:local_maxima].length > 0, "should find at least one peak"
     result[:local_maxima].each do |peak|
@@ -188,7 +188,7 @@ class PkCalculatorTest < ActiveSupport::TestCase
   test "for_medication y_max equals the highest concentration" do
     version = medication_versions(:percocet_5mg)
 
-    result = PkCalculator.for_medication(version)
+    result = PkCalculator.for_medication(version, 70)
     max_conc = result[:series].map { |d| d[:concentration] }.max
 
     assert_in_delta max_conc, result[:y_max], 1e-10
@@ -197,7 +197,7 @@ class PkCalculatorTest < ActiveSupport::TestCase
   test "for_medication returns empty series for medication without pk data" do
     version = medication_versions(:ritalin_ir_10mg)
 
-    result = PkCalculator.for_medication(version)
+    result = PkCalculator.for_medication(version, 70)
 
     assert_empty result[:series]
     assert_empty result[:ingredients]

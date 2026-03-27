@@ -17,11 +17,13 @@ class PkCalculator
       doses = prescription.recent_doses.map { |d| { taken_at: d.taken_at.to_i, amount: d.amount_taken } }
       next if doses.empty?
 
+      body_weight = prescription.user.body_weight
+
       pk_ingredients(prescription.medication_version).each do |ing|
         entry = ingredient_map[ing[:name]] ||= { id: ing[:id], name: ing[:name], concentration: 0.0, rate: 0.0 }
 
-        c_now = concentration_from_doses(ing, release, doses, now_ts, 0)
-        c_dt  = concentration_from_doses(ing, release, doses, now_ts, dt)
+        c_now = concentration_from_doses(ing, release, doses, now_ts, 0, body_weight)
+        c_dt  = concentration_from_doses(ing, release, doses, now_ts, dt, body_weight)
 
         entry[:concentration] += c_now
         entry[:rate] += (c_dt - c_now) / dt
@@ -33,7 +35,7 @@ class PkCalculator
 
   # Single hypothetical dose at t=0, plotted over 0–24h.
   # Used on the medication show page.
-  def self.for_medication(medication_version)
+  def self.for_medication(medication_version, body_weight)
     medication = medication_version.medication
 
     ingredients = pk_ingredients(medication_version)
@@ -41,7 +43,7 @@ class PkCalculator
 
     build_plot_data(ingredients, 0..24) do |ing, t|
       next 0.0 if t < 0
-      concentration_for_single_dose(ing, release, t)
+      concentration_for_single_dose(ing, release, t, body_weight)
     end
   end
 
@@ -50,13 +52,14 @@ class PkCalculator
   def self.for_prescription(prescription, now: Time.current)
     ingredients = pk_ingredients(prescription.medication_version)
     release     = pk_release_profile(prescription.medication)
+    body_weight = prescription.user.body_weight
     doses       = prescription.recent_doses.map { |d| { taken_at: d.taken_at.to_i, amount: d.amount_taken } }
     now_ts      = now.to_i
     x_start     = (prescription.preview_past * -1).to_i
     x_end       = prescription.preview_future.to_i
 
     result = build_plot_data(ingredients, x_start..(x_end + 1)) do |ing, t|
-      concentration_from_doses(ing, release, doses, now_ts, t)
+      concentration_from_doses(ing, release, doses, now_ts, t, body_weight)
     end
 
     # Add "now" dots showing current concentration at t=0
@@ -64,7 +67,7 @@ class PkCalculator
       {
         time: 0,
         ingredient: ing[:name],
-        concentration: concentration_from_doses(ing, release, doses, now_ts, 0),
+        concentration: concentration_from_doses(ing, release, doses, now_ts, 0, body_weight),
         color: PALETTE[idx % PALETTE.length]
       }
     end
@@ -74,10 +77,10 @@ class PkCalculator
 
   # --- shared math ---
 
-  def self.concentration_for_single_dose(ing, release, t)
+  def self.concentration_for_single_dose(ing, release, t, body_weight)
     _ke = ke(ing[:half_life])
     ka  = ing[:absorption_rate]
-    vd  = ing[:volume_of_distribution]
+    vd  = ing[:volume_of_distribution] * body_weight
     return 0.0 if (ka - _ke).abs < 0.0001
 
     case release[:name]
@@ -91,7 +94,7 @@ class PkCalculator
     end
   end
 
-  def self.concentration_from_doses(ing, release, doses, now_ts, t)
+  def self.concentration_from_doses(ing, release, doses, now_ts, t, body_weight)
     doses.sum do |dose|
       elapsed = (now_ts + t * 3600 - dose[:taken_at]) / 3600.0
       next 0.0 if elapsed < 0
@@ -99,15 +102,14 @@ class PkCalculator
       amount = ing[:amount] * dose[:amount]
       _ke    = ke(ing[:half_life])
       ka     = ing[:absorption_rate]
-      vd     = ing[:volume_of_distribution]
+      vd     = ing[:volume_of_distribution] * body_weight
       next 0.0 if (ka - _ke).abs < 0.0001
 
       case release[:name]
       when "Bimodal"
-        pulse(amount, vd, ka, _ke, elapsed) +
-          pulse(amount, vd, ka, _ke, elapsed, release[:delay])
+        pulse(amount, vd, ka, _ke, elapsed) + pulse(amount, vd, ka, _ke, elapsed, release[:delay])
       when "Extended"
-        extended(dose[:amount], vd, _ke, elapsed, release[:release_duration])
+        extended(amount, vd, _ke, elapsed, release[:release_duration])
       else
         pulse(amount, vd, ka, _ke, elapsed)
       end
@@ -121,7 +123,7 @@ class PkCalculator
   def self.pulse(amount, vd, ka, ke, elapsed, offset = 0)
     e = elapsed - offset
     return 0.0 if e < 0
-    [ 0.0, (amount / vd) * (ka / (ka - ke)) * (Math.exp(-ke * e) - Math.exp(-ka * e)) ].max
+    [ 0.0, (amount / (vd)) * (ka / (ka - ke)) * (Math.exp(-ke * e) - Math.exp(-ka * e)) ].max
   end
 
   def self.extended(amount, vd, ke, elapsed, release_duration)

@@ -10,7 +10,7 @@
           &middot; ka &nbsp;<%= format("%g", @active_ingredient.absorption_rate) %>/h
         <% end %>
         <% if @active_ingredient.volume_of_distribution.present? %>
-          &middot; Vd &nbsp;<%= format("%g", @active_ingredient.volume_of_distribution) %>L
+          &middot; Vd &nbsp;<%= format("%g", @active_ingredient.volume_of_distribution) %>L/kg
         <% end %>
       </span>
     </h3>

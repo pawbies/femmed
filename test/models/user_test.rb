@@ -43,6 +43,15 @@ class UserTest < ActiveSupport::TestCase
     assert users(:alice).medicine_kisser?
   end
 
+  test "should require a body weight over 0" do
+    user = users(:alice)
+    user.body_weight = 0
+    user.save
+    assert_not user.valid?
+    assert_includes user.errors[:body_weight], "must be greater than 0"
+  end
+
+
   test "should return profile_picture path" do
     assert_match /pfps\/.*\.png/, users(:alice).profile_picture
   end
