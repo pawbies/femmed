@@ -1,6 +1,10 @@
 class ActiveIngredientsController < ApplicationController
   before_action :require_admin, except: :show
-  before_action :set_active_ingredient, except: %i[ new create ]
+  before_action :set_active_ingredient, except: %i[ index new create ]
+
+  def index
+    @pagy, @active_ingredients = pagy(:offset, ActiveIngredient.order(:name))
+  end
 
   def new
     @active_ingredient = ActiveIngredient.new

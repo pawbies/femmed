@@ -7,6 +7,22 @@ class ActiveIngredientsControllerTest < ActionDispatch::IntegrationTest
     @admin = users(:admin)
   end
 
+  test "index" do
+    # Not authenticated
+    get active_ingredients_url
+    assert_redirected_to new_session_url
+
+    # Not admin
+    sign_in_as(@user)
+    get active_ingredients_url
+    assert_redirected_to root_url
+
+    # Admin
+    sign_in_as(@admin)
+    get active_ingredients_url
+    assert_response :success
+  end
+
   test "show" do
     # Not authenticated
     get active_ingredient_url(@active_ingredient)

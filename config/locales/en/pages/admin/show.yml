@@ -10,3 +10,7 @@ en:
         medication_management: "Medication Management"
         see_all_medications: "See all medications"
         create_new_medication: "Create new medication"
+
+        active_ingredient_management: "Active Ingredient Management"
+        see_all_active_ingredients: "See all active ingredients"
+        create_new_active_ingredient: "Create new active ingredient"

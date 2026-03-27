@@ -1,0 +1,42 @@
+<div class="w-full">
+  <h3 class="text-3xl font-semibold text-gray-800">
+    <%= t(".title") %>
+    <span class="text-gray-400 font-normal italic">
+      - <%= @pagy.count %> <%= t(".active_ingredient_count", count: @pagy.count) %>
+    </span>
+  </h3>
+
+  <div class="mt-8 divide-y divide-zinc-100">
+    <% @active_ingredients.each do |active_ingredient| %>
+      <%= link_to active_ingredient, class: "flex items-center justify-between py-4 -mx-4 px-4 rounded-lg transition-all group hover:bg-zinc-50" do %>
+        <div>
+          <p class="font-medium text-gray-900 group-hover:text-rose-500 transition-colors underline-offset-2 group-hover:underline decoration-rose-300">
+            <%= active_ingredient.name %>
+          </p>
+          <p class="text-sm text-gray-400 mt-0.5">
+            <% if active_ingredient.half_life.present? %>
+              t½ &nbsp;<%= format("%g", active_ingredient.half_life) %>h
+            <% end %>
+            <% if active_ingredient.absorption_rate.present? %>
+              &middot; ka &nbsp;<%= format("%g", active_ingredient.absorption_rate) %>/h
+            <% end %>
+            <% if active_ingredient.volume_of_distribution.present? %>
+              &middot; Vd &nbsp;<%= format("%g", active_ingredient.volume_of_distribution) %>L
+            <% end %>
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs text-gray-400">
+            <%= active_ingredient.medications.count %>
+            <%= t(".medication_count", count: active_ingredient.medications.count) %>
+          </span>
+          <svg class="h-4 w-4 text-zinc-300 group-hover:text-rose-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%== @pagy.series_nav %>
+</div>

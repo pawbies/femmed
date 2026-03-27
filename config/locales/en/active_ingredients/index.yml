@@ -1,0 +1,10 @@
+en:
+  active_ingredients:
+    index:
+      title: "All active ingredients"
+      active_ingredient_count:
+        one: "active ingredient"
+        other: "active ingredients"
+      medication_count:
+        one: "medication"
+        other: "medications"
