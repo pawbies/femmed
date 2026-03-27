@@ -1,6 +1,10 @@
 class LabelersController < ApplicationController
   before_action :require_admin, except: :show
-  before_action :set_labeler, except: %i[ new create ]
+  before_action :set_labeler, except: %i[ index new create ]
+
+  def index
+    @pagy, @labelers = pagy(:offset, Labeler.order(:name))
+  end
 
   def new
     @labeler = Labeler.new

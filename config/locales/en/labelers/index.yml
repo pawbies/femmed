@@ -1,0 +1,10 @@
+en:
+  labelers:
+    index:
+      title: "All labelers"
+      labeler_count:
+        one: "labeler"
+        other: "labelers"
+      medication_count:
+        one: "medication"
+        other: "medications"

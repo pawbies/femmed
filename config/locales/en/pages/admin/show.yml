@@ -18,3 +18,7 @@ en:
         category_management: "Category Management"
         see_all_categories: "See all categories"
         create_new_category: "Create new category"
+
+        labeler_management: "Labeler Management"
+        see_all_labelers: "See all labelers"
+        create_new_labeler: "Create new labeler"
