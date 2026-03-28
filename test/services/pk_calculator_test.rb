@@ -286,4 +286,26 @@ class PkCalculatorTest < ActiveSupport::TestCase
     assert parsed.key?("dots")
     assert parsed.key?("y_max")
   end
+
+  # --- bioavailability ---
+
+  test "for_medication scales peak concentration proportionally with bioavailability" do
+    version = medication_versions(:percocet_5mg)
+
+    result_full = PkCalculator.for_medication(version, 70)
+    peak_full = result_full[:series]
+      .select { |d| d[:ingredient] == "Oxycodone" }
+      .max_by { |d| d[:concentration] }[:concentration]
+
+    medication_version_ingredients(:percocet_5mg_oxycodone).update!(bioavailability: 0.5)
+    version.association(:pk_compatible_ingredients).reset
+
+    result_half = PkCalculator.for_medication(version, 70)
+    peak_half = result_half[:series]
+      .select { |d| d[:ingredient] == "Oxycodone" }
+      .max_by { |d| d[:concentration] }[:concentration]
+
+    assert_in_delta peak_full * 0.5, peak_half, 1e-10,
+      "halving bioavailability should halve the peak concentration"
+  end
 end
