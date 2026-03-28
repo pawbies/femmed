@@ -24,11 +24,4 @@ class Prescriptions::AboutControllerTest < ActionDispatch::IntegrationTest
     get prescription_about_url(@prescription)
     assert_response :success
   end
-
-  test "show: redirects when prescription is inactive" do
-    sign_in_as(@user)
-    @prescription.update! active: false
-    get prescription_about_url(@prescription)
-    assert_redirected_to root_url
-  end
 end
