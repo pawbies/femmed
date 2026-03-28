@@ -37,6 +37,7 @@
           <div class="flex items-center gap-1.5 text-xs text-zinc-500">
             <span class="inline-block w-2 h-2 rounded-full <%= mvi.available_for_pk? ? "bg-green-400" : "bg-rose-400" %>"></span>
             <span class="font-medium text-zinc-700"><%= ingredient.name %></span>
+            <span>F <%= format("%g", mvi.bioavailability) %></span>
             <% if ingredient.half_life.present? %>
               <span class="text-zinc-400">·</span>
               <span>t½ <%= format("%g", ingredient.half_life) %>h</span>

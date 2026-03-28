@@ -37,6 +37,9 @@
             <li class="text-sm text-gray-600">
               <%= mvi.active_ingredient.name %> &mdash;
               <span class="font-medium"><%= format("%g", mvi.amount) %><%= mvi.unit %></span>
+              <span>
+                (F <%= format("%g", mvi.bioavailability) %> &rarr; <%= format("%g", mvi.amount * mvi.bioavailability) %><%= mvi.unit %>)
+              </span>
             </li>
           <% end %>
         </ul>

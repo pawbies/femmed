@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_27_194709) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_28_123939) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -106,6 +106,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_27_194709) do
   create_table "medication_version_ingredients", force: :cascade do |t|
     t.integer "active_ingredient_id", null: false
     t.float "amount"
+    t.float "bioavailability", default: 1.0, null: false
     t.datetime "created_at", null: false
     t.integer "medication_version_id", null: false
     t.integer "unit"

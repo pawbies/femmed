@@ -11,6 +11,8 @@ class MedicationVersionIngredient < ApplicationRecord
 
 
   validates :amount, presence: true, numericality: true
+  validates :bioavailability, presence: true, numericality: true, comparison: { greater_than: 0, less_than_or_equal_to: 1 }
+
 
   enum :unit, {
     "mg": 0,

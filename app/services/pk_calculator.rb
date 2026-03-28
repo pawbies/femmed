@@ -177,7 +177,7 @@ class PkCalculator
       {
         id:                     ai.id,
         name:                   ai.name,
-        amount:                 mvi.amount * mvi.pk_multiplier,
+        amount:                 mvi.amount * mvi.pk_multiplier * mvi.bioavailability,
         half_life:              ai.half_life,
         absorption_rate:        ai.absorption_rate,
         volume_of_distribution: ai.volume_of_distribution

@@ -61,7 +61,9 @@
                 <div class="text-xs flex items-center">
                   <ul>
                     <% version.medication_version_ingredients.each do |mvi| %>
-                      <li><%= "#{format("%g", mvi.amount)}#{mvi.unit} #{mvi.active_ingredient.name}" %></li>
+                      <li>
+                        <%= "#{format("%g", mvi.amount)}#{mvi.unit} #{mvi.active_ingredient.name} (#{format("%g", mvi.bioavailability)}F)" %>
+                      </li>
                     <% end %>
                   </ul>
                   <span class="mx-1">/</span>

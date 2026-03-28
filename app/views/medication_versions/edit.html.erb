@@ -53,6 +53,20 @@
           </span>
         </div>
       </div>
+      <div class="mb-3">
+        <%= ingredient_form.label :bioavailability, t(".bioavailability_label", name: ingredient_form.object.active_ingredient.name), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+        <div class="flex items-center">
+          <%= ingredient_form.number_field :bioavailability,
+            required: true,
+            step: "any",
+            min: 0.001,
+            max: 1,
+            class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+          <span class="shadow-sm rounded-r-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-min whitespace-nowrap">
+            F
+          </span>
+        </div>
+      </div>
     <% end %>
 
     <div class="mt-8 flex justify-center">

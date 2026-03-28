@@ -7,6 +7,7 @@ en:
         other: "%{count} errors prohibited this version from being saved:"
       name_placeholder: "eg. 5mg"
       amount_label: "Amount of %{name}"
+      bioavailability_label: "Bioavailability of %{name}"
       submit: "Create %{medication} version"
     edit:
       title: "Edit %{version}"
@@ -15,4 +16,5 @@ en:
         other: "%{count} errors prohibited this version from being saved:"
       name_placeholder: "eg. 5mg"
       amount_label: "Amount of %{name}"
+      bioavailability_label: "Bioavailability of %{name}"
       submit: "Update %{version}"

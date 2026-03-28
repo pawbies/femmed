@@ -38,7 +38,7 @@ class MedicationVersionsController < ApplicationController
 
   private
     def medication_version_params
-      params.expect(medication_version: [ :added_name, { medication_version_ingredients_attributes: [ [ :id, :active_ingredient_id, :amount, :unit ] ] } ])
+      params.expect(medication_version: [ :added_name, { medication_version_ingredients_attributes: [ [ :id, :active_ingredient_id, :amount, :unit, :bioavailability ] ] } ])
     end
 
     def set_medication
