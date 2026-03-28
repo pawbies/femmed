@@ -1,4 +1,5 @@
 class Prescriptions::PacksController < Prescriptions::BaseController
+  before_action :require_active_prescription, except: :index
   before_action :set_pack, except: %i[ index new create ]
   before_action :require_pack_tracking_enabled
 

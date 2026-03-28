@@ -1,4 +1,5 @@
 class Prescriptions::DosesController < Prescriptions::BaseController
+  before_action :require_active_prescription, except: :index
   before_action :set_dose, only: %i[ edit update destroy ]
   before_action :require_non_empty_stash, only: %i[ new create ]
 

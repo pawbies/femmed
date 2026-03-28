@@ -1,4 +1,6 @@
 class Prescriptions::RoutinesController < Prescriptions::BaseController
+  before_action :require_active_prescription
+
   def new
   end
 

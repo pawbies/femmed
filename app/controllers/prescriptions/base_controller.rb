@@ -1,6 +1,5 @@
 class Prescriptions::BaseController < ApplicationController
   before_action :set_prescription
-  before_action :require_active_prescription
 
   private
     def set_prescription
