@@ -45,7 +45,7 @@ class Prescriptions::DosesController < Prescriptions::BaseController
 
     def require_non_empty_stash
       unless !@prescription.pack_tracking_enabled? || @prescription.remaining_units > 0
-        redirect_back fallback_location: @prescription, notice: "You don't have anything to take cutie >.<"
+        redirect_back fallback_location: @prescription, notice: t(".nothing_to_take")
       end
     end
 

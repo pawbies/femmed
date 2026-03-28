@@ -4,7 +4,7 @@ class Transfer::ExportsController < ApplicationController
 
   def create
     unless params.dig(:data, :prescriptions) == "1" || params.dig(:data, :profile) == "1"
-      redirect_to new_export_path, notice: "Pick at least one silly boy"
+      redirect_to new_export_path, notice: t(".pick_at_least_one")
       return
     end
 

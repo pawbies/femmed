@@ -1,0 +1,5 @@
+en:
+  prescriptions:
+    update:
+      updated: "Updated your prescription for ya ^^"
+      something_went_wrong: "Something went wrong :("

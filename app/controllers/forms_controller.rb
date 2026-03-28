@@ -36,9 +36,9 @@ class FormsController < ApplicationController
 
   def destroy
     @form.destroy!
-    redirect_to root_path, notice: "Got rid of #{@form.name}"
+    redirect_to root_path, notice: t(".got_rid_of", name: @form.name)
   rescue ActiveRecord::InvalidForeignKey
-    redirect_to @form, notice: "This form still has medications"
+    redirect_to @form, alert: t(".still_has_medications")
   end
 
   private

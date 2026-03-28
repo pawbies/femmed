@@ -1,0 +1,4 @@
+en:
+  prescriptions:
+    destroy:
+      removed: "Removed %{name}"

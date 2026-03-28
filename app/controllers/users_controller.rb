@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
     if @user.save
       if authenticated? && admin?
-        redirect_to @user, notice: "Created this new user >:3"
+        redirect_to @user, notice: t(".created_user")
       else
         start_new_session_for @user
         redirect_to root_path
@@ -51,10 +51,10 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy!
 
-    if Current.user&.admin?
-      redirect_to users_path, notice: "Deleted this weird guy >:3"
+    unless @user.id == Current.user.id
+      redirect_to users_path, notice: t(".deleted_this_weird_guy")
     else
-      redirect_to landing_path, notice: "Sorry to see you go"
+      redirect_to landing_path, notice: t(".sorry_to_see_you_go")
     end
   end
 
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
 
     def require_own_user_or_admin
       if params[:id].to_i(10) != Current.user.id && !Current.user.admin?
-        redirect_to root_path, alert: "Hey! You can't be there!"
+        redirect_to root_path, alert: t(".unauthorized")
       end
     end
 
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
 
     def require_public_application
       unless EnvConfig::PUBLIC || (authenticated? && admin?)
-        redirect_to root_path, alert: "UwU... whatcha doin there ^^"
+        redirect_to root_path, alert: t(".private")
       end
     end
 end

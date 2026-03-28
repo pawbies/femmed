@@ -7,6 +7,6 @@ class Prescriptions::BaseController < ApplicationController
     end
 
     def require_active_prescription
-      redirect_back fallback_location: root_path, notice: "This requires an active prescription" unless @prescription.active?
+      redirect_back fallback_location: root_path, notice: t("prescriptions.base.prescription_inactive") unless @prescription.active?
     end
 end

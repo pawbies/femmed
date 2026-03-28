@@ -37,7 +37,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy!
 
-    redirect_to root_path, notice: "#{@category.name} is no more"
+    redirect_to root_path, notice: t(".is_no_more", name: @category.name)
   end
 
   private

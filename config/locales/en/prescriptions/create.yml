@@ -1,0 +1,4 @@
+en:
+  prescriptions:
+    create:
+      something_went_wrong: "Something went wrong :("

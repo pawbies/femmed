@@ -1,0 +1,4 @@
+en:
+  prescriptions:
+    base:
+      prescription_inactive: "This requires an active prescription >.<"

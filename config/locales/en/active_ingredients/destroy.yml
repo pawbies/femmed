@@ -1,0 +1,5 @@
+en:
+  active_ingredients:
+    destroy:
+      gone_now: "Poor %{name} is gone now"
+

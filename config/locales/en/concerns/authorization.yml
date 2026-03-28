@@ -1,0 +1,4 @@
+en:
+  concerns:
+    authorization:
+      not_allowed: "You're cute but not allowed here >.<"

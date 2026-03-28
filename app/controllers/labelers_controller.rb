@@ -37,7 +37,7 @@ class LabelersController < ApplicationController
   def destroy
     @labeler.destroy!
 
-    redirect_to root_path, notice: "Gone now! >:3"
+    redirect_to root_path, notice: t(".gone_now")
   end
 
   private

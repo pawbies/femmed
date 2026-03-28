@@ -1,0 +1,5 @@
+en:
+  medications:
+    destroy:
+      gone_now: "%{name} is gone now"
+

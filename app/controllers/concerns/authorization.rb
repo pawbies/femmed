@@ -11,6 +11,6 @@ module Authorization
     end
 
     def require_admin
-      redirect_to root_path, notice: "You're cute but not allowed here" unless admin?
+      redirect_to root_path, alert: t("concerns.authorization.not_allowed") unless admin?
     end
 end

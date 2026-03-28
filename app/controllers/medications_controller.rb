@@ -39,7 +39,7 @@ class MedicationsController < ApplicationController
   def destroy
     @medication.destroy!
 
-    redirect_to root_path, notice: "#{@medication.name} is gone now"
+    redirect_to root_path, notice: t(".gone_now", name: @medication.name)
   end
 
   private

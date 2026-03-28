@@ -1,0 +1,5 @@
+en:
+  categories:
+    destroy:
+      is_no_more: "%{name} is no more"
+

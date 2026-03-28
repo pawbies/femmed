@@ -37,7 +37,7 @@ class ActiveIngredientsController < ApplicationController
   def destroy
     @active_ingredient.destroy!
 
-    redirect_to root_path, notice: "Poor #{@active_ingredient.name} is gone now"
+    redirect_to root_path, notice: t(".gone_now", name: @active_ingredient.name)
   end
 
   private

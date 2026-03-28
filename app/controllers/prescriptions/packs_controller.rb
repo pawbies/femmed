@@ -44,7 +44,7 @@ class Prescriptions::PacksController < Prescriptions::BaseController
     end
 
     def require_pack_tracking_enabled
-      redirect_back fallback_location: root_path, notice: "This requires the pack tracking feature" unless @prescription.pack_tracking_enabled?
+      redirect_back fallback_location: root_path, notice: t(".requires_pack_tracking") unless @prescription.pack_tracking_enabled?
     end
 
     def pack_params

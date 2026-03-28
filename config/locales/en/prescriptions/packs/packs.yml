@@ -1,0 +1,4 @@
+en:
+  prescriptions:
+    packs:
+      requires_pack_tracking: "This requires the pack tracking feature"

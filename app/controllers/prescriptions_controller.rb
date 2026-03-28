@@ -6,7 +6,7 @@ class PrescriptionsController < ApplicationController
     if @prescription.save
       redirect_to prescription_doses_path(@prescription)
     else
-      redirect_back fallback_location: @prescription.medication, alert: "Something went wrong :("
+      redirect_back fallback_location: @prescription.medication, alert: t(".something_went_wrong")
     end
   end
 
@@ -15,15 +15,15 @@ class PrescriptionsController < ApplicationController
 
   def update
     if @prescription.update prescription_update_params
-      redirect_to edit_prescription_path(@prescription), notice: "Updated your prescription for ya"
+      redirect_to edit_prescription_path(@prescription), notice: t(".updated")
     else
-      redirect_to edit_prescription_path(@prescription), alert: "Something went wrong :("
+      redirect_to edit_prescription_path(@prescription), alert: t(".something_went_wrong")
     end
   end
 
   def destroy
     @prescription.destroy!
-    redirect_to root_path, notice: "Removed #{@prescription.full_name}"
+    redirect_to root_path, notice: t(".removed", name: @prescription.full_name)
   end
 
   private

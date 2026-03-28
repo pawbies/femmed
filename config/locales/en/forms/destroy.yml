@@ -1,0 +1,5 @@
+en:
+  forms:
+    destroy:
+      got_rid_of: "Got rid of %{name}"
+      still_has_medications: "This form still has medications"
