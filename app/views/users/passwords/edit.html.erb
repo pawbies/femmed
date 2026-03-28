@@ -1,0 +1,22 @@
+<div class="w-full">
+  <h1 class="font-semibold text-3xl text-center text-gray-800"><%= t(".title") %></h1>
+
+  <%= form_with url: user_password_path, method: :patch, class: "mt-10 mx-auto max-w-md" do |form| %>
+    <div class="my-5">
+      <%= form.label :old_password, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.password_field :old_password, required: true, autocomplete: "current-password", placeholder: t(".old_password_placeholder"), class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
+    </div>
+    <div class="my-5">
+      <%= form.label :password, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: t(".password_placeholder"), class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
+    </div>
+    <div class="my-5">
+      <%= form.label :password_confirmation, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: t(".password_confirmation_placeholder"), maxlength: 72, class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
+    </div>
+    <div class="mt-8 flex justify-center">
+      <%= form.submit t(".submit"), class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+    </div>
+  <% end %>
+ </div>
+</div>

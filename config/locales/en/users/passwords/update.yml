@@ -1,0 +1,7 @@
+en:
+  users:
+    passwords:
+      update:
+        wrong_old_password: "Your old password is incorrect"
+        error: "Couldn't update: %{errors}"
+

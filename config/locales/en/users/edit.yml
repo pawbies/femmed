@@ -9,5 +9,6 @@ en:
       admin_access_desc: "Grants full administrative privileges"
       submit: "Apply my awesome changes!"
       revert: "Revert everything!"
+      reset_password: "Reset password"
       delete: "Delete account! (please don't)"
       confirm_delete: "Are you sure? :("

@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   resources :labelers
   resources :categories
   resources :forms
-  resources :users
+
+  resources :users do
+    scope module: :users do
+      resource :password
+    end
+  end
 
   resources :prescriptions do
     scope module: :prescriptions do

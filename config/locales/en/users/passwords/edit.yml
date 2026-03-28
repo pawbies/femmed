@@ -1,0 +1,9 @@
+en:
+  users:
+    passwords:
+      edit:
+        title: "Reset your password"
+        old_password_placeholder: "Your old password"
+        password_placeholder: "Your new password"
+        password_confirmation_placeholder: "Repeat it once"
+        submit: "Update! >:3"

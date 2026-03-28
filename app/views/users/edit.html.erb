@@ -81,6 +81,10 @@
       <%= form.submit t(".submit"), class: "hover:cursor-pointer text-xl underline hover:no-underline" %>
       <%= link_to t(".revert"), @user, class: "text-xl underline hover:no-underline" %>
     </div>
+
+    <div class="mx-auto flex justify-center mt-16">
+      <%= link_to t(".reset_password"), edit_user_password_path(@user), class: "text-xl underline hover:no-underline" %>
+    </div>
   <% end %>
 
   <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">
