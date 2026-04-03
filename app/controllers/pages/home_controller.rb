@@ -6,8 +6,9 @@ class Pages::HomeController < Pages::BaseController
     @prescriptions = Current.user.prescriptions.includes(
       { medication_version: { medication_version_ingredients: :active_ingredient } },
       { medication: [ :release_profile, :medication_release_profile, :active_ingredients ] },
-      :recent_doses
-    ).order(active: :desc)
+      :recent_doses,
+      :doses
+    ).order(prescriptions: { active: :desc }, doses: { taken_at: :desc })
 
     @concentrations = PkCalculator.current_concentrations(@prescriptions)
   end
