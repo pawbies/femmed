@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   scope "/", module: :pages do
     get "timeline" => "timeline#show"
     get "calendar" => "calendar#show"
+    get "developments" => "developments#show"
     get "admin"    => "admin#show"
 
     get "landing" => "landing#show"

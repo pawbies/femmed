@@ -1,0 +1,9 @@
+en:
+  pages:
+    developments:
+      show:
+        title: "Developments"
+        biomarkers: "Biomarkers"
+        biomarkers_desc: "Track lab results and bio markers over time"
+        blood_pressure: "Blood Pressure"
+        blood_pressure_desc: "Log and monitor your blood pressure readings"

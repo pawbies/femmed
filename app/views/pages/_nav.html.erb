@@ -4,6 +4,7 @@
       <%= link_to t(".home"), root_path, class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{current_page?(root_path) ? 'border-b-2 border-rose-500 text-rose-600' : ''}" %>
       <%= link_to t(".timeline"), timeline_path, class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{current_page?(timeline_path) ? 'border-b-2 border-rose-500 text-rose-600' : ''}" %>
       <%= link_to t(".calendar"), calendar_path, class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{current_page?(calendar_path) ? 'border-b-2 border-rose-500 text-rose-600' : ''}" %>
+      <%= link_to t(".developments"), developments_path, class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{current_page?(developments_path) ? 'border-b-2 border-rose-500 text-rose-600' : ''}" %>
       <% if admin? %>
         <%= link_to t(".admin"), admin_path, class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{current_page?(admin_path) ? 'border-b-2 border-rose-500 text-rose-600' : ''}" %>
       <% end %>
