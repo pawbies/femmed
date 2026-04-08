@@ -11,7 +11,7 @@ class Prescriptions::RoutinesController < Prescriptions::BaseController
   def create
     schedule = build_schedule
     if schedule.nil?
-      flash.now[:notice] = "Sorry >.< something went wrong"
+      flash.now[:notice] = t(".something_went_wrong")
       render :new, status: :unprocessable_content
     elsif @prescription.update routine: schedule
       redirect_to prescription_routine_path(@prescription)
@@ -24,7 +24,7 @@ class Prescriptions::RoutinesController < Prescriptions::BaseController
     schedule = build_schedule
     if schedule.nil?
       @routine_data = schedule_to_form_data(@prescription.routine)
-      flash.now[:notice] = "Sorry >.< something went wrong"
+      flash.now[:notice] = t(".something_went_wrong")
       render :edit, status: :unprocessable_content
     elsif @prescription.update routine: schedule
       redirect_to prescription_routine_path(@prescription)

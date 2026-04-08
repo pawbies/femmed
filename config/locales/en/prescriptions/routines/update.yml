@@ -1,0 +1,6 @@
+en:
+  prescriptions:
+    routines:
+      update:
+        something_went_wrong: "Sorry >.< something went wrong"
+
