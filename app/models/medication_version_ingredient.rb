@@ -34,8 +34,8 @@ class MedicationVersionIngredient < ApplicationRecord
   def pk_multiplier
     case unit
     when "mg"  then 1.0
-    when "g"   then 0.001
-    when "mcg" then 1000.0
+    when "g"   then 1000.0
+    when "mcg" then 0.001
     else nil
     end
   end
