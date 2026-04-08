@@ -26,8 +26,6 @@ export default class extends Controller {
     const yLabel = this.ylabelValue
     const nowLabel = this.nowlabelValue
 
-    console.log(xLabel)
-
     const ingredients = [...new Set(series.map(d => d.ingredient))]
     const colorMap = Object.fromEntries(series.map(d => [d.ingredient, d.color]))
 

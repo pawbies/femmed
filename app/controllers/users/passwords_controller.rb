@@ -3,9 +3,11 @@ class Users::PasswordsController < Users::BaseController
 
   def edit
   end
+
   def update
-    if @user.authenticate(params[:old_password])
-      if @user.update(password: params[:password], password_confirmation: params[:password_confirmation])
+    p = password_params
+    if @user.authenticate(p[:old_password])
+      if @user.update(password: p[:password], password_confirmation: p[:password_confirmation])
         redirect_to @user, notice: "Updated your password"
       else
         redirect_back fallback_location: edit_user_password_path(@user), alert: t(".error", errors: @user.errors.full_messages.join(", "))
@@ -13,6 +15,10 @@ class Users::PasswordsController < Users::BaseController
     else
       redirect_back fallback_location: edit_user_password_path(@user), alert: t(".wrong_old_password")
     end
+  end
+
+  def password_params
+    params.permit(:old_password, :password, :password_confirmation)
   end
 
   def require_own_user

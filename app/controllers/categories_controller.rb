@@ -46,6 +46,6 @@ class CategoriesController < ApplicationController
     end
 
     def category_params
-      params.require(:category).permit(:name, medication_ids: [])
+      params.expect(category: [ :name, medication_ids: [] ])
     end
 end

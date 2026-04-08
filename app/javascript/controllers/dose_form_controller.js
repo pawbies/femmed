@@ -10,8 +10,6 @@ export default class extends Controller {
 
   connect() {
     if (this.inputTarget.value) this.updateOutput()
-
-    console.log(this.ingredientDosesPerUnitValue)
   }
 
   updateOutput() {
