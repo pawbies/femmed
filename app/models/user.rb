@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :medication_versions, through: :prescriptions
   has_many :doses, through: :prescriptions, class_name: "Prescription::Dose"
 
-  has_many :blood_pressure_readings
+  has_many :blood_pressure_readings, dependent: :destroy
 
   has_many :push_subscriptions, dependent: :destroy
 
