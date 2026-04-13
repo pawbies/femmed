@@ -2,7 +2,14 @@ class Developments::BloodPressureReadingsController < Developments::BaseControll
   before_action :set_blood_pressure_reading, except: %i[ index new create ]
 
   def index
+    @period = params[:period].presence_in(%w[week month year]) || "all"
     @bpr = Current.user.blood_pressure_readings.order(measured_at: :desc)
+    @bpr = case @period
+           when "week"  then @bpr.where(measured_at: 1.week.ago..)
+           when "month" then @bpr.where(measured_at: 1.month.ago..)
+           when "year"  then @bpr.where(measured_at: 1.year.ago..)
+           else @bpr
+           end
     @prescriptions = Current.user.prescriptions
   end
 

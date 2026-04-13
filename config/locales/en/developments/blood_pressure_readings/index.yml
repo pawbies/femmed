@@ -6,3 +6,7 @@ en:
         times_logged_count:
           one: "time logged"
           other: "times logged"
+        one_week: "1W"
+        one_month: "1M"
+        one_year: "1Y"
+        all_time: "All"

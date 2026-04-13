@@ -1,7 +1,15 @@
 <div class="w-full">
-  <h1 class="text-3xl font-semibold text-gray-800 mb-8"><%= t(".blood_pressure_history") %></h1>
+  <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
+    <h1 class="text-3xl font-semibold text-gray-800"><%= t(".blood_pressure_history") %></h1>
+    <div class="flex items-center gap-1 bg-zinc-100 rounded-xl p-1 text-xs font-medium">
+      <% [["week", t(".one_week")], ["month", t(".one_month")], ["year", t(".one_year")], ["all", t(".all_time")]].each do |period, label| %>
+        <%= link_to label, blood_pressure_readings_path(period: period == "all" ? nil : period),
+            class: "px-3 py-1.5 rounded-lg transition-colors #{@period == period ? "bg-white text-rose-500 shadow-sm" : "text-zinc-500 hover:text-zinc-700"}" %>
+      <% end %>
+    </div>
+  </div>
 
-  <%= render "history_graph", bpr: @bpr, prescriptions: @prescriptions %>
+  <%= render "history_graph", bpr: @bpr, prescriptions: @prescriptions, period: @period %>
 
   <table class="w-full mt-6 text-sm border-collapse">
     <thead>

@@ -11,7 +11,7 @@ const COLORS = {
 // Connects to data-controller="bp-history-graph"
 export default class extends Controller {
   static targets = ["chart", "toggle"]
-  static values  = { sys: Array, dia: Array, bpm: Array, medications: Array }
+  static values  = { sys: Array, dia: Array, bpm: Array, medications: Array, start: String }
 
   connect() {
     this.hidden = new Set()
@@ -47,7 +47,9 @@ export default class extends Controller {
     const allDates = [...this.sysValue, ...this.diaValue, ...this.bpmValue]
       .map(d => new Date(d.measured_at))
       .filter(d => !isNaN(d))
-    const start = allDates.length ? new Date(Math.min(...allDates)) : new Date(now - 30 * 864e5)
+    const start = this.startValue
+      ? new Date(this.startValue)
+      : allDates.length ? new Date(Math.min(...allDates)) : new Date(now - 30 * 864e5)
 
     const sys = this.hidden.has("sys") ? [] : parse(this.sysValue)
     const dia = this.hidden.has("dia") ? [] : parse(this.diaValue)

@@ -16,6 +16,23 @@ class Developments::BloodPressureReadingsControllerTest < ActionDispatch::Integr
     assert_response :success
   end
 
+  test "index with period filter" do
+    sign_in_as(@user)
+
+    get blood_pressure_readings_url(period: "week")
+    assert_response :success
+
+    get blood_pressure_readings_url(period: "month")
+    assert_response :success
+
+    get blood_pressure_readings_url(period: "year")
+    assert_response :success
+
+    # Invalid period falls back to all
+    get blood_pressure_readings_url(period: "invalid")
+    assert_response :success
+  end
+
   test "show" do
     get blood_pressure_reading_url(@bpr)
     assert_redirected_to new_session_url
