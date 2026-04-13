@@ -1,11 +1,5 @@
 <div class="w-full">
-  <h1 class="text-3xl font-semibold text-gray-800"><%= t(".blood_pressure_history") %></h1>
-
-  <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
-    <span class="text-gray-400 font-normal italic">
-      <%= "#{@bpr.count} #{t(".times_logged_count", count: @bpr.count)}" %>
-    </span>
-  </h3>
+  <h1 class="text-3xl font-semibold text-gray-800 mb-8"><%= t(".blood_pressure_history") %></h1>
 
   <%= render "history_graph", bpr: @bpr, prescriptions: @prescriptions %>
 
