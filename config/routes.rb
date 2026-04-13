@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :labelers
   resources :categories
   resources :forms
+  resources :bio_markers
 
   resources :users do
     scope module: :users do

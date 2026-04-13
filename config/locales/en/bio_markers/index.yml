@@ -1,0 +1,7 @@
+en:
+  bio_markers:
+    index:
+      title: "All bio markers"
+      bio_marker_count:
+        one: "bio marker"
+        other: "bio markers"

@@ -1,0 +1,67 @@
+<div class="w-full">
+  <div class="flex flex-col md:flex-row justify-between">
+    <div class="md:w-2/3">
+      <h3 class="text-3xl font-semibold text-gray-800">
+        <%= @bio_marker.name %>
+        <% if @bio_marker.abbreviation.present? %>
+          <span class="text-lg font-normal text-zinc-400 ml-1">(<%= @bio_marker.abbreviation %>)</span>
+        <% end %>
+      </h3>
+    </div>
+    <% if admin? %>
+      <div class="my-6 md:my-0 flex items-center gap-2">
+        <%= link_to edit_bio_marker_path(@bio_marker), class: "inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300 transition-colors" do %>
+          <%= image_tag "icons/edit.svg", class: "h-4 w-4" %>
+        <% end %>
+        <%= button_to @bio_marker, method: :delete, data: { turbo_confirm: t(".confirm_delete") }, class: "inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 bg-white hover:bg-rose-50 hover:border-rose-300 transition-colors cursor-pointer" do %>
+          <%= image_tag "icons/delete.svg", class: "h-4 w-4" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @bio_marker.description.present? %>
+    <p class="mt-4 text-zinc-500 text-lg leading-relaxed">
+      <%= @bio_marker.description %>
+    </p>
+  <% end %>
+
+  <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="bg-white border border-rose-200 rounded-xl p-5 shadow-sm">
+      <p class="text-xs uppercase tracking-widest text-rose-400 font-semibold mb-2">
+        <%= t(".reference_range") %>
+      </p>
+      <p class="text-2xl font-mono font-medium text-zinc-800">
+        <% if @bio_marker.min_reference_value && @bio_marker.max_reference_value %>
+          <%= number_with_precision(@bio_marker.min_reference_value, precision: 2, strip_insignificant_zeros: true) %>
+          –
+          <%= number_with_precision(@bio_marker.max_reference_value, precision: 2, strip_insignificant_zeros: true) %>
+        <% elsif @bio_marker.min_reference_value %>
+          ≥ <%= number_with_precision(@bio_marker.min_reference_value, precision: 2, strip_insignificant_zeros: true) %>
+        <% elsif @bio_marker.max_reference_value %>
+          ≤ <%= number_with_precision(@bio_marker.max_reference_value, precision: 2, strip_insignificant_zeros: true) %>
+        <% else %>
+          <span class="text-zinc-300 text-base font-sans"><%= t(".not_set") %></span>
+        <% end %>
+      </p>
+    </div>
+
+    <div class="bg-white border border-rose-200 rounded-xl p-5 shadow-sm">
+      <p class="text-xs uppercase tracking-widest text-rose-400 font-semibold mb-2">
+        <%= t(".unit") %>
+      </p>
+      <p class="text-2xl font-mono font-medium text-zinc-800">
+        <%= @bio_marker.unit || content_tag(:span, t(".not_set"), class: "text-zinc-300 text-base font-sans") %>
+      </p>
+    </div>
+
+    <div class="bg-white border border-rose-200 rounded-xl p-5 shadow-sm">
+      <p class="text-xs uppercase tracking-widest text-rose-400 font-semibold mb-2">
+        <%= t(".abbreviation") %>
+      </p>
+      <p class="text-2xl font-mono font-medium text-zinc-800">
+        <%= @bio_marker.abbreviation.presence || content_tag(:span, t(".not_set"), class: "text-zinc-300 text-base font-sans") %>
+      </p>
+    </div>
+  </div>
+</div>

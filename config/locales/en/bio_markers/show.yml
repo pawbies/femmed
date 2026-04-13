@@ -1,0 +1,8 @@
+en:
+  bio_markers:
+    show:
+      confirm_delete: "Are you sure?"
+      reference_range: "Reference range"
+      not_set: "Not set"
+      unit: "Unit"
+      abbreviation: "Abbreviation"

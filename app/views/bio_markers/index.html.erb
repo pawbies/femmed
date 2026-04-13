@@ -1,0 +1,25 @@
+<div class="w-full">
+  <h3 class="text-3xl font-semibold text-gray-800">
+    <%= t(".title") %>
+    <span class="text-gray-400 font-normal italic">
+      - <%= @pagy.count %> <%= t(".bio_marker_count", count: @pagy.count) %>
+    </span>
+  </h3>
+
+  <div class="mt-8 divide-y divide-zinc-100">
+    <% @bio_markers.each do |bio_marker| %>
+      <%= link_to bio_marker, class: "flex items-center justify-between py-4 -mx-4 px-4 rounded-lg transition-all group hover:bg-zinc-50" do %>
+        <p class="font-medium text-gray-900 group-hover:text-rose-500 transition-colors underline-offset-2 group-hover:underline decoration-rose-300">
+          <%= bio_marker.name %> (<%= bio_marker.abbreviation %>)
+        </p>
+        <div class="flex items-center gap-3">
+          <svg class="h-4 w-4 text-zinc-300 group-hover:text-rose-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%== @pagy.series_nav %>
+</div>
