@@ -1,0 +1,14 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+normal:
+  user: alice
+  systolic: 120
+  diastolic: 80
+  bpm: 72
+  measured_at: 2026-04-13 12:00:00
+
+no_bpm:
+  user: alice
+  systolic: 115
+  diastolic: 75
+  measured_at: 2026-04-13 10:00:00
