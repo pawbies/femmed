@@ -1,0 +1,2 @@
+module Developments::BloodPressureReadingsHelper
+end

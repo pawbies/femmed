@@ -1,0 +1,8 @@
+<div data-controller="bp-history-graph"
+     data-bp-history-graph-sys-value="<%= @bpr.map { |brp| { value: brp.systolic, measured_at: brp.measured_at }.compact }.compact.to_json %>"
+     data-bp-history-graph-dia-value="<%= @bpr.map { |brp| { value: brp.diastolic, measured_at: brp.measured_at }.compact }.compact.to_json %>"
+     data-bp-history-graph-bpm-value="<%= @bpr.map { |brp| { value: brp.bpm, measured_at: brp.measured_at }.compact }.compact.to_json %>"
+     data-bp-history-graph-medications-value="<%= @prescriptions.map { |prescription| { id: prescription.id, name: prescription.full_name, created_at: prescription.created_at }.compact }.compact.to_json
+     %>">
+  <div data-bp-history-graph-target="chart"></div>
+</div>
