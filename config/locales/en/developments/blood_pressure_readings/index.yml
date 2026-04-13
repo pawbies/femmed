@@ -1,0 +1,8 @@
+en:
+  developments:
+    blood_pressure_readings:
+      index:
+        title: "Blood pressure history"
+        times_logged_count:
+          one: "time logged"
+          other: "times logged"

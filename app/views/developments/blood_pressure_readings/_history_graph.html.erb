@@ -1,8 +1,31 @@
-<div data-controller="bp-history-graph"
+<div class="bg-white border border-rose-100 rounded-2xl overflow-hidden shadow-sm"
+     data-controller="bp-history-graph"
      data-bp-history-graph-sys-value="<%= @bpr.map { |brp| { value: brp.systolic, measured_at: brp.measured_at }.compact }.compact.to_json %>"
      data-bp-history-graph-dia-value="<%= @bpr.map { |brp| { value: brp.diastolic, measured_at: brp.measured_at }.compact }.compact.to_json %>"
      data-bp-history-graph-bpm-value="<%= @bpr.map { |brp| { value: brp.bpm, measured_at: brp.measured_at }.compact }.compact.to_json %>"
-     data-bp-history-graph-medications-value="<%= @prescriptions.map { |prescription| { id: prescription.id, name: prescription.full_name, created_at: prescription.created_at }.compact }.compact.to_json
-     %>">
-  <div data-bp-history-graph-target="chart"></div>
+     data-bp-history-graph-medications-value="<%= @prescriptions.map { |prescription| { id: prescription.id, name: prescription.full_name, created_at: prescription.created_at }.compact }.compact.to_json %>">
+
+  <div class="px-5 pt-5 pb-3 flex items-start justify-between flex-wrap gap-3">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-widest text-rose-300 mb-2"><%= t(".trend") %></p>
+      <div data-bp-history-graph-target="stats" class="flex items-baseline gap-2 text-zinc-800">
+      </div>
+    </div>
+    <div class="flex items-center gap-4 text-xs text-zinc-500 pt-1">
+      <span class="flex items-center gap-1.5">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+        <%= t(".systolic") %>
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-orange-400"></span>
+        <%= t(".diastolic") %>
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="inline-block w-5 h-0 border-t-2 border-dashed border-indigo-400"></span>
+        <%= t(".heart_rate") %>
+      </span>
+    </div>
+  </div>
+
+  <div data-bp-history-graph-target="chart" class="w-full px-4 pb-2"></div>
 </div>
