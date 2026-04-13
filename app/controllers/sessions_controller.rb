@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         PushNotificationService.new(
           user: user,
           title: "Heyyo, theres a new login",
-          body: "Someone logged in to your account at #{DateTime.now.utc.strftime("%B %e, %Y %H:%M UTC")}"
+          body: "Someone logged in to your account at #{DateTime.current.utc.strftime("%B %e, %Y %H:%M UTC")}"
         ).call
       end
       redirect_to after_authentication_url
