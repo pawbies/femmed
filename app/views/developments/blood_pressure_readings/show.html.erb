@@ -1,9 +1,15 @@
 <div class="w-full">
   <div class="flex flex-col md:flex-row justify-between">
-    <h3 class="text-3xl font-semibold text-gray-800 md:w-2/3">
-      <%= t(".blood_pressure_reading_from", datetime: @bpr.measured_at.strftime("%B %e, %Y at %H:%M")) %>
-    </h3>
-    <div class="my-6 md:my-0 flex items-center gap-2">
+    <div>
+      <%= link_to blood_pressure_readings_path, class: "inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-rose-300 hover:text-rose-400 transition-colors mb-3" do %>
+        &#8592; <%= t(".back") %>
+      <% end %>
+      <h3 class="text-3xl font-semibold text-gray-800">
+        <%= @bpr.measured_at.strftime("%B %e, %Y") %>
+        <span class="text-gray-400 font-normal text-2xl"><%= @bpr.measured_at.strftime("at %H:%M") %></span>
+      </h3>
+    </div>
+    <div class="my-6 md:my-0 flex items-center gap-2 md:self-start">
       <%= link_to edit_blood_pressure_reading_path(@bpr), class: "inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300 transition-colors" do %>
         <%= image_tag "icons/edit.svg", class: "h-4 w-4" %>
       <% end %>
@@ -13,16 +19,36 @@
     </div>
   </div>
 
-  <div class="my-6 text-lg text-center">
-    <p><%= "#{t(".systolic")}: #{@bpr.systolic} mmHg" %></p>
-    <p><%= "#{t(".diastolic")}: #{@bpr.diastolic} mmHg" %></p>
-    <p><%= "#{t(".heart_rate")}: #{@bpr.bpm} bpm" %></p>
-  </div>
-
-  <div class="md:w-3/5 xl:w-1/2 mx-auto"
+  <div class="mt-6"
        data-controller="blood-pressure-graph"
        data-blood-pressure-graph-sys-value="<%= @bpr.systolic %>"
        data-blood-pressure-graph-dia-value="<%= @bpr.diastolic %>">
-    <div data-blood-pressure-graph-target="chart" class="w-full px-4 pb-4"></div>
+
+    <div class="grid grid-cols-3 gap-3 mb-6">
+      <div class="bg-white border border-rose-100 rounded-2xl px-4 py-4 shadow-sm text-center">
+        <p class="text-xs font-semibold uppercase tracking-widest text-rose-300 mb-1"><%= t(".systolic") %></p>
+        <p class="text-4xl font-bold text-gray-800 leading-none"><%= @bpr.systolic %></p>
+        <p class="text-xs text-gray-400 mt-1">mmHg</p>
+      </div>
+      <div class="bg-white border border-orange-100 rounded-2xl px-4 py-4 shadow-sm text-center">
+        <p class="text-xs font-semibold uppercase tracking-widest text-orange-300 mb-1"><%= t(".diastolic") %></p>
+        <p class="text-4xl font-bold text-gray-800 leading-none"><%= @bpr.diastolic %></p>
+        <p class="text-xs text-gray-400 mt-1">mmHg</p>
+      </div>
+      <div class="bg-white border border-indigo-100 rounded-2xl px-4 py-4 shadow-sm text-center">
+        <p class="text-xs font-semibold uppercase tracking-widest text-indigo-300 mb-1"><%= t(".heart_rate") %></p>
+        <p class="text-4xl font-bold text-gray-800 leading-none"><%= @bpr.bpm %></p>
+        <p class="text-xs text-gray-400 mt-1">bpm</p>
+      </div>
+    </div>
+
+    <div class="bg-white border border-rose-100 rounded-2xl shadow-sm overflow-hidden md:w-3/5 xl:w-1/2 mx-auto">
+      <div class="px-5 pt-5 pb-2 flex items-center justify-between">
+        <p class="text-xs font-semibold uppercase tracking-widest text-rose-300"><%= t(".systolic") %> / <%= t(".diastolic") %></p>
+        <span data-blood-pressure-graph-target="badge" class="text-xs font-semibold"></span>
+      </div>
+      <div data-blood-pressure-graph-target="chart" class="w-full px-4 pb-4"></div>
+    </div>
+
   </div>
 </div>
