@@ -10,10 +10,26 @@ const COLORS = {
 
 // Connects to data-controller="bp-history-graph"
 export default class extends Controller {
-  static targets = ["chart"]
-  static values = { sys: Array, dia: Array, bpm: Array, medications: Array }
+  static targets = ["chart", "toggle"]
+  static values  = { sys: Array, dia: Array, bpm: Array, medications: Array }
 
   connect() {
+    this.hidden = new Set()
+    this.render()
+  }
+
+  toggleSeries(event) {
+    const s = event.currentTarget.dataset.series
+    this.hidden.has(s) ? this.hidden.delete(s) : this.hidden.add(s)
+
+    // Sync visual state
+    this.toggleTargets.forEach(btn => {
+      const active = !this.hidden.has(btn.dataset.series)
+      btn.style.opacity = active ? "1" : "0.4"
+      const label = btn.querySelector("[data-label]")
+      if (label) label.style.textDecoration = active ? "none" : "line-through"
+    })
+
     this.render()
   }
 
@@ -33,18 +49,19 @@ export default class extends Controller {
       .filter(d => !isNaN(d))
     const start = allDates.length ? new Date(Math.min(...allDates)) : new Date(now - 30 * 864e5)
 
-    const sys  = parse(this.sysValue)
-    const dia  = parse(this.diaValue)
-    const bpm  = parse(this.bpmValue)
+    const sys = this.hidden.has("sys") ? [] : parse(this.sysValue)
+    const dia = this.hidden.has("dia") ? [] : parse(this.diaValue)
+    const bpm = this.hidden.has("bpm") ? [] : parse(this.bpmValue)
     const empty = sys.length === 0 && dia.length === 0 && bpm.length === 0
 
     const rx = this.medicationsValue
       .map(d => ({ ...d, created_at: new Date(d.created_at) }))
       .filter(d => d.created_at >= start)
 
-    const allValues = [...sys, ...dia, ...bpm].map(d => d.value)
-    const yMin = allValues.length ? Math.max(0, Math.min(...allValues) - 10) : 0
-    const yMax = allValues.length ? Math.max(...allValues) + 15 : 200
+    // Y domain relative to visible series; fall back to 0–160 when nothing shown
+    const visibleValues = [...sys, ...dia, ...bpm].map(d => d.value)
+    const yMin = visibleValues.length ? Math.max(0, Math.min(...visibleValues) - 10) : 0
+    const yMax = visibleValues.length ? Math.max(...visibleValues) + 15 : 160
 
     const W = this.chartTarget.clientWidth || 600
     const H = Math.round(W * 0.5)
@@ -54,9 +71,6 @@ export default class extends Controller {
       ...dia.map(d => ({ ...d, series: "Diastolic" })),
       ...bpm.map(d => ({ ...d, series: "Heart rate" })),
     ]
-
-    const colorDomain  = ["Systolic", "Diastolic", "Heart rate"]
-    const colorRange   = [COLORS.sys, COLORS.dia, COLORS.bpm]
 
     const chart = Plot.plot({
       width: W, height: H,
@@ -82,15 +96,11 @@ export default class extends Controller {
         tickSize: 0,
         grid: true,
       },
-      color: {
-        domain: colorDomain,
-        range: colorRange,
-      },
       marks: empty
         ? [
             Plot.text([{ x: new Date((start.getTime() + now.getTime()) / 2), y: (yMin + yMax) / 2 }], {
               x: "x", y: "y",
-              text: () => "No readings in the last 30 days",
+              text: () => "No data selected",
               fontSize: 12, fill: "#94a3b8", textAnchor: "middle",
             }),
           ]
@@ -123,9 +133,9 @@ export default class extends Controller {
             ),
 
             // Lines
-            Plot.line(series.filter(d => d.series === "Systolic"),   { x: "measured_at", y: "value", stroke: COLORS.sys, strokeWidth: 2.5, curve: "catmull-rom" }),
-            Plot.line(series.filter(d => d.series === "Diastolic"),  { x: "measured_at", y: "value", stroke: COLORS.dia, strokeWidth: 2.5, curve: "catmull-rom" }),
-            Plot.line(series.filter(d => d.series === "Heart rate"), { x: "measured_at", y: "value", stroke: COLORS.bpm, strokeWidth: 2, strokeDasharray: "6,3", curve: "catmull-rom" }),
+            ...(sys.length ? [Plot.line(sys, { x: "measured_at", y: "value", stroke: COLORS.sys, strokeWidth: 2.5, curve: "catmull-rom" })] : []),
+            ...(dia.length ? [Plot.line(dia, { x: "measured_at", y: "value", stroke: COLORS.dia, strokeWidth: 2.5, curve: "catmull-rom" })] : []),
+            ...(bpm.length ? [Plot.line(bpm, { x: "measured_at", y: "value", stroke: COLORS.bpm, strokeWidth: 2, strokeDasharray: "6,3", curve: "catmull-rom" })] : []),
 
             // Dots
             Plot.dot(series, {
@@ -134,7 +144,7 @@ export default class extends Controller {
               r: 3, fillOpacity: 0.85, strokeWidth: 0,
             }),
 
-            // Tooltip-style text on hover via tip
+            // Tooltip on hover
             Plot.tip(series, Plot.pointer({
               x: "measured_at", y: "value",
               title: d => `${d.series}: ${d.value}\n${d.measured_at.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}`,
