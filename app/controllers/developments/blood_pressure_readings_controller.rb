@@ -34,6 +34,12 @@ class Developments::BloodPressureReadingsController < Developments::BaseControll
     end
   end
 
+  def destroy
+    @bpr.destroy!
+
+    redirect_to blood_pressure_readings_path, notice: t(".deleted")
+  end
+
   private
     def set_blood_pressure_reading
       @bpr = Current.user.blood_pressure_readings.find(params[:id])

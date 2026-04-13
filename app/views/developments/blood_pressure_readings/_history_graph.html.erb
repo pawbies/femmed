@@ -3,7 +3,7 @@
      data-bp-history-graph-sys-value="<%= @bpr.map { |brp| { value: brp.systolic, measured_at: brp.measured_at }.compact }.compact.to_json %>"
      data-bp-history-graph-dia-value="<%= @bpr.map { |brp| { value: brp.diastolic, measured_at: brp.measured_at }.compact }.compact.to_json %>"
      data-bp-history-graph-bpm-value="<%= @bpr.map { |brp| { value: brp.bpm, measured_at: brp.measured_at }.compact }.compact.to_json %>"
-     data-bp-history-graph-medications-value="<%= @prescriptions.map { |prescription| { id: prescription.id, name: prescription.full_name, created_at: prescription.created_at }.compact }.compact.to_json %>">
+     data-bp-history-graph-medications-value="<%= @prescriptions.map { |prescription| { id: prescription.id, name: prescription.full_name, created_at: prescription.created_at.beginning_of_day }.compact }.compact.to_json %>">
 
   <div class="px-5 pt-5 pb-3 flex items-start justify-between flex-wrap gap-3">
     <p class="text-xs font-semibold uppercase tracking-widest text-rose-300 pt-1"><%= t(".trend") %></p>
