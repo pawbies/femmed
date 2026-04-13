@@ -1,0 +1,11 @@
+one:
+  name: Glucose
+  abbreviation: GLU
+  description: Blood glucose level
+  unit: 0
+
+two:
+  name: Hemoglobin
+  abbreviation: HGB
+  description: Red blood cell protein
+  unit: 2
