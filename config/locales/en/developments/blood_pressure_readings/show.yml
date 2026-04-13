@@ -4,5 +4,7 @@ en:
       show:
         blood_pressure_reading_from: "Blood pressure from %{datetime}"
         confirm_delete: "Are you sure you want to delete this reading?"
-        classification: "Classification"
-        reading: "Reading"
+
+        systolic: "Systolic"
+        diastolic: "Diastolic"
+        heart_rate: "Heart rate"

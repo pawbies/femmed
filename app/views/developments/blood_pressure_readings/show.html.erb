@@ -13,7 +13,13 @@
     </div>
   </div>
 
-  <div class="mt-6 md:w-3/5 xl:w-1/2 mx-auto"
+  <div class="my-6 text-lg text-center">
+    <p><%= "#{t(".systolic")}: #{@bpr.systolic} mmHg" %></p>
+    <p><%= "#{t(".diastolic")}: #{@bpr.diastolic} mmHg" %></p>
+    <p><%= "#{t(".heart_rate")}: #{@bpr.bpm} bpm" %></p>
+  </div>
+
+  <div class="md:w-3/5 xl:w-1/2 mx-auto"
        data-controller="blood-pressure-graph"
        data-blood-pressure-graph-sys-value="<%= @bpr.systolic %>"
        data-blood-pressure-graph-dia-value="<%= @bpr.diastolic %>">

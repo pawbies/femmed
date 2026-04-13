@@ -1,0 +1,69 @@
+<div class="w-full">
+  <h1 class="font-semibold text-center text-3xl text-gray-800"><%= t(".title") %></h1>
+
+  <%= form_with model: @bpr, class: "mt-10 mx-auto max-w-md" do |form| %>
+    <% if @bpr.errors.any? %>
+      <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
+        <h4 class="text-red-900 font-semibold mb-2">
+          <%= t(".error_count", count: @bpr.errors.count) %>
+        </h4>
+        <ul class="list-disc list-inside text-red-800 space-y-1">
+          <% @bpr.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mt-5 mb-1">
+      <%= form.label :systolic, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <div class="flex">
+        <%= form.number_field :systolic,
+          required: true,
+          autofocus: true,
+          placeholder: t(".systolic_placeholder"),
+          class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span class="shadow-sm rounded-r-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-min whitespace-nowrap">
+          mmHg
+        </span>
+      </div>
+    </div>
+
+    <div class="mt-5 mb-1">
+      <%= form.label :diastolic, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <div class="flex">
+        <%= form.number_field :diastolic,
+          required: true,
+          placeholder: t(".diastolic_placeholder"),
+          class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span class="shadow-sm rounded-r-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-min whitespace-nowrap">
+          mmHg
+        </span>
+      </div>
+    </div>
+
+    <div class="mt-5 mb-1">
+      <%= form.label :bpm, t(".heart_rate"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <div class="flex">
+        <%= form.number_field :bpm,
+          placeholder: t(".bpm_placeholder"),
+          class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span class="shadow-sm rounded-r-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-min whitespace-nowrap">
+          bpm
+        </span>
+      </div>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :measured_at, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.datetime_field :measured_at,
+        required: true,
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+    </div>
+
+    <div class="mt-8 flex justify-center">
+      <%= form.submit t(".submit"),
+        class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+    </div>
+  <% end %>
+</div>

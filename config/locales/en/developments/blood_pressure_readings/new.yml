@@ -1,0 +1,10 @@
+en:
+  developments:
+    blood_pressure_readings:
+      new:
+        title: "New blood pressure reading"
+        systolic_placeholder: "Systolic thingy ;3"
+        diastolic_placeholder: "Diastolic boy"
+        heart_rate: "Heart rate (optional)"
+        bpm_placeholder: "doki doki"
+        submit: "Save"
