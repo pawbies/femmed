@@ -14,7 +14,7 @@ class Developments::BloodPressureReadingsController < Developments::BaseControll
   end
 
   def new
-    @bpr = Current.user.blood_pressure_readings.new(measured_at: Time.current)
+    @bpr = Current.user.blood_pressure_readings.new(measured_at: Time.current.change(sec: 0))
   end
 
   def create
