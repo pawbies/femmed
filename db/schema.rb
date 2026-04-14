@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_13_172630) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_14_115403) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -106,6 +106,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_13_172630) do
     t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_forms_on_name", unique: true
+  end
+
+  create_table "lab_works", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "taken_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["taken_at"], name: "index_lab_works_on_taken_at"
+    t.index ["user_id"], name: "index_lab_works_on_user_id"
   end
 
   create_table "labelers", force: :cascade do |t|
@@ -229,6 +238,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_13_172630) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blood_pressure_readings", "users"
+  add_foreign_key "lab_works", "users"
   add_foreign_key "medication_release_profiles", "medications"
   add_foreign_key "medication_release_profiles", "release_profiles"
   add_foreign_key "medication_version_ingredients", "active_ingredients"
