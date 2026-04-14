@@ -1,0 +1,7 @@
+en:
+  blood_pressure_readings:
+    history_graph:
+      trend: "Trend"
+      systolic: "Systolic"
+      diastolic: "Diastolic"
+      heart_rate: "Heart rate"

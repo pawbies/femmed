@@ -1,0 +1,4 @@
+en:
+  blood_pressure_readings:
+    destroy:
+      deleted: "Deleted blood pressure reading"

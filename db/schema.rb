@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_14_120753) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_14_152714) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -85,6 +85,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_120753) do
     t.text "systolic", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.index ["measured_at"], name: "index_blood_pressure_readings_on_measured_at"
     t.index ["user_id"], name: "index_blood_pressure_readings_on_user_id"
   end
 
@@ -182,6 +183,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_120753) do
     t.datetime "taken_at", null: false
     t.datetime "updated_at", null: false
     t.index ["prescription_id"], name: "index_prescription_doses_on_prescription_id"
+    t.index ["taken_at"], name: "index_prescription_doses_on_taken_at"
   end
 
   create_table "prescription_packs", force: :cascade do |t|
@@ -190,6 +192,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_120753) do
     t.datetime "created_at", null: false
     t.integer "prescription_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["acquired_at"], name: "index_prescription_packs_on_acquired_at"
     t.index ["prescription_id"], name: "index_prescription_packs_on_prescription_id"
   end
 

@@ -1,0 +1,12 @@
+en:
+  blood_pressure_readings:
+    edit:
+      title: "Edit blood pressure reading"
+      error_count:
+        one: "1 error prohibited this reading from being updated:"
+        other: "%{count} errors prohibited this reading from being saved:"
+      systolic_placeholder: "Systolic thingy ;3"
+      diastolic_placeholder: "Diastolic boy"
+      heart_rate: "Heart rate (optional)"
+      bpm_placeholder: "doki doki"
+      submit: "Update"
