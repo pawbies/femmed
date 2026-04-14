@@ -1,0 +1,63 @@
+<div class="w-full">
+  <h1 class="font-semibold text-3xl text-center text-gray-800"><%= t(".title", name: @bio_marker.name) %></h1>
+
+  <%= form_with model: @bio_marker, class: "mt-10 mx-auto max-w-md" do |form| %>
+    <% if @bio_marker.errors.any? %>
+      <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
+        <h4 class="text-red-900 font-semibold mb-2">
+          <%= t(".error_count", count: @bio_marker.errors.count) %>
+        </h4>
+        <ul class="list-disc list-inside text-red-800 space-y-1">
+          <% @bio_marker.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-5">
+      <%= form.label :name, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.text_field :name,
+        placeholder: t(".name_placeholder"),
+        required: true,
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :abbreviation, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.text_field :abbreviation,
+        placeholder: t(".abbreviation_placeholder"),
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :description, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.text_field :description,
+        placeholder: t(".description_placeholder"),
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full text-gray-800 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent transition" %>
+    </div>
+
+    <div class="mt-5 mb-1">
+      <%= form.label :min_reference_value, t(".reference_value"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <div class="flex shadow-sm rounded-lg">
+        <%= form.number_field :min_reference_value,
+          placeholder: t(".min_reference_value_placeholder"),
+          class: "rounded-l-lg border border-r-0 placeholder-rose-300 bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span class="border-y place bg-rose-50 border-rose-300 px-4 py-2.5 w-min whitespace-nowrap">
+          -
+        </span>
+        <%= form.number_field :max_reference_value,
+          placeholder: t(".max_reference_value_placeholder"),
+          class: "border border-l-0 placeholder-rose-300 bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span class="rounded-r-lg border place bg-rose-50 border-rose-300 px-4 py-2.5 w-min whitespace-nowrap">
+          <%= form.select :unit, BioMarker.units.keys %>
+        </span>
+      </div>
+    </div>
+
+    <div class="mt-8 flex justify-center">
+      <%= form.submit t(".submit"),
+        class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+    </div>
+  <% end %>
+</div>

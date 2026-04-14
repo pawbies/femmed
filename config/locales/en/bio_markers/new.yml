@@ -13,9 +13,14 @@ en:
       reference_value: "Reference value (optional besides unit)"
       submit: "Add bio marker!"
     edit:
-      title: "Edit labeler %{name}"
+      title: "Editing marker %{name}"
       error_count:
-        one: "1 error prohibited this labeler from being saved:"
-        other: "%{count} errors prohibited this labeler from being saved:"
-      name_placeholder: "eg. Femboy Bussy Institute"
+        one: "1 error prohibited this marker from being saved:"
+        other: "%{count} errors prohibited this marker from being saved:"
+      name_placeholder: "eg. Marky"
+      abbreviation_placeholder: "eg. MAR"
+      description_placeholder: "eg. Makes everything cute"
+      min_reference_value_placeholder: "eg. 10"
+      max_reference_value_placeholder: "eg. 20"
+      reference_value: "Reference value (optional besides unit)"
       submit: "Update :3"

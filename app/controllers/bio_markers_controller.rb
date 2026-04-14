@@ -20,7 +20,24 @@ class BioMarkersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @bio_marker.update bio_marker_params
+      redirect_to @bio_marker
+    else
+      render :edit, status: :unprocessable_content
+    end
+  end
+
   def show
+  end
+
+  def destroy
+    @bio_marker.destroy!
+
+    redirect_to bio_markers_path, notice: t(".deleted", name: @bio_marker.name)
   end
 
   private

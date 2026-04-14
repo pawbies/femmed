@@ -1,0 +1,4 @@
+en:
+  bio_markers:
+    destroy:
+      deleted: "Deleted %{name} :3"
