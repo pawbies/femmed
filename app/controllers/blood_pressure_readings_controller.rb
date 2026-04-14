@@ -1,4 +1,4 @@
-class Developments::BloodPressureReadingsController < Developments::BaseController
+class BloodPressureReadingsController < ApplicationController
   before_action :set_blood_pressure_reading, except: %i[ index new create ]
 
   def index

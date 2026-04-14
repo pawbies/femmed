@@ -19,12 +19,12 @@ class LabWorkTest < ActiveSupport::TestCase
   end
 
   test "belongs to user" do
-    lab_work = lab_works(:one)
+    lab_work = lab_works(:lab_work)
     assert_equal users(:alice), lab_work.user
   end
 
   test "has rich text notes" do
-    lab_work = lab_works(:one)
+    lab_work = lab_works(:lab_work)
     lab_work.notes = "Cholesterol normal, vitamin D low"
     lab_work.save!
     assert_equal "Cholesterol normal, vitamin D low", lab_work.notes.to_plain_text

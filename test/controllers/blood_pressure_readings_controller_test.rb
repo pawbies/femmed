@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Developments::BloodPressureReadingsControllerTest < ActionDispatch::IntegrationTest
+class BloodPressureReadingsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:alice)
     @other_user = users(:bob)

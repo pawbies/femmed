@@ -45,9 +45,7 @@ Rails.application.routes.draw do
     get "about"   => "about#show"
   end
 
-  scope "/developments", module: :developments do
-    resources :blood_pressure_readings
-  end
+  resources :blood_pressure_readings
 
   get "legal/imprint", as: :imprint
   get "legal/terms-of-service", as: :terms_of_service

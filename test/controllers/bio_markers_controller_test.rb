@@ -2,7 +2,7 @@ require "test_helper"
 
 class BioMarkersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @bio_marker = bio_markers(:one)
+    @bio_marker = bio_markers(:glucose)
     @user  = users(:alice)
     @admin = users(:admin)
   end
@@ -125,10 +125,17 @@ class BioMarkersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to root_url
 
-    # Admin
+    # Admin with lab works
     sign_in_as(@admin)
-    assert_difference "BioMarker.count", -1 do
+    assert_no_difference "BioMarker.count" do
       delete bio_marker_url(@bio_marker)
+    end
+    assert_redirected_to bio_marker_url(@bio_marker)
+
+    # Admin without lab works
+    b = BioMarker.create! name: "Test", unit: "mg/dL"
+    assert_difference "BioMarker.count", -1 do
+      delete bio_marker_url(b)
     end
     assert_redirected_to bio_markers_url
   end

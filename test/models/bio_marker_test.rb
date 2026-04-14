@@ -35,7 +35,7 @@ class BioMarkerTest < ActiveSupport::TestCase
 
   test "invalid with duplicate name" do
     marker = valid_marker
-    marker.name = bio_markers(:one).name
+    marker.name = bio_markers(:glucose).name
     assert_not marker.valid?
     assert_includes marker.errors[:name], "has already been taken"
   end
@@ -165,7 +165,7 @@ class BioMarkerTest < ActiveSupport::TestCase
   end
 
   test "fixtures are valid" do
-    assert bio_markers(:one).valid?
-    assert bio_markers(:two).valid?
+    assert bio_markers(:glucose).valid?
+    assert bio_markers(:hemoglobin).valid?
   end
 end

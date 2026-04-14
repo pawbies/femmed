@@ -35,9 +35,12 @@ class BioMarkersController < ApplicationController
   end
 
   def destroy
-    @bio_marker.destroy!
-
-    redirect_to bio_markers_path, notice: t(".deleted", name: @bio_marker.name)
+    unless @bio_marker.results.any?
+      @bio_marker.destroy!
+      redirect_to bio_markers_path, notice: t(".deleted", name: @bio_marker.name)
+    else
+      redirect_to @bio_marker
+    end
   end
 
   private
