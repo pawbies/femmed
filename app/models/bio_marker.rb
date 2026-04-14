@@ -9,7 +9,8 @@ class BioMarker < ApplicationRecord
   validates :abbreviation, length: { maximum: 10 }
   validates :description, length: { maximum: 100 }
   validates :min_reference_value, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
-  validates :max_reference_value, numericality: { greater_than: :min_reference_value }, allow_nil: true
+  validates :max_reference_value, numericality: true, allow_nil: true
+  validate :complete_reference_value
 
   enum :unit, {
     "mg/dL" => 0,
@@ -23,4 +24,15 @@ class BioMarker < ApplicationRecord
     "10⁰/L" => 8,
     "IU/L" => 9
   }
+
+  private
+    def complete_reference_value
+      if min_reference_value.present? && max_reference_value.nil?
+        errors.add(:max_reference_value, "must be set if minimum is set")
+      elsif max_reference_value.present? && min_reference_value.nil?
+        errors.add(:min_reference_value, "must be set if maximum is set")
+      elsif min_reference_value.present? && max_reference_value.present? && max_reference_value.to_f <= min_reference_value.to_f
+        errors.add(:max_reference_value, "must be greater than minimum")
+      end
+    end
 end

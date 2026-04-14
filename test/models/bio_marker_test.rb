@@ -120,6 +120,7 @@ class BioMarkerTest < ActiveSupport::TestCase
   test "min_reference_value of 0 is valid" do
     marker = valid_marker
     marker.min_reference_value = 0
+    marker.max_reference_value = 1
     assert marker.valid?
   end
 
@@ -134,6 +135,14 @@ class BioMarkerTest < ActiveSupport::TestCase
     marker = valid_marker
     marker.min_reference_value = 20
     marker.max_reference_value = 10
+    assert_not marker.valid?
+    assert marker.errors[:max_reference_value].any?
+  end
+
+  test "invalid with max less than min when max has a higher leading digit" do
+    marker = valid_marker
+    marker.min_reference_value = 10
+    marker.max_reference_value = 9
     assert_not marker.valid?
     assert marker.errors[:max_reference_value].any?
   end

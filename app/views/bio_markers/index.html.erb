@@ -10,7 +10,10 @@
     <% @bio_markers.each do |bio_marker| %>
       <%= link_to bio_marker, class: "flex items-center justify-between py-4 -mx-4 px-4 rounded-lg transition-all group hover:bg-zinc-50" do %>
         <p class="font-medium text-gray-900 group-hover:text-rose-500 transition-colors underline-offset-2 group-hover:underline decoration-rose-300">
-          <%= bio_marker.name %> (<%= bio_marker.abbreviation %>)
+          <%= bio_marker.name %>
+          <% if bio_marker.abbreviation.present? %>
+            (<%= bio_marker.abbreviation %>)
+          <% end %>
         </p>
         <div class="flex items-center gap-3">
           <svg class="h-4 w-4 text-zinc-300 group-hover:text-rose-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
