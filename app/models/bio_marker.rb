@@ -1,4 +1,6 @@
 class BioMarker < ApplicationRecord
+  has_many :results, class_name: "LabWork::Result"
+
   encrypts :name, deterministic: true
   encrypts :abbreviation, deterministic: true
   encrypts :description

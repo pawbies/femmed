@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+lab_work_glucose:
+  lab_work: lab_work
+  bio_marker: glucose
+  value: 1.5
+lab_work_hemoglobin:
+  lab_work: lab_work
+  bio_marker: hemoglobin
+  value: 3.5

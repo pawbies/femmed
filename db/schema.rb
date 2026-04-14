@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_14_115403) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_14_120753) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -106,6 +106,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_115403) do
     t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_forms_on_name", unique: true
+  end
+
+  create_table "lab_work_results", force: :cascade do |t|
+    t.integer "bio_marker_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "lab_work_id", null: false
+    t.datetime "updated_at", null: false
+    t.float "value", null: false
+    t.index ["bio_marker_id"], name: "index_lab_work_results_on_bio_marker_id"
+    t.index ["lab_work_id"], name: "index_lab_work_results_on_lab_work_id"
   end
 
   create_table "lab_works", force: :cascade do |t|
@@ -238,6 +248,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_115403) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blood_pressure_readings", "users"
+  add_foreign_key "lab_work_results", "bio_markers"
+  add_foreign_key "lab_work_results", "lab_works"
   add_foreign_key "lab_works", "users"
   add_foreign_key "medication_release_profiles", "medications"
   add_foreign_key "medication_release_profiles", "release_profiles"
