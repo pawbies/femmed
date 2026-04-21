@@ -9,7 +9,7 @@ en:
       hours_unit: "Hours"
       submit: "Create"
     edit:
-      title: "Edit active ingredient"
+      title: "Edit %{active_ingredient}"
       error_count:
         one: "1 error prohibited this from being saved:"
         other: "%{count} errors prohibited this from being saved:"

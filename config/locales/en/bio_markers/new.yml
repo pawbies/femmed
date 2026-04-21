@@ -13,7 +13,7 @@ en:
       reference_value: "Reference value (optional besides unit)"
       submit: "Add bio marker!"
     edit:
-      title: "Editing marker %{name}"
+      title: "Edit %{name}"
       error_count:
         one: "1 error prohibited this marker from being saved:"
         other: "%{count} errors prohibited this marker from being saved:"

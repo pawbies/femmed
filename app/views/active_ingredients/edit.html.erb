@@ -1,5 +1,7 @@
+<% content_for(:title, t(".title", active_ingredient: @active_ingredient.name)) %>
+
 <div class="w-full">
-  <h1 class="font-semibold text-3xl text-center text-gray-800"><%= t(".title") %></h1>
+  <h1 class="font-semibold text-3xl text-center text-gray-800"><%= t(".title", active_ingredient: @active_ingredient.name) %></h1>
 
   <%= form_with model: @active_ingredient, class: "mt-10 mx-auto max-w-md" do |form| %>
     <% if @active_ingredient.errors.any? %>

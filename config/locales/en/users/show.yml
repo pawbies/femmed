@@ -1,6 +1,7 @@
 en:
   users:
     show:
+      title: "Profile of %{username}"
       edit: "Wanna change something?"
       export: "Export your data?"
       log_out: "Log out"

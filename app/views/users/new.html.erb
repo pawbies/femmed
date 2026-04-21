@@ -1,5 +1,6 @@
-<div class="w-full">
+<% content_for(:title, t(".title")) %>
 
+<div class="w-full">
   <% unless authenticated? && admin? %>
     <img src="/icon.svg" alt="<%= t(".logo_alt") %>" class="mx-auto aspect-square max-w-32">
     <h1 class="mt-6 text-center font-semibold text-3xl text-gray-800"><%= t(".title") %></h1>

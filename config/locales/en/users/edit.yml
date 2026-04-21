@@ -1,6 +1,7 @@
 en:
   users:
     edit:
+      title: "Edit profile of %{username}"
       error_heading: "Couldn't save your changes :("
       email_placeholder: "Your email address goes here :3"
       username_placeholder: "Whatever you wanna be called around here Nyaaa"

@@ -2,7 +2,7 @@ en:
   pages:
     admin:
       show:
-        title: "Admin"
+        title: "Management"
         user_management: "User Management"
         see_all_users: "See all users"
         create_new_user: "Create new user"

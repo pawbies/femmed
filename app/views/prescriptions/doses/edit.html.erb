@@ -1,5 +1,7 @@
+<% content_for(:title, t(".title", medication: @prescription.medication.name)) %>
+
 <div class="w-full">
-  <h1 class="font-semibold text-center text-3xl text-gray-800"><%= t(".title", medication: @prescription.medication.name, date: @dose.taken_at.strftime("%B %e, %Y at %H:%M")) %></h1>
+  <h1 class="font-semibold text-center text-3xl text-gray-800"><%= t(".title", medication: @prescription.medication.name) %></h1>
 
   <%= form_with model: @dose, url: prescription_dose_path(@prescription, @dose), class: "mt-10 mx-auto max-w-md",
     data: { controller: "dose-form", dose_form_ingredient_doses_per_unit_value: @prescription.medication_version.medication_version_ingredients.map { |mvi| { name: mvi.active_ingredient.name, amount: mvi.amount, unit: mvi.unit } }.to_json } do |form| %>
