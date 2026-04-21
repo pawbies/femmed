@@ -1,29 +1,29 @@
 <div class="w-full">
   <div class="flex flex-col md:flex-row items-start md:items-center justify-between mt-6 mb-8">
     <div class="flex items-center gap-4">
-      <%= link_to calendar_path(date: @mode == "week" ? @date - 1.week : @date - 1.month, mode: @mode), class: "p-2 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-400 transition-colors" do %>
+      <%= link_to calendar_path(date: @mode == "week" ? @date - 1.week : @date - 1.month, mode: @mode), class: "p-2 rounded-lg border border-green-200 hover:bg-green-50 text-green-400 transition-colors" do %>
         &#8592;
       <% end %>
-      <p class="text-rose-400 font-medium">
+      <p class="text-green-400 font-medium">
         <% if @mode == "week" %>
           <%= @date.beginning_of_week(:monday).strftime("%b %e") %> – <%= @date.end_of_week(:monday).strftime("%b %e, %Y") %>
         <% else %>
           <%= @date.strftime("%B %Y") %>
         <% end %>
       </p>
-      <%= link_to calendar_path(date: @mode == "week" ? @date + 1.week : @date + 1.month, mode: @mode), class: "p-2 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-400 transition-colors" do %>
+      <%= link_to calendar_path(date: @mode == "week" ? @date + 1.week : @date + 1.month, mode: @mode), class: "p-2 rounded-lg border border-green-200 hover:bg-green-50 text-green-400 transition-colors" do %>
         &#8594;
       <% end %>
     </div>
 
-    <div class="mt-3 md:mt-0 flex rounded-lg border border-rose-200 overflow-hidden text-sm">
-      <%= link_to t(".month"), calendar_path(date: @date, mode: "month"), class: "px-4 py-1.5 transition-colors #{@mode == 'month' ? 'bg-rose-400 text-white font-medium' : 'text-rose-400 hover:bg-rose-50'}" %>
-      <%= link_to t(".week"), calendar_path(date: @date, mode: "week"), class: "px-4 py-1.5 transition-colors #{@mode == 'week' ? 'bg-rose-400 text-white font-medium' : 'text-rose-400 hover:bg-rose-50'}" %>
+    <div class="mt-3 md:mt-0 flex rounded-lg border border-green-200 overflow-hidden text-sm">
+      <%= link_to t(".month"), calendar_path(date: @date, mode: "month"), class: "px-4 py-1.5 transition-colors #{@mode == 'month' ? 'bg-green-400 text-white font-medium' : 'text-green-400 hover:bg-green-50'}" %>
+      <%= link_to t(".week"), calendar_path(date: @date, mode: "week"), class: "px-4 py-1.5 transition-colors #{@mode == 'week' ? 'bg-green-400 text-white font-medium' : 'text-green-400 hover:bg-green-50'}" %>
     </div>
   </div>
 
   <% if @mode == "month" %>
-    <div class="w-full mx-auto lg:w-2/3">
+    <div class="w-full mx-auto lg:w-2/3 xl:w-1/2">
       <div class="grid grid-cols-7 mb-2">
         <% t(".day_abbr").each do |day| %>
           <div class="text-center text-xs font-medium text-gray-400 py-2"><%= day %></div>
@@ -40,7 +40,7 @@
         <% (1..@date.end_of_month.day).each do |day| %>
           <% current = Date.new(@date.year, @date.month, day) %>
           <% is_today = current == Date.today %>
-          <%= link_to timeline_path(date: current), class: "relative aspect-square flex items-center justify-center rounded text-sm transition-colors #{is_today ? 'bg-rose-400 text-white font-semibold' : 'hover:bg-rose-50 text-gray-700 border border-rose-100'}" do %>
+          <%= link_to timeline_path(date: current), class: "relative aspect-square flex items-center justify-center rounded text-sm transition-colors #{is_today ? 'bg-green-400 text-white font-semibold' : 'hover:bg-green-50 text-gray-700 border border-green-200'}" do %>
             <%= day %>
             <% if @dose_dates.include?(current) %>
               <%= image_tag "icons/pill.svg", class: "aspect-square h-2 md:h-4 absolute left-2 bottom-2" %>
@@ -55,14 +55,14 @@
       <div class="grid grid-cols-1 md:grid-cols-7 gap-1">
         <% (@date.beginning_of_week(:monday)..@date.end_of_week(:monday)).each do |day| %>
           <% is_today = day == Date.today %>
-          <div class="border border-rose-100 rounded p-2">
+          <div class="border border-green-200 rounded p-2">
             <div class="flex items-center gap-2 mb-3">
               <span class="text-xs font-medium text-gray-400"><%= day.strftime("%a") %></span>
-              <span class="text-sm <%= is_today ? 'bg-rose-400 text-white font-semibold w-6 h-6 rounded flex items-center justify-center' : 'text-gray-700' %>">
+              <span class="text-sm <%= is_today ? 'bg-green-400 text-white font-semibold w-6 h-6 rounded flex items-center justify-center' : 'text-gray-700' %>">
                 <%= day.day %>
               </span>
             </div>
-            <%= link_to timeline_path(date: day), class: "text-xs text-rose-400 hover:underline" do %>
+            <%= link_to timeline_path(date: day), class: "text-xs text-green-400 hover:underline" do %>
               <%= t(".view_day") %> &#8594;
             <% end %>
           </div>
