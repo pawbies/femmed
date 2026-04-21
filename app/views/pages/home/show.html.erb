@@ -28,7 +28,7 @@
       <%= t(".views") %>
     </h3>
 
-    <div class="grid grid-cols-3 gap-3">
+    <div class="grid grid-cols-4 gap-3">
       <%= link_to timeline_path, class: "group aspect-square rounded-2xl bg-white border border-rose-200 shadow-sm hover:shadow-md hover:border-rose-300 hover:-translate-y-0.5 transition p-3 flex gap-2 flex-col justify-center items-center" do %>
         <%= image_tag "icons/timeline.svg", class: "h-10 w-10 transition group-hover:scale-105" %>
         <h4 class="text-center text-sm font-medium text-gray-700"><%= t(".timeline") %></h4>
@@ -42,6 +42,10 @@
           <%= image_tag "icons/management.svg", class: "h-10 w-10 transition group-hover:scale-105" %>
           <h4 class="text-center text-sm font-medium text-gray-700"><%= t(".management") %></h4>
         <% end %>
+      <% end %>
+      <%= link_to Current.user, class: "group aspect-square rounded-2xl bg-white border border-rose-200 shadow-sm hover:shadow-md hover:border-rose-300 hover:-translate-y-0.5 transition p-3 flex gap-2 flex-col justify-center items-center" do %>
+        <%= image_tag "icons/user.svg", class: "h-10 w-10 transition group-hover:scale-105" %>
+        <h4 class="text-center text-sm font-medium text-gray-700"><%= t(".your_profile") %></h4>
       <% end %>
     </div>
   </section>
