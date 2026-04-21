@@ -40,7 +40,7 @@
           <%= t(".your_prescriptions") %>
           <span class="ml-1 text-xs font-normal text-rose-400 bg-rose-50 border border-rose-200 rounded-full px-2 py-0.5"><%= @prescriptions.size %></span>
         </h4>
-        <div class="grid grid-cols-2 xl:grid-cols-4 gap-3">
+        <div class="grid grid-cols-2 gap-3">
           <%= render partial: "prescriptions/prescription", collection: @prescriptions, locals: { minimal: true } %>
         </div>
       </div>
@@ -83,7 +83,7 @@
             <%= link_to t(".add_new"), new_medication_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
           <% end %>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-3">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
           <% @medications.each do |medication| %>
             <%= render "medications/card", medication: medication %>
           <% end %>
@@ -110,7 +110,7 @@
             <%= link_to t(".add_new"), new_active_ingredient_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
           <% end %>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
           <%= render @active_ingredients %>
         </div>
       </div>
@@ -135,7 +135,7 @@
             <%= link_to t(".add_new"), new_labeler_path, class: "text-xs text-rose-400 hover:text-rose-600 border border-rose-200 rounded-full px-2.5 py-0.5 transition-colors" %>
           <% end %>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
           <%= render @labelers %>
         </div>
       </div>
