@@ -1,0 +1,5 @@
+en:
+  partials:
+    flash:
+      notice_header: "For your info cutie pie!"
+      alert_header: "Something went wrong!"
