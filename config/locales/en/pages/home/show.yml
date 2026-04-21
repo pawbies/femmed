@@ -5,6 +5,8 @@ en:
         search_placeholder: "Something cool"
         yippie: "Yippie"
 
+        views: "Views"
+
         my_prescriptions: "My prescriptions"
         track_health_data: "Track health data"
         timeline: "Timeline"

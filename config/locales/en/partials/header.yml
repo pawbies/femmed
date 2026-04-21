@@ -1,7 +1,0 @@
-en:
-  partials:
-    header:
-      logo_alt: "FemMed Logo"
-      profile_alt: "Profile picture"
-      profile: "Profile"
-      log_out: "Log out"

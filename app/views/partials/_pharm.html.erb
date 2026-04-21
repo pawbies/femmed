@@ -1,9 +1,29 @@
 <div class="relative w-full mx-auto aspect-4/3 rounded-lg overflow-hidden">
   <%= image_tag "pharmacy.svg", class: "absolute inset-0 w-full h-full object-cover z-10" %>
-
   <svg class="absolute bottom-0 left-0 w-full h-12 z-20" viewBox="0 0 600 80" preserveAspectRatio="none">
     <path d="M0,20 Q300,80 600,20 L600,80 L0,80 Z" fill="white" />
   </svg>
+  <img src="/icon.svg" class="absolute bottom-0 left-1/2 -translate-x-1/2 mb-4 h-1/2 z-20">
 
-  <img src="/icon.svg" class="absolute bottom-0 left-1/2 -translate-x-1/2 mb-4 h-1/2 z-10">
+  <% if alert %>
+    <div class="absolute top-8 left-1/2 -translate-x-[80%] max-w-sm border border-red-300 bg-red-50 rounded-2xl px-4 py-3 shadow-sm z-30
+                after:content-[''] after:absolute after:right-6 after:-bottom-2
+                after:w-4 after:h-4 after:bg-red-50 after:border-b after:border-r after:border-red-300
+                after:rotate-45">
+      <p class="text-gray-700"><%= alert %></p>
+    </div>
+  <% elsif notice %>
+    <div class="absolute top-8 left-1/2 -translate-x-[80%] max-w-sm bg-white border border-rose-200 rounded-2xl px-4 py-3 shadow-sm z-30
+                after:content-[''] after:absolute after:right-6 after:-bottom-2
+                after:w-4 after:h-4 after:bg-white after:border-b after:border-r after:border-rose-200
+                after:rotate-45">
+      <p class="text-gray-700"><%= notice %></p>
+    </div>
+  <% end %>
 </div>
+
+<% unless current_page? root_path %>
+  <nav class="mt-3 flex items-center justify-center">
+    <%= link_to t(".back_to_home"), root_path, class: "text-rose-500" %>
+  </nav>
+<% end %>

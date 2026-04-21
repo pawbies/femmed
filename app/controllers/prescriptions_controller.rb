@@ -1,5 +1,14 @@
 class PrescriptionsController < ApplicationController
-  before_action :set_prescription, except: :create
+  before_action :set_prescription, except: %i[ index create ]
+
+  def index
+    @prescriptions = Current.user.prescriptions.includes(
+      { medication_version: { medication_version_ingredients: :active_ingredient } },
+      { medication: [ :release_profile, :medication_release_profile, :active_ingredients ] },
+      :recent_doses,
+      :doses
+    ).order(prescriptions: { active: :desc }, doses: { taken_at: :desc })
+  end
 
   def create
     @prescription = Current.user.prescriptions.new(**prescription_create_params, amount: 1, active: true)

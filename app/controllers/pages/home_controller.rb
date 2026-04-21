@@ -11,6 +11,8 @@ class Pages::HomeController < Pages::BaseController
     ).order(prescriptions: { active: :desc }, doses: { taken_at: :desc })
 
     @concentrations = PkCalculator.current_concentrations(@prescriptions)
+
+    flash.now[:alert] = "uwu"
   end
 
   private
