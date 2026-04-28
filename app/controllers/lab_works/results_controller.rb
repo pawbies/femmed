@@ -7,11 +7,12 @@ class LabWorks::ResultsController < ApplicationController
   end
 
   def create
-    @result = @lab_work.results.new(result_params)
+    @result = @lab_work.results.new result_params
 
     if @result.save
       redirect_to @lab_work
     else
+      @bio_markers = BioMarker.order(:name)
       render :new, status: :unprocessable_content
     end
   end

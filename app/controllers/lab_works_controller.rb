@@ -1,4 +1,6 @@
 class LabWorksController < ApplicationController
+  before_action :set_lab_work, except: %i[ index new create ]
+
   def index
     @lab_works = Current.user.lab_works
   end
@@ -18,11 +20,20 @@ class LabWorksController < ApplicationController
   end
 
   def show
-    @lab_work = Current.user.lab_works.includes(results: :bio_marker).find(params[:id])
+  end
+
+  def destroy
+    @lab_work.destroy!
+
+    redirect_to lab_works_url
   end
 
   private
     def lab_work_create_params
       params.expect(lab_work: [ :taken_at ])
+    end
+
+    def set_lab_work
+      @lab_work = Current.user.lab_works.includes(results: :bio_marker).find(params[:id])
     end
 end

@@ -10,7 +10,7 @@
           <%= t(".error_count", count: @lab_work.errors.count) %>
         </h4>
         <ul class="list-disc list-inside text-red-800 space-y-1">
-          <% @bpr.errors.full_messages.each do |error| %>
+          <% @lab_work.errors.full_messages.each do |error| %>
             <li><%= error %></li>
           <% end %>
         </ul>
