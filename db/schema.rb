@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_14_152714) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_28_103609) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -114,7 +114,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_152714) do
     t.datetime "created_at", null: false
     t.integer "lab_work_id", null: false
     t.datetime "updated_at", null: false
-    t.float "value", null: false
+    t.text "value"
     t.index ["bio_marker_id"], name: "index_lab_work_results_on_bio_marker_id"
     t.index ["lab_work_id"], name: "index_lab_work_results_on_lab_work_id"
   end

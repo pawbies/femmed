@@ -1,0 +1,16 @@
+en:
+  lab_works:
+    results:
+      new:
+        title: "Add result"
+        marker: "Marker"
+        marker_prompt: "Select a marker…"
+        value: "Value"
+        reference_range: "Reference range"
+        min: "Min"
+        max: "Max"
+        no_range_set: "No reference range set for this marker."
+        submit: "Save"
+        error_count:
+          one: "1 error prohibited this result from being saved:"
+          other: "%{count} errors prohibited this result from being saved:"

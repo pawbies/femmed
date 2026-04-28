@@ -1,0 +1,73 @@
+<% content_for(:title, t(".title")) %>
+
+<%
+  markers_json = @bio_markers.map { |m|
+    { id: m.id, unit: m.unit, min: m.min_reference_value&.to_f, max: m.max_reference_value&.to_f }
+  }.to_json
+%>
+
+<div class="w-full">
+  <h1 class="font-semibold text-center text-3xl text-gray-800"><%= t(".title") %></h1>
+  <p class="text-center text-zinc-400 text-sm mt-1"><%= @lab_work.taken_at.strftime("%B %e, %Y at %H:%M") %></p>
+
+  <%= form_with model: @result, url: lab_work_results_path(@lab_work),
+        data: { controller: "lab-result-form", "lab-result-form-markers-value": markers_json },
+        class: "mt-10 mx-auto max-w-md" do |form| %>
+    <% if @result.errors.any? %>
+      <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
+        <h4 class="text-red-900 font-semibold mb-2">
+          <%= t(".error_count", count: @result.errors.count) %>
+        </h4>
+        <ul class="list-disc list-inside text-red-800 space-y-1">
+          <% @result.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-5">
+      <%= form.label :bio_marker_id, t(".marker"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.collection_select :bio_marker_id, @bio_markers, :id, :name,
+        { prompt: t(".marker_prompt") },
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300",
+        data: { action: "change->lab-result-form#update" } %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :value, t(".value"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <div class="flex">
+        <%= form.number_field :value,
+          required: true,
+          step: "any",
+          min: 0,
+          autofocus: true,
+          placeholder: "0.0",
+          data: { "lab-result-form-target": "valueField" },
+          class: "shadow-sm rounded-l-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        <span data-lab-result-form-target="unit"
+              class="shadow-sm rounded-r-lg border border-l-0 bg-rose-50 border-rose-300 px-4 py-2.5 text-sm text-zinc-500 whitespace-nowrap min-w-16 flex items-center justify-center">
+        </span>
+      </div>
+
+      <%# Reference range hint — hidden until a marker is selected %>
+      <div data-lab-result-form-target="rangeHint"
+           class="hidden mt-3 rounded-xl border border-zinc-100 bg-zinc-50 px-4 py-3 text-sm">
+        <p class="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-2"><%= t(".reference_range") %></p>
+        <div data-range-values class="flex items-center gap-2">
+          <span class="text-xs text-zinc-400"><%= t(".min") %></span>
+          <span data-lab-result-form-target="rangeMin" class="font-semibold text-zinc-700 tabular-nums"></span>
+          <span class="text-zinc-300 mx-1">–</span>
+          <span class="text-xs text-zinc-400"><%= t(".max") %></span>
+          <span data-lab-result-form-target="rangeMax" class="font-semibold text-zinc-700 tabular-nums"></span>
+        </div>
+        <p data-lab-result-form-target="noRange" class="hidden text-zinc-400 text-xs italic"><%= t(".no_range_set") %></p>
+      </div>
+    </div>
+
+    <div class="mt-8 flex justify-center">
+      <%= form.submit t(".submit"),
+        class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+    </div>
+  <% end %>
+</div>

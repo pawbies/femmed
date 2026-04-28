@@ -1,0 +1,32 @@
+<% content_for(:title, t(".title")) %>
+
+<div class="w-full">
+  <h1 class="text-3xl font-semibold text-gray-800"><%= t(".title") %></h1>
+
+  <table class="w-full mt-6 text-sm border-collapse">
+    <thead>
+      <tr class="border-b border-zinc-200 text-left text-xs uppercase tracking-widest text-rose-300">
+        <th class="pb-3 pr-8"><%= t(".date") %></th>
+        <th class="pb-3 pr-8"><%= t(".markers_measured") %></th>
+        <th class="pb-3 pr-8"><%= t(".view") %></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-100">
+      <% @lab_works.each do |lab_work| %>
+        <tr class="transition-colors hover:bg-zinc-50">
+          <td class="py-3 pr-8 font-medium text-zinc-800">
+            <%= lab_work.taken_at.strftime("%B %e, %Y %H:%M") %>
+          </td>
+          <td class="py-3 pr-8 font-medium text-zinc-800">
+            <%= lab_work.results.count %>
+          </td>
+          <td class="py-3 font-medium text-zinc-800">
+            <%= link_to "View", lab_work %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= render "partials/add_button", path: new_lab_work_path %>
+</div>

@@ -1,0 +1,17 @@
+en:
+  lab_works:
+    show:
+      title: "Lab work from %{date}"
+      back: "All lab work"
+      confirm_delete: "Are you sure you want to delete this lab work?"
+      results: "Results"
+      marker: "Marker"
+      value: "Value"
+      unit: "Unit"
+      reference_range: "Reference range"
+      status: "Status"
+      no_results: "No results recorded yet."
+      normal: "Normal"
+      low: "Low"
+      high: "High"
+      no_range: "—"

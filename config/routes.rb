@@ -46,6 +46,9 @@ Rails.application.routes.draw do
   end
 
   resources :blood_pressure_readings
+  resources :lab_works do
+    resources :results, module: :lab_works, only: [ :new, :create ]
+  end
 
   get "legal/imprint", as: :imprint
   get "legal/terms-of-service", as: :terms_of_service

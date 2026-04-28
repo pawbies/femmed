@@ -1,0 +1,32 @@
+<% content_for(:title, t(".title")) %>
+
+<div class="w-full">
+  <h1 class="font-semibold text-center text-3xl text-gray-800"><%= t(".title") %></h1>
+
+  <%= form_with model: @lab_work, class: "mt-10 mx-auto max-w-md" do |form| %>
+    <% if @lab_work.errors.any? %>
+      <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-6">
+        <h4 class="text-red-900 font-semibold mb-2">
+          <%= t(".error_count", count: @lab_work.errors.count) %>
+        </h4>
+        <ul class="list-disc list-inside text-red-800 space-y-1">
+          <% @bpr.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-5">
+      <%= form.label :taken_at, class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.datetime_field :taken_at,
+        required: true,
+        class: "shadow-sm rounded-lg border bg-rose-50 border-rose-300 px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+    </div>
+
+    <div class="mt-8 flex justify-center">
+      <%= form.submit t(".submit"),
+        class: "rounded-lg px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white cursor-pointer font-semibold transition-colors shadow-sm" %>
+    </div>
+  <% end %>
+</div>
