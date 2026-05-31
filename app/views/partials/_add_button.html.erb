@@ -1,1 +1,5 @@
-<%= link_to "+", path, target: "_top", class: "fixed md:bottom-12 bottom-8 md:right-12 right-8 w-14 h-14 bg-rose-400 hover:bg-rose-500 text-white rounded-full shadow-lg flex items-center justify-center text-2xl transition-colors" %>
+<div class="fixed inset-x-0 bottom-0 pointer-events-none z-50">
+  <div class="mx-auto max-w-2xl relative">
+    <%= link_to "+", path, target: "_top", class: "pointer-events-auto absolute md:bottom-12 bottom-8 md:right-12 right-8 w-14 h-14 bg-rose-400 hover:bg-rose-500 text-white rounded-full shadow-lg flex items-center justify-center text-2xl transition-colors" %>
+  </div>
+</div>
