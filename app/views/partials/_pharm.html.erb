@@ -23,7 +23,12 @@
 </div>
 
 <% unless current_page? root_path %>
-  <nav class="mt-3 flex items-center justify-center">
-    <%= link_to t(".back_to_home"), root_path, class: "text-rose-500" %>
+  <nav class="mt-4 flex items-center justify-center">
+    <%= link_to root_path, class: "group inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-rose-400 hover:text-rose-500 transition-colors" do %>
+      <svg class="w-3 h-3 transition-transform duration-200 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+      <span class="border-b border-transparent group-hover:border-rose-300"><%= t(".back_to_home") %></span>
+    <% end %>
   </nav>
 <% end %>
