@@ -14,7 +14,6 @@ class Medication < ApplicationRecord
   validates :name, presence: true
   validates :form, presence: true
 
-  validates :release_type, presence: true
   validates :delay, presence: true, if: :bimodal?
   validates :release_duration, presence: true, if: :extended?
 

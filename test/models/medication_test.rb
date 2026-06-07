@@ -14,13 +14,13 @@ class MedicationTest < ActiveSupport::TestCase
     assert_includes medication.errors[:name], "can't be blank"
   end
 
-  test "should require a release type" do
+  test "should fallback to immediate release type" do
     medication = Medication.new(
       name: "New Medication",
       form: @tablet_form
     )
-    assert_not medication.valid?
-    assert_includes medication.errors[:release_type], "can't be blank"
+    assert medication.valid?
+    assert_equal medication.release_type, "immediate"
   end
 
   test "should require a form" do
