@@ -34,7 +34,7 @@ class Transfer::ExportsController < ApplicationController
 
           csv << [
             csv_safe(prescription.full_name),
-            "#{format("%g", prescription.amount)} #{csv_safe(prescription.form.name.pluralize(prescription.amount))}",
+            "#{format("%g", prescription.amount)} #{prescription.form.name.pluralize(prescription.amount)}",
             prescription.active? ? "Active" : "Inactive",
             prescription.created_at.iso8601
           ]
@@ -47,9 +47,9 @@ class Transfer::ExportsController < ApplicationController
               "",
               case record
               when Prescription::Dose then
-                "#{format("%g", record.amount_taken)} #{csv_safe(prescription.form.name.pluralize(record.amount_taken))} Dose at #{record.taken_at.strftime("%B %e, %Y %H:%M")}"
+                "#{format("%g", record.amount_taken)} #{prescription.form.name.pluralize(record.amount_taken)} Dose at #{record.taken_at.strftime("%B %e, %Y %H:%M")}"
               when Prescription::Pack then
-                "#{record.amount} #{csv_safe(prescription.form.name.pluralize(record.amount))} Pack at #{record.acquired_at.strftime("%B %e, %Y")}"
+                "#{record.amount} #{prescription.form.name.pluralize(record.amount)} Pack at #{record.acquired_at.strftime("%B %e, %Y")}"
               end
             ]
           end
