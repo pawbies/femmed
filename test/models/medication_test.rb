@@ -2,32 +2,31 @@ require "test_helper"
 
 class MedicationTest < ActiveSupport::TestCase
   setup do
-    @immediate_release = release_profiles(:immediate)
     @tablet_form = forms(:tablet)
   end
 
   test "should require a name" do
     medication = Medication.new(
       form: @tablet_form,
-      medication_release_profile_attributes: { release_profile: @immediate_release }
+      release_type: "immediate"
     )
     assert_not medication.valid?
     assert_includes medication.errors[:name], "can't be blank"
   end
 
-  test "should require a release profile" do
+  test "should require a release type" do
     medication = Medication.new(
       name: "New Medication",
       form: @tablet_form
     )
     assert_not medication.valid?
-    assert_includes medication.errors[:medication_release_profile], "can't be blank"
+    assert_includes medication.errors[:release_type], "can't be blank"
   end
 
   test "should require a form" do
     medication = Medication.new(
       name: "New Medication",
-      medication_release_profile_attributes: { release_profile: @immediate_release }
+      release_type: "immediate"
     )
     assert_not medication.valid?
     assert_includes medication.errors[:form], "must exist"
@@ -38,7 +37,7 @@ class MedicationTest < ActiveSupport::TestCase
       name: "Testamed",
       form: forms(:tablet),
       labeler: nil,
-      medication_release_profile_attributes: { release_profile: @immediate_release }
+      release_type: "immediate"
     )
     assert medication.valid?
   end

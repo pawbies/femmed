@@ -5,7 +5,7 @@ class Pages::HomeController < Pages::BaseController
   def show
     @prescriptions = Current.user.prescriptions.includes(
       { medication_version: { medication_version_ingredients: :active_ingredient } },
-      { medication: [ :release_profile, :medication_release_profile, :active_ingredients ] },
+      { medication: [ :active_ingredients ] },
       :recent_doses,
       :doses
     ).order(prescriptions: { active: :desc }, doses: { taken_at: :desc })

@@ -46,24 +46,23 @@
     </div>
 
     <div class="my-5">
-      <%= form.label :medication_release_profile, t(".release_profile_label"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
-      <%= form.fields_for :medication_release_profile do |rp_form| %>
-        <%= rp_form.select :release_profile_id, ReleaseProfile.all.order(name: :desc).map { |rp| [rp.name, rp.id] },
-          { default: "Immediate" },
-          { data: { action: "new-medication#update", new_medication_target: "rpSelect" }, class: "my-2 border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300 w-full" } %>
-        <div class="flex gap-3 mt-2">
-          <%= rp_form.number_field :delay,
-            data: { new_medication_target: "rpDelayField" },
-            placeholder: t(".delay_placeholder"),
-            step: 0.5,
-            class: "js:hidden shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full text-sm" %>
-          <%= rp_form.number_field :release_duration,
-            data: { new_medication_target: "rpDurationField" },
-            placeholder: t(".duration_placeholder"),
-            step: 1,
-            class: "js:hidden shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full text-sm" %>
-        </div>
-      <% end %>
+      <%= form.label :release_type, t(".release_type_label"), class: "block text-xs font-semibold uppercase tracking-widest text-rose-400 mb-2" %>
+      <%= form.select :release_type,
+        Medication.release_types.keys.map { |k| [k.humanize, k] },
+        {},
+        { data: { action: "new-medication#update", new_medication_target: "rpSelect" }, class: "my-2 border border-rose-200 bg-rose-50 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300 w-full" } %>
+      <div class="flex gap-3 mt-2">
+        <%= form.number_field :delay,
+          data: { new_medication_target: "rpDelayField" },
+          placeholder: t(".delay_placeholder"),
+          step: 0.5,
+          class: "js:hidden shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full text-sm" %>
+        <%= form.number_field :release_duration,
+          data: { new_medication_target: "rpDurationField" },
+          placeholder: t(".duration_placeholder"),
+          step: 1,
+          class: "js:hidden shadow-sm rounded-md border bg-rose-50 border-rose-300 px-3 py-2 w-full text-sm" %>
+      </div>
     </div>
 
     <div class="my-5">

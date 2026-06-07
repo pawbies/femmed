@@ -9,11 +9,9 @@ en:
       medication_version: "Medication version"
       active_ingredient: "Active ingredient"
       medication_version_ingredient: "Medication version ingredient"
-      medication_release_profile: "Medication release profile"
       category: "Category"
       form: "Form"
       labeler: "Labeler"
-      release_profile: "Release profile"
       session: "Session"
     attributes:
       user:
@@ -40,6 +38,9 @@ en:
         amount: "Amount"
       medication:
         name: "Name"
+        delay: "Delay"
+        release_duration: "Release duration"
+        release_type: "Release type"
       medication_version:
         added_name: "Added name"
       active_ingredient:
@@ -50,9 +51,6 @@ en:
       medication_version_ingredient:
         amount: "Amount"
         unit: "Unit"
-      medication_release_profile:
-        delay: "Delay"
-        release_duration: "Release duration"
     errors:
       messages:
         accepted: "must be accepted"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_28_103609) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_07_121448) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -135,17 +135,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_103609) do
     t.index ["name"], name: "index_labelers_on_name", unique: true
   end
 
-  create_table "medication_release_profiles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.float "delay"
-    t.integer "medication_id", null: false
-    t.float "release_duration"
-    t.integer "release_profile_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["medication_id"], name: "index_medication_release_profiles_on_medication_id"
-    t.index ["release_profile_id"], name: "index_medication_release_profiles_on_release_profile_id"
-  end
-
   create_table "medication_version_ingredients", force: :cascade do |t|
     t.integer "active_ingredient_id", null: false
     t.float "amount"
@@ -168,9 +157,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_103609) do
 
   create_table "medications", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.float "delay"
     t.integer "form_id", null: false
     t.integer "labeler_id"
     t.string "name", null: false
+    t.float "release_duration"
+    t.integer "release_type"
     t.datetime "updated_at", null: false
     t.index ["form_id"], name: "index_medications_on_form_id"
     t.index ["labeler_id"], name: "index_medications_on_labeler_id"
@@ -221,13 +213,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_103609) do
     t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
   end
 
-  create_table "release_profiles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "name"
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_release_profiles_on_name", unique: true
-  end
-
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -254,8 +239,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_103609) do
   add_foreign_key "lab_work_results", "bio_markers"
   add_foreign_key "lab_work_results", "lab_works"
   add_foreign_key "lab_works", "users"
-  add_foreign_key "medication_release_profiles", "medications"
-  add_foreign_key "medication_release_profiles", "release_profiles"
   add_foreign_key "medication_version_ingredients", "active_ingredients"
   add_foreign_key "medication_version_ingredients", "medication_versions"
   add_foreign_key "medication_versions", "medications"

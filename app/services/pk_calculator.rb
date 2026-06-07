@@ -186,11 +186,10 @@ class PkCalculator
   end
 
   def self.pk_release_profile(medication)
-    mrp = medication.medication_release_profile
     {
-      name: medication.release_profile&.name || "Immediate",
-      delay: mrp.delay,
-      release_duration: mrp.release_duration
+      name: medication.release_type&.capitalize || "Immediate",
+      delay: medication.delay,
+      release_duration: medication.release_duration
     }.compact
   end
 

@@ -2,7 +2,6 @@ require "test_helper"
 
 class MedicationsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @immediate_release = release_profiles(:immediate)
     @medication = medications(:ritalin_ir)
     @user       = users(:alice)
     @admin      = users(:admin)
@@ -69,7 +68,7 @@ class MedicationsControllerTest < ActionDispatch::IntegrationTest
         form_id: @medication.form_id,
         labeler_id: @medication.labeler_id,
         notes: "Take with food",
-        medication_release_profile_attributes: { release_profile_id: @immediate_release.id },
+        release_type: "immediate",
         active_ingredient_ids: [],
         category_ids: []
       } }

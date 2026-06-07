@@ -4,26 +4,36 @@ ritalin_ir:
   name: Ritalin IR
   labeler: infecto_pharm
   form: tablet
+  release_type: immediate
+
 ritalin_la:
   name: Ritalin LA
   labeler: infecto_pharm
   form: tablet
+  release_type: bimodal
+  delay: 4.0
 
 concerta:
   name: Concerta
   labeler: pfizer
   form: tablet
+  release_type: extended
+  release_duration: 12.0
 
 adderall_ir:
   name: Adderall IR
   labeler: teva
   form: tablet
+  release_type: immediate
 
 adderall_xr:
   name: Adderall XR
   labeler: abbvie
   form: capsule
+  release_type: extended
+  release_duration: 12.0
 
 percocet:
   name: Percocet
   form: tablet
+  release_type: immediate

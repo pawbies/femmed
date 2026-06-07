@@ -9,12 +9,12 @@ export default class extends Controller {
   }
 
   update() {
-    const selected = this.rpSelectTarget.options[this.rpSelectTarget.selectedIndex]?.text
+    const selected = this.rpSelectTarget.value
 
-    if (selected === "Bimodal") {
+    if (selected === "bimodal") {
       this.rpDelayFieldTarget.classList.remove("js:hidden")
       this.rpDurationFieldTarget.classList.add("js:hidden")
-    } else if (selected === "Extended") {
+    } else if (selected === "extended") {
       this.rpDelayFieldTarget.classList.add("js:hidden")
       this.rpDurationFieldTarget.classList.remove("js:hidden")
     } else {

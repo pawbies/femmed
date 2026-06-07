@@ -8,7 +8,6 @@ class MedicationsController < ApplicationController
 
   def new
     @medication = Medication.new
-    @medication.build_medication_release_profile
   end
 
   def create
@@ -53,11 +52,9 @@ class MedicationsController < ApplicationController
         :form_id,
         :labeler_id,
         :notes,
-        medication_release_profile_attributes: [
-          :release_profile_id,
-          :delay,
-          :release_duration
-        ],
+        :release_type,
+        :delay,
+        :release_duration,
         active_ingredient_ids: [],
         category_ids: [] ])
     end
