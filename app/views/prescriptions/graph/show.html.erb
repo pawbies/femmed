@@ -1,5 +1,13 @@
 <% content_for(:title, @prescription.full_name) %>
 
+<% presets = [
+     [t(".preset_day"),    24,  24],
+     [t(".preset_3_days"), 72,  24],
+     [t(".preset_week"),   168, 48],
+     [t(".preset_2_weeks"), 336, 72],
+     [t(".preset_month"),  720, 168]
+   ] %>
+
 <div class="w-full">
   <h1 class="text-3xl font-semibold text-gray-800"><%= @prescription.medication_version.full_name %></h1>
 
@@ -9,5 +17,53 @@
     <h3 class="text-2xl font-semibold text-gray-700 pb-3 border-b border-rose-100 mb-8">
       <%= t(".graph") %>
     </h3>
+
+    <turbo-frame id="prescription_graph">
+      <div data-controller="prescription-graph"
+           class="w-full bg-white border border-rose-100 rounded-2xl overflow-hidden shadow-sm"
+           data-prescription-graph-past-value="<%= @past %>"
+           data-prescription-graph-future-value="<%= @future %>"
+           data-prescription-graph-plot-value="<%= @plot.to_json %>"
+           data-prescription-graph-xlabel-value="<%= t(".x_label") %>"
+           data-prescription-graph-ylabel-value="<%= t(".y_label") %>"
+           data-prescription-graph-nowlabel-value="<%= t(".now_label") %>">
+
+        <div class="px-5 pt-5 pb-3 border-b border-rose-50">
+          <p class="text-xs font-semibold uppercase tracking-widest text-rose-300 mb-3"><%= t(".time_range") %></p>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            <% presets.each do |label, past, future| %>
+              <% active = @past == past && @future == future %>
+              <%= link_to label, prescription_graph_path(@prescription, past: past, future: future),
+                    class: "text-xs font-medium px-3 py-1.5 rounded-full border transition-colors #{
+                      active ? 'bg-rose-500 text-white border-rose-500' : 'bg-white text-rose-500 border-rose-200 hover:bg-rose-50'
+                    }" %>
+            <% end %>
+          </div>
+
+          <%= form_with url: prescription_graph_path(@prescription), method: :get,
+                data: { turbo_frame: "prescription_graph", prescription_graph_target: "form" },
+                class: "flex flex-wrap items-end gap-4" do |f| %>
+            <div class="flex flex-col gap-1">
+              <%= f.label :past, t(".past_hours"), class: "text-xs font-medium text-zinc-500" %>
+              <%= f.number_field :past, value: @past, min: 0, max: Prescriptions::GraphController::MAX_HOURS,
+                    data: { action: "change->prescription-graph#update" },
+                    class: "w-28 text-sm border border-rose-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-rose-200" %>
+            </div>
+            <div class="flex flex-col gap-1">
+              <%= f.label :future, t(".future_hours"), class: "text-xs font-medium text-zinc-500" %>
+              <%= f.number_field :future, value: @future, min: 0, max: Prescriptions::GraphController::MAX_HOURS,
+                    data: { action: "change->prescription-graph#update" },
+                    class: "w-28 text-sm border border-rose-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-rose-200" %>
+            </div>
+            <noscript>
+              <%= f.submit t(".update"), class: "text-sm bg-rose-500 text-white font-medium px-4 py-2 rounded-lg" %>
+            </noscript>
+          <% end %>
+        </div>
+
+        <div data-prescription-graph-target="chart" class="w-full px-1 py-2"></div>
+      </div>
+    </turbo-frame>
   </turbo-frame>
 </div>

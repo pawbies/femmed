@@ -3,6 +3,7 @@ en:
     nav:
       log: "Log"
       packs: "Packs"
+      graph: "Graph"
       routine: "Routine"
       about: "About"
       settings: "Settings"

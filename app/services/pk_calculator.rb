@@ -48,15 +48,23 @@ class PkCalculator
   end
 
   # Real dose history, plotted from -past to +future hours around now.
-  # Used on the prescription card.
-  def self.for_prescription(prescription, now: Time.current)
+  # Used on the prescription card (defaults to the saved preview window) and
+  # on the full graph page, which passes custom past/future hours.
+  def self.for_prescription(prescription, now: Time.current, past: nil, future: nil)
+    past   = (past   || prescription.preview_past).to_i
+    future = (future || prescription.preview_future).to_i
+
     ingredients = pk_ingredients(prescription.medication_version)
     release     = pk_release_profile(prescription.medication)
     body_weight = prescription.user.body_weight
-    doses       = prescription.recent_doses.map { |d| { taken_at: d.taken_at.to_i, amount: d.amount_taken } }
+    # Look back at least a week so residual concentration from earlier doses is
+    # captured, or further when a wider past window is requested.
+    lookback    = [ past.hours, 1.week ].max
+    doses       = prescription.doses.where(taken_at: (now - lookback)..now)
+                              .map { |d| { taken_at: d.taken_at.to_i, amount: d.amount_taken } }
     now_ts      = now.to_i
-    x_start     = (prescription.preview_past * -1).to_i
-    x_end       = prescription.preview_future.to_i
+    x_start     = past * -1
+    x_end       = future
 
     result = build_plot_data(ingredients, x_start..(x_end + 1)) do |ing, t|
       concentration_from_doses(ing, release, doses, now_ts, t, body_weight)
