@@ -11,7 +11,7 @@ class ActiveIngredient < ApplicationRecord
   }
 
   validates :name, presence: true, uniqueness: true
-  validates :half_life, numericality: true, comparison: { greater_than_or_equal_to: 0 }, allow_nil: true
-  validates :absorption_rate, numericality: true, allow_nil: true
-  validates :volume_of_distribution, numericality: true, allow_nil: true
+  validates :half_life, numericality: { greater_than: 0 }, allow_nil: true
+  validates :absorption_rate, numericality: { greater_than: 0 }, allow_nil: true
+  validates :volume_of_distribution, numericality: { greater_than: 0 }, allow_nil: true
 end
