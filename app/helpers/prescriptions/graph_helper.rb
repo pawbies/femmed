@@ -1,0 +1,2 @@
+module Prescriptions::GraphHelper
+end

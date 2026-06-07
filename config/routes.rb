@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :packs
       resources :doses
       resource :routine
+      get "graph" => "graph#show"
       get "about" => "about#show"
     end
   end

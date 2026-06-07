@@ -11,6 +11,12 @@
         }" %>
   <% end %>
 
+
+  <%= link_to t(".graph"), prescription_graph_path(@prescription),
+      class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
+        current_page?(prescription_graph_path(@prescription)) ? 'border-b-2 border-rose-500 text-rose-600' : ''
+      }" %>
+
   <%= link_to t(".routine"), prescription_routine_path(@prescription),
       class: "pb-3 font-medium text-gray-600 hover:text-gray-900 transition-colors #{
         current_page?(prescription_routine_path(@prescription)) ? 'border-b-2 border-rose-500 text-rose-600' : ''
