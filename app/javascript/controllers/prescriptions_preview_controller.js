@@ -34,12 +34,12 @@ export default class extends Controller {
 
     const chart = Plot.plot({
       width: W, height: H,
-      marginLeft: 8, marginRight: 8, marginTop: 20, marginBottom: 8,
+      marginLeft: 0, marginRight: 0, marginTop: 4, marginBottom: 0,
       style: { fontFamily: "'Inter', 'DM Sans', system-ui, sans-serif", fontSize: "11px", background: "transparent", overflow: "visible" },
       y: {
         // Floor at 0 so a flat/empty series sits on the bottom; the `|| 1`
         // keeps the domain non-degenerate when yMax is 0 (no concentration).
-        domain: [0, (yMax || 1) * 1.25],
+        domain: [0, (yMax || 1) * 1.1],
         axis: null
       },
       x: {
