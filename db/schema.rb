@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_07_121448) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_07_131401) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -162,7 +162,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_07_121448) do
     t.integer "labeler_id"
     t.string "name", null: false
     t.float "release_duration"
-    t.integer "release_type"
+    t.integer "release_type", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["form_id"], name: "index_medications_on_form_id"
     t.index ["labeler_id"], name: "index_medications_on_labeler_id"
