@@ -1,34 +1,63 @@
 <% content_for(:title, t(".title", username: @user.username)) %>
 
 <div class="w-full">
-  <%= image_tag @user.profile_picture, alt: "Profile picture", class: "mx-auto aspect-square max-w-32 rounded-full border" %>
-  <h1 class="mt-6 text-center font-semibold text-3xl text-gray-800"><%= @user.username %></h1>
-
-  <div class="mt-16 mx-auto md:max-w-2/3 flex flex-col md:flex-row justify-around items-center">
-    <%= link_to t(".edit"), edit_user_path(@user), class: "my-2 text-xl underline hover:no-underline" %>
-    <% if @user.id == Current.user.id %>
-      <%= link_to t(".export"), new_export_path, class: "my-2 text-xl underline hover:no-underline" %>
-      <%= button_to t(".log_out"), session_path, method: :delete, class: "my-2 text-xl underline hover:no-underline" %>
-    <% end %>
+  <div class="flex flex-col items-center">
+    <%= image_tag @user.profile_picture, alt: "Profile picture", class: "aspect-square w-28 rounded-full border-4 border-white shadow-md ring-2 ring-rose-200" %>
+    <h1 class="mt-4 text-center font-semibold text-3xl text-gray-800"><%= @user.username %></h1>
   </div>
 
+  <div class="mt-10 mx-auto max-w-md space-y-3">
+    <%= link_to edit_user_path(@user), class: "group flex items-center gap-4 rounded-xl border border-rose-100 bg-white px-5 py-4 shadow-sm transition-colors hover:border-rose-200 hover:bg-rose-50/60" do %>
+      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-rose-100 text-rose-400">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+        </svg>
+      </span>
+      <span class="flex-1 font-medium text-gray-800"><%= t(".edit") %></span>
+      <svg class="h-5 w-5 text-rose-300 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    <% end %>
 
-  <% if @user.id == Current.user.id %>
-    <div data-controller="push-notifications" class="mt-8 text-center">
-      <button
-        data-push-notifications-target="button"
-        data-action="push-notifications#subscribe"
-        class="hover:cursor-pointer text-lg text-red-500 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        Enable push notifications
-      </button>
-      <p data-push-notifications-target="status" class="mt-2 text-sm text-gray-500"></p>
-    </div>
-  <% end %>
+    <% if @user.id == Current.user.id %>
+      <%= link_to new_export_path, class: "group flex items-center gap-4 rounded-xl border border-rose-100 bg-white px-5 py-4 shadow-sm transition-colors hover:border-rose-200 hover:bg-rose-50/60" do %>
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-rose-100 text-rose-400">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+        </span>
+        <span class="flex-1 font-medium text-gray-800"><%= t(".export") %></span>
+        <svg class="h-5 w-5 text-rose-300 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      <% end %>
 
-  <% if hotwire_native_app? %>
-    <div class="mt-16 mx-auto md:max-w-2/3 flex justify-evenly items-center">
-      <%= button_to t(".log_out"), session_path, method: :delete, class: "hover:cursor-pointer text-lg text-red-500 font-semibold" %>
-    </div>
-  <% end %>
+      <div data-controller="push-notifications" class="rounded-xl border border-rose-100 bg-white px-5 py-4 shadow-sm">
+        <div class="flex items-center gap-4">
+          <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-rose-100 text-rose-400">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+            </svg>
+          </span>
+          <button
+            data-push-notifications-target="button"
+            data-action="push-notifications#subscribe"
+            class="flex-1 text-left font-medium text-gray-800 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <%= t(".enable_push") %>
+          </button>
+        </div>
+        <p data-push-notifications-target="status" class="mt-2 text-sm text-gray-500"></p>
+      </div>
+
+      <%= button_to session_path, method: :delete, class: "group flex w-full items-center gap-4 rounded-xl border border-rose-100 bg-white px-5 py-4 shadow-sm transition-colors hover:border-red-200 hover:bg-red-50/60 hover:cursor-pointer" do %>
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-100 text-red-500">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+          </svg>
+        </span>
+        <span class="flex-1 text-left font-medium text-red-500"><%= t(".log_out") %></span>
+      <% end %>
+    <% end %>
+  </div>
 </div>

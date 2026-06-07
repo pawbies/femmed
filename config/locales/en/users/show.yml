@@ -4,4 +4,5 @@ en:
       title: "Profile of %{username}"
       edit: "Wanna change something?"
       export: "Export your data?"
+      enable_push: "Enable push notifications"
       log_out: "Log out"

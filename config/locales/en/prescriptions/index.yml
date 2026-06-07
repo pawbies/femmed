@@ -2,3 +2,6 @@ en:
   prescriptions:
     index:
       title: "Your prescriptions"
+      empty_title: "No prescriptions yet"
+      empty_body: "Search for a medication to add your first prescription and start tracking your doses."
+      empty_cta: "Find a medication"
