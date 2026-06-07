@@ -34,24 +34,26 @@ export default class extends Controller {
 
     const chart = Plot.plot({
       width: W, height: H,
-      marginLeft: 64, marginRight: 24, marginTop: 28, marginBottom: 44,
+      marginLeft: 8, marginRight: 8, marginTop: 20, marginBottom: 8,
       style: { fontFamily: "'Inter', 'DM Sans', system-ui, sans-serif", fontSize: "11px", background: "transparent", overflow: "visible" },
       y: {
-        domain: [0, yMax * 1.25], label: yLabel, labelArrow: "up", labelOffset: 56, tickSize: 0, grid: true,
-        tickFormat: v => {
-          if (v === 0) return "0"
-          const decimals = Math.max(0, 1 - Math.floor(Math.log10(Math.abs(v))))
-          return v < 0.001 ? v.toExponential(1) : v.toFixed(decimals)
-        },
+        // Floor at 0 so a flat/empty series sits on the bottom; the `|| 1`
+        // keeps the domain non-degenerate when yMax is 0 (no concentration).
+        domain: [0, (yMax || 1) * 1.25],
+        axis: null
       },
       x: {
+        /*
         domain: [xStart, xEnd], label: xLabel, labelAnchor: "right", labelOffset: 36, tickSize: 0, grid: true,
         tickFormat: t => t === 0 ? nowLabel : `${t > 0 ? "+" : ""}${t}h`,
+        */
+
+        axis: null
       },
-      color: { legend: true, domain: ingredients, range: ingredients.map(n => colorMap[n]) },
+      color: { legend: false, domain: ingredients, range: ingredients.map(n => colorMap[n]) },
       marks: [
         Plot.ruleY([0], { stroke: "#d1d5db", strokeWidth: 1 }),
-        Plot.ruleX([0], { stroke: "#94a3b8", strokeWidth: 1.5, strokeDasharray: "5,3" }),
+        // Plot.ruleX([0], { stroke: "#94a3b8", strokeWidth: 1.5, strokeDasharray: "5,3" }),
         ...ingredients.map(name =>
           Plot.areaY(series.filter(d => d.ingredient === name), { x: "time", y: "concentration", fill: colorMap[name], fillOpacity: 0.08, curve: "catmull-rom" })
         ),
