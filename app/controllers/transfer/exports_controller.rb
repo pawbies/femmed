@@ -33,8 +33,8 @@ class Transfer::ExportsController < ApplicationController
           end
 
           csv << [
-            prescription.full_name,
-            "#{format("%g", prescription.amount)} #{prescription.form.name.pluralize(prescription.amount)}",
+            csv_safe(prescription.full_name),
+            "#{format("%g", prescription.amount)} #{csv_safe(prescription.form.name.pluralize(prescription.amount))}",
             prescription.active? ? "Active" : "Inactive",
             prescription.created_at.iso8601
           ]
@@ -47,9 +47,9 @@ class Transfer::ExportsController < ApplicationController
               "",
               case record
               when Prescription::Dose then
-                "#{format("%g", record.amount_taken)} #{prescription.form.name.pluralize(record.amount_taken)} Dose at #{record.taken_at.strftime("%B %e, %Y %H:%M")}"
+                "#{format("%g", record.amount_taken)} #{csv_safe(prescription.form.name.pluralize(record.amount_taken))} Dose at #{record.taken_at.strftime("%B %e, %Y %H:%M")}"
               when Prescription::Pack then
-                "#{record.amount} #{prescription.form.name.pluralize(record.amount)} Pack at #{record.acquired_at.strftime("%B %e, %Y")}"
+                "#{record.amount} #{csv_safe(prescription.form.name.pluralize(record.amount))} Pack at #{record.acquired_at.strftime("%B %e, %Y")}"
               end
             ]
           end
@@ -60,11 +60,22 @@ class Transfer::ExportsController < ApplicationController
       if params.dig(:data, :profile) == "1"
         user = Current.user
         csv << [ "Email address", "Username", "Language", "Created at" ]
-        csv << [ user.email_address, user.username, user.language, user.created_at.strftime("%B %e, %Y %H:%M") ]
+        csv << [
+          csv_safe(user.email_address),
+          csv_safe(user.username),
+          csv_safe(user.language),
+          user.created_at.strftime("%B %e, %Y %H:%M")
+        ]
         2.times do csv << [] end
       end
     end
 
     send_data csv, filename: "femmed-export-#{Current.user.username}-#{Date.today}.csv", type: "text/csv"
   end
+
+  private
+    def csv_safe(value)
+      s = value.to_s
+      s.match?(/\A[=+\-@\t\r]/) ? "'#{s}" : s
+    end
 end
